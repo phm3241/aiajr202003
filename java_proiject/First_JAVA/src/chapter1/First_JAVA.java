@@ -6,6 +6,10 @@ public class First_JAVA {
 		
 		System.out.println("Hi"); 
 		// System.out.println("Hello JAVA"); 
+		/* System.out.println("Hello JAVA"); 
+		System.out.println("Hello JAVA");
+		 */
+		
 
 	}
 
