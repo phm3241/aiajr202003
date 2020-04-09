@@ -5,7 +5,7 @@ public class Test_3 {
 	public static void main(String[] args) {
 			
 		// 1. 정수형 타입의 변수 num1변수를 선언하자 
-		int num1;
+		int num1; 
 		
 		
 		// 2. 변수 num1에 숫자 데이터 10을 저장하자.
