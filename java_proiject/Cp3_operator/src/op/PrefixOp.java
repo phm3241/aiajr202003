@@ -13,7 +13,7 @@ public class PrefixOp {
  		System.out.println(num2);     // 출력: 8
  		System.out.println(--num2);   // 출력: 7
  		System.out.println(--num3);   // 출력: 6
-				
+		//전위형일때는 증감먼저되고 출력이 된다. 
 		
 	}
 
