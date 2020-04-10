@@ -1,6 +1,6 @@
 package ex_1;
 
-public class Test_byteOverflow {
+public class Test_8_ByteOverflow {
 	
 	public static void main(String[] args) {
 	
