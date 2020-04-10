@@ -26,6 +26,7 @@ public class Test_15_castingEX2 {
 		
 		System.out.println("i2=" + i2);  // i2=300
 		System.out.println("b2=" + b2);  // b2=외곡된 값
+
 		// 형변환으로 값의 외곡으로 b2는 300이 다른값이 나온다. 
 
 	}

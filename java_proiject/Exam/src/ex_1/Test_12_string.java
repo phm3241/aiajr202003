@@ -27,7 +27,7 @@ public class Test_12_string {
 		System.out.println(e);
 		System.out.println(f);
 		System.out.println(g);
-
+		
 	}
 
 }
