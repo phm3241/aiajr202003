@@ -11,8 +11,12 @@ public class Exercise3_3 {
 		int num = 10;
 
 //		System.out.println( /* (1) */ );
-		
 
+		System.out.println( num==0 ? "0":(num>0 ? "양수":"음수"));
+		// 삼항연산자 사용. 조건은 num=0이다. 참이면 0 출력, 
+		// 참이 아니라면 다시 삼항연산자로 조건설정하고 양수 또는 음수 출력 
+		
+		
 	}
 
 }
