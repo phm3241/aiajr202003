@@ -8,7 +8,7 @@ ch to lowerCase:a
 
 package op_ex_200410;
 
-public class Excercise3_10 {
+public class Exercise3_10 {
 
 	public static void main(String[] args) {
 
