@@ -1,6 +1,6 @@
 package op_ex_200410;
 
-public class Test1 {
+public class Test_1 {
 
 	public static void main(String[] args) {
 		
