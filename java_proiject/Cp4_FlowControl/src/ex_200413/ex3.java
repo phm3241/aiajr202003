@@ -29,12 +29,5 @@ public class ex3 {
 		System.out.println(big + "이 큰 수 입니다.");
 		System.out.println("두 수의 차는 "+diff+" 입니다.");
 		
-		
-		
-		
-		
-		
-
-		
 	}
 }

@@ -14,12 +14,12 @@ public class ex8 {
 		while (0<num && num<=1000) {
 			if (num%2==0 && num%7==0) {
 				System.out.print(num + ", ");
-				System.out.println(" ");
 				sum = sum + num;
 			}
 			num += 1;
 		}
 			
+		System.out.println(" ");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("1000이하의 자연수 중 2의 배수이면서 7의 배수인 숫자들의 합:" + sum);
 	}

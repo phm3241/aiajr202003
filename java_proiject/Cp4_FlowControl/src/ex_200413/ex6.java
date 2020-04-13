@@ -16,10 +16,6 @@ public class ex6 {
 		System.out.println(sum);
 		
 		
-		
-		
-		
-		
 	}
 
 }
