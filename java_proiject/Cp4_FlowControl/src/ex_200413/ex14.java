@@ -19,11 +19,11 @@ public class ex14 {
 			
 			// 먼저 A+B=9의 조합을 찾음 (십의자리끼리, 일의자리끼리 계산할떄)
 			if (sum==9)
-//				System.out.println("A+B= "+A+ "+"+B+"="+sum);
+				System.out.println("A+B= "+A+ "+"+B+"="+sum);
 				
 				//조합하여 출력...고민중..
 //				System.out.println("---------------");
-				System.out.println(A+B+"+"+B+A+"="+"99");
+//				System.out.println(A+B+"+"+B+A+"="+"99");
 			}
 		}
 
