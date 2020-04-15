@@ -19,13 +19,11 @@ public class Ch4_ex13 {
 		for(int i=0; i < value.length() ;i++) {
 		
 		// (1) 알맞은 코드를 넣어 완성하시오.
-			
-			for(ch = value.charAt(i); !('0'<=ch && ch<='9');){
-				isNumber=true;
-				
+			ch = value.charAt(i); 
+			if(!('0'<=ch && ch<='9')){
+				isNumber=false;
+				break;
 			}
-			
-			
 		}
 		
 		if (isNumber) {

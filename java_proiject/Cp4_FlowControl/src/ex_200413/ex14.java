@@ -9,27 +9,18 @@ public class ex14 {
 //		------
 //		  9 9
 
-		int sum = 0;
+		int A = 1;
 		
-		for(int A=0; A<10; A++) {
+		while(A<=9) {
+			int B=9-A;
 			
-			for(int B=0; B<10; B++) {
-			
-			sum = A+B;
-			
-			// 먼저 A+B=9의 조합을 찾음 (십의자리끼리, 일의자리끼리 계산할떄)
-			if (sum==9)
-				System.out.println("A+B= "+A+ "+"+B+"="+sum);
-				
+			System.out.println("A: "+A+", "+"B: "+B );
+			A++;
 				//조합하여 출력...고민중..
 //				System.out.println("---------------");
 //				System.out.println(A+B+"+"+B+A+"="+"99");
 			}
-		}
-
-		
 	}
-		
 }
 		
 		

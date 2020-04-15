@@ -19,17 +19,15 @@ public class Ch4_ex11 {
 		for (int i = 0 ; i < 8 ; i++ ) {
 
 		// (1) 알맞은 코드를 넣어 완성하시오.
-			for (int
-		num3=num1+num2
-		num4=num2+num3=num2+num1+num2 = num1+2*num2
-		num5=num3+num4=num1+num2+num1+2*num2 = 2*num1+3*num2
-		num6=num4+num5=num1+2*num2 + 2*num1+3*num2 = 3num1+5num2
-		num7=num5+num6=2*num1+3*num2 + 3num1+5num2 = 5num1 + 8num2
-		
-		
+			num3=num1+num2;
+			System.out.print(","+num3);  //println이 아니라 print이므로, 수열이 계속 한줄로 붙어서 출력된다. 
+			
+			// num3=num1+num2이고, 
+			// num4=num2+num3이니까
+			// num4를 나타내기 위해 num1에 num2를 대입해주고
+			// num2에 num3을 대입해준다. 그리고 반복 이런패턴으로 반복.
+			num1=num2;   
+			num2=num3;		
 		} 
-
-
 	}
-
 }
