@@ -16,9 +16,6 @@ public class ex14 {
 			
 			System.out.println("A: "+A+", "+"B: "+B );
 			A++;
-				//조합하여 출력...고민중..
-//				System.out.println("---------------");
-//				System.out.println(A+B+"+"+B+A+"="+"99");
 			}
 	}
 }
