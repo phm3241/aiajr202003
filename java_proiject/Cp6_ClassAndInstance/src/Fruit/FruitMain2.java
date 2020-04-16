@@ -26,6 +26,8 @@ public class FruitMain2 {
 		System.out.println("------------------------------------");
 		System.out.println("구매자의 정보");
 		buyer.showBuyResult();
+		
+		
 
 	}
 
