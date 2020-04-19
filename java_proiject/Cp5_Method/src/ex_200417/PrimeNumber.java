@@ -3,7 +3,7 @@
 //	이를 이용해서 1이상 100 이하의 소수를 전부 출력할 수 있도록 main 메서드를 정의하자.
 
 
-package ex;
+package ex_200417;
 
 public class PrimeNumber {
 

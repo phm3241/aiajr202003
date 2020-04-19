@@ -1,4 +1,4 @@
-package ex;
+package ex_200417;
 
 public class Calc {
 	// 두 수의 사칙연산 결과를 출력하는 메서드들 

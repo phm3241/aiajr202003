@@ -1,4 +1,4 @@
-package ex;
+package ex_200417;
 
 public class CalcAbs {
 	// 두수의 절대값을 계산하여 출력하는 메서드

@@ -1,4 +1,4 @@
-package ex;
+package ex_200417;
 
 public class MyMath {
 	// 더하기 기능의 메서드를 가지는 클래스.

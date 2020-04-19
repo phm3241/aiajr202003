@@ -1,4 +1,4 @@
-package ex;
+package ex_200417;
 
 public class Method1 {
 

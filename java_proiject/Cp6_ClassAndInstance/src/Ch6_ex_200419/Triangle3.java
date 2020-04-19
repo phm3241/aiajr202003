@@ -38,14 +38,11 @@ public static void main(String[] args) {
 	// 참조변수로 속성과 넓이계산결과 호출하여 출력
 	System.out.println("밑변이 "+t.width+"이고, 높이가 "+t.height+"인 삼각형의 넓이는 "+t.area()+"입니다.");
 	
+	/*
+	[실행결과]
+	밑변이 3이고, 높이가 5인 삼각형의 넓이는 7.5입니다.	
+	*/
 	
-		
-		
-		
-		
-		
-		
-
 	}
 
 }

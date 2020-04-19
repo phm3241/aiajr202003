@@ -1,4 +1,4 @@
-package ex;
+package ex_200417;
 
 public class MethodDefAdd {
 	// static이라는 키워드를 붙여주면 이 코드들이 메모리에 올라간다.
