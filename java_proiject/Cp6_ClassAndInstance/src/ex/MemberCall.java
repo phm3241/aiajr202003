@@ -29,9 +29,11 @@ public class MemberCall {
 		//스테틱 멤버 출력
 		System.out.println(cv);
 		System.out.println(iv);
+		
+
 
 	
 	}
 	
-	
-}
+}	
+
