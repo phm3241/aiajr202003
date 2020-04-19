@@ -1,5 +1,7 @@
 package ex;
 
+import api.StringTest2;
+
 public class Number {
 
 	int num;
@@ -22,7 +24,7 @@ public class Number {
 		num = n;		
 	}
 	
-	public static void main(StringTest[] args) {
+	public static void main(StringTest2[] args) {
 		
 		Number n1=new Number(1000000); //인스턴스 생성
 		System.out.println(n1.num); //인스턴스 생성

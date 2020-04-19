@@ -1,8 +1,10 @@
 package ex;
 
+import api.StringTest2;
+
 public class AccessWayMain {
 	
-	public static void main(StringTest[] args) {
+	public static void main(StringTest2[] args) {
 	
 		
 		System.out.println(AccessWay.num);
