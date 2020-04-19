@@ -2,7 +2,7 @@ package ex;
 
 public class AccessWayMain {
 	
-	public static void main(String[] args) {
+	public static void main(StringTest[] args) {
 	
 		
 		System.out.println(AccessWay.num);
