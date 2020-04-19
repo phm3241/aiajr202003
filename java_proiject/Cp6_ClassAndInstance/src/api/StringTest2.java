@@ -1,6 +1,6 @@
-package ex;
+package api;
 
-public class StringTest {
+public class StringTest2 {
 
 	public static void main(java.lang.String[] args) {
 		// [문제 1] 다음 형태로 String 인스턴스를 생성.
