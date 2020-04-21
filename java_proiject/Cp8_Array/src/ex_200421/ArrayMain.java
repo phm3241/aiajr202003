@@ -10,7 +10,7 @@ public static int maxValue(int[] arr) { . . . . } // 최대값 반환
 int형 배열에 채워질 정수는 프로그램 사용자로부터 입력 받고, 배열의 길이는
 임의로 결정*/
 
-package ex;
+package ex_200421;
 
 import java.util.Scanner;
 
@@ -26,17 +26,11 @@ public class ArrayMain {
 		}
 //		System.out.println(arr[i]);
 		
-		ArrayMaxMin m=new ArrayMaxMin();
-		System.out.println(m.miniValue(arr));
-		System.out.println(m.maxValue(arr));
-
-
-	
+		ArrayMax max=new ArrayMax();
+		ArrayMin min=new ArrayMin();
+		System.out.println(max.maxValue(arr));
+		System.out.println(min.miniValue(arr));
 	}
-	
-		
-
-
-	}
+}
 
 
