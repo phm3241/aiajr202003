@@ -37,16 +37,18 @@ public class PhoneBookMain {
 		
 		PhoneInfor info=null;
 		
-		Scanner sc=new Scanner(System.in);
-
+//		Scanner sc=new Scanner(System.in);
+		// Manager의 생성자에 scanner가 포함되어 있기때문에, 입력받는 부분은 manager.sc.로 수정가능
+		
 		while(true) {
 			
 			// 사용자가 선택해서 기능을 사용할 수 있도록.
+			// public static void 메서드니까 객체생성 안하고 바로 사용가능.
 			Menu.showMenu();
 
-			int selectNum=sc.nextInt();
+			int selectNum=manager.sc.nextInt();
 			
-			sc.nextLine(); // 입력받고 난 뒷부분 버퍼?를 날려주어야 이름을 안적어도 넘어가지는 일이없다.
+			manager.sc.nextLine(); // 입력받고 난 뒷부분 버퍼?를 날려주어야 이름을 안적어도 넘어가지는 일이없다.
 			
 			// 사용자가 선택한 번호(입력번호)로 기능들이 실행되도록 switch문으로  
 			switch(selectNum) {
@@ -54,7 +56,7 @@ public class PhoneBookMain {
 				// 정보를 배열에 저장
 //				info= manager.createInstance();
 //				manager.addInfo(info);
-				manager.addInfo();   // 메서드 오버로딩하여, 위 두 문
+				manager.addInfo();   // 메서드 오버로딩하여, 위 두 문장을 합쳐서 기능하도록한다. 
 				break;
 			case 2: 
 				// 이름으로 검색
@@ -79,7 +81,8 @@ public class PhoneBookMain {
 			
 			
 			
-			// 아래내용을 switch문으로 변경한 것이다. 
+			// 위 메뉴는! 아래내용(그냥 순서대로 기능이 실행되는 것)을 
+			// switch문으로 변경하여 선택하면 기능이 실행되는 형태로 바꾼 것이다.  
 			
 //			// 사용자의 입력 데이터를 인스턴스 생성
 //			info= manager.createInstance();   // 데이터입력받아서 생성되도록
@@ -97,15 +100,15 @@ public class PhoneBookMain {
 			
 			
 			
-			
+			// 메서드 - 전체 리스트 출력
 			// 이 기능은 배열관련이니까 배열이 있는  매니저에 기능으로 넣음
 //			System.out.println("-------------------------");
 //			
 ////			for(int i=0; i<manager.pBooks.length; i++) {
 //			// 반복범위는 cnt가 되어야한다. length는 배열 100인데(저장할 수 있는 공간)
-//			// 저장되어있는 공간은 cnt이기 떄문에, 
-//			for(int i=0; i<manager.cnt; i++) {   
-//				manager.pBooks[i].showInfo(); 
+//			// 저장되어있는 공간은 cnt이기 떄문에(ex.6개만저장했을수도있으니까, 6개 저장되있고, 나머지 null) 
+//				for(int i=0; i<manager.cnt; i++) {   
+//					manager.pBooks[i].showInfo(); 
 //				
 //			System.out.println("-------------------------");
 			

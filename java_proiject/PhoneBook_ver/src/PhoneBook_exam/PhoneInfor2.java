@@ -24,8 +24,8 @@ import java.util.Scanner;
 //		
 //		// 언제까지 반복할지 모르기 때문에 while 무한반복문 사용
 //		while(true) {
-			
-			// 키보드로부터 데이터 입력 
+//			
+//			// 키보드로부터 데이터 입력 
 //			Scanner s=new Scanner(System.in);
 //			System.out.println("이름을 입력하세요(필수)");
 //			String name=s.nextLine();
@@ -36,12 +36,12 @@ import java.util.Scanner;
 //			System.out.println("생년월일을 입력하세요(선택)");
 //			String birthday=s.nextLine();
 //			
-			
-			// 입력 받은 데이터로 인스턴스 생성
+//			
+//			// 입력 받은 데이터로 인스턴스 생성
 //			PhoneInfor1 p1=new PhoneInfor1(name, phonNumber);
-////			PhoneInfor1 p2=new PhoneInfor1(name, phonNumber, birthday);
-////			p3=p1;
-////			p4=p2;
+//			PhoneInfor1 p2=new PhoneInfor1(name, phonNumber, birthday);
+//			p3=p1;
+//			p4=p2;
 //			
 //			
 //			// 생성된 인스턴스의 메소드 호출
@@ -49,7 +49,7 @@ import java.util.Scanner;
 //			if(birthday.length()==0)
 //				p1.showInfo1();
 //			else
-////				p2.showInfo2();
+//				p2.showInfo2();
 //				
 //			
 //			// 프로그램 종료를 숫자입력으로 받아 반복문 종료
