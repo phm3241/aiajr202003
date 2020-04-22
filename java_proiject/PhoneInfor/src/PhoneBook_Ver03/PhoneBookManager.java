@@ -9,7 +9,9 @@ import java.util.Scanner;
  */
 
 public class PhoneBookManager {
-
+		// 배열을 컨트롤하는 메서드
+	
+	
 //		PhoneInfor[] pBooks=new PhoneInfor[100]; // 이런방법보다 주로 아래 생성자 통하는 방법으로 사용
 
 		PhoneInfor[] pBooks;
@@ -23,12 +25,17 @@ public class PhoneBookManager {
 		
 		// 입력 받을 떄도 쓰고, 검색할때도 Scanner를 쓰니까 
 		// 공용으로 쓸 수 있도록 인스턴스 변수에 선언.
-		Scanner sc=new Scanner(System.in);
+		Scanner sc;
 		
-		// 초기화
+		// 생성자 초기화 : 가능한 초기화할 수 있는 변수들? 넣기
 		public PhoneBookManager() {
 			// 배열초기화
 			pBooks=new PhoneInfor[100];
+			// 저장갯수 초기화
+			cnt=0;
+			// Scanner 객체 초기화
+			sc=new Scanner(System.in);
+			
 		}
 		
 		
@@ -36,14 +43,24 @@ public class PhoneBookManager {
 		// 배열에 PhoneInfor 타입의 참조값을 저장
 		// 아래 PhoneInfor creatInstance()와 합칠 수도 있는데, 분리한 것이다. 
 		void addInfo(PhoneInfor info) {   //info는 아래에 creatInstance() 메서드에 있는 info이다. 
+			// 배열에 요소 대입
 			pBooks[cnt]=info;
+			
+			// 등록된 정보의 갯수를 증가
+			cnt++;
+		}
+
+		void addInfo() {   //info는 아래에 creatInstance() 메서드에 있는 info이다. 
+			// 배열에 요소 대입
+			// pBooks[cnt]=info;  info대신에 createInstance()를 받아주면 info를 반환하니까.
+			pBooks[cnt]=createInstance();
 			
 			// 등록된 정보의 갯수를 증가
 			cnt++;
 		}
 	
 		// 메서드: 사용자의 입력데이터로 PhoneInfor 객체를 생성하는 기능
-		PhoneInfor creatInstance() {
+		PhoneInfor createInstance() {
 			
 			PhoneInfor info=null;    // 반환하기 위한 변수선언
 
@@ -85,6 +102,21 @@ public class PhoneBookManager {
 		}
 		
 		
+		// 배열에서 이름을 기준으로 검색 후 index 값을 반환
+		int searchIndex(String name) {
+			
+			int searchIndex=-1;
+			// (cnt) ㅡ> 
+			for(int i =0; i<cnt; i++) {
+				if(pBooks[i].checkName(name)) {   // 입력받은 이름과 배열안에 이름이 같은지 확인하는 메서드 사용.
+					searchIndex=i;
+					break;
+				}
+			}
+			return searchIndex;
+		}
+		
+		
 		// 검색: 이름을 기준으로 데이터를 찾아서 해당 데이터의 정보를 출력
 		// 배열의 요소(PhoneInfor)의 name 속성 값으로 배열의 요소
 		void searchInfo() {
@@ -93,7 +125,7 @@ public class PhoneBookManager {
 			String name=sc.nextLine();
 			
 			// 검색결고가 없을 때 써야할 기준값이 필요
-			int searchIndex=-1;
+			int searchIndex=searchIndex(name);
 			
 			// 사용자가 입력한 이름으로 배열에 요소를 검색 ㅡ> 배열의 index를 찾는다. 
 			// (cnt) ㅡ> 
@@ -119,7 +151,7 @@ public class PhoneBookManager {
 			String name=sc.nextLine();
 			
 			// 삭제결과가 없을 때 써야할 기준값이 필요
-			int searchIndex=-1;
+			int searchIndex=searchIndex(name);
 			
 			// 사용자가 입력한 이름으로 배열에 요소를 검색 ㅡ> 배열의 index를 찾는다. 
 			// (cnt) ㅡ> 
