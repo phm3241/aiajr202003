@@ -50,7 +50,7 @@ public class PhoneBookMain {
 			manager.deleteInfo();
 			manager.showAllData(); // 실제로 데이터 삭제되었는지 확인출력
 			
-			
+			///
 			
 			// 이 기능은 배열관련이니까 배열이 있는  매니저에 기능으로 넣음
 //			System.out.println("-------------------------");

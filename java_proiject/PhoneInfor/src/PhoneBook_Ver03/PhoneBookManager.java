@@ -145,7 +145,7 @@ public class PhoneBookManager {
 				// 중요! 저장된 정보의 갯수를 -1, 하나 삭제되었으므로.전체 정보갯수를 1뺴준다. 
 				cnt--;   
 				System.out.println("요청하신 이름의 정보를 삭제했습니다");
-			}
+			}///
 			
 		}
 		

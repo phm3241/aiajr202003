@@ -61,7 +61,7 @@ public class PhoneInfor {
 		boolean checkName(String name) {
 			return this.name.equals(name);  
 			// 같은 클래스에 있으니까 name 쓸 수있음. 
-		}
+		}///
 		
 
 }
