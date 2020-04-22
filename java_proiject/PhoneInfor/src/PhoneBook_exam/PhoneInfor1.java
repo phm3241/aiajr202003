@@ -1,4 +1,4 @@
-package PhoneInfor;
+package PhoneBook_exam;
 
 /*Version 0.1 전화번호 관리 프로그램. 
 PhoneInfor 라는 이름의 클래스를 정의해 보자. 
@@ -15,9 +15,9 @@ PhoneInfor 라는 이름의 클래스를 정의해 보자.
 public class PhoneInfor1 {
 
 	// 변수: 문자열 형태로 저장
-	String name;
-	String phonNumber;
-	String birthday;
+	static String name;
+	static String phonNumber;
+	static String birthday;
 	
 	// 생성자1: 이름, 전화번호은 필수. 생년월일은 선택으로. 
 	public PhoneInfor1(String name, String phonNumber){
@@ -37,9 +37,15 @@ public class PhoneInfor1 {
 		System.out.println("전화번호: "+this.phonNumber);
 	}
 
+	// 메소드: 저장된 데이터 출력
 	void showInfo2() {
 		System.out.println("이름: "+this.name);
 		System.out.println("전화번호: "+this.phonNumber);
 		System.out.println("생년월일: "+this.birthday);
 	}
+	
+
+	
+	
+
 }
