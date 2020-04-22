@@ -1,5 +1,7 @@
 package PhoneBook_Ver03;
 
+import java.util.Scanner;
+
 /*
 배열을 이용해서 프로그램 사용자가 입력하는 정보가 최대 100개까지 유지되도록 프로그램을 변경. 
  ㅡ> 배열!을 어디에서 만들것인가? ㅡ> 메인쪽에서 만들 수 있긴한데, static으로 만들어줘야한다.(계속 저장, 검색, 삭제등 사용하니까) 
@@ -27,7 +29,6 @@ PhoneBookManager 클래스 : 기능. <ㅡ 여기에 배열의 기능을 넣어�
 */
 
 
-
 public class PhoneBookMain {
 
 	public static void main(String[] args) {
@@ -36,21 +37,66 @@ public class PhoneBookMain {
 		
 		PhoneInfor info=null;
 		
+		Scanner sc=new Scanner(System.in);
+
 		while(true) {
 			
-			// 사용자의 입력 데이터를 인스턴스 생성
-			info= manager.creatInstance();   // 데이터입력받아서 생성되도록
-			// 정보를 배열에 저장
-			manager.addInfo(info);   // 배열에 들어가도록
-			// 전체 리스트 출력
-			manager.showAllData();   
-			// 이름으로 검색
-			manager.searchInfo();
-			// 이름으로 검색 후 삭제
-			manager.deleteInfo();
-			manager.showAllData(); // 실제로 데이터 삭제되었는지 확인출력
+			// 사용자가 선택해서 기능을 사용할 수 있도록.
+			Menu.showMenu();
+
+			int selectNum=sc.nextInt();
 			
-			///
+			sc.nextLine(); // 입력받고 난 뒷부분 버퍼?를 날려주어야 이름을 안적어도 넘어가지는 일이없다.
+			
+			// 사용자가 선택한 번호(입력번호)로 기능들이 실행되도록 switch문으로  
+			switch(selectNum) {
+			case 1: 
+				// 정보를 배열에 저장
+//				info= manager.createInstance();
+//				manager.addInfo(info);
+				manager.addInfo();   // 메서드 오버로딩하여, 위 두 문
+				break;
+			case 2: 
+				// 이름으로 검색
+				manager.searchInfo();
+				break;
+			case 3: 
+				// 이름으로 검색 후 삭제
+				manager.deleteInfo();
+				break;
+			case 4: 
+				// 전체 리스트 출력
+				manager.showAllData();
+				break;
+			case 5: 
+				// return;  이렇게만 해줘도 시작점인 main 메서드가 종료되니 시스템이 종료된다.
+				System.exit(0);
+				break;
+				
+			
+			}
+			
+			
+			
+			
+			// 아래내용을 switch문으로 변경한 것이다. 
+			
+//			// 사용자의 입력 데이터를 인스턴스 생성
+//			info= manager.createInstance();   // 데이터입력받아서 생성되도록
+//			// 정보를 배열에 저장
+//			manager.addInfo(info);   // 배열에 들어가도록
+//			// 전체 리스트 출력
+//			manager.showAllData();   
+//			// 이름으로 검색
+//			manager.searchInfo();
+//			// 이름으로 검색 후 삭제
+//			manager.deleteInfo();
+//			manager.showAllData(); // 실제로 데이터 삭제되었는지 확인출력
+			
+
+			
+			
+			
 			
 			// 이 기능은 배열관련이니까 배열이 있는  매니저에 기능으로 넣음
 //			System.out.println("-------------------------");
@@ -65,5 +111,9 @@ public class PhoneBookMain {
 			
 			}
 		}
+
+
+		
 	}
+	
 
