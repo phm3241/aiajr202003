@@ -41,7 +41,7 @@ public class PhoneMain {
 			
 			// 2. 친구 정보 검색
 			case(2):
-				manager.selectInfo();
+				manager.searchInfo();
 				break;
 			
 			// 3. 친구 정보 삭제
