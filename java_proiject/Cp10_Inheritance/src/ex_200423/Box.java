@@ -16,8 +16,8 @@ class Box {
 	public void simpleWrap() {
 		System.out.println("simple wrap");
 	}
-	public void wrapBox(Box box) {
-		System.out.println(box+"wrap");
+	public void wrap() {
+		System.out.println("simple wrap");
 	}
 }
 
