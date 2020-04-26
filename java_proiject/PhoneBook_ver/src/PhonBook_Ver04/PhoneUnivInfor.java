@@ -13,6 +13,14 @@ public class PhoneUnivInfor extends PhoneInfor {
 		this.year=year;
 	}
 
+	@Override
+	void showInfo() {
+		super.showInfo();
+		System.out.println("주소 : "+this.address);
+		System.out.println("전공 : "+this.major);
+		System.out.println("학년 : "+this.year);
+	}
+	
 	
 	
 	
