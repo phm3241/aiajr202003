@@ -55,6 +55,15 @@ public class PhoneInfor {
 		System.out.println("전화번호 : "+this.phoneNum);
 		System.out.println("이메일 : "+this.email);
 	}
+	
+	// 검색한 이름과 phoneBook에 저장된 이름 체크
+	boolean checkName(String name) {
+		if(name.equals(this.name)){
+			return true;
+		}else {
+			return false;
+		}
+	}
 } // class end
 	
 	
