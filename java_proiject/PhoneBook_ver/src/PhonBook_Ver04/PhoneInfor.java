@@ -50,7 +50,7 @@ public class PhoneInfor {
 	}
 	
 	// 전체 정보 출력
-	void showBasicInfo() {
+	void showInfo() {
 		System.out.println("이름 : "+this.name);
 		System.out.println("전화번호 : "+this.phoneNum);
 		System.out.println("이메일 : "+this.email);
