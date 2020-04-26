@@ -2,9 +2,9 @@ package PhonBook_Ver04;
 
 public class PhoneUnivInfor extends PhoneInfor {
 
-	String address;
-	String major;
-	String year;
+	private String address;
+	private String major;
+	private String year;
 	
 	public PhoneUnivInfor(String name, String phoneNum, String email, String address, String major, String year) {
 		super(name, phoneNum, email);
