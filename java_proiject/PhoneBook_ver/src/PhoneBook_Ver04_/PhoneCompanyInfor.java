@@ -21,6 +21,7 @@ public class PhoneCompanyInfor extends PhoneInfor {
 		System.out.println("회사 :" +this.company);
 		System.out.println("부서 :" +this.dept);
 		System.out.println("직급 :" +this.job);
+		System.out.println("--------------------------");
 	}
 	
 }

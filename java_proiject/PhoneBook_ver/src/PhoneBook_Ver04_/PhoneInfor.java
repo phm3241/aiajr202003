@@ -106,10 +106,10 @@ PhoneInfor 상속
 public class PhoneInfor {
 	
 	// 변수
-	String name;
-	String phoneNumber;
-	String address;
-	String email;
+	static String name;
+	static String phoneNumber;
+	static String address;
+	static String email;
 	
 	// 생성자
 	PhoneInfor(	String name, String phoneNumber, String address, String email){
@@ -133,28 +133,19 @@ public class PhoneInfor {
 		
 	}
 	
+	// 메소드3 : 검색한 이름과 폰북 이름 비교
+	boolean checkName(String name) {
+		if(name.equals(this.name)) {
+			return true;
+		}
+		return false;
+	}
+	
+	String getName() {
+		return this.name;
+	}
+}	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
+
