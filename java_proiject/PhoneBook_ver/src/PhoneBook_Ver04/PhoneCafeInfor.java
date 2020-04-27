@@ -2,21 +2,21 @@ package PhoneBook_Ver04;
 
 public class PhoneCafeInfor extends PhoneInfor {
 	
-	private String work;
-	private String age;
+	private String cafeName;    // 동호회 이름
+	private String nickName;    // 닉네임
 	
-	public PhoneCafeInfor(String name, String phoneNum, String email, String address, String work, String age) {
-		super(name, phoneNum, email);
-		this.work=work;
-		this.age=age;
+	public PhoneCafeInfor
+		(String name, String phoneNum, String addr, String email, String cafeName, String nickName) {
+		super(name, phoneNum, addr, email);
+		this.cafeName=cafeName;
+		this.nickName=nickName;
 	}
 
 	@Override
-	void showInfo() {
-		super.showInfo();
-		System.out.println("직업 : "+this.work);
-		System.out.println("나이 : "+this.age);
+	void showAllInfo() {
+		super.showBasicInfo();
+		System.out.println("동호회이름 : "+this.cafeName);
+		System.out.println("닉네임 : "+this.nickName);
 	}
-	
 	
 }
