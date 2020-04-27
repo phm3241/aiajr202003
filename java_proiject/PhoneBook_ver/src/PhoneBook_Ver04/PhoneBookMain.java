@@ -1,6 +1,6 @@
-package PhonBook_Ver04;
+package PhoneBook_Ver04;
 
-public class PhonBookMain {
+public class PhoneBookMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

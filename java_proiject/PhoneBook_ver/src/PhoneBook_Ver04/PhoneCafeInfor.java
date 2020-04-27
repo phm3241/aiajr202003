@@ -1,4 +1,4 @@
-package PhonBook_Ver04;
+package PhoneBook_Ver04;
 
 public class PhoneCafeInfor extends PhoneInfor {
 	
