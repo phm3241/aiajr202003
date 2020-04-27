@@ -72,7 +72,6 @@ Ex) PhoneCafeInfor, PhoneFamilyInfor
 */
 
 // 상속을 위한 기본 클래스 구성
-// 인스턴스 생성의 목적이 없다.
 public class PhoneInfor {
 	
 	
