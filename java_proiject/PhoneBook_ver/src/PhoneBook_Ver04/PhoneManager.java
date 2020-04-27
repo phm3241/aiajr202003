@@ -217,10 +217,8 @@ public class PhoneManager {
 	
 			
 			// 저장된 인스턴스가 기본, 대학, 회사, 동회회인지에 따라 달라짐.  
-			if(books[searchIndex(name)] instanceof PhoneInfor){
-				info=new PhoneInfor(editName, phoneNum, addr, email);
 				
-			}else if(books[searchIndex(name)] instanceof PhoneUnivInfor) {
+			if(books[searchIndex(name)] instanceof PhoneUnivInfor) {
 				System.out.println("전공을 입력해주세요.");
 				String major=kb.nextLine();
 				System.out.println("학년을 입력해주세요.");
@@ -246,6 +244,9 @@ public class PhoneManager {
 				String nickName=kb.nextLine();
 				
 				info=new PhoneCafeInfor(editName, phoneNum, addr, email, cafeName, nickName);
+			
+			}else if(books[searchIndex(name)] instanceof PhoneInfor){
+				info=new PhoneInfor(editName, phoneNum, addr, email);
 			}
 			
 			// 배열에 새로운 인스턴스를 저장
