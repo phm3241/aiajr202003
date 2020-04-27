@@ -1,28 +1,21 @@
 package PhoneBook_Ver04;
 
+// PhoneInfor 클래스를 상속해서 새로운 클래스를 정의
 public class PhoneUnivInfor extends PhoneInfor {
 
-	private String address;
 	private String major;
-	private String year;
+	private String grade;
 	
-	public PhoneUnivInfor(String name, String phoneNum, String email, String address, String major, String year) {
-		super(name, phoneNum, email);
-		this.address=address;
+	public PhoneUnivInfor(String name, String phoneNum, String addr, String email, String major, String grade) {
+		super(name, phoneNum, addr, email);
 		this.major=major;
-		this.year=year;
+		this.grade=grade;
 	}
 
 	@Override
-	void showInfo() {
-		super.showInfo();
-		System.out.println("주소 : "+this.address);
+	void showAllInfo() {
+		super.showBasicInfo();
 		System.out.println("전공 : "+this.major);
-		System.out.println("학년 : "+this.year);
+		System.out.println("학년 : "+this.grade);
 	}
-	
-	
-	
-	
-	
 } //class end
