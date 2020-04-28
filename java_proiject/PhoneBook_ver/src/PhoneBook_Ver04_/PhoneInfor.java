@@ -106,10 +106,10 @@ PhoneInfor 상속
 public class PhoneInfor {
 	
 	// 변수
-	static String name;
-	static String phoneNumber;
-	static String address;
-	static String email;
+	String name;
+	String phoneNumber;
+	String address;
+	String email;
 	
 	// 생성자
 	PhoneInfor(	String name, String phoneNumber, String address, String email){
