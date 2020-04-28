@@ -1,5 +1,27 @@
 package PhoneBook_Ver05;
 
+/*
+PhoneBook_ver05
+_문제분석
+
+1.manager 클래스의 싱글톤 패턴처리
+	1-1. 생성자 접근제어지시자 : private (인스턴스 생성 막는다.)
+	1-2. 공동으로 사용할 인스턴스 생성 : static private
+	1-3. 참조변수를 반환해주는 메서드 : static public
+**자주보게될 패턴. 
+
+
+2. interFace 기반의 상수표현 메뉴표현
+	고교 친구 저장 : 1
+	대학 친구 저장 : 2
+	기본 정보 출력 : 3
+	전체 정보 출력 : 4
+	exit : 5
+
+
+3. interfacr ㅡ> 추상클래스 ㅡ> 상속 관계 구조로 변경
+*/
+
 public class PhoneBookMain implements MainMenu  {
 
 	public static void main(String[] args) {
