@@ -6,7 +6,7 @@ public class DivideByZero {
 		
 		
 		int num1=10;
-		int num2=2;
+		int num2=0;
 		
 		// int divide=num1/num2;
 		// java.lang.ArithmeticException
@@ -24,7 +24,16 @@ public class DivideByZero {
 			System.out.println("0으로 나눌 수 없습니다.");
 			System.out.println(e.getMessage());
 			e.printStackTrace();   // 예외발생을 확인해볼 수 있는 메서드?
+			return;
+		} finally {  
+			System.out.println("무조건 실행하는 finally블럭");
 		}
+		// finally는 
+		// 예외가 발행여부와 관계없이 실행됨. return을 만나도 실행됨.
+		// try-finally 로만 쓰기도 한다. 마지막에 반드시 뭔가를 실행해야하는 경우. 
+		
+		
+		
 		
 		// System.out.println("연산의 결과는 "+divide);  이 코드의 위치는 try안쪾에 같이 있어야한다.
 		// 일이 하나의 묶음이기 때문에?
