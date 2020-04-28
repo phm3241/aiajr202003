@@ -1,6 +1,4 @@
-package PhoneBook_Ver05;
-
-import PhoneBook_Ver05_Exception.EmptyException;
+package PhoneBook_Ver05_Exception;
 
 /*
 PhoneBook_ver05
@@ -33,8 +31,6 @@ public class PhoneBookMain implements MainMenu  {
 		// 인스턴스 참조값을 반환하는 getInstance() 메서드를 사용하여 생성된 객체를 사용. 
 		PhoneBookManager manager=PhoneBookManager.getInstance();
 		
-		
-		try {
 		
 		// 인터페이스 MainMenu 의 상수로 메인에서 메뉴를 수정.
 		while(true) {
@@ -69,20 +65,6 @@ public class PhoneBookMain implements MainMenu  {
 				return;
 			} // switch end
 		} // while end
-		} // try end
-		
-		// 예외처리 1. 이름과 전화번호는 필수사항으로 공백일 경우, 예외 처리되도록 작성.
-		catch(EmptyException e){   
-			System.out.println(e.getMessage());
-			
-		}
-		
-		
-		
-		
-		
-		
-		
 	}// main end
 
 } //class end

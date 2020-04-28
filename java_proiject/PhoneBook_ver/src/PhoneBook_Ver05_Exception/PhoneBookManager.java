@@ -1,8 +1,6 @@
-package PhoneBook_Ver05;
+package PhoneBook_Ver05_Exception;
 
 import java.util.Scanner;
-
-import PhoneBook_Ver05_Exception.EmptyException;
 
 public class PhoneBookManager {
 	
@@ -11,7 +9,7 @@ public class PhoneBookManager {
 	// 배열에 저장된 요소의 개수
 	int numOfInfo;
 
-	static Scanner kb;
+	Scanner kb;
 
 	// 생성자를 통해서 배열 생성, 요소의 개수 초기화
 	private PhoneBookManager(int num) {
@@ -45,7 +43,7 @@ public class PhoneBookManager {
 	}
 
 	// 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
-	void createInfo() throws EmptyException {
+	void createInfo() {
 
 //		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");
 		System.out.println(" 2.대학 3.회사 4.동호회 ");
@@ -70,18 +68,10 @@ public class PhoneBookManager {
 
 		// 2.2.1 기본 정보 수집 : 이름, 전번, 주소, 이메일
 		System.out.println("이름을 입력해주세요.");
-		String name=readInputInfo();
-
-		// String name = kb.nextLine();  원래 코드.
-		// ㅡ> kb.nextLine(); 기능이 포함된 readInputInfo(); 메서드를 추가구성하여 적용.
-		// 		입력받고 그대로 입력한 문자 반환하는 기능.
-		// 		+ 예외 발생예상처리(필수사항인데, 공백일때 예외처리되도록) 
-		//		ㅡ> EmptyException 클래스 생성 ㅡ> throws EmptyException 
-		// 		ㅡ> 메인에서 예외처리 : 공백일때, "입력된 정보가 없습니다. 필수사항이니 정보를 입력해주세요." 출력되도록 
-
+		String name = kb.nextLine();
 
 		System.out.println("전화번호를 입력해주세요.");
-		String phoneNumber = readInputInfo();
+		String phoneNumber = kb.nextLine();
 
 		System.out.println("주소를 입력해주세요.");
 		String addr = kb.nextLine();
@@ -169,11 +159,11 @@ public class PhoneBookManager {
 	
 	
 	// 4. 배열의 정보 검색 : 이름 기준
-	void showInfo() throws EmptyException {
+	void showInfo() {
 
 		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("검색하실 이름을 입력해주세요.");
-		String name = readInputInfo();
+		String name = kb.nextLine();
 		
 		int index = searchIndex(name);
 		
@@ -193,9 +183,9 @@ public class PhoneBookManager {
 	
 	
 	// 5. 배열의 정보를 삭제 : 이름 기준
-	void deleteInfo() throws EmptyException {
+	void deleteInfo() {
 		System.out.println("삭제하고자하는 이름을 입력해주세요.");
-		String name = readInputInfo();
+		String name = kb.nextLine();
 		kb.nextLine();
 		
 		int index = searchIndex(name);
@@ -216,10 +206,10 @@ public class PhoneBookManager {
 	
 	
 	// 6. 배열의 정보를 수정 : 이름 기준
-	void editInfo() throws EmptyException {
+	void editInfo() {
 		
 		System.out.println("변경하고자 하는 이름을 입력해주세요.");
-		String name = readInputInfo();
+		String name = kb.nextLine();
 		kb.nextLine();
 		
 		int index = searchIndex(name);
@@ -234,7 +224,7 @@ public class PhoneBookManager {
 			System.out.println("수정 데이터 입력을 시작합니다.");
 			System.out.println("이름은 " + editName + "입니다.");
 			System.out.println("전화번호를 입력해주세요.");
-			String phoneNumber = readInputInfo();
+			String phoneNumber = kb.nextLine();
 			System.out.println("주소를 입력해주세요.");
 			String addr = kb.nextLine();
 			System.out.println("이메일을 입력해주세요.");
@@ -278,21 +268,12 @@ public class PhoneBookManager {
 			
 			// 배열에 새로운 인스턴스를 저장
 			books[index]=info;
-			}
-		}
-	} // editInfo 메서드 end
-
-	
-	// 예외처리 확인해주는 메서드 - 입력받은 문자열이 공백문자일 때
-	public static String readInputInfo() throws EmptyException {
-		
-		String info = kb.nextLine();
-		
-		if(info.length()<=0) {
-			EmptyException e=new EmptyException();    // 사용자정의 Exception 클래스 사용.
-			throw e; // 강제적으로 예외를 발생시키는 지점, 예외타입의 참조값 e를 던져줘야한다.
+			
+			
 		}
 		
-		return info;
+		
+		
+	}
 	}
 }
