@@ -27,6 +27,6 @@ public interface MainMenu {
 	int COMPANY=2;           // 1-2.회사  
 	int CAFE=3;              // 1-3.동호회
 	
-//	char INSERT_CHAR='i';    // ex. 사용자가 실수로 11을 눌러도 앞에 1만 뽑아서 판단가능 ㅡ> 메뉴1로 이동. 
+	char INSERT_CHAR='i';    // ex. 사용자가 실수로 11을 눌러도 앞에 1만 뽑아서 판단가능 ㅡ> 메뉴1로 이동. 
 	
 }

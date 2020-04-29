@@ -1,5 +1,6 @@
 package PhoneBook_Ver05_Exception;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
@@ -71,43 +72,92 @@ public class PhoneBookManager {
 
 	// 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
 	void createInfo() {
-
-//		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");   PhoneInfor를 추상화클래스로 변경하면서 아래메뉴로 변경
-		System.out.println("1.대학 2.회사 3.동호회 ");
-		System.out.println("입력하고자 하는 번호를 입력해주세요.");
 		
 		// 사용자 선택 번호
-		int select = kb.nextInt();
-		kb.nextLine();
-		
-		if(!(select>0 && select<5)) {
-			System.out.println("정상적인 메뉴 선택이 아닙니다.\n메뉴를 다시 선택해주세요.");
-			return;
-		}
-		
-		// 예외발생 예상
-		if(!(select>0 && select<5)) {
-			
-			return;
-		}
-
-		
-
-		// 2.2.1 기본 정보 수집 : 이름, 전번, 주소, 이메일
-		System.out.println("이름을 입력해주세요.");
-		String name = kb.nextLine();
-
-		System.out.println("전화번호를 입력해주세요.");
-		String phoneNumber = kb.nextLine();
-
-		System.out.println("주소를 입력해주세요.");
-		String addr = kb.nextLine();
-
-		System.out.println("이메일을 입력해주세요.");
-		String email = kb.nextLine();
-
+		int select = 0;
 		PhoneInfor info = null;
+		String name=null, phoneNumber=null, addr=null, email=null;
+		
+		
+		// 다시 입력받는 경우를 위해, createInfo 메서드 중 번호입력부분. while문으로 수정.
+		while(true) {
+			
+//		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");   PhoneInfor를 추상화클래스로 변경하면서 아래메뉴로 변경
+			System.out.println("1.대학 2.회사 3.동호회 ");
+			System.out.println("입력하고자 하는 번호를 입력해주세요.");
+			
+			try {
+				select = kb.nextInt();
+				
+				// 정상범위 1~3를 벗어났을 때, 강제적 예외발생!
+				if(!(select>=1 && select <=3)) {
+					BadNumberException e=new BadNumberException("잘못된 메뉴번호 입력");
+					throw e;
+				}
+			} catch(InputMismatchException e) {
+				System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
+				continue;
+			} catch(BadNumberException e) {
+//				System.out.println(e.getMessage());
+				System.out.println("메뉴범위를 벗어난 숫자입력입니다. \n 확인하시고 다시 입력해주세요");
+				continue;
+			} catch(Exception e) {  // 생각치 못한 오류발생이 있을 수 있기 때문에.
+				System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
+				continue;
+			} finally {
+				manager.kb.nextLine();  
+				// 버퍼발생을 없애주기 위해, finally에 넣어 예외가 발생하든 안하든 실행됨.
+			}
+			
+			break;
+		
+		} // while end
+		
+		// 위의 Try~catch로 예외처리
+//		if(!(select>0 && select<5)) {
+//			System.out.println("정상적인 메뉴 선택이 아닙니다.\n메뉴를 다시 선택해주세요.");
+//			return;
+//		}
+//		
 
+
+		
+		while(true) {
+
+			// 2.2.1 기본 정보 수집 : 이름, 전번, 주소, 이메일
+			System.out.println("이름을 입력해주세요.");
+			name = kb.nextLine();
+	
+			System.out.println("전화번호를 입력해주세요.");
+			phoneNumber = kb.nextLine();
+	
+			System.out.println("주소를 입력해주세요.");
+			addr = kb.nextLine();
+	
+			System.out.println("이메일을 입력해주세요.");
+			email = kb.nextLine();
+			
+			
+			try {
+			
+			// 예외가 생긴다면, 강제 예외발생!
+			// trim은 앞뒤 공백 잘라주는 기능. 그리고나서 isEmpty 공백문자확인기능.
+				if(name.trim().isEmpty() || phoneNumber.trim().isEmpty() || addr.trim().isEmpty() || email.trim().isEmpty()) {
+			
+				StringEmptyException e=new StringEmptyException();
+				throw e;
+				}
+			}catch(StringEmptyException e) {
+				System.out.println("기본정보는 공백없이 모두 입력해주셔야합니다.");
+				System.out.println("다시 입력해주세요\n.");
+				continue;
+			}
+			
+			break;
+			
+		} //while end
+			
+			
 		switch (select) {
 //		case 1:
 			// 2.2.2 기본 클래스로 인스턴스 생성
@@ -142,13 +192,16 @@ public class PhoneBookManager {
 			// 2.2.5 동호회 클래스로 인스턴스 생성
 			info = new PhoneCafeInfor(name, phoneNumber, addr, email, cafeName, nickName);
 			break;
-		}
-
-		// 2.3 생성된 인스턴스를 배열에 저장
+		} // switch end
 		
+		// 2.3 생성된 인스턴스를 배열에 저장
 		addInfo(info);
-	}
-
+		
+	} // createInfo() method end 
+		
+		
+		
+	
 	// 3. 배열의 데이터 출력
 	void showAllInfo() {
 		
@@ -188,7 +241,7 @@ public class PhoneBookManager {
 	// 4. 배열의 정보 검색 : 이름 기준
 	void showInfo() {
 
-		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
+//		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("검색하실 이름을 입력해주세요.");
 		String name = kb.nextLine();
 		
@@ -212,7 +265,7 @@ public class PhoneBookManager {
 	// 5. 배열의 정보를 삭제 : 이름 기준
 	void deleteInfo() {
 		
-		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
+//		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("삭제하고자하는 이름을 입력해주세요.");
 		String name = kb.nextLine();
 		
@@ -236,7 +289,7 @@ public class PhoneBookManager {
 	// 6. 배열의 정보를 수정 : 이름 기준
 	void editInfo() {
 		
-		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
+//		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("변경하고자 하는 이름을 입력해주세요.");
 		String name = kb.nextLine();
 		
@@ -297,11 +350,8 @@ public class PhoneBookManager {
 			// 배열에 새로운 인스턴스를 저장
 			books[index]=info;
 			
-			
-		}
-		
-		
-		
-	}
-	}
-}
+			} // else if end
+		} //else end
+	} // editInfo() end
+
+} //PhoneBookManager class end
