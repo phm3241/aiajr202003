@@ -1,6 +1,6 @@
 package PhoneBook_Ver05;
 
-public class PhoneCafeInfor extends PhoneInfor implements PhoneInforInterface {
+public class PhoneCafeInfor extends PhoneInfor {
 	
 	String cafeName;   // 동호회 이름
 	String nickName;   // 닉네임

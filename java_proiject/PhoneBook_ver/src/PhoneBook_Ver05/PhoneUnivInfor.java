@@ -1,6 +1,6 @@
 package PhoneBook_Ver05;
 
-public class PhoneUnivInfor extends PhoneInfor implements PhoneInforInterface {
+public class PhoneUnivInfor extends PhoneInfor{
 	
 	String major;   // 전공
 	String grade;   // 학년

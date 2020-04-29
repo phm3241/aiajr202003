@@ -1,6 +1,10 @@
 package PhoneBook_Ver05;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import PhoneBook_Ver05_Exception.BadNumberException;
+import PhoneBook_Ver05_Exception.StringEmptyException;
 
 public class PhoneBookManager {
 	
@@ -43,58 +47,108 @@ public class PhoneBookManager {
 	}
 
 	// 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
-	void createInfo() throws EmptyException {
-
-//		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");
-		System.out.println(" 2.대학 3.회사 4.동호회 ");
-		System.out.println("입력하고자 하는 번호를 입력해주세요.");
+	void createInfo() {
 		
-		// 사용자 선택 번호
-		int select = kb.nextInt();
-		kb.nextLine();
+		int select=0;
 		
-		if(!(select>0 && select<5)) {
-			System.out.println("정상적인 메뉴 선택이 아닙니다.\n메뉴를 다시 선택해주세요.");
-			return;
-		}
-		
-		// 예외발생 예상
-		if(!(select>0 && select<5)) {
+		// 저장할 그룹선택 
+		// 예외발생시 예외처리 후 다시 입력받을 수 있도록 반복문으로 묶어준다. 
+		while(true) {
 			
-			return;
-		}
+			try {
+		//		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");
+				System.out.println(" 1.대학 2.회사 3.동호회 ");
+				System.out.println("입력하고자 하는 번호를 입력해주세요.");
+				
+				// 사용자 선택 번호
+				select = kb.nextInt();
+				
+				// 예외발생 예상
+				if(!(select>=1 && select<=3)) {
+					BadNumberException e=new BadNumberException("잘못된 숫자입력");
+					throw e;
+				}
+					
+						}catch(InputMismatchException e) {
+							System.out.println("잘못된 메뉴 숫자입력입니다. 다시 입력해주세요.");
+							continue;
+			
+						}catch(BadNumberException e) {
+							System.out.println("메뉴 숫자 범위를 벗어났습니다. 다시 입력해주세요.");
+							continue;
+							
+						}catch(Exception e) {
+							System.out.println("잘못된 메뉴 숫자입력입니다. 다시 입력해주세요.");
+							continue;
+							
+						}finally {
+							manager.kb.nextLine();
+						}
+			break;
+		} // while end 
+		
+		
+		
+		// 단독 if문으로 예외처리하지 않고, 위에 while문 사용하고 try~catch로 예외처리
+//			if(!(select>0 && select<5)) {
+//				System.out.println("정상적인 메뉴 선택이 아닙니다.\n메뉴를 다시 선택해주세요.");
+//				return;
+//			}
 
 		
-
-		// 2.2.1 기본 정보 수집 : 이름, 전번, 주소, 이메일
-		System.out.println("이름을 입력해주세요.");
-		String name=readInputInfo();
-
-		// String name = kb.nextLine();  원래 코드.
-		// ㅡ> kb.nextLine(); 기능이 포함된 readInputInfo(); 메서드를 추가구성하여 적용.
-		// 		입력받고 그대로 입력한 문자 반환하는 기능.
-		// 		+ 예외 발생예상처리(필수사항인데, 공백일때 예외처리되도록) 
-		//		ㅡ> EmptyException 클래스 생성 ㅡ> throws EmptyException 
-		// 		ㅡ> 메인에서 예외처리 : 공백일때, "입력된 정보가 없습니다. 필수사항이니 정보를 입력해주세요." 출력되도록 
-
-
-		System.out.println("전화번호를 입력해주세요.");
-		String phoneNumber = readInputInfo();
-
-		System.out.println("주소를 입력해주세요.");
-		String addr = kb.nextLine();
-
-		System.out.println("이메일을 입력해주세요.");
-		String email = kb.nextLine();
-
+		
+		String name=null, phoneNumber=null, addr=null, email=null;
 		PhoneInfor info = null;
-
-		switch (select) {
-		case 1:
-			// 2.2.2 기본 클래스로 인스턴스 생성
-//			info = new PhoneInfor(name, phoneNumber, addr, email);
+		
+		
+		
+		// 저장할 그룹선택 
+		// 예외발생시 예외처리 후 다시 입력받을 수 있도록 반복문으로 묶어준다
+		while(true) {
+		
+		
+			// 2.2.1 기본 정보 수집 : 이름, 전번, 주소, 이메일
+			System.out.println("이름을 입력해주세요.");
+			name=kb.nextLine();
+	
+			System.out.println("전화번호를 입력해주세요.");
+			phoneNumber = kb.nextLine();
+	
+			System.out.println("주소를 입력해주세요.");
+			addr = kb.nextLine();
+	
+			System.out.println("이메일을 입력해주세요.");
+			email = kb.nextLine();
+			
+			
+			try {
+				// 공백이면, 강제 예외발생!
+				if(name.trim().isEmpty() || phoneNumber.trim().isEmpty() || addr.trim().isEmpty() || email.trim().isEmpty()) {
+					StringEmptyException e=new StringEmptyException();
+					throw e;
+					} //if end
+	
+					}catch(StringEmptyException e) {
+						System.out.println("필수사항입니다. 다시 입력해주세요.");
+						continue;
+						
+					}catch(Exception e) {
+						System.out.println("필수사항입니다. 다시 입력해주세요.");
+						continue;
+					}
 			break;
-		case 2:
+		} //while end
+		
+		
+		
+		
+		
+		switch (select) {
+//		case 1:
+//			// 2.2.2 기본 클래스로 인스턴스 생성
+////			info = new PhoneInfor(name, phoneNumber, addr, email);
+//			break;
+		case MainMenu.UNIV:
 			System.out.println("전공(학과)를 입력해주세요.");
 			String major = kb.nextLine();
 			System.out.println("학년 정보를 입력해주세요.");
@@ -103,7 +157,7 @@ public class PhoneBookManager {
 			// 2.2.3 대학 클래스로 인스턴스 생성			
 			info = new PhoneUnivInfor(name, phoneNumber, addr, email, major, grade);
 			break;
-		case 3:
+		case MainMenu.COMPANY:
 			System.out.println("회사의 이름을 입력해주세요.");
 			String company = kb.nextLine();
 			System.out.println("부서의 이름을 입력해주세요.");
@@ -114,7 +168,7 @@ public class PhoneBookManager {
 			// 2.2.4 회사 클래스로 인스턴스 생성
 			info = new PhoneCompanyInfor(name, phoneNumber, addr, email, company, dept, job);
 			break;
-		case 4:
+		case MainMenu.CAFE:
 			System.out.println("동호회 이름을 입력해주세요.");
 			String cafeName = kb.nextLine();
 			System.out.println("닉네임을 입력해주세요.");
@@ -167,11 +221,11 @@ public class PhoneBookManager {
 	
 	
 	// 4. 배열의 정보 검색 : 이름 기준
-	void showInfo() throws EmptyException {
+	void showInfo() {
 
 		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("검색하실 이름을 입력해주세요.");
-		String name = readInputInfo();
+		String name = kb.nextLine();
 		
 		int index = searchIndex(name);
 		
@@ -191,9 +245,9 @@ public class PhoneBookManager {
 	
 	
 	// 5. 배열의 정보를 삭제 : 이름 기준
-	void deleteInfo() throws EmptyException {
+	void deleteInfo() {
 		System.out.println("삭제하고자하는 이름을 입력해주세요.");
-		String name = readInputInfo();
+		String name = kb.nextLine();
 		kb.nextLine();
 		
 		int index = searchIndex(name);
@@ -214,10 +268,10 @@ public class PhoneBookManager {
 	
 	
 	// 6. 배열의 정보를 수정 : 이름 기준
-	void editInfo() throws EmptyException {
+	void editInfo() {
 		
 		System.out.println("변경하고자 하는 이름을 입력해주세요.");
-		String name = readInputInfo();
+		String name = kb.nextLine();
 		kb.nextLine();
 		
 		int index = searchIndex(name);
@@ -232,7 +286,7 @@ public class PhoneBookManager {
 			System.out.println("수정 데이터 입력을 시작합니다.");
 			System.out.println("이름은 " + editName + "입니다.");
 			System.out.println("전화번호를 입력해주세요.");
-			String phoneNumber = readInputInfo();
+			String phoneNumber = kb.nextLine();
 			System.out.println("주소를 입력해주세요.");
 			String addr = kb.nextLine();
 			System.out.println("이메일을 입력해주세요.");
@@ -278,19 +332,7 @@ public class PhoneBookManager {
 			books[index]=info;
 			}
 		}
-	} // editInfo 메서드 end
+	} // editInfo() end
 
-	
-	// 예외처리 확인해주는 메서드 - 입력받은 문자열이 공백문자일 때
-	public static String readInputInfo() throws EmptyException {
-		
-		String info = kb.nextLine();
-		
-		if(info.length()<=0) {
-			EmptyException e=new EmptyException();    // 사용자정의 Exception 클래스 사용.
-			throw e; // 강제적으로 예외를 발생시키는 지점, 예외타입의 참조값 e를 던져줘야한다.
-		}
-		
-		return info;
-	}
-}
+
+} //class PhoneBookManager end

@@ -1,6 +1,6 @@
 package PhoneBook_Ver05;
 
-public class PhoneCompanyInfor extends PhoneInfor implements PhoneInforInterface {
+public class PhoneCompanyInfor extends PhoneInfor {
 	
 	String company;   // 회사이름
 	String dept;   // 부서

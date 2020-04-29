@@ -1,5 +1,9 @@
 package PhoneBook_Ver05;
 
+import java.util.InputMismatchException;
+
+import PhoneBook_Ver05_Exception.BadNumberException;
+
 /*
 PhoneBook_ver05
 _문제분석
@@ -32,8 +36,6 @@ public class PhoneBookMain implements MainMenu  {
 		PhoneBookManager manager=PhoneBookManager.getInstance();
 		
 		
-		try {
-		
 		// 인터페이스 MainMenu 의 상수로 메인에서 메뉴를 수정.
 		while(true) {
 			
@@ -46,7 +48,35 @@ public class PhoneBookMain implements MainMenu  {
 			System.out.println(" "+MainMenu.EXIT+". 프로그램 종료 ");
 			System.out.println("=========================");
 			
-			switch(manager.kb.nextInt()){
+			
+			int select;
+			
+			try {
+				select=manager.kb.nextInt();
+				// 메뉴입력 숫자가 범위를 벗어난다면, 강제 예외 발생!
+				if(!(select>=MainMenu.INSERT_INFO && select<=MainMenu.EXIT)) {
+					BadNumberException e=new BadNumberException("잘못된 숫자입력");
+					throw e;
+				}
+				
+			}catch(InputMismatchException e) {
+				System.out.println("잘못된 메뉴 숫자입력입니다. 다시 입력해주세요.");
+				continue;
+
+			}catch(BadNumberException e) {
+				System.out.println("메뉴 숫자 범위를 벗어났습니다. 다시 입력해주세요.");
+				continue;
+				
+			}catch(Exception e) {
+				System.out.println("잘못된 메뉴 숫자입력입니다. 다시 입력해주세요.");
+				continue;
+				
+			}finally {
+				manager.kb.nextLine();
+			}
+			
+			
+			switch(select){
 			case MainMenu.INSERT_INFO:
 				manager.createInfo();
 				break;
@@ -67,20 +97,6 @@ public class PhoneBookMain implements MainMenu  {
 				return;
 			} // switch end
 		} // while end
-		} // try end
-		
-		// 예외처리 1. 이름과 전화번호는 필수사항으로 공백일 경우, 예외 처리되도록 작성.
-		catch(EmptyException e){   
-			System.out.println(e.getMessage());
-			
-		}
-		
-		
-		
-		
-		
-		
-		
 	}// main end
 
 } //class end
