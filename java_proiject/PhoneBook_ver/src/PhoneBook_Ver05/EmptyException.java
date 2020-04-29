@@ -1,4 +1,4 @@
-package PhoneBook_Ver05_Exception;
+package PhoneBook_Ver05;
 
 public class EmptyException extends Exception {
 	
