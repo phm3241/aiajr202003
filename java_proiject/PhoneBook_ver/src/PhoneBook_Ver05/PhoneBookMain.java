@@ -1,7 +1,5 @@
 package PhoneBook_Ver05;
 
-import PhoneBook_Ver05_Exception.EmptyException;
-
 /*
 PhoneBook_ver05
 _문제분석

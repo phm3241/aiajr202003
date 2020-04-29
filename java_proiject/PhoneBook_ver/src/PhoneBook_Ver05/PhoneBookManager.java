@@ -2,8 +2,6 @@ package PhoneBook_Ver05;
 
 import java.util.Scanner;
 
-import PhoneBook_Ver05_Exception.EmptyException;
-
 public class PhoneBookManager {
 	
 	// 1. 배열 선언

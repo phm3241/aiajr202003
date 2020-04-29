@@ -1,8 +1,9 @@
 package PhoneBook_Ver05_Exception;
 
+import java.util.InputMismatchException;
+
 /*
 PhoneBook_ver05
-_문제분석
 
 1.manager 클래스의 싱글톤 패턴처리
 	1-1. 생성자 접근제어지시자 : private (인스턴스 생성 막는다.)
@@ -19,7 +20,7 @@ _문제분석
 	exit : 5
 
 
-3. interfacr ㅡ> 추상클래스 ㅡ> 상속 관계 구조로 변경
+3. interface ㅡ> 추상클래스 ㅡ> 상속 관계 구조로 변경
 */
 
 public class PhoneBookMain implements MainMenu  {
@@ -44,7 +45,36 @@ public class PhoneBookMain implements MainMenu  {
 			System.out.println(" "+MainMenu.EXIT+". 프로그램 종료 ");
 			System.out.println("=========================");
 			
-			switch(manager.kb.nextInt()){
+			int select=0;
+			
+			try {
+				select=manager.kb.nextInt();
+				
+				// 정상범위 1~6
+				// MainMenu.INSERT_INFO ~ MainMenu.EXIT
+				if(!(select >= MainMenu.INSERT_INFO && select<=MainMenu.EXIT)) {
+					BadNumberException e= new BadNumberException("잘못된 메뉴입력입니다.");
+							
+					// 강제적인 예외발생
+					throw e;
+				}
+				
+			} catch(InputMismatchException e) {
+				System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
+				continue;
+			} catch(BadNumberException e) {
+				System.out.println("메뉴범위를 벗어난 숫자입력입니다. \n 확인하시고 다시 입력해주세요");
+				continue;
+			} catch(Exception e) {  // 생각치 못한 오류발생이 있을 수 있기 때문에.
+				System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
+				continue;
+			} finally {
+				manager.kb.nextLine();  
+				// 버퍼발생을 없애주기 위해, finally에 넣어 예외가 발생하든 안하든 실행됨.
+			}
+			
+			
+			switch(select){
 			case MainMenu.INSERT_INFO:
 				manager.createInfo();
 				break;

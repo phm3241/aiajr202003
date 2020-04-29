@@ -2,6 +2,29 @@ package PhoneBook_Ver05_Exception;
 
 import java.util.Scanner;
 
+/*
+PhoneBook_ver05
+
+1.manager 클래스의 싱글톤 패턴처리 
+	1-1. 생성자 접근제어지시자 : private (인스턴스 생성 막는다.)
+	1-2. 공동으로 사용할 인스턴스 생성 : static private
+	1-3. 참조변수를 반환해주는 메서드 : static public
+**자주보게될 패턴. 
+**무분별한 인스턴스생성을 막기위한 목적
+  (기능만 있는 인스턴스는 같은 기능의 인스턴스를 만들어서 메모리를 굳이 차지할 필요가 없기 때문에)
+
+
+2. interFace 기반의 상수표현 메뉴표현
+	고교 친구 저장 : 1
+	대학 친구 저장 : 2
+	기본 정보 출력 : 3
+	전체 정보 출력 : 4
+	exit : 5
+
+
+3. interface ㅡ> 추상클래스 ㅡ> 상속 관계 구조로 변경
+*/
+
 public class PhoneBookManager {
 	
 	// 1. 배열 선언
@@ -12,6 +35,7 @@ public class PhoneBookManager {
 	Scanner kb;
 
 	// 생성자를 통해서 배열 생성, 요소의 개수 초기화
+	// 싱글톤처리 위한 private 생성자 : 생성자를 막아두어 다른 클래스에서 인스턴스 생성을 못하도록. 
 	private PhoneBookManager(int num) {
 		// 배열의 생성
 		books = new PhoneInfor[num];
@@ -21,8 +45,11 @@ public class PhoneBookManager {
 		kb = new Scanner(System.in);
 	}
 	
+	// 싱글톤처리 위한 private 인스턴스생성 : 여기서만 인스턴스 생성하여 찬조변수 생성.
 	private static PhoneBookManager manager=new PhoneBookManager(100);
 	
+	// 싱글톤처리 위한 public static 메서드 : 외부에서 인스턴스생성 말고, 인스턴스의 참조값을 가져가서 쓸 수 있도록.
+	// 인스턴스는 하나만 만드는 효과.
 	public static PhoneBookManager getInstance() {
 		return manager;
 		
@@ -45,8 +72,8 @@ public class PhoneBookManager {
 	// 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
 	void createInfo() {
 
-//		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");
-		System.out.println(" 2.대학 3.회사 4.동호회 ");
+//		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");   PhoneInfor를 추상화클래스로 변경하면서 아래메뉴로 변경
+		System.out.println("1.대학 2.회사 3.동호회 ");
 		System.out.println("입력하고자 하는 번호를 입력해주세요.");
 		
 		// 사용자 선택 번호
@@ -82,11 +109,11 @@ public class PhoneBookManager {
 		PhoneInfor info = null;
 
 		switch (select) {
-		case 1:
+//		case 1:
 			// 2.2.2 기본 클래스로 인스턴스 생성
 //			info = new PhoneInfor(name, phoneNumber, addr, email);
-			break;
-		case 2:
+//			break;
+		case MainMenu.UNIV:
 			System.out.println("전공(학과)를 입력해주세요.");
 			String major = kb.nextLine();
 			System.out.println("학년 정보를 입력해주세요.");
@@ -95,7 +122,7 @@ public class PhoneBookManager {
 			// 2.2.3 대학 클래스로 인스턴스 생성			
 			info = new PhoneUnivInfor(name, phoneNumber, addr, email, major, grade);
 			break;
-		case 3:
+		case MainMenu.COMPANY:
 			System.out.println("회사의 이름을 입력해주세요.");
 			String company = kb.nextLine();
 			System.out.println("부서의 이름을 입력해주세요.");
@@ -106,7 +133,7 @@ public class PhoneBookManager {
 			// 2.2.4 회사 클래스로 인스턴스 생성
 			info = new PhoneCompanyInfor(name, phoneNumber, addr, email, company, dept, job);
 			break;
-		case 4:
+		case MainMenu.CAFE:
 			System.out.println("동호회 이름을 입력해주세요.");
 			String cafeName = kb.nextLine();
 			System.out.println("닉네임을 입력해주세요.");
@@ -145,8 +172,8 @@ public class PhoneBookManager {
 		
 		// 배열의 반복으로 name 값을 비교해서 index 값을 찾는다.
 		for(int i=0; i<numOfInfo; i++) {
-			System.out.println(name);
-			System.out.println(books[i].checkName(name));
+//			System.out.println(name); // 오류점검차 중간출력
+//			System.out.println(books[i].checkName(name));   // 오류점검차 중간출력
 			if(books[i].checkName(name)) {
 				searchIndex=i;
 				break;
@@ -167,7 +194,7 @@ public class PhoneBookManager {
 		
 		int index = searchIndex(name);
 		
-		System.out.println(index);
+//		System.out.println(index);   // 오류점검차 중간출력
 		
 		if(index<0) {
 			System.out.println("검색하신 이름의 정보가 없습니다.");
@@ -184,9 +211,10 @@ public class PhoneBookManager {
 	
 	// 5. 배열의 정보를 삭제 : 이름 기준
 	void deleteInfo() {
+		
+		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("삭제하고자하는 이름을 입력해주세요.");
 		String name = kb.nextLine();
-		kb.nextLine();
 		
 		int index = searchIndex(name);
 		
@@ -208,9 +236,9 @@ public class PhoneBookManager {
 	// 6. 배열의 정보를 수정 : 이름 기준
 	void editInfo() {
 		
+		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("변경하고자 하는 이름을 입력해주세요.");
 		String name = kb.nextLine();
-		kb.nextLine();
 		
 		int index = searchIndex(name);
 		
