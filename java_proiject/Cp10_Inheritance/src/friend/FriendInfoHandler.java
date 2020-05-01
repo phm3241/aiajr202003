@@ -1,5 +1,6 @@
 package friend;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // 입력하고 출력만 하는 클래스
@@ -11,14 +12,25 @@ import java.util.Scanner;
 
 public class FriendInfoHandler {
 	
-	private Friend[] myFriends;    // Friend 타입의 배열 선언
-	int numOfFriend;      // 저장된 친구의 정보 갯수 (저장할 배열의 인덱스, 반복의 횟수가 된다)
+	
+	// private Friend[] myFriends;    // Friend 타입의 배열 선언
+	// int numOfFriend;      // 저장된 친구의 정보 갯수 (저장할 배열의 인덱스, 반복의 횟수가 된다)
+	// ㅡ> 배열을 리스트로 변경하기!
+	
+	// List 참조변수
+	private ArrayList<Friend> myFriends;
+	
+	
+	
 	Scanner kb;
 	
 	// 생성자(초기화) : 저장공간(사이즈) 크기를 받아서 배열을 생성
 	FriendInfoHandler(int num){   
-		myFriends=new Friend[num];
-		numOfFriend=0;
+		// myFriends=new Friend[num];
+		// numOfFriend=0;
+		
+		// ArrayList 인스턴스 생성 
+		myFriends=new ArrayList<Friend>();
 		kb=new Scanner(System.in);
 	}
 
@@ -29,8 +41,11 @@ public class FriendInfoHandler {
 	
 	// 1. 배열에 저장하는 기능
 	void addFriendInfo(Friend f) {
-		myFriends[numOfFriend]=f;
-		numOfFriend++;
+		// myFriends[numOfFriend]=f;
+		// numOfFriend++;
+		// ㅡ> 이제 배열이 아니라 리스트에 저장 
+		myFriends.add(f);
+		
 	}
 	
 	// 2. 사용자에게 데이터를 받아서 사용자요청에 맞는 인스턴스 생성
@@ -79,8 +94,10 @@ public class FriendInfoHandler {
 	// 친구정보의 기본정보 출력 기능
 	void showAllSimpleData() {
 		System.out.println("=====친구의 기본정보를 출력합니다=====");
-		for(int i=0; i<numOfFriend; i++) {
-			myFriends[i].showBasicInfo();
+//		for(int i=0; i<numOfFriend; i++) {
+//			myFriends[i].showBasicInfo();
+		for(int i=0; i<myFriends.size(); i++) {
+			myFriends.get(i).showBasicInfo();
 			System.out.println("---------------------------------------");
 		}
 	}
@@ -90,8 +107,10 @@ public class FriendInfoHandler {
 	// 친구정보 상세정보 출력 기능
 	void showAllData() {
 		System.out.println("=====친구의 모든정보를 출력합니다=====");
-		for(int i=0; i<numOfFriend; i++) {
-			myFriends[i].showData();
+//		for(int i=0; i<numOfFriend; i++) {
+//			myFriends[i].showData();
+		for(int i=0; i<myFriends.size(); i++) {
+			myFriends.get(i).showData();
 			System.out.println("---------------------------------------");
 		}
 	}
