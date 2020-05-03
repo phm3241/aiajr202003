@@ -1,23 +1,42 @@
 package Algorism_level01;
 
+import java.util.Scanner;
+
+/*
+작성자 : 박혜미
+작성일시 : 2020.04.12
+수정일시 : 2020.05.03
+수정내용 : 스캐너로 사용자에게 두숫자 입력받는 기능 추가.
+
+----------------------------------------------------------------------
+문제 1. 두 수의 차 구하기 - 큰 수에서 작은 수 해결할 수 있는 방법을 순차적으로 기술하세요.
+ */
 public class Algorism_1 {
 
 	public static void main(String[] args) {
 		
-		// 1. 두 수의 차 구하기 - 큰 수에서 작은 수
-		// 해결할 수 있는 방법을 순차적으로 기술하세요.
+		//1- 변수선언 : 두숫자
+		int num1; 
+		int num2;
 
 		
-		//1- 두 숫자를 받는다. 혹은 두 숫자를 저장한다. a, b
-		int a = 25;
-		int b = 30;
+		
+		//2- 사용자에게 두 숫자를 입력받는다.
+		Scanner kb=new Scanner(System.in);  // 입력받기 위해 스캐너 임포트
+		
+		System.out.println("두 수의 차를 구하기 위한, 첫번째 숫자를 입력해주세요.");
+		num1=kb.nextInt();
+		kb.nextLine();         // 버퍼발생을 없애기 위해 한번더 입력코드추가
+		
+		System.out.println("두 수의 차를 구하기 위한, 두번째 숫자를 입력해주세요.");
+		num2=kb.nextInt();
+		kb.nextLine();         // 버퍼발생을 없애기 위해 한번더 입력코드추가
 		
 		
-		// 2- a >= b 이면, a - b의 결과값을 출력하고, 아니면 b - a의 결과값을 출력한다. 
- 		int result = a >= b ? a-b : b-a;
- 				
- 				
-		System.out.println(a + ", " + b + "의 차이는 " + result + "입니다.");
+	
+		// 3-삼항연산자 사용하여 두수의 차 결과값 출력
+		int result = num1 >= num2 ? num1-num2 : num1-num2;
+		System.out.println(num1 + ", " + num2 + "의 차이는 " + result + "입니다.");
 			
 
 	}
