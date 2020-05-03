@@ -1,6 +1,7 @@
 package PhoneBook_Try3;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,35 +35,97 @@ public class PhoneBookManager {
 	}
 	
 	// 메서드1 : 친구추가 (리스트에)
-	void addInfo(PhoneInfo f) {
-		books.add(f);
+	void addInfo(PhoneInfo info) {
+		books.add(info);
 	}
 	
 	// 메서드2 : 친구추가(사용자 입력 ㅡ> 인스턴스생성)
 	void createInfo() {
 		
-		System.out.println("저장하실 친구 그룹을 선택해주세요");
-		System.out.println("1.대학	2.회사	3.동호회");
-		int select=kb.nextInt();
-		kb.hasNextLine();
-		
-		System.out.println("이름을 입력해주세요.");
-		String name=kb.nextLine();
+		int select=0;
+		String name=null, phoneNumber=null, address=null, email=null;
 
-		System.out.println("전화번호를 입력해주세요.");
-		String phoneNumber=kb.nextLine();
 		
-		System.out.println("주소를 입력해주세요.");
-		String address=kb.nextLine();
+		while(true) {
+			
+				
+			System.out.println("저장하실 친구 그룹을 선택해주세요");
+			System.out.println("1.대학	2.회사	3.동호회");
+				try {
+					select=kb.nextInt();
+
+					//만약에 메뉴선택 숫자범위를 벗어난다면, 강제에러발생!
+					if(!(1<=select && select<=3)) {
+						BadNumberException e = new BadNumberException("문제발생");
+						throw e;
+					}
+						//예외처리
+						}catch(BadNumberException e){
+							System.out.println("메뉴 숫자범위를 벗어났습니다. \n 확인 후 다시 입력해주세요.");
+							continue;
+						
+						}catch(InputMismatchException e){
+							System.out.println("입력하신 것이 숫자가 아닙니다. \n 확인 후 다시 숫자를 입력해주세요.");
+							continue;
+			
+						}catch(Exception e){
+							System.out.println("확인 후 다시 입력해주세요.");
+							continue;
+
+						}finally {
+							kb.nextLine();
+						}
+				break;
+			} //while end
+			
 		
-		System.out.println("이메일을 입력해주세요.");
-		String email=kb.nextLine();
+		
+
+		while(true) {
+		
+			// ★★★실수부분★★★ 
+			// ★★★이부분은 try 밖에 있어야한다.★★★
+			System.out.println("이름을 입력해주세요.");
+			name=kb.nextLine();
+			
+			System.out.println("전화번호를 입력해주세요.");
+			phoneNumber=kb.nextLine();
+			
+			System.out.println("주소를 입력해주세요.");
+			address=kb.nextLine();
+			
+			System.out.println("이메일을 입력해주세요.");
+			email=kb.nextLine();
+		
+			
+				try {
+					
+					//만약에 입력정보가 공백이면, 강제에러발생!
+					// ★★★실수부분★★★ 
+					// ★★★조건식 공백조건 변수명 모두 적어주어야한다. ★★★
+//					if(kb.nextLine().trim().isEmpty()) {
+					if(name.trim().isEmpty() || phoneNumber.trim().isEmpty() || address.trim().isEmpty() || email.trim().isEmpty()) {
+						StringEmptyException e=new StringEmptyException();
+						throw e;
+					}
+					
+						//예외처리
+						}catch(StringEmptyException e) {
+							System.out.println("필수사항입니다. 정보를 입력해주세요.");
+							continue;
+							
+						}catch(Exception e) {
+							System.out.println("필수사항입니다. 정보를 입력해주세요.");
+							continue;
+						}
+				break;
+		} //while end
 		
 		
 		PhoneInfo books=null;
 		
 		switch(select) {
-		case 1:
+		case Menu.UNIV:
 			System.out.println("전공을 입력해주세요.");
 			String major=kb.nextLine();
 			
@@ -72,7 +135,7 @@ public class PhoneBookManager {
 			books=new PhoneUnivInfo(name, phoneNumber, address, email, major, grade); 
 			break;
 
-		case 2:
+		case Menu.COMPANY:
 			System.out.println("회사를 입력해주세요.");
 			String company=kb.nextLine();
 			
@@ -85,7 +148,7 @@ public class PhoneBookManager {
 			books=new PhoneCompanyInfo(name, phoneNumber, address, email, company, depart, job);
 			break;
 
-		case 3:
+		case Menu.CAFE:
 			System.out.println("동호회 이름을 입력해주세요.");
 			String cafeName=kb.nextLine();
 			
@@ -108,7 +171,9 @@ public class PhoneBookManager {
 	// 메서드3 : 친구정보 검색 ㅡ> 인덱스 반환 (이름기준)
 	int searchIndex(String name) {
 		
+		
 		int searchName=-1;  // 검색결과가 없을 떄를 생각한 초기값
+		
 		for(int i=0; i<books.size(); i++) {
 			if (books.get(i).checkName(name)) {
 				searchName=i;
@@ -143,6 +208,11 @@ public class PhoneBookManager {
 	
 	// 메서드5 : 친구정보 수정 (이름기준)
 	void editInfo() {
+		
+		String phoneNumber;
+		String address;
+		String email;
+		
 		System.out.println("수정하실 친구의 이름을 입력해주세요.");
 		String name=kb.nextLine();
 		
@@ -151,17 +221,40 @@ public class PhoneBookManager {
 		
 		if(index<0) {
 			System.out.println("찾으시는 이름의 정보가 없습니다.");
+			
 		} else {
 			System.out.println("수정하실 친구의 이름은 "+books.get(index).getName()+"입니다.");
 			
-			System.out.println("수정하실 전화번호를 입력하세요.");
-			String phoneNumber=kb.nextLine();
 			
-			System.out.println("수정하실 주소를 입력하세요.");
-			String address=kb.nextLine();
-
-			System.out.println("수정하실 이메일을 입력하세요.");
-			String email=kb.nextLine();
+			while(true) {
+				System.out.println("수정하실 전화번호를 입력하세요.");
+				phoneNumber=kb.nextLine();
+				
+				System.out.println("수정하실 주소를 입력하세요.");
+				address=kb.nextLine();
+	
+				System.out.println("수정하실 이메일을 입력하세요.");
+				email=kb.nextLine();
+				
+					try {
+						//만약에 입력정보가 공백이면, 강제에러발생!
+						if(phoneNumber.trim().isEmpty() || address.trim().isEmpty() || email.trim().isEmpty()) {
+							StringEmptyException e=new StringEmptyException();
+							throw e;
+						}
+							
+							//예외처리
+							}catch(StringEmptyException e) {
+								System.out.println("필수사항입니다. 정보를 입력해주세요.");
+								continue;
+								
+							}catch(Exception e) {
+								System.out.println("필수사항입니다. 정보를 입력해주세요.");
+								continue;
+							}
+				break;
+				
+			}//while end
 			
 			
 				if(books.get(index) instanceof PhoneUnivInfo) {
@@ -213,8 +306,8 @@ public class PhoneBookManager {
 			System.out.println("찾으시는 이름의 정보가 없습니다.");
 		} else {
 			books.remove(index);
+			System.out.println("요청하신 친구정보를 삭제했습니다.");
 		}
-		System.out.println("요청하신 친구정보를 삭제했습니다.");
 	}
 	
 	// ★★★실수부분★★★ 
