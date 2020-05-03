@@ -1,5 +1,7 @@
 package PhoneBook_Try3;
 
+import java.util.InputMismatchException;
+
 public class PhoneBookMain {
 
 	public static void main(String[] args) {
@@ -13,6 +15,8 @@ public class PhoneBookMain {
 		
 		// 메인메뉴 
 		while(true) {
+			int select = 0;
+			
 			System.out.println("메뉴를 선택해주세요.");
 			System.out.println(Menu.INSERT_INFO+". 친구정보 저장");
 			System.out.println(Menu.SEARCH_INFO+". 친구정보 검색");
@@ -21,8 +25,33 @@ public class PhoneBookMain {
 			System.out.println(Menu.SHOW_ALL_INFO+". 친구정보 전체보기");
 			System.out.println(Menu.EXIT+". 프로그램 종료");
 			
-			int select=manager.kb.nextInt();
-			manager.kb.nextLine();
+				try {
+					select=manager.kb.nextInt();
+					
+					// ★★★실수부분★★★ 
+					// ★★★범위에 들어가는 숫자도 상수로 설정해놓은 것을 쓸 수 있다.★★★ 
+					if(!(Menu.INSERT_INFO<=select && select<=Menu.EXIT)) {
+						BadNumberException e= new BadNumberException("문제발생");
+						throw e;
+						}
+						
+					}catch(BadNumberException e) {
+						System.out.println("메뉴 숫자범위를 벗어났습니다. 확인 후 다시 입력해주세요.");
+						continue;
+						
+					}catch(InputMismatchException e) {
+						System.out.println("입력하신 것은 숫자가 아닙니다. 확인 후 다시 입력해주세요.");
+						continue;
+						
+					}catch(Exception e) {
+						System.out.println("확인 후 다시 입력해주세요.");
+						continue;
+
+					}finally{
+						manager.kb.nextLine();
+					}
+			
+			
 			
 			switch(select) {
 			case Menu.INSERT_INFO:
