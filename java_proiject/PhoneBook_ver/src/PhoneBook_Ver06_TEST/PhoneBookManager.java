@@ -4,35 +4,9 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/*
-PhoneBook_ver05
-
-1.manager 클래스의 싱글톤 패턴처리 
-	1-1. 생성자 접근제어지시자 : private (인스턴스 생성 막는다.)
-	1-2. 공동으로 사용할 인스턴스 생성 : static private
-	1-3. 참조변수를 반환해주는 메서드 : static public
-**자주보게될 패턴. 
-**무분별한 인스턴스생성을 막기위한 목적
-  (기능만 있는 인스턴스는 같은 기능의 인스턴스를 만들어서 메모리를 굳이 차지할 필요가 없기 때문에)
-
-
-2. interFace 기반의 상수표현 메뉴표현
-	고교 친구 저장 : 1
-	대학 친구 저장 : 2
-	기본 정보 출력 : 3
-	전체 정보 출력 : 4
-	exit : 5
-
-
-3. interface ㅡ> 추상클래스 ㅡ> 상속 관계 구조로 변경
-*/
-
 public class PhoneBookManager {
 	
 	// 1. 배열 선언
-	// PhoneInfor[] books;
-	// 배열에 저장된 요소의 개수
-	// int numOfInfo;
 	
 	// List 참조변수
 	ArrayList<PhoneInfor> books;
@@ -42,10 +16,6 @@ public class PhoneBookManager {
 	// 생성자를 통해서 배열 생성, 요소의 개수 초기화
 	// 싱글톤처리 위한 private 생성자 : 생성자를 막아두어 다른 클래스에서 인스턴스 생성을 못하도록. 
 	private PhoneBookManager(int num) {
-		// 배열의 생성
-		// books = new PhoneInfor[num];
-		// 요소 개수의 초기화
-		// numOfInfo = 0;
 		
 		// List 인스턴스 생성
 		books=new ArrayList<PhoneInfor>(); // PhoneInfor는 앞에서 선언되었으므로 생략가능
@@ -73,10 +43,6 @@ public class PhoneBookManager {
 
 	// 2.1 배열에 추가
 	void addInfo(PhoneInfor info) {
-		// 배열에 numOfInfo 숫자 -> index 로 참조값을 저장
-		// books[numOfInfo] = info;
-		// 입력된 정보의 개수를 +1 증가 시킨다
-		// numOfInfo++;
 		
 		// List에 추가
 		books.add(info);
@@ -94,7 +60,6 @@ public class PhoneBookManager {
 		// 다시 입력받는 경우를 위해, createInfo 메서드 중 번호입력부분. while문으로 수정.
 		while(true) {
 			
-//		System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");   PhoneInfor를 추상화클래스로 변경하면서 아래메뉴로 변경
 			System.out.println(MainMenu.BASIC+".일반\n"+ MainMenu.COMPANY+".대학\n" +MainMenu.COMPANY+".회사\n"+MainMenu.CAFE+".동호회");
 			System.out.println("입력하고자 하는 번호를 입력해주세요.");
 			
@@ -125,13 +90,6 @@ public class PhoneBookManager {
 		
 		} // while end
 		
-		// 위의 Try~catch로 예외처리
-//		if(!(select>0 && select<5)) {
-//			System.out.println("정상적인 메뉴 선택이 아닙니다.\n메뉴를 다시 선택해주세요.");
-//			return;
-//		}
-//		
-
 
 		
 		while(true) {
@@ -168,10 +126,6 @@ public class PhoneBookManager {
 			
 			
 		switch (select) {
-//		case 1:
-			// 2.2.2 기본 클래스로 인스턴스 생성
-//			info = new PhoneInfor(name, phoneNumber, address, email);
-//			break;
 		
 		case MainMenu.BASIC:
 			System.out.println("주소를 입력해주세요.");
@@ -228,12 +182,7 @@ public class PhoneBookManager {
 	// 3. 배열의 데이터 출력
 	void showAllInfo() {
 		
-		// for each 반복  : 현재 프로그램에서는 사용 불가
-		// for 반복문 : 반복의 횟수 지정이 가능 numOfInfo
-		
 		System.out.println("전체 정보를 출력합니다. ===========");
-		// for(int i=0; i<numOfInfo ; i++) {
-		// 		books[i].showAllInfo();
 		
 		// List로 변경
 		for(int i=0; i<books.size() ; i++) {
@@ -249,19 +198,8 @@ public class PhoneBookManager {
 		
 		// 정상적인 index 값은 0~이상의 값, 찾지 못했을 때 구분 값 -1을 사용
 		int searchIndex = -1; 
-		
-		// 배열의 반복으로 name 값을 비교해서 index 값을 찾는다.
-		// for(int i=0; i<numOfInfo; i++) {
-//			System.out.println(name); // 오류점검차 중간출력
-//			System.out.println(books[i].checkName(name));   // 오류점검차 중간출력
-		//	if(books[i].checkName(name)) {
-		//		searchIndex=i;
-		//		break;
-		//	}
 			
 		for(int i=0; i<books.size(); i++) {
-//				System.out.println(name); // 오류점검차 중간출력
-//				System.out.println(books[i].checkName(name));   // 오류점검차 중간출력
 			if(books.get(i).checkName(name)) {
 				searchIndex=i;
 				break;
@@ -276,13 +214,11 @@ public class PhoneBookManager {
 	// 4. 배열의 정보 검색 : 이름 기준
 	void showInfo() {
 
-//		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("검색하실 이름을 입력해주세요.");
 		String name = kb.nextLine();
 		
 		int index = searchIndex(name);
 		
-//		System.out.println(index);   // 오류점검차 중간출력
 		
 		if(index<0) {
 			System.out.println("검색하신 이름의 정보가 없습니다.");
@@ -291,8 +227,6 @@ public class PhoneBookManager {
 			books.get(index).showBasicInfo();
 			System.out.println("----------------");
 		}
-		
-		
 	}
 	
 	
@@ -300,7 +234,6 @@ public class PhoneBookManager {
 	// 5. 배열의 정보를 삭제 : 이름 기준
 	void deleteInfo() {
 		
-//		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("삭제하고자하는 이름을 입력해주세요.");
 		String name = kb.nextLine();
 		
@@ -310,14 +243,9 @@ public class PhoneBookManager {
 			System.out.println("삭제하고자하는 이름의 정보가 없습니다.");
 		} else {
 			
-			// 삭제 위치에서 외쪽으로 시프트
-			// for(int i=index; i<numOfInfo-1; i++) {
-			//	books[i]=books[i+1];
 			books.remove(index);
 			
 			}
-			// 삭제가 되었으므로 요소의 개수도 -1 
-//			numOfInfo--;
 		}
 			
 	
@@ -325,7 +253,6 @@ public class PhoneBookManager {
 	// 6. 배열의 정보를 수정 : 이름 기준
 	void editInfo() {
 		
-//		kb.nextLine();   // ★공백값으로 이름값이 안들어가서 계속 검색결과가 false였다.
 		System.out.println("변경하고자 하는 이름을 입력해주세요.");
 		String name = kb.nextLine();
 		
@@ -382,12 +309,6 @@ public class PhoneBookManager {
 				
 				info = new PhoneCafeInfor(editName, phoneNumber, email, cafeName, nickName);
 				
-//			} else if(books[index] instanceof PhoneInfor) {
-//				info = new PhoneInfor(editName, phoneNumber, addr, email);
-//			}
-			
-			// 배열에 새로운 인스턴스를 저장
-			// books[index]=info;
 				
 			// 수정은 해당인덱스에 있던 데이터를 삭제하고나서, 추가하는 방법으로 진행
 			books.remove(index);  

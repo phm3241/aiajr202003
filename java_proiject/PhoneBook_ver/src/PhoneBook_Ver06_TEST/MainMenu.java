@@ -1,20 +1,6 @@
 package PhoneBook_Ver06_TEST;
 
 public interface MainMenu {
-	/* 
-	메뉴
-	 1. 친구정보 입력
-	 	1-1.대학  1-2.회사  1-3.동호회
-	 2. 친구정보 검색
-	 3. 친구정보 삭제
-	 4. 친구정보 수정
-	 5. 친구정보 전체보기
-	 6. 프로그램 종료 
-	 */
-	
-	
-	// 인터페이스에는 상수나 추상메서드만 가능.
-	// public static final 상수=리터럴;
 	
 	int INSERT_INFO=1;       // 1. 친구정보 입력
 	int SEARCH_INFO=2;       // 2. 친구정보 검색
