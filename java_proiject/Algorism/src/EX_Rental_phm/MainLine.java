@@ -16,6 +16,7 @@ public class MainLine {
             switch (selectNum) {
 
                 case 1:
+                	/* 검색 메서드 MemberManager 클래스의 showInfo() */
                     System.out.println("1.도서 | 2.DVD | 3. 게임");
 
                     selectNum = manager.sc.nextInt();
@@ -27,13 +28,24 @@ public class MainLine {
                             System.out.println("1.검색 2.뒤로가기");
                             selectNum = manager.sc.nextInt();
                             switch (selectNum) {
-                                case 1:
+                                case 1:   // 이부분 수정했음. phm
                                     System.out.println("이곳에 상세 내역 출력");
                                     //로그인 됬을시
-                                    System.out.println("1.대여 | 2.예약 | 3.반납 | 연장");
+                                    /* 검색결과 메서드 */
+                                    System.out.println("1.대여 | 2.예약");
                                     selectNum = manager.sc.nextInt();
+                                    	switch(selectNum) {
+                                    	case 1: 
+                                    		/* 대여 메서드 */
+                                    		break;
+                                    	case 2:
+                                    		/* 예약 메서드 */
+                                    		break;
+                                    	}
+                                    
                                     //비로그인 시
                                     System.out.println("이용하시려면 로그인을 해 주세요.");
+                                    /* 로그인 메서드 */
                                     break;
                                 case 2:
                                     break;
