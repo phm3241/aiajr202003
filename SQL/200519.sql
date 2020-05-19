@@ -103,6 +103,8 @@ where sal between 2001 and 2999
 ;
 
 
+s
+
 
 -- 1987년 입사자 리스트 출력
 select *
