@@ -1,12 +1,12 @@
 
 --2020.05.19. [과제] sql select 추가 문제
---◆◆◆
+
 desc book;
 desc Customer;
 desc Orders;
---select * from book;
---select * from Customer;
---select * from Orders;
+select * from book;
+select * from Customer;
+select * from Orders;
 
 
 --1 마당서점의 고객이 요구하는 다음 질문에 대해 SQL 문을 작성하시오.
@@ -23,14 +23,14 @@ from book
 where price>20000;
 
 
---(3) 박지성의 총 구매액(박지성의 고객번호는 1번으로 놓고작성) --pass
-select sum(saleprice)
+--(3) 박지성의 총 구매액(박지성의 고객번호는 1번으로 놓고작성) 
+select to_char(sum(saleprice),'999,999') as "박지성의 총 구매액"
 from orders
 where custid=1;
 
 
---(4) 박지성이 구매한 도서의 수(박지성의 고객번호는 1번으로 놓고 작성) --pass
-select count(custid)
+--(4) 박지성이 구매한 도서의 수(박지성의 고객번호는 1번으로 놓고 작성) 
+select count(custid) as "박지성이 구매한 도서의 수"
 from orders
 where custid=1;
 
@@ -40,13 +40,13 @@ where custid=1;
 
 --2 마당서점의 운영자와 경영자가 요구하는 다음 질문에 대해 SQL 문을 작성하시오.
 
---(1) 마당서점 도서의 총 개수 -- pass
-select count(bookid)
+--(1) 마당서점 도서의 총 개수
+select count(bookid) as "마당서점 도서의 총 개수"
 from book;
 
 
---(2) 마당서점에 도서를 출고하는 출판사의 총개수 --pass
-select count(distinct publisher)
+--(2) 마당서점에 도서를 출고하는 출판사의 총개수 
+select count(distinct publisher) as "마당서점 출판사 총개수"
 from book;
 
 
