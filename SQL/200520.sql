@@ -1,8 +1,6 @@
 -- 2020.05.20 
 ----------------------------------------------------------------------
--- 함수
-
-
+-- SELECT 함수
 
 
 ----------------------------------------------------------------------
@@ -151,18 +149,62 @@ from dual;
 
 
 
-
-
-
-
-
-
-
-
+----------------------------------------------------------------------
+-- << 변환함수 >>
+-- TO_number : 문자형을 숫자형으로 변환한다.
+-- TO_number(원본(해당컬럼), 패턴)
+-- str ㅡ> number : 산술,관계 연산을 목적으로 변환
+-- 참고 : 데이터모델링을 할때, 출력용이냐(문자형으로 저장), 연산용도 있느냐(숫자형으로 저장)에 따라 
+--       데이터를 구분해서 저장. 선정해서 변환함수를 쓰지 않을 수 있다. 
+select to_number('20,000','999,999') - to_number('9,000','999,999')
+from dual;
 
 
 
 ----------------------------------------------------------------------
+-- <<DECODE 함수>> 
+-- if나 switch구문과 유사
+
+select ename, deptno, 
+decode(deptno, 
+            10, 'ACCOUNTING',
+            20, 'RESEARCH',
+            30, 'SALEs',
+            40, 'OPERATING'
+) as dsptName
+from emp;
+
+
+
+-- 직급에 따라 급여를 인상하도록 하자. 
+-- 직급이 'ANALYST'인 사원은 5%, 
+--       'SALESMAN'인 사원은 10%, 
+--       'MANAGER'인 사원은 15%, 
+--       'CLERK'인사원은 20%인 인상한다.
+
+select ename, job, sal,
+decode(job, 
+            'ANALIST', sal*1.05,
+            'SALESMAN', sal*1.1,
+            'MANAGER', sal*1.15,
+            'CLERK', sal*1.2
+) as UPSALE
+from emp;
+
+
+----------------------------------------------------------------------
+-- <<CASE 함수>> 
+-- if else 구문과 유사
+select ename, deptno, 
+case 
+    when deptno=10 then 'ACCOUNTING'
+    when deptno=20 then 'RESEARCH'
+    when deptno=30 then 'SALES'
+    when deptno=40 then 'OPERATING'
+    else 'no name'
+end as deptName
+from emp;
+
 
 
 
