@@ -135,6 +135,16 @@ from emp natural join dept;
 
 
 
+select *
+from emp e left outer join emp m
+on e.mgr=m.empno;
+
+
+
+
+
+
+
 
 
 
