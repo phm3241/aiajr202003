@@ -3,8 +3,8 @@
 
 -- 16. SUBSTR 함수를 사용하여 사원들의 입사한 년도와 입사한 달만 출력하시오.
 -- SUBSTR : 문자를 잘라서 추출(한글 1byte)하는 문자처리함수
--- substr(컬럼명, 시작위치, 글자수)
-select substr(hiredate, 1,5)
+-- substr(원본 문자열, 시작인덱스, 글자수)
+select substr(hiredate, 0,5)
 from emp;
 
 
@@ -15,6 +15,7 @@ where substr(hiredate, 4, 2)='04';
 
 
 -- 18. MOD 함수를 사용하여 사원번호가 짝수인 사람만 출력하시오.
+-- mod(피제수, 제수)ㅡ> 나머지 반환
 select *
 from emp
 where mod(empno, 2)=0;
@@ -25,11 +26,6 @@ where mod(empno, 2)=0;
 select to_char(hiredate, 'YY/ MM/ DY')
 from emp; 
 
---select to_char(hiredate, 'YY') as "입사년도",
---       to_number(substr(hiredate, 4, 2), '999,999') as "입사월",
---       to_char(hiredate, 'DY') as "입사요일"
---from emp; 
-
 
 -- 20. 올해 몇 칠이 지났는지 출력하시오. 
 -- 현재날짜에서 올해 1월 1일을 뺀 결과를 출력하고 TO_DATE 함수를 사용하여 데이터 형을 일치 시키시오.
@@ -38,12 +34,13 @@ from dual;
 
 
 -- 21. 사원들의 상관 사번을 출력하되 상관이 없는 사원에 대해서는 NULL 값 대신 0으로 출력하시오.
-select ename,nvl(mgr, 0) as "상관 사번" 
+-- nvl(컬럼, 치환할 기본값)
+select ename, nvl(mgr, 0) as "상관 사번" 
 from emp;
 
 
 -- 22. DECODE 함수로 직급에 따라 급여를 인상하도록 하시오. 
--- 직급이 ‘ANALIST”인 사원은 200, ‘SALESMAN’인 사원은 180, 
+-- 직급이 ‘ANALYST”인 사원은 200, ‘SALESMAN’인 사원은 180, 
 -- ‘MANAGER’인 사원은 150, ‘CLERK”인 사원은 100을 인상하시오.
 select ename, job, sal, 
 decode (job, 'ANALYST', sal+200,
@@ -81,9 +78,14 @@ group by job;
 
 
 -- 26. 관리자 수를 출력하시오.
-select count(*)
-from emp
-where mgr is not null;
+-- ◆관리자는 mgr에서 중복되는 값을 제거하고 카운트하면된다◆ 
+select count(distinct mgr)
+from emp;
+
+-- 오답 : 중복제거를 하지 않았다..
+-- select count(*)
+-- from emp
+-- where mgr is not null;
 
 
 -- 27. 급여 최고액, 급여 최저액의 차액을 출력하시오.
@@ -98,7 +100,7 @@ select job, min(sal)
 from emp
 where mgr is not null
 group by job
-having min(sal) > 2000    
+having min(sal) >= 2000    
 order by min(sal) desc;
 
 
@@ -113,17 +115,33 @@ group by deptno;
 -- 30. 각 부서에 대해 
 -- 부서번호 이름, 지역 명, 사원 수, 부서내의 모든 사원의 평균 급여를 출력하시오.
 -- 평균 급여는 정수로 반올림 하시오. DECODE 사용.
+-- ◆
+select deptno, 
+       Decode(deptno, 10, 'ACCOUNTING', 
+                      20, 'RESEARCH',
+                      30, 'SALES') as "부서번호 이름",
+       Decode(deptno, 10, 'NEW YORK', 
+                      20, 'DALLAS',
+                      30, 'CHICAGO') as "지역명",                               
+       count(*) as "사원수", 
+       round(avg(sal),0) as "평균급여"
+from emp
+group by deptno;
+
+
+-- dept테이블 확인용 (부서번호 이름, 지역명)
+select*
+from dept;
+
+-- 오답: 부서이름을 안썼다...
 select deptno, 
        Decode(deptno, 10, 'NEW YORK', 
                       20, 'DALLAS',
                       30, 'CHICAGO') as "지역명",
        count(*) as "사원수", 
-       round(avg(sal),2) as "평균급여"
+       round(avg(sal),0) as "평균급여"
 from emp
 group by deptno;
-
-select*
-from dept;
 
 
 -- 31. 업무를 표시한 다음 
@@ -131,10 +149,10 @@ from dept;
 -- 및 부서 10, 20, 30의 급여 총액을 각각 출력하시오. 
 -- 별칭은 각 job, dno, 부서 10, 부서 20, 부서 30, 총액으로 지정하시오. ( hint. Decode, group by )
 select job, deptno as dno, 
-Decode(deptno, 10, sum(sal)) as "부서 10",
-Decode(deptno, 20, sum(sal)) as "부서 20",
-Decode(deptno, 30, sum(sal)) as "부서 30",
-Decode(deptno, deptno, sum(sal)) as "총액"
+nvl(Decode(deptno, 10, sum(sal)),0) as "부서 10",
+nvl(Decode(deptno, 20, sum(sal)),0) as "부서 20",
+nvl(Decode(deptno, 30, sum(sal)),0) as "부서 30",
+sum(sal) as "총액"
 from emp
 group by job, deptno 
 order by deptno;
