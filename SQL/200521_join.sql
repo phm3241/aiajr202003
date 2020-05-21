@@ -127,6 +127,11 @@ select ename, dname
 from emp inner join dept
 using(deptno);
 
+-- NATURAL Join
+-- 두 테이블에 각각 조인을 정의한 컬럼의 이름이 동일하다면 
+-- USING 절에서 조인할 컬럼을 지정하여 구문을 더 간단하게 표현
+select ename, dname
+from emp natural join dept;
 
 
 
