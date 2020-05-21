@@ -115,7 +115,7 @@ group by deptno;
 -- 30. 각 부서에 대해 
 -- 부서번호 이름, 지역 명, 사원 수, 부서내의 모든 사원의 평균 급여를 출력하시오.
 -- 평균 급여는 정수로 반올림 하시오. DECODE 사용.
--- ◆
+-- ◆join을 사용하면 더 간단하게 작성가능하다◆
 select deptno, 
        Decode(deptno, 10, 'ACCOUNTING', 
                       20, 'RESEARCH',
