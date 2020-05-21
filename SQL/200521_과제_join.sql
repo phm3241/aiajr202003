@@ -51,12 +51,13 @@ on e.mgr=m.empno
 order by e.empno desc;
 
 
--- 40. SELF JOIN을 사용하여 지정한 사원의 이름, 부서번호, 
+-- 40. SELF JOIN을 사용하여 
 -- 지정한 사원과 동일한 부서에서 근무하는 사원을 출력하시오. ( SCOTT )
-select e.ename, e.deptno, m.*
+select m.*
 from emp e, emp m
 where e.deptno=m.deptno
 and e.ename ='SCOTT';
+-- and m.ename !='SCOTT'; -- 목록에서 SCOTT을 빼고싶으면 이 조건을 추가하면된다. 
 
 
 -- 41. SELF JOIN을 사용하여 WARD 사원보다 늦게 입사한 사원의 이름과 입사일을 출력하시오.
