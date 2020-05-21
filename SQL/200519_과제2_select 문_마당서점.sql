@@ -29,8 +29,10 @@ from orders
 where custid=1;
 
 
+--◆count(custid) ㅡ> count(*) 하나의 행을 세는 것으로 표현해야한다. ◆
 --(4) 박지성이 구매한 도서의 수(박지성의 고객번호는 1번으로 놓고 작성) 
-select count(custid) as "박지성이 구매한 도서의 수"
+select count(*) as "박지성이 구매한 도서의 수"
+-- select count(custid) as "박지성이 구매한 도서의 수"
 from orders
 where custid=1;
 
@@ -39,9 +41,10 @@ where custid=1;
 
 
 --2 마당서점의 운영자와 경영자가 요구하는 다음 질문에 대해 SQL 문을 작성하시오.
-
+--◆count(bookid) ㅡ> count(*) 하나의 행을 세는 것으로 표현해야한다. ◆
 --(1) 마당서점 도서의 총 개수
-select count(bookid) as "마당서점 도서의 총 개수"
+select count(*) as "마당서점 도서의 총 개수"
+--select count(bookid) as "마당서점 도서의 총 개수"
 from book;
 
 
