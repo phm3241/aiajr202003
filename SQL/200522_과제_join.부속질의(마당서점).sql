@@ -16,7 +16,7 @@ where custid=1;
 --풀이1 : 중첩질의 2번사용
 select count(distinct publisher)
 from book b
-where b.bookid in(select bookid 
+where b.bookid in(select distinct bookid 
                   from orders o 
                   where custid=(select custid 
                                 from customer 
@@ -29,6 +29,14 @@ from book b natural join orders o
 where custid=(select custid 
               from customer 
               where name='박지성');
+
+
+--◆ 참고풀이 : 조인 사용해서 풀이
+select count(distinct publisher)
+from customer c, orders o, book b
+where c.custid=o.custid and o.bookid=b.bookid
+and c.name='박지성';
+
 
 
 
@@ -45,7 +53,14 @@ from book b natural join orders o
 where custid=(select custid 
               from customer 
               where name='박지성');
+
+--◆ 참고풀이 : 조인 사용해서 풀이
+select bookname, saleprice, price-saleprice as pricegap 
+from customer c, orders o, book b
+where c.custid=o.custid and o.bookid=b.bookid
+and c.name='박지성';
         
+
 
 
 
@@ -61,7 +76,7 @@ from orders
 where custid=1;
 
 --풀이 : 중첩질의 사용
-select bookname
+select bookname, bookid
 from book b 
 where b.bookid not in(select bookid 
                       from orders o 
@@ -69,7 +84,14 @@ where b.bookid not in(select bookid
                                     from customer 
                                     where name='박지성') 
                       and b.bookid=o.bookid);
-
+                      
+--◆ 참고풀이 : 조인 사용해서 풀이
+select bookname, bookid
+from book b 
+where b.bookid not in(select bookid 
+                      from orders o, customer c 
+                      where o.custid=c.custid
+                      and name='박지성'); 
 
 
 
@@ -84,7 +106,14 @@ order by custid;
 --풀이 : 주문하지 않은 고객의 이름 (부속질의사용)
 select c.name
 from customer c
-where c.custid not in(select custid from orders o);
+where c.custid not in(select distinct custid from orders o);
+
+--◆ 참고풀이 : outer join으로 풀이 
+select c.name
+from orders o, customer c
+where o.custid(+)=c.custid
+and o.orderid is null;
+
 
 
 
@@ -109,6 +138,13 @@ select (select name
         sum(saleprice) as "구매액"  
 from orders o 
 group by o.custid;
+
+--◆ 참고풀이 : join으로 풀이 
+select c.name, sum(saleprice)
+from orders o, customer c
+where o.custid=c.custid
+group by c.name;
+
 
 
 
@@ -139,13 +175,23 @@ order by c.custid;
 --풀이 : join, rownum 사용
 select o.*, b.*, b.price-o.saleprice as "판매가격차"
 from orders o, book b
-where o.bookid = b.bookid and rownum=1
+where o.bookid = b.bookid 
+and rownum=1
 order by b.price-o.saleprice desc;
 
+--◆ 참고풀이 : join, max로 풀이 
+select b.bookname, b.price-o.saleprice
+from orders o, book b
+where o.bookid = b.bookid
+and price-saleprice =(select max(b.price-o.saleprice)
+                      from orders o, book b
+                      where o.bookid = b.bookid);
 
 
 
--- (13) 도서의 판매액 평균보다 자신의 구매액평균이 더 높은 고객의 이름
+
+
+-- (13) 도서의 판매액 평균보다 자신의 구매액 평균이 더 높은 고객의 이름
 --부속질의 : 도서의 판매액 평균
 select avg(saleprice)
 from orders;
@@ -154,7 +200,7 @@ from orders;
 select c.name   --, o.custid, avg(saleprice)
 from orders o, customer c
 where o.custid = c.custid
-group by o.custid, c.name
+group by c.name
 having avg(saleprice) > (select avg(saleprice) 
                          from orders);
 
@@ -178,7 +224,7 @@ where o.bookid=b.bookid and o.custid=c.custid
     and b.publisher in(select distinct b.publisher
                        from orders o, book b, customer c
                        where o.bookid=b.bookid and o.custid=c.custid
-                       and o.custid='박지성');
+                       and c.name='박지성');
 
 
 
