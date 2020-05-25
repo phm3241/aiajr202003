@@ -247,6 +247,10 @@ from (select c.name, o.custid, b.publisher, count(*)
 group by name
 having count(*) >=2;
 
-
-
+--◆ 참고풀이 : 풀이 
+select name
+from orders o, book b, customer c
+where o.bookid=b.bookid and o.custid=c.custid
+group by name
+having count(distinct publisher) >=2;
 
