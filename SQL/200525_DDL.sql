@@ -30,7 +30,8 @@ select * from ddl_test;
 
 
 -----------------------------------------------------------------------------------
--- 생성된 테이블에 데이터 넣어주기 : insert into 
+-- << 생성된 테이블에 데이터 넣어주기 >> 
+-- insert into 
 insert into ddl_test (no, name) values(1,'SCOTT');
 -- 테이블 생성시 birth의 기본값이 현재시간으로 설정되어있기 때문에, 
 -- 값을 넣어주지 않아도 현재시간으로 값이 들어간 것을 확인할 수 있다. 
@@ -48,6 +49,10 @@ create table emp01(
 
 select * from tab;
 desc emp01;
+
+
+
+
 
 -----------------------------------------------------------------------------------
 -- << 테이블의 복사 >> 
@@ -101,8 +106,14 @@ desc emp05;
 
 
 
+
+
+
 -----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
 --<< 테이블에 컬럼 추가/수정/삭제 >> 
+
 -----------------------------------------------------------------------------------
 -- << 테이블에 컬럼 추가 >> 
 -- alter table 테이블 이름 add (컬럼정의);
@@ -113,6 +124,7 @@ add(job varchar2(10));
 
 -- 결과 테이블 확인 
 desc emp01;
+
 
 
 
@@ -177,12 +189,312 @@ select * from test_emp;
 
 
 
+desc dept;
+insert into dept values(10, 'test', 'seoul');
+-- 10번은 가지고 있기 때문에 중복되는 값으로 인식되어 오류가 발생. 
+
+
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+--<< 제약조건 >> 
+--데이터 무결성을 위해 설정
+
+-----------------------------------------------------------------------------------
+-- <<제약조건의 2가지 방법>>
+-- 컬럼의 제약정의는 컬럼 정의를 하면서 컬럼 옆에 정의하는 방법 2 (컬럼레벨에서 정의)
+-- 컬럼의 타입을 모두 정의하고, 아래에 제약을 정의하는 방법 2  (테이블레벨에서 정의)
+
+-- 컬럼레벨에서 정의하는 방식. 
+-- create table emp01(
+--    empno number(4) not null
+--);
+
+-- 이렇게 컬럼정의 후, 아래에 제약사항 정의하는 것도 방식. 
+--create table emp01(
+--    empno number(4),
+--    primary key(empno)
+--);
+
+-- 이렇게 primary key 정의도 가능. 
+--create table emp01(
+--    empno number(4) primary key
+--);
+
+
+-- 그런데, not null 제약 : 컬럼의 값에 null 값을 허용하지 않는다. 
+-- 컬럼 레벨에서만 정의가 가능
+
+
+-- 사원 테이블(EMP02)을 
+-- 사원번호, 사원명, 직급, 부서번호 4개의 칼럼으로 구성하되 
+-- 이번에는 사원번호와 사원명에 NOT NULL 조건을 지정하도록 합시다.
+
+-- 테이블 있는지 확인후 새로 생성하고 확인. 
+-- not null 제약조건 포함하여 생성.
+drop table emp02;
+
+create table emp02(
+    empno number(4) not null,
+    ename varchar2(10) not null,
+    job varchar2(10),
+    deptno number(2)
+);
+
+desc emp02;
+
+
+
+-----------------------------------------------------------------------------------
+-- 테이블에 정의되어있는 제약조건에 따라서 insert into 오류 또는 실행확인
+insert into emp02 values (null, null, 'MANAGER', 10);
+-- 오류 보고 -
+-- ORA-01400: NULL을 ("SCOTT"."EMP02"."EMPNO") 안에 삽입할 수 없습니다
+
+insert into emp02 values (1111, null, 'MANAGER', 10);
+-- 오류 보고 -
+-- ORA-01400: NULL을 ("SCOTT"."EMP02"."ENAME") 안에 삽입할 수 없습니다
+
+insert into emp02 values (1111, 'son', 'MANAGER', 10);
+-- 1 행 이(가) 삽입되었습니다.
+
+-- 삽입되었는지 확인
+select * from emp02;
+
+
+-----------------------------------------------------------------------------------
+--<< not null, unique 제약조건>>
+--not null 제약조건 : NULL을 허용하지 않는다.
+--unique 제약조건 : 중복된 값을 허용하지 않는다. 항상 유일한 값을 갖도록 한다.
+
+
+-- 테이블 삭제하고 다시 생성, 제약조건 
+drop table emp03;
+create table emp03(
+    empno number(4) unique,
+    ename varchar2(10) not null,
+    job varchar2(10),
+    deptno number(2)
+);
+
+-- desc 만 했을 때는 unique 속성이 보이지 않고
+-- 왼쪽 패널의 테이블에서 확인해야한다. 
+desc emp03;
+
+
+--insert into로 결과 확인하기
+insert into emp03 values(1111, 'TEST', 'MANAGER', 10);
+-- 1 행 이(가) 삽입되었습니다.
+
+-- 사원번호 1111 이 똑같아서 오류발생
+insert into emp03 values(1111, 'TEST123', 'MANAGER', 20);
+-- 오류 보고 -
+-- ORA-00001: 무결성 제약 조건(SCOTT.SYS_C0011062)에 위배됩니다
+
+insert into emp03 values(null, 'TEST123', 'MANAGER', 20);
+-- 1 행 이(가) 삽입되었습니다.
+-- null로 하면 삽입이 되는 문제가 발생한다. 따라서 생성할 때 unique not null로 제약조건 2개를 같이 적어줄 수 있다. 
+
+
+-----------------------------------------------------------------------------------
+--<< not null, unique 제약조건>>
+
+-- 테이블 삭제하고 ㅡ> 제약조건 2개 같이 적어주고 다시 생성. 
+drop table emp03;
+create table emp03(
+    empno number(4) unique not null,
+    ename varchar2(10) not null,
+    job varchar2(10),
+    deptno number(2)
+);
+
+
+--insert into로 결과 확인하기
+insert into emp03 values(1111, 'TEST', 'MANAGER', 10);
+-- 1 행 이(가) 삽입되었습니다.
+
+-- 사원번호 1111 이 똑같아서 오류발생
+insert into emp03 values(1111, 'TEST123', 'MANAGER', 20);
+-- 오류 보고 -
+-- ORA-00001: 무결성 제약 조건(SCOTT.SYS_C0011062)에 위배됩니다
+
+insert into emp03 values(null, 'TEST123', 'MANAGER', 20);
+--오류 보고 -
+--ORA-01400: NULL을 ("SCOTT"."EMP03"."EMPNO") 안에 삽입할 수 없습니다
+-- unique 제약조건과 not null 제약조건이 모두 실행된 것을 확인가능. 
 
 
 
 
 
 
+
+
+-----------------------------------------------------------------------------------
+--<< 제약조건 조건명 명시하기>>
+-- 사용자 제약 조건 명을 설정하기 위해서는 CONSTRAINT라는 키워드와 함께 제약 조건 명을 기술
+-- constraint 테이블명_컬럼명_조건명 제약사항유형 
+
+
+-- 사원번호, 사원명,
+-- 직급, 부서번호 4개의 칼럼으로 구성된 EMP04 테이블을 생성하되 사원번호에는 유일키로 사원명은 NOT NULL 제약조건을 설정해 봅시다.
+
+drop table emp04;
+create table emp04(
+    empno number(4) constraint emp04_empno_uk unique constraint emp04_empno_NN not null,
+    ename varchar2(10)constraint emp04_ename_NN not null,
+    job varchar2(10),
+    deptno number(2)
+);
+
+
+
+--insert into로 결과 확인하기
+insert into emp04 values(1111, 'TEST', 'MANAGER', 10);
+-- 1 행 이(가) 삽입되었습니다.
+
+-- 사원번호 1111 이 똑같아서 오류발생
+insert into emp04 values(1111, 'TEST123', 'MANAGER', 20);
+-- 오류 보고 -
+-- ORA-00001: 무결성 제약 조건(SCOTT.EMP04_EMPNO_UK)에 위배됩니다
+--> (제약 조건명 : EMP04_EMPNO_UK)이 바뀐것을 확인가능. 
+
+insert into emp04 values(null, 'TEST123', 'MANAGER', 20);
+--오류 보고 -
+--ORA-01400: NULL을 ("SCOTT"."EMP04"."EMPNO") 안에 삽입할 수 없습니다
+--> not null의 경우 (제약 조건명)이 나오지 않기 때문에, 보통 not null은 제약조건명을 따로 붙여주지 않는다. 
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+--<< primary key 제약조건 >>
+-- 식별 기능을 갖는 칼럼은 유일하면서도 NULL 값을 허용하지 말아야 합니다.
+-- 제약조건 (primary key)하게 되면 uinque와 not null을 모두 해준 것과 같다.
+
+
+-- 사원번호, 사원명,--직급, 부서번호 4개의 칼럼으로 구성된 
+-- 테이블을 생성하되 기본 키 제약 조건을 설정해 봅시다.
+drop table emp05;
+create table emp05(
+    empno number(4) constraint emp05_empno_pk primary key,
+    ename varchar2(10)constraint emp05_empname_NN not null,
+    job varchar2(10),
+    deptno number(2)
+);
+
+desc emp05;
+
+
+--insert into로 결과 확인하기
+insert into emp05 values(1111, 'TEST', 'MANAGER', 10);
+-- 1 행 이(가) 삽입되었습니다.
+
+-- 사원번호 1111 이 똑같아서 오류발생
+insert into emp05 values(1111, 'TEST123', 'MANAGER', 20);
+-- 오류 보고 -
+-- ORA-00001: 무결성 제약 조건(SCOTT.EMP05_EMPNO_PK)에 위배됩니다
+--> (제약 조건명 :SCOTT.EMP05_EMPNO_PK)이 바뀐것을 확인가능. 
+
+insert into emp05 values(null, 'TEST123', 'MANAGER', 20);
+--오류 보고 -
+--ORA-01400: NULL을 ("SCOTT"."EMP05"."EMPNO") 안에 삽입할 수 없습니다
+--> not null의 경우 (제약 조건명)이 나오지 않기 때문에, 보통 not null은 제약조건명을 따로 붙여주지 않는다.
+
+
+
+
+
+-----------------------------------------------------------------------------------
+--<< FOREIGN KEY 제약 조건 : 외래키 제약조건 >>
+-- 부모 키가 되기 위한 칼럼은 반드시 부모 테이블의 기본 키(PRIMARY KEY)나 유일키(UNIQUE)로 설정되어 있어야 한다 
+--   : dept 테이블의 deptno가  emp테이블의 부모테이블이므로 
+--     반드시 dept 테이블의 deptno 컬럼에는 기본 키(PRIMARY KEY)나 유일키(UNIQUE)로 설정되어 있어야 한다
+
+
+-- 사원번호, 사원명,--직급, 부서번호 4개의 칼럼으로 구성된 
+-- 테이블을 생성하되 기본 키 제약 조건을 설정해 봅시다.
+-- deptno 외래키로 제약조건을 설정 : deptno number(2) constraint emp06_deptno_fk REFERENCES dept(deptno)
+
+drop table emp06;
+create table emp06( 
+    empno number(4) constraint emp06_empno_pk primary key,
+    ename varchar2(10) constraint emp06_ename_NN not null,
+    job varchar2(10),
+    deptno number(2) constraint emp06_deptno_fk REFERENCES dept(deptno)   --외래키 제약조건. REFERENCES 부모테이블(컬럼명)
+);
+
+SELECT * FROM DEPT;
+DESC EMP06;
+
+
+
+--insert into로 결과 확인하기
+insert into emp06 values(1111, 'TEST', 'MANAGER', 10);
+-- 1 행 이(가) 삽입되었습니다.
+
+-- 사원번호 1111 이 똑같아서 오류발생
+insert into emp06 values(1111, 'TEST123', 'MANAGER', 20);
+-- 오류 보고 -
+-- ORA-00001: 무결성 제약 조건(SCOTT.EMP06_EMPNO_PK)에 위배됩니다
+--> (제약 조건명 :SCOTT.EMP06_EMPNO_PK)이 바뀐것을 확인가능. 
+
+insert into emp06 values(2222, 'TEST123', 'MANAGER', 50);
+--오류 보고 -
+--ORA-02291: 무결성 제약조건(SCOTT.EMP06_DEPTNO_FK)이 위배되었습니다- 부모 키가 없습니다
+--> 부모키인 dept 테이블의 deptno가 10~40까지 있기 때문에, 
+-- 자식테이블에서는 부모키에 있는 범위 또는 null값만 가능하므로 50은 들어갈 수없다. 
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+--<< chek 제약조건 >>
+-- 입력되는 값을 체크하여 설정된 값 이외의 값이 들어오면 오류 메시지와 함께 명령이 수행되지 못하게 하는 것
+
+
+-- 사원번호, 사원명, 직급, 부서번호, 직급, 성별, 생일 7개의 칼럼으로 구성된 테이블을 생성하되 
+-- 기본 키 제약 조건, 외래키 제약 조건은 물론
+-- CHECK 제약 조건도 설정해 봅시다.
+-- default 제약 조건으로 birthday sysdate로 입력되도록 처리
+-- default에는 constraint 따로 없다. 
+
+create table emp07( 
+    empno number(4) constraint emp07_empno_pk primary key,
+    ename varchar2(10) constraint emp07_ename_NN not null,
+    job varchar2(10) default 'MANAGER',
+    deptno number(2) constraint emp07_deptno_fk REFERENCES dept(deptno),
+    gender char(1) constraint emp07_gender_ck check(gender='M' or gender='F'),
+    sal number(7,2) constraint emp07_sla_ck check(sal between 500 and 5000),
+    birthday date default sysdate
+);
+
+
+--insert into로 결과 확인하기
+insert into emp07 values(1111, 'test', null, 10, 'F', 600, null);
+--1 행 이(가) 삽입되었습니다.
+
+insert into emp07 values(1112, 'test', null, 10, 'K', 600, null);
+--오류 보고 -
+--ORA-02290: 체크 제약조건(SCOTT.EMP07_GENDER_CK)이 위배되었습니다
+--> gender에서 check 제약조건에 해당되지 않은 값이므로, 오류발생
+
+insert into emp07 (empno, ename, deptno, gender, sal) values(1113, 'test', 10, 'F', 1600);
+select * from emp07;
+-- 1 행 이(가) 삽입되었습니다.
+--> gender에서 check 제약조건에 해당되는 값이므로, 오류없이 행 삽입 가능.
+
+SELECT * FROM EMP07;
 
 
 
