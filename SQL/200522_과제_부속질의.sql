@@ -51,6 +51,13 @@ from (select *
       order by sal) 
 where rownum=1;
 
+--◆ 참고풀이 : 중첩질의 사용. all연산자 사용. 
+-- 모든데이터와 비교해야하므로 좋은방법은..아닌 것 같음.
+select ename, job, sal
+from emp e
+where e.sal <= all(select sal 
+               from emp);
+
 
 
 
@@ -68,6 +75,23 @@ from (select job, avg(sal) as "평균급여"
       group by job 
       order by avg(sal))
 where rownum=1;
+
+--◆ 참고풀이 : 중첩질의
+select job, avg(sal) 
+from emp 
+group by job  
+having avg(sal) <= all(select avg(sal) 
+                       from emp 
+                       group by job); 
+
+--◆ 참고풀이 : 중첩질의, 인라인 뷰 사용
+select job, avg(sal) 
+from emp 
+group by job  
+having avg(sal) = (select min(avg)
+                  from (select avg(sal) as avg 
+                        from emp 
+                        group by job));
 
 
 
@@ -88,13 +112,24 @@ where (e.deptno, e.sal) in(select deptno, min(sal)
                            and e.sal=min(sal))
 order by e.deptno;
 
+--◆ 참고풀이 : 
+select ename, sal, deptno
+from emp e
+where e.sal in(select min(sal) 
+                           from emp p
+                           where e.deptno=p.deptno
+                           group by deptno)
+order by e.deptno;
+
 
 
 
 -- 48. 담당업무가 ANALYST 인 사원보다 급여가 적으면서 
 -- 업무가 ANALYST가 아닌 사원들을 표시(사원번호, 이름, 담당 업무, 급여)하시오.
 --부속질의 : 담당업무가 ANALYST인 사원의 급여
-select ename, sal, job from emp where job='ANALYST';   
+select ename, sal, job 
+from emp 
+where job='ANALYST';   
 
 --풀이 : 중첩질의 사용
 select e.empno, e.ename, e.job, e.sal
@@ -105,6 +140,14 @@ where e.sal <= (select min(sal)
 and e.job!='ANALYST'
 order by sal;
 
+--◆ 참고풀이 : 사원의 늘어나거나 할 수 있으므로 all연산자 사용
+select e.empno, e.ename, e.job, e.sal
+from emp e
+where e.sal < all(select distinct sal 
+                  from emp 
+                  where job='ANALYST') 
+and e.job!='ANALYST'
+order by sal;
 
 
 
@@ -126,6 +169,19 @@ where p.ename not in(select distinct m.ename
                      from emp e, emp m 
                      where e.mgr=m.empno);
 
+--◆ 참고풀이 : 부속질의
+select distinct mgr 
+from emp 
+where mgr is not null;
+
+--◆ 참고풀이 :
+select ename, mgr
+from emp
+where empno not in (select distinct mgr 
+                    from emp 
+                    where mgr is not null);
+
+
 
 
 
@@ -139,6 +195,18 @@ where p.ename not in(select distinct m.ename
 select distinct m.ename
 from emp e, emp m
 where e.mgr=m.empno;
+
+--◆ 참고풀이 : 부속질의
+select distinct mgr
+               from emp
+               where mgr is not null;
+               
+--◆참고풀이 :              
+select ename, mgr
+from emp 
+where empno in(select distinct mgr
+               from emp
+               where mgr is not null);
 
 
 
@@ -215,6 +283,13 @@ where deptno=(select deptno
               from dept 
               where loc='DALLAS');
 
+--◆ 참고풀이 : =이 아니라 in 연산자를 써주는 것이 맞다..
+--dallas가 이전하여 부서번호가 달라질 수도 있기 때문에, 여러행이 나올 수도 있기 때문에. 
+select ename, deptno, job
+from emp
+where deptno in(select deptno 
+              from dept 
+              where loc='DALLAS');
 
 
 
@@ -243,16 +318,19 @@ from dept
 where dname='RESEARCH';
 
 --풀이 : 중첩질의 사용
-select empno, ename, job
+select deptno, ename, job
 from emp
 where deptno=(select deptno 
               from dept 
               where dname='RESEARCH');
 
---확인용 출력
-select deptno, ename, job 
-from emp 
-where deptno=20; 
+--◆ 참고풀이 : 조인 사용한 방법 
+-- 조인이 가능하면 조인을 사용한 방법으로 select를 한번만 사용하는 것이 좋다. 
+select e.deptno, empno, job
+from emp e, dept d
+where e.deptno=d.deptno
+and dname='RESEARCH';
+
 
 
 
@@ -290,6 +368,14 @@ select *
 from (select job, avg(sal) from emp  group by job order by min(sal))
 where rownum=1;
 
+--◆ 참고풀이 : all연산자 사용하여 풀이
+select job, avg(sal) 
+from emp  
+group by job
+having avg(sal) <= all(select avg(sal) 
+                       from emp  
+                       group by job); 
+
 
 
 
@@ -304,13 +390,19 @@ select ename
 from emp e
 where e.deptno in(select deptno 
                   from emp m 
-                  where job='MANAGER' 
+                  where job='MANAGER'
                   and e.deptno=m.deptno)
 order by deptno, job;
 
 -- 확인용
 select * from emp order by job; 
 
-
+--◆ 참고풀이 : MANAGER가 여럿일 수 있으므로, distinct 붙여주기.
+select *
+from emp e
+where e.deptno in(select distinct deptno 
+                  from emp m 
+                  where job='MANAGER') 
+order by deptno, job;
 
 
