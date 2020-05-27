@@ -96,9 +96,11 @@ insert into phoneinfo_com values(6,'sk', '6');
 
 
 
+
+
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
--- << 친구 정보 출력 질의 >>
+-- << 친구 정보 출력 질의 : 입력을 위한 sql  >>
 ---------------------------------------------------------------------------------
 
 -- 1. 전체 친구 목록 출력
@@ -111,6 +113,7 @@ where b.idx=u.fr_ref(+) and b.idx=c.fr_ref(+);
 --where b.idx=u.fr_ref(+) and b.idx=c.fr_ref;  -- 이렇게 하면 학교친구 정보는 나오지 않는다..
 
 ----> phoneinfo_basic b, phoneinfo_univ u, phoneinfo_com c 3개의 테이블이 join될때, 
+----  null값과 and 연산 하게 되므로, 결과가 null 값이 나오기 때문에, 출력되는 것이 없다. 
 ----  phoneinfo_basic와 phoneinfo_univ를 join할 때, phoneinfo_com이 전부 null값이고,
 ----  phoneinfo_basic와 phoneinfo_com를 join할 때, phoneinfo_univ이 전부 null값이기 때문에 
 ----  각각 outer join을 사용해서 정보를 출력해야한다. 
@@ -136,6 +139,7 @@ on b.idx=c.fr_ref;
 
 
 
+
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 --<< 부모테이블의 삭제 >>
@@ -156,6 +160,82 @@ drop table phoneInfo_basic;
            
 drop table phoneInfo_univ;
 drop table phoneInfo_com;
+
+
+
+
+
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-- << 친구 정보 변경 : 수정을 위한 sql >>
+---------------------------------------------------------------------------------
+-- 1. 회사친구 정보를 변경
+-- 회사 친구 목록 확인
+select * from phoneinfo_basic b join phoneinfo_com c  on b.idx=c.fr_ref ;
+
+
+-- 수정 1 : 박세리의 회사이름을 KoreaGolf 를 LondonGolf로 변경
+update (select * from phoneinfo_basic b join phoneinfo_com c  on b.idx=c.fr_ref)
+set fr_c_company = 'LondonGolf' 
+where fr_name = '박세리';
+
+-- 수정 2 : scott의 회사이름을 박세리와 같은 회사이름으로 변경
+update (select * from phoneinfo_basic b join phoneinfo_com c  on b.idx=c.fr_ref)
+set fr_c_company = 
+        (select fr_c_company 
+         from(select * from phoneinfo_basic b join phoneinfo_com c  on b.idx=c.fr_ref) 
+         where fr_name = '박세리') 
+where fr_name = 'scott';
+
+--수정 3 : 추신수의 전화번호, 주소 변경
+--update (select * from phoneinfo_basic b join phoneinfo_com c  on b.idx=c.fr_ref)
+--set ; 
+--b.= '010-4000-4000', b.fr_address = '서울'
+--where fr_name = '추신수';
+    
+
+
+
+
+
+
+-- 2. 학교친구 정보를 변경
+-- 학교 친구 목록 확인
+select * from phoneinfo_basic b join phoneinfo_univ u  on b.idx=u.fr_ref;
+
+
+-- 수정 1 : 김연아 학년을 1 올리기
+update (select * from phoneinfo_basic b join phoneinfo_univ u  on b.idx=u.fr_ref)
+set fr_u_year = fr_u_year + 1
+where fr_name = '김연아'; 
+
+-- 수정 2 : 전공이 축구인 사람의 전공을 스포츠로 수정
+update (select * from phoneinfo_basic b join phoneinfo_univ u  on b.idx=u.fr_ref)
+set fr_u_major = '스포츠' 
+where fr_u_major = '축구'; 
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-- << 친구 정보 삭제 : 삭제를 위한 sql  >>
+---------------------------------------------------------------------------------
+
+-- 1. 회사친구 정보를 삭제
+select * from phoneinfo_basic b join phoneinfo_com c  on b.idx=c.fr_ref ;
+
+
+
+
+-- 2. 학교친구 정보를 삭제
+-- 학교 친구 목록 확인
+select * from phoneinfo_basic b join phoneinfo_univ u  on b.idx=u.fr_ref;
 
 
 
