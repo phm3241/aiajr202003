@@ -2,14 +2,17 @@ package ex;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-public class JDBCTest1 {
+public class JDBCTest2 {
 
 	public static void main(String[] args)  {
 		
 		
 		Connection conn=null;
+		ResultSet rs=null;
 		
 		// 1. DB드라이버 로드
 		try {
@@ -28,34 +31,48 @@ public class JDBCTest1 {
 			conn = DriverManager.getConnection(url, user, pw);
  
 			System.out.println("데이터베이스에 접속했습니다. ");
-			
-			// 트랜잭션 설정
-			conn.setAutoCommit(false);
+
 			
 			// 3. sql 로 데이터처리
+			// Statement : Connection의 createStatement()메서드는 Statement객체를 반환한다.
+			Statement stmt = conn.createStatement();
 			
+			String sql = "select * from dept order by deptno";
 			
+			// Select의 결과는 ResultSet이 받는다. 
+			// executeQuery(sql문) ㅡ> ResultSet반환
+			rs = stmt.executeQuery(sql);
+			
+			// ResultSet : next() ㅡ> 행의 존재 유무 확인 (커서의 개념이다)
+			while(rs.next()) {
+//				System.out.print(rs.getInt("deptno") + "\t");
+//				System.out.print(rs.getString("dname") + "\t");
+//				System.out.print(rs.getString("loc") + "\n");
+				
+				System.out.print(rs.getInt(1) +"\t");
+				System.out.print(rs.getString(2)+"\t");
+				System.out.print(rs.getString(3)+"\n");
+								
+				
+			}
+			
+			rs.close();
+			stmt.close();
+						
 			
 			// commit : 처리완료
 			conn.commit();
 			
 			// 4.close
-			conn.close();
+			// conn.close();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			
 			e.printStackTrace();
 		}
 		
 		
 	}
-
-}
+ 
+} //class end
