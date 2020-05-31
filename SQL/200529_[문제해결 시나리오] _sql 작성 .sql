@@ -50,8 +50,7 @@ create table MEMBER(
 
 desc MEMBER;
 
-desc emp;
-select * from emp;
+
 
 
 
