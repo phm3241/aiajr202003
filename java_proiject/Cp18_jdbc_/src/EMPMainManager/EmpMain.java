@@ -70,9 +70,9 @@ public class EmpMain {
 		
 		while(true) {
 		System.out.println(" 사원관리 프로그램 _EMP MANAGER NENU ");
-		System.out.println("--------------------------------------------------");
-		System.out.println("  1. 입력	ㅣ 2. 수정	ㅣ 3. 삭제	ㅣ 4. 리스트 ㅣ 5. 검색");
-		System.out.println("--------------------------------------------------");
+		System.out.println("----------------------------------------------------------");
+		System.out.println("  1. 입력	ㅣ 2. 수정	ㅣ 3. 삭제	ㅣ 4. 리스트 ㅣ 5. 검색 ㅣ 6. 메인으로");
+		System.out.println("----------------------------------------------------------");
 
 		System.out.println("메뉴를 선택하세요.");
 
@@ -81,8 +81,8 @@ public class EmpMain {
 			try {
 				select = em.kb.nextInt();
 	
-				// 정상범위 1~3
-				if (!(select >= 1 && select <= 3)) {
+				// 정상범위 1~6
+				if (!(select >= 1 && select <= 6)) {
 					BadNumberException e = new BadNumberException("잘못된 메뉴입력입니다.");
 	
 					// 강제적인 예외발생
@@ -120,6 +120,8 @@ public class EmpMain {
 		case 5:
 			em.empSearch();
 			break;
+		case 6:
+			break;
 		} //switch end
 		break;
 	} //while end
@@ -137,9 +139,9 @@ public class EmpMain {
 		
 		while(true) {
 		System.out.println(" 부서관리 프로그램 _DEPT MANAGER NENU ");
-		System.out.println("--------------------------------------------------");
-		System.out.println("  1. 입력	ㅣ 2. 수정	ㅣ 3. 삭제	ㅣ 4. 리스트 ㅣ 5. 검색");
-		System.out.println("--------------------------------------------------");
+		System.out.println("----------------------------------------------------------");
+		System.out.println("  1. 입력	ㅣ 2. 수정	ㅣ 3. 삭제	ㅣ 4. 리스트 ㅣ 5. 검색 ㅣ 6. 메인으로");
+		System.out.println("----------------------------------------------------------");
 
 		System.out.println("메뉴를 선택하세요.");
 
@@ -149,8 +151,8 @@ public class EmpMain {
 			try {
 				select = dm.kb.nextInt();
 	
-				// 정상범위 1~3
-				if (!(select >= 1 && select <= 3)) {
+				// 정상범위 1~6
+				if (!(select >= 1 && select <= 6)) {
 					BadNumberException e = new BadNumberException("잘못된 메뉴입력입니다.");
 	
 					// 강제적인 예외발생
@@ -192,6 +194,8 @@ public class EmpMain {
 
 		case 5:
 			dm.deptSearch();
+			break;
+		case 6:
 			break;
 		} //switch end
 		break;
