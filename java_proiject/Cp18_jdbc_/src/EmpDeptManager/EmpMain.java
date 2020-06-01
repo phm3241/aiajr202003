@@ -1,20 +1,23 @@
-package EMPMainManager;
+package EmpDeptManager;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
+
+
 /*
 
-DAO 패턴..
+
 1. 메인 
 2. 핵심 class - 기능을 따로 구성
 3. Dao - 기능 안에서도 데이터베이스관련 처리기능을 따로 구성
+
 ==>> 데이터베이스 처리할때는 이런식의 패턴구성이 생산성에 좋다. 
 
 
 데이터 처리 흐름.. 
-1. 메인 ㅡ> 핵심class ㅡ> Dao
+1. 메인 ㅡ> 핵심class ㅡ>Dao
  */
 
 

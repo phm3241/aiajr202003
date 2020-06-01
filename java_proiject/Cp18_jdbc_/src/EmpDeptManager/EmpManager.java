@@ -1,4 +1,4 @@
-package EMPMainManager;
+package EmpDeptManager;
 
 import java.sql.Connection;
 import java.sql.Date;
