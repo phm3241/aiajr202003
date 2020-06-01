@@ -16,6 +16,8 @@ public class JDBCTest4 {
 		try {
 			
 			// 1. DB드라이버 로드
+			// 드라이버로드는 프로그램에서 한번만 로드해줘도 된다.
+
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 			System.out.println("Oracle 드라이버 로드 성공");

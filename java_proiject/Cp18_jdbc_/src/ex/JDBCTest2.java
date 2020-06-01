@@ -15,6 +15,8 @@ public class JDBCTest2 {
 		ResultSet rs=null;
 		
 		// 1. DB드라이버 로드
+		// 드라이버로드는 프로그램에서 한번만 로드해줘도 된다.
+
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			

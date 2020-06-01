@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class JDBCTest5 {
+public class JDBCTest6 {
 
 	public static void main(String[] args) {
 
@@ -32,54 +32,45 @@ public class JDBCTest5 {
 			// String url = "jbdc:oracle:thin:@주소:포트:데이터베이스이름";
 			// 주소 : localhost or 127.0.0.1
 
+
 			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
 			String user = "scott";
 			String pw = "tiger";
-
 			// Connection 객체 생성 : Statment 객체 생성하기 위해..
-
 			conn = DriverManager.getConnection(url, user, pw);
-			
+
 			// 3. SQL처리
 			// Statement or PretaredStatemenent
 			// pstmt = conn.prepareStatement(sql 문장);
-			String sql = "select * from dept where deptno=?";
+			String sql = "insert into dept (deptno, dname, loc) "
+					+ " values (?, ?, ?)";
+			
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 70);
+			pstmt.setString(2, "마케팅");
+			pstmt.setString(3, "서울");
 
-			// 변수 데이터 설정
-			pstmt.setInt(1, 10);
-
-			rs = pstmt.executeQuery();
-
-			System.out.println("부서 리스트");
-			System.out.println("===================================================");
-
-			// ResultSet ㅡ> 결과참조
-			// 결과가 행단위로 여러행이 나오는데, ResultSet의 next()메서드로 행단위로 출력가능
-			while (rs.next()) {
-				System.out.print(rs.getInt("deptno") + "\t");
-				System.out.print(rs.getString("dname") + "\t");
-				System.out.print(rs.getString("loc") + "\n");
+			
+			// executeUpdate() 메서드는 처리후 처리된 행의 갯수를 int로 반환하므로..
+			int resultCnt = pstmt.executeUpdate();
+			
+			if(resultCnt > 0) {
+				System.out.println("정상적으로 입력 되었습니다.");
+				System.out.println(resultCnt +"행이 입력되었습니다.");
+			} else {
+				System.out.println("입력이 되지 않았습니다. 확인 후 재시도 해주세요.");
 			}
-			System.out.println("===================================================");
+			
 
-			
-			
-			// 4. 데이터베이스 연결 종료
-			
-			// finally 에서 처리해주었으므로..
-			// rs.close();
-			// pstmt.close();
-		    // conn.close();
 
-			
-			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {  
 			
+			// 4. 데이터베이스 연결 종료
+
 			// 객체가 생성되기 전에 오류가 날 수 있기 때문에 각각 if문으로 예외처리를 해야한다. 
 			if (rs != null) {
 				try {
@@ -110,3 +101,20 @@ public class JDBCTest5 {
 
 	} // main end
 } // class end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
