@@ -148,17 +148,20 @@ public class EmpManager {
 	public void empUdate() {
 
 		// -수정(이름, 부서번호, 급여)
+		kb.nextLine();
+
 		System.out.println("======사원관리 프로그램 _ 수정======");
 
 		System.out.println("수정할 사원의 이름을 입력해주세요 >>");
-		String ename1 = kb.nextLine();
-
-		System.out.println(ename1 + "사원의 수정할 부서번호를 입력해주세요 >>");
-		int deptno1 = kb.nextInt();
+		String ename = kb.nextLine();
+		System.out.println("ename1 : "+ename);
+		
+		System.out.println(ename + "사원의 수정할 부서번호를 입력해주세요 >>");
+		int deptno = kb.nextInt();
 		kb.nextLine();
 
-		System.out.println(ename1 + "사원의 수정할 급여를 입력해주세요 >>");
-		int sal1 = kb.nextInt();
+		System.out.println(ename + "사원의 수정할 급여를 입력해주세요 >>");
+		int sal = kb.nextInt();		
 		kb.nextLine();
 
 		
@@ -176,21 +179,21 @@ public class EmpManager {
 			
 			
 			// 3. sql 로 데이터처리
-			String sql1 = "Update emp(ename, deptno, sal) set(?, ?, ?) where ename =   " + ename1;
+			String sql = "Update emp   "
+					+ " set deptno = ?, sal = ? where ename = '" + ename +"'";
 
-			pstmt = conn.prepareStatement(sql1);
+			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, ename1);
-			pstmt.setInt(2, deptno1);
-			pstmt.setInt(3, sal1);
-
-			int resultCnt1 = pstmt.executeUpdate();
+			pstmt.setInt(1, deptno);
+			pstmt.setInt(2, sal);
+			
+			int resultCnt = pstmt.executeUpdate();
 
 			System.out.println("----------------------------------------");
 
-			if (resultCnt1 > 0) {
+			if (resultCnt > 0) {
 				System.out.println("정상적으로 수정 되었습니다.");
-				System.out.println(resultCnt1 + "행이 수정되었습니다.");
+				System.out.println(resultCnt + "행이 수정되었습니다.");
 			} else {
 				System.out.println("수정이 되지 않았습니다. 확인 후 재시도 해주세요.");
 			}
@@ -250,7 +253,7 @@ public class EmpManager {
 		System.out.println("======사원관리 프로그램 _ 삭제======");
 
 		System.out.println("삭제할 사원의 사원번호를 입력해주세요 >>");
-		int empno2 = kb.nextInt();
+		int empno = kb.nextInt();
 		kb.nextLine();
 
 
@@ -268,12 +271,13 @@ public class EmpManager {
 
 			
 			// 3. sql 로 데이터처리
-			String sql2 = "delete from emp where empno2 =  " + empno2;
+			
+			String sql2 = "delete from emp where empno2 = '" + empno+"'";
 
 			pstmt = conn.prepareStatement(sql2);
 
 			int resultCnt2 = pstmt.executeUpdate();
-
+			
 			System.out.println("----------------------------------------");
 
 			if (resultCnt2 > 0) {
@@ -349,7 +353,6 @@ public class EmpManager {
 			
 			// 3. sql 로 데이터처리
 			stmt = conn.createStatement();
-			stmt = conn.createStatement();
 
 			System.out.println("======사원관리 프로그램 _ 리스트======");
 
@@ -369,15 +372,15 @@ public class EmpManager {
 			while (rs.next()) {
 				System.out.print(rs.getInt("empno") + "\t");
 				System.out.print(rs.getString("ename") + "\t");
-				System.out.print(rs.getString("job") + "\t\t");
-				System.out.print(rs.getInt("mgr") + "\t");
+				System.out.print(""+rs.getString("job") + "\t\t");
+				System.out.print(""+rs.getInt("mgr") + "\t");
 				System.out.print(rs.getDate("hiredate") + "\t\t");
 				System.out.print(rs.getInt("sal") + "\t");
 				System.out.print(rs.getInt("comm") + "\t");
 				System.out.print(rs.getInt("deptno") + "\n");
 
 			}
-			System.out.println("----------------------------------------");
+			System.out.println("------------------------------------------------------------------------------------------");
 			
 
 		} catch (ClassNotFoundException e) {
@@ -430,6 +433,13 @@ public class EmpManager {
 	// 검색(이름기준)--------------------------------------------------------------------------
 	public void empSearch() {	
 
+		kb.nextLine();
+		System.out.println("======사원관리 프로그램 _ 검색======");
+
+		System.out.println("검색할 사원의 이름을 입력해주세요 >>");
+		String ename = kb.nextLine();
+		
+		
 		try {
 			// 1. 데이터베이스 드라이버 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -444,23 +454,19 @@ public class EmpManager {
 
 			
 			// 3. sql 로 데이터처리
-			System.out.println("======사원관리 프로그램 _ 검색======");
+			stmt = conn.createStatement();
 
-			System.out.println("검색할 사원의 이름을 입력해주세요 >>");
-			String ename4 = kb.nextLine();
+			String sql = "select * from emp where ename = '" + ename+"'";
 
-			String sql4 = "select * from emp where ename =  " + ename4;
-
-			rs = stmt.executeQuery(sql4);
+			rs = stmt.executeQuery(sql);
 
 			System.out
 					.println("==========================================================================================");
-			System.out.println(ename4 + " 사원의 정보");
+			System.out.println(ename + " 사원의 정보");
 			System.out
 					.println("------------------------------------------------------------------------------------------");
 			System.out.println("사원번호\t사원이름\t직급\t\t관리자\t입사일\t\t급여\t성과급\t부서번호");
-			System.out
-					.println("------------------------------------------------------------------------------------------");
+			System.out.println("------------------------------------------------------------------------------------------");
 
 			while (rs.next()) {
 				System.out.print(rs.getInt("empno") + "\t");
@@ -473,7 +479,7 @@ public class EmpManager {
 				System.out.print(rs.getInt("deptno") + "\n");
 
 			}
-			System.out.println("----------------------------------------");
+			System.out.println("------------------------------------------------------------------------------------------");
 
 			
 
