@@ -64,7 +64,15 @@ public class DEPTManager {
 		 // 같은 연결정보를 쓸 수 있다. 
 		Connection conn = ConnectionProvider.getConnection();
 		
+		// 트랜잭션이기 때문에 우선 자동커밋을 false로 설정해두고, 
+		// 모든절차가 완전히 끝난 후, 개발자가 commit해준다. 
+		// (수정하고자 하는 기존정보 있는지확인되고, 기존정보가져오고, 수정정보입력하고의 모든 과정이 끝나야
+		// 하나의 처리가 완성되는 트랜잭션)
+		// conn.setAutoCommit(false); 처리를 해주지 않으면, 과정마다 커밋될 수있어 잘못되 정보가 될 수 있다. 
+		
 		conn.setAutoCommit(false); // 기본값은 true : 자동커밋된다. 
+		
+		
 		
 		// 1.수정하고자 하는 데이터 유무확인 ㅡ> 2. 사용자로부터 데이터 받아서 전달
 		 

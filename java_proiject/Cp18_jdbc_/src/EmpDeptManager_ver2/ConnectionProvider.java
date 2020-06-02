@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionProvider {
+	// 드라이버로드처럼 메인에서 처리하면 안되는 이유는..
+	// 동시접속에 대한 문제가 생길 수 있기 때문이다. 
+	// (한번연결되면 끊길 때까지 다음연결은 대기하고 있는 문제가 생긴다.)
+	
 	
 	// 별도 클래스로 생성하여 처리선능에 도움..?
 	public static Connection getConnection() {

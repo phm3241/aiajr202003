@@ -10,7 +10,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DeptDao {
-
+	// 각각 다른 연결정보이기 때문에(connection정보가 다르다) 
+	// Statement, PreparedStatement, ResultSet는 각 메서드에서 선언되고 처리되어야한다. 
+	
+	
 	// DAO = Data Access Object
 	// 데이터베이스 처리하는 클래스 (기능만을 가지는 클래스)
 	

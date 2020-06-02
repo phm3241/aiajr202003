@@ -22,6 +22,7 @@ public class ManageMain {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		System.out.println("데이터베이스 드라이버 로드 완료...!!");
 		
+		
 		DEPTManager deptManager = new DEPTManager();
 
 		while (true) {
