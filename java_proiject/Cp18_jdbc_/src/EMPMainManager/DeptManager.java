@@ -14,6 +14,8 @@ import java.util.Scanner;
 public class DeptManager {
 	// 부서관리 프로그램
 		
+	
+		// 리스트 출력하기 위해서는 DeptDao가 반드시 필요하다. 
 		DeptDao dao = new DeptDao();
 	
 		public void deptManager() {
@@ -23,6 +25,7 @@ public class DeptManager {
 		
 		public void deptList() {
 		
+			// dao로 deptList메서드 사용. 
 			List<Dept> deptList = dao.deptList();
 			
 			if(deptList !=null && !deptList.isEmpty()) {
