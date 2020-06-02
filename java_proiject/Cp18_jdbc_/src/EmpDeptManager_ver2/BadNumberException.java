@@ -1,4 +1,4 @@
-package EmpDeptManager;
+package EmpDeptManager_ver2;
 
 public class BadNumberException extends Exception {
 

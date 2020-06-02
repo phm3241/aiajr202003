@@ -1,4 +1,4 @@
-package EmpDeptManager;
+package EmpDeptManager_ver2;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
