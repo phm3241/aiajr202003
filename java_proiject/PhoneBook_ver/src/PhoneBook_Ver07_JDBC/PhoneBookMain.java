@@ -11,10 +11,11 @@ public class PhoneBookMain {
 	public static void main(String[] args) {
 		
 		/* 데이터베이스 드라이버 로드 */
-		Class.forName("oracle.jdbc.driver.OracleDriver");
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		
 		System.out.println("데이터베이스 드라이버 로드완료!");
 
-		PbUnivManager uManager = PbUnivManager.getInstance();
 		PbUnivMain univMain = new PbUnivMain();
 		
 
@@ -70,6 +71,12 @@ public class PhoneBookMain {
 				return;
 			} // switch end
 		} // while end
+		
+		
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
 	}// main end
 
 } //class end

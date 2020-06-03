@@ -11,12 +11,14 @@ public class PbUnivMain {
 
 	public void PbUnivMenu() {
 
+		PbUnivManager uManager = new PbUnivManager();
+
 		while (true) {
 
 			System.out.println("대 학 친 구 ");
-			System.out.println("====================================================");
-			System.out.println("1. List  2. Insert  3. Search  4. Delete  5. Edit  ");
-			System.out.println("====================================================");
+			System.out.println("=================================================================");
+			System.out.println("   1. List  2. Insert  3. Search  4. Delete  5. Edit  6. Exit");
+			System.out.println("=================================================================");
 
 			int select = 0;
 
@@ -24,8 +26,7 @@ public class PbUnivMain {
 				select = PhoneBookMain.kb.nextInt();
 
 				// 정상범위 1~6
-				// MainMenu.INSERT_INFO ~ MainMenu.EXIT
-				if (!(select >= 1 && select <= 5)) {
+				if (!(select >= 1 && select <= 6)) {
 					BadNumberException e = new BadNumberException("잘못된 메뉴입력입니다.");
 
 					// 강제적인 예외발생
@@ -47,22 +48,22 @@ public class PbUnivMain {
 			}
 
 			switch (select) {
-			case MainMenu.INSERT_INFO:
-				manager.createInfo();
+			case 1:
+				uManager.univList();
 				break;
-			case MainMenu.SEARCH_INFO:
-				manager.showInfo();
+			case 2:
+				uManager.univInsert();
 				break;
-			case MainMenu.DELETE_INFO:
-				manager.deleteInfo();
+			case 3:
+				uManager.univSearch();
 				break;
-			case MainMenu.EDIT_INFO:
-				manager.editInfo();
+			case 4:
+				uManager.univDelete();
 				break;
-			case MainMenu.SHOW_ALL_INFO:
-				manager.showAllInfo();
+			case 5:
+				uManager.univEdit();
 				break;
-			case MainMenu.EXIT:
+			case 6:
 				System.out.println("프로그램을 종료합니다.");
 				return;
 
