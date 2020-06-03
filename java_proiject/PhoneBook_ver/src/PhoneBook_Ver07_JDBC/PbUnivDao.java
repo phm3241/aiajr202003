@@ -300,27 +300,24 @@ public class PbUnivDao {
 		
 		
 		try {
-		
+
+			
+		// ◆ 실수부분수정 : sql문 수정..2개 ㅡ> 1개(join) ㅡ> 1개 (where 부속질의)
 		// sql 
-		String sql = "update phoneinfo_basic set phoneNumber=?, address=?, email=? regdate=? where name = ?";
+		String sql = "update phoneinfo_basic b    "
+				+ " set phoneNumber=?, address=?, email=?, regdate=?, major=?, grade=?     "
+				+ " where fr_name = ? and (b.idx=phoneinfo_univ.fr_ref) ";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, newUniv.getPhoneNumber());
 			pstmt.setString(2, newUniv.getAddress());
 			pstmt.setString(3, newUniv.getEmail());
 			pstmt.setString(4, newUniv.getRegdate());
-			pstmt.setString(5, newUniv.getName());
-
-			resultCnt = pstmt.executeUpdate();
-
-		String sql1 = "update phoneinfo_basic set major=?, grade=? where fr_name = ?";
-			pstmt = conn.prepareStatement(sql1);
-						
-			pstmt.setString(1, newUniv.getMajor());
-			pstmt.setInt(2, newUniv.getGrade());
-			pstmt.setString(3, newUniv.getName());
+			pstmt.setString(5, newUniv.getMajor());
+			pstmt.setInt(6, newUniv.getGrade());
+			pstmt.setString(7, newUniv.getName());
 			
-			resultCnt += pstmt.executeUpdate();
+			resultCnt = pstmt.executeUpdate();
 		
 
 		// ◆ 실수부분수정 : try~catch ㅡ> throws SQLException 로 예외처리 

@@ -12,6 +12,8 @@ public class PbUniv {
 	private String regdate;
 	private String major;   
 	private int grade;   
+	private int ref;   
+	
 	
 	// 기본 생성자(필수)
 	public PbUniv() {

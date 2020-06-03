@@ -204,19 +204,19 @@ public class PbUnivManager {
 			int idx = univ.getIdx();
 			
 			System.out.println("대학친구 정보수정을 시작합니다. ");
-			System.out.println("전화번호 : " +univ.getPhoneNumber());
+			System.out.println("전화번호 : " +(univ.getPhoneNumber()));
 			String phoneNumber = PhoneBookMain.kb.nextLine();
 			
-			System.out.println("주소 : " +univ.getAddress());
+			System.out.println("주소 : " +(univ.getAddress()));
 			String address = PhoneBookMain.kb.nextLine();
 	
-			System.out.println("이메일 : " +univ.getEmail());
+			System.out.println("이메일 : " +(univ.getEmail()));
 			String email = PhoneBookMain.kb.nextLine();
 	
-			System.out.println("전공 : " +univ.getMajor());
+			System.out.println("전공 : " +(univ.getMajor()));
 			String major = PhoneBookMain.kb.nextLine();
 	
-			System.out.println("학년 : " +univ.getGrade());
+			System.out.println("학년 : " +(univ.getGrade()));
 			int grade = PhoneBookMain.kb.nextInt();
 			PhoneBookMain.kb.nextLine();
 			
