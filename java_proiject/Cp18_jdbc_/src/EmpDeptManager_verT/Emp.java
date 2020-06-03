@@ -2,8 +2,12 @@ package EmpDeptManager_verT;
 
 import java.sql.Date;
 
-//VO : 읽기전용
-//DTO : 읽기, 쓰기
+// 구조를 deptManager(핵심로직, 비지니스 처리?)와 deptDao(데이터처리만)로 변경했기 때문에
+// 두 구조 사이에서 데이터를 주고 받기 위해, 객체를 만들어야한다. 
+// 이런 객체를 VO, DTO라고 한다. 
+// VO : Value Object 읽기전용(read only)
+// DTO : Data Transfer 읽기쓰기전용
+
 public class Emp {
 	
 	private int empno;

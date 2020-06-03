@@ -1,4 +1,4 @@
-package EmpDeptManager_verT;
+package EmpDeptManager_ver2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

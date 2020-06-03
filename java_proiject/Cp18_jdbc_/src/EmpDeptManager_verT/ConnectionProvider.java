@@ -11,6 +11,7 @@ public class ConnectionProvider {
 // (한번연결되면 끊길 때까지 다음연결은 대기하고 있는 문제가 생긴다.)
 	
 	
+	// 별도 클래스로 생성하여 처리선능에 도움..?
 	public static Connection getConnection() throws SQLException {
 		// 2. 데이터베이스 연결
 		Connection conn = null;
