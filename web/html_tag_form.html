@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form tag</title>
+    </head>
+
+    <body>
+        
+        <hr>
+        <h1>[ 입력양식 Tag : Form ]</h1>
+        <hr>
+        form : 입력 양식 태그 <br>
+        action : 전송 위치(데이터를 전달할 목적지) <br>
+        method : 전송 방식 2가지 get/post <br> <br> <br>   
+        
+        
+        <h2> input tag </h2>
+        <!--기본양식-->
+        <input> <br><br>
+        
+        <!--name 은 파라미터 이름.. 서버쪽에서 받을 때의 이름?-->
+        <input type="text" id="name" name="username"> <br><br>
+        
+        
+        <input type="password" id="pw" name="pw"> <br><br>
+        
+        개인정보 방침에 동의합니다. <input type="checkbox"> <br><br>
+        
+        <input type="color"> <br><br>
+        
+        <input type="date"> <br><br>
+        
+        <input type="datetime-local">  <br><br>
+        
+        <input type="email"> <br><br>
+        
+        <input type="file"> <br><br>
+        
+        <input type="reset">
+        
+        
+        
+        
+        <br> <br> <br>
+        <h5>------------------------------------------------------------</h5>
+        <h2>로그인</h2>
+        
+        <form action="member/test.html" method="post">
+            <!--input은 단일태그, 입력 기본값은 텍스트-->
+            아이디 <input type="text" name="id"> <br>
+            비밀번호 <input type="password" name="pw"> <br>
+            이메일 <input type="email">
+            <input type="submit">
+        
+        </form>
+        
+        
+        
+    </body>
+
+</html>
