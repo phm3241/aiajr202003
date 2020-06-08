@@ -10,7 +10,7 @@ import java.util.List;
 public class PbUnivManager {
 
 
-	//System.out.println("1. List  2. Insert  3. Search  4. Delete  5. Edit  ");
+	//System.out.println("1. Insert  2. Search  3. Delete  4. Edit  5. List  ");
 	
 	PbUnivDao dao = PbUnivDao.getInstance();
 
@@ -22,7 +22,7 @@ public class PbUnivManager {
 	public void univList() {
 		
 		// dao의  univList() 메서드 : 데이터처리하여 리스트로 반환
-		List<PbUniv> univList = dao.univList();
+		List<PbUnivDto> univList = dao.univList();
 		
 		
 		// 리스트 내용 확인 : if ~ else문
@@ -90,7 +90,7 @@ public class PbUnivManager {
 		
 		
 		// 사용자 입력정보 ㅡ> univ 객체로 생성
-		PbUniv univ = new PbUniv(idx, name, phoneNumber, address, email, regdate, major, grade);
+		PbUnivDto univ = new PbUnivDto(idx, name, phoneNumber, address, email, regdate, major, grade);
 
 		
 		// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
@@ -113,7 +113,7 @@ public class PbUnivManager {
 	public void univSearch() {
 		
 		// PbUniv타입 리스트 생성
-		List<PbUniv> univList = new ArrayList<>();
+		List<PbUnivDto> univList = new ArrayList<>();
 		
 		System.out.println("찾으시는 대학친구 이름을 입력해주세요.");
 		String searchName = PhoneBookMain.kb.nextLine();
@@ -167,8 +167,8 @@ public class PbUnivManager {
 		// 데이터베이스 드라이버 연결
 		// 트랜잭션 처리해하므로 여기서 연결 
 		Connection conn = null;
-		PbUniv univ = null;
-		PbUniv newUniv = null;
+		PbUnivDto univ = null;
+		PbUnivDto newUniv = null;
 		int resultCnt = 0;
 		
 		try {
@@ -225,7 +225,7 @@ public class PbUnivManager {
 			System.out.println("등록일자 : "+ regdate);
 			
 			// 사용자 입력 수정정보 ㅡ> 새로운 univ객체로 생성
-			newUniv = new PbUniv(idx, searchName, phoneNumber, address, email, regdate, major, grade);
+			newUniv = new PbUnivDto(idx, searchName, phoneNumber, address, email, regdate, major, grade);
 	
 		
 			// 수정한 새로운 객체 ㅡ> dao에 매개변수로 전달, 데이터처리 후 수정 행 개수 반환

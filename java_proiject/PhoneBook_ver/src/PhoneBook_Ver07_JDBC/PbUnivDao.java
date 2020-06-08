@@ -24,7 +24,7 @@ public class PbUnivDao {
 
 
 	
-	public List<PbUniv> univList() {
+	public List<PbUnivDto> univList() {
 		
 		// jdbc 객체 선언
 		Connection conn = null;
@@ -33,7 +33,7 @@ public class PbUnivDao {
 		ResultSet rs = null;
 		
 		// 리스트 선언
-		List<PbUniv> univList = new ArrayList<>();
+		List<PbUnivDto> univList = new ArrayList<>();
 		
 		// 드라이버 연결
 		try {
@@ -56,7 +56,7 @@ public class PbUnivDao {
 				String major = rs.getString("fr_u_major");
 				int grade = rs.getInt("fr_u_year");
 				
-				PbUniv univ = new PbUniv(idx, name, phonenumber, address, email, regdate, major, grade);
+				PbUnivDto univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade);
 				univList.add(univ);
 				
 			}
@@ -96,7 +96,7 @@ public class PbUnivDao {
 	} // univList() end
 		
 				
-	public int univInsert(PbUniv univ) {
+	public int univInsert(PbUnivDto univ) {
 		
 		// jdbc 객체 선언
 		Connection conn = null;
@@ -161,7 +161,7 @@ public class PbUnivDao {
 	
 	
 	
-	public List<PbUniv> univSearch(String searchname) {
+	public List<PbUnivDto> univSearch(String searchname) {
 		
 		// jdbc 객체선언
 		Connection conn = null;
@@ -169,7 +169,7 @@ public class PbUnivDao {
 		ResultSet rs = null;
 		
 		// PbUniv 타입 리스트 생성
-		List<PbUniv> univList = new ArrayList<>();
+		List<PbUnivDto> univList = new ArrayList<>();
 		
 		
 		try {
@@ -200,7 +200,7 @@ public class PbUnivDao {
 				String major = rs.getString("fr_u_major");
 				int grade = rs.getInt("fr_u_year");
 				
-				PbUniv univ = new PbUniv(idx, name, phonenumber, address, email, regdate, major, grade);
+				PbUnivDto univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade);
 				univList.add(univ);
 			}
 			
@@ -291,7 +291,7 @@ public class PbUnivDao {
 	
 	
 	
-	public int univEdit(PbUniv newUniv, Connection conn) throws SQLException {
+	public int univEdit(PbUnivDto newUniv, Connection conn) throws SQLException {
 
 		// jdbc 객체 선언
 		
@@ -375,11 +375,11 @@ public class PbUnivDao {
 	
 	
 	
-	public PbUniv searchName(String searchName, Connection conn) {
+	public PbUnivDto searchName(String searchName, Connection conn) {
 		
 		Statement stmt = null;
 		ResultSet rs = null;
-		PbUniv univ = null;
+		PbUnivDto univ = null;
 		
 		
 		try {
@@ -402,7 +402,7 @@ public class PbUnivDao {
 				String major = rs.getString("fr_u_major");
 				int grade = rs.getInt("fr_u_year");
 				
-				univ = new PbUniv(idx, name, phonenumber, address, email, regdate, major, grade);
+				univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade);
 			}
 			
 		} catch (SQLException e) {
