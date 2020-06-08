@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+        <title>CSS3 선택자 Selector</title>
+        <meta charset="utf-8">
+        
+        <link>
+        
+        <style>
+            /*----------------------------------------------------------------*/
+            /*   전체선택자 : *  */
+            
+            * {
+                color : black;
+            }
+            
+            
+            /*   태그선택자  */
+            h2 {
+                background-color: lightgray;
+            }
+            
+            p {
+                font-size: 24px;
+                font-style: italic;
+            }
+            
+            h2, p{
+                border : 3px solid skyblue;
+            }
+            
+            /*   선택자 여러개 가능  */
+            body, h2, p {
+                margin : 0;
+                padding: 0;
+            }
+            
+            
+            
+            /*----------------------------------------------------------------*/
+            /* 아이디 선택자
+            
+            #아이디{   
+            }
+            */
+            
+            
+            #header {
+                width:300px;
+                background-color:yellow;
+                margin:0 auto 
+                /*상하좌우의 여백, auto를 쓰면 상하와 같은 여백으로 자동중앙정렬이 된다.*/
+                /*margin-top, margin-bottom, margin-left, margin-right: */
+                /*창크기가 변해도 가운데정렬이 된다.*/
+            }
+            
+            #aside {
+                width:500px;
+                background-color: lightcyan;
+                margin: 10px auto;
+            }
+            
+            #content{
+                width:700px;
+                background-color: lightgreen;
+                margin: 0 auto;
+            }
+            
+            li {
+                color: black;
+            }
+                
+            
+            /*----------------------------------------------------------------*/
+            /* 클래스 선택자
+                .클래스 이름 { 
+            } 
+            */
+                        
+            .font_color{
+                color:violet;    
+            }
+            
+            .font_bold{
+                font-weight: lighter;   
+            }
+            
+            
+            /*같은 font_size여도 li태그에 있는 font_size만 선택할 수 있다.*/
+            li.font_size {
+                font-size: 200%;
+            }
+            
+            div.font_size {
+                font-size: 130%;
+            }
+                
+
+        </style>
+        
+    </head>
+
+    
+    
+    
+    
+    <body>
+        <hr>
+        <h1> CSS3 선택자</h1>
+        - 특정한 HTML 태그를 선택할 때 사용하는 기능 <br>
+        - 선택한 태그에 원하는 스타일이나 스크립트 적용 가능 <br><br>
+        
+        - <b>css 적용하는 3가지 방법</b> <br>
+        - 1. *.css : 외부에 파일 따로 만들어서 가져오는 방법 <br>
+        - 2. style : style태그로 적용하는 방법 <br>
+        - 3. h1 style=""  태그 안에 있는 syle속성에 바로 적용하는 방법 <br>
+        ===> 보통은 *.css 방법을 권장! <br><br>
+        <hr><br>
+        
+        
+        
+        <!---------------------------------------------------------------->
+        <h3>[ 클래스 선택자 ]</h3>
+        - 특정 클래스가 있는 태그를 선택 <br>
+        - li class="font_color font_size" 처럼 중복해서 적용가능, 단 여러 속성을 쓸때는 띄어쓰기 필수 <br>
+        - 선택자 형태 : .클래스 <br><br>
+        
+
+        <ul>
+            <li class="font_color font_size">사과</li>
+            <li>바나나</li>
+            <li>오렌지</li>
+            <li class="font_color font_bold font_size">키위</li>
+        </ul>
+        
+        
+        
+        
+        
+        <!---------------------------------------------------------------->
+        <br><br><hr>
+        <h3>[ id 선택자 ]</h3>
+        - 공간 분할 태그에 아이디 선택자를 사용하여 id 속성을 적용 <br>
+        - 특정 id 속성이 있는 태그를 선택. 특정 태그 하나를 선택할 때 사용 <br>
+        - 선택자 형태 : #아이디 <br><br>
+
+        - id 속성이 중복되면 해당 id 속성을 표시한 모든 태그에 스타 일이 적용됨. <br>
+        - 스타일시트에서는 문제가 없지만 <br> 
+          자바스크립트에서는 id 속성이 중복되면 문제가 발생하므로 주의!
+        <br><br>
+        
+        
+        <div id="header" class="font_size">header header header header header header header header header header header header header header header header header</div>
+        <div id="aside">aside</div>
+        <div id="content">content</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <!---------------------------------------------------------------->
+        <br><br><br><br><hr>
+        <h3> [ 전체, 태그, 기본 선택자 ]</h3>
+        - 전체 선택자 : HTML 문서 안에 있는 태그를 모두 선택  <br>
+        - 전체 선택자 형태 : * <br>
+        - 태그 선택자 : HTML 페이지 내부의 특정 태그를 모두 선택 <br>
+        - 태그 선택자 형태 : 태그  <br>
+        - 한꺼번에 여러 개의 선택자를 입력하여 스타일 속성 적용 -> 쉼표 사용  <br>
+        
+        <br><br>
+        
+        <h2>또 못 산 '비말차단용 마스크', 중고나라에 뜨자 분노 폭발</h2>
+        
+        <p>이른 무더위 속 '비말(침방울) 차단용 마스크 대란'이 8일도 이어졌다. 판매처 '웰킵스몰' 사이트가 판매 첫 날인 지난 5일에 이어 두 번째로 마비됐다. 전국 내륙 곳곳에 폭염주의보가 내려진 무더위 속 비말 차단용 마스크를 구하지 못한 소비자들의 원성이 한층 뜨거워지고 있다.</p>
+        
+        <p>비말 차단용 마스크를 구하기 위한 소비자들의 '광클' 행보가 이날도 빗발쳤다. 구입희망자들의 바쁜 손길에 준비수량은 약 30분 만에 동이 났다. <br>
+
+        웰킵스에 따르면 이날 오전 9시부터 자사 온라인몰에서 판매하기 시작한 비말 차단용 마스크가 약 30분 만에 품절된 것으로 전해졌다.</p>
+        
+         <br><br><br><br>
+        
+    
+    </body>
+</html>
