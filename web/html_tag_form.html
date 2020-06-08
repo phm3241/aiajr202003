@@ -9,16 +9,22 @@
         <hr>
         <h1>[ 입력양식 Tag : Form ]</h1>
         <hr>
-        form : 입력 양식 태그 <br>
-        action : 전송 위치(데이터를 전달할 목적지) <br>
-        method : 전송 방식 2가지 get/post <br> <br> <br>   
+        - form : 입력 양식 태그 <br>
+        - action : 전송 위치(데이터를 전달할 목적지) <br>
+        - method : 전송 방식 2가지 get/post, <br> 
+        - get방식은 주소표시줄에 id, pw가 표시되어 개인정보 노출의 보안문제가 있다. <br>
+        - 보통은 post방식을 사용.<br>
+        - ★name속성 중요! 파라미터 이름.. 서버쪽에서 받을 때의 이름
+        <br> <br> <br>   
+        
         
         
         <h2> input tag </h2>
+        <h3> input type : "text","password", "color", "date", "datetime-local" ..등   </h3>
         <!--기본양식-->
         <input> <br><br>
         
-        <!--name 은 파라미터 이름.. 서버쪽에서 받을 때의 이름?-->
+        <!--★name속성 중요! 파라미터 이름.. 서버쪽에서 받을 때의 이름-->
         <input type="text" id="name" name="username"> <br><br>
         
         
@@ -37,6 +43,8 @@
         <input type="file"> <br><br>
         
         <input type="reset">
+        
+        <!--<input type="hidden"> : 사용자에게 보여질 필요가 없는 정보의 경우, hidden속성으로 정보를 받을 수 있다.-->
         
         
         
