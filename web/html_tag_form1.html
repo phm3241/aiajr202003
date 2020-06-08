@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <!--<head>에 들어가는 기본적인 구조. 큰 변화가 없음.-->
+        <title>폼 태그 : input</title>
+        <meta charset = "utf-8">
+        <link> <!--외부의 파일 가져올 때-->
+        <style></style> <!--스타일 적용할 때-->
+        
+        <!--html은 위에서 아래로 실행하는데, 
+        script를 다 읽고 body로 내려오기 떄문에 화면이 늦게 뜨는 성능저하 문제가 일어날 수 있다. 
+        ㅡ> 따라서 보통은 script를 body의 맨 아래부분에 작성한다. -->
+        <script></script> 
+        <script src="chk.js"></script> <!--자바스크립트 외부에서 불러올 때-->
+        
+        
+        
+    </head>
+        <hr>
+        <h1>[ 입력양식 Tag : Form ]</h1>
+        <hr><br>
+        
+        <!--경우에 따라서는 action이 생략될 수 있다.? --> 
+        <form action="" method="get">
+            <h2>선택 표현 : checkbox, radio </h2>
+            <!--form 작성할 떄 입력방식 어떤 것으로 할 건지..-->
+            - checkbox는 멀티체크의 개념 <br><br>
+            <input type="checkbox" name="like" value="dog"> 강아지
+            <input type="checkbox" name="like" value="cat"> 고양이
+            
+            <br><br>
+            - 라디오 버튼의 name 속성을 이용하여 여러 대상 중 하나만 선택하는 기능 <br>
+            - 라디오의 경우, name속성을 같게 해야한다. 
+            - 선택에 따라 설정해둔 value 값을 가져가게 된다. (value값 생략가능) <br><br>
+            <input type="radio" name="menu" value="menu01"> 짜장면 
+            <input type="radio" name="menu" value="menu02"> 짬뽕
+            <input type="radio" name="menu" value="menu03"> 탕수육
+            
+            
+            <br><br><br> 
+            <h5>------------------------------------------------------------</h5>
+            <h2> hidden </h2>
+            - 프로그래머가 임의로 서버쪽으로 전송해야하는 데이터나 <br>
+            사용자에게 보일 필요 없는 데이터일 때 사용. <br>
+            - hidden 타입으로 하면 화면에 보이지 않게 되지만, name과 value값이 서버로 전송된다.
+            - 아래의 경우, userName=scott & idx=2 로 전송된다. 
+            
+            <br><br> 
+            <input type="hidden" name="userName" value="scott">
+            <input type="text" name="userName" value="scott">
+            <input type="hidden" name="idx" value="2">
+            
+            
+            
+            
+            
+            
+            
+            <br><br><br>
+            <h5>------------------------------------------------------------</h5>
+            <h2>버튼 표현 : submit, button, reset </h2>
+
+            
+            submit은 form의 사용자 입력정보를 action속성의 전송방법으로 서버로 전송하는 기능. <br>
+            value로 버튼 이름을 정할 수 있다.
+            <br>
+            <input type="submit" > 
+            <input type="submit" value="보내기"> 
+            
+            <br><br>
+            버튼의 속성은은 페이지가 이동이 없고 그냥 버튼의 모양표현이다. <br> 
+            폼을 서버로 보내는 역할은 sumit이 한다. 
+            
+            <br> 
+            <input type="button" value="버튼: 확인하기"> 
+            
+            <br> 
+            sumit 버튼을 따로 쓰지 않고 button 태그로도 쓸 수있다.
+            sumit 과 button의 기능은 동일 
+            하지만 input type="button" 폼안의 버튼속성은 전송기능이 없음.
+            구별해서 사용해야한다. 
+            <button>button-new</button>
+            <br> <br> <br> 
+            
+            
+            
+            input type = "reset"
+            <input type="reset"> 
+            초기화하게 되면 처음 설정해둔 상태로 돌아간다. 아래의 경우 입력값 cool이 초기화 상태가 된다. 
+            <input type="text" name="nic" value="cool">
+            
+            
+            
+            
+            
+            
+            
+            <br><br><br> 
+            <h5>------------------------------------------------------------</h5>
+            <h2>select </h2>
+            - name, value 속성 기억하기! 이 이름의 이 값을 서버로 보내야하기 떄문에 중요! <br>
+            - value에 값을 지정해주지 않으면, 사용자 선택값으로 전송된다. <br>
+            - 사용자에게는 이름을 보여주게하고, 내부에서 처리할때는 식별할 수있는 코드값을 value속성을 사용할 수 있다. <br><br>
+            
+            
+            <select name="mgr">
+                <option value="7788">SCOTT</option>
+                <option value="783">KING</option>
+            </select>
+            
+            
+            
+            
+            <br>
+            예약일을 선택하세요.<br>
+            <select name="year"> 
+                <option value="20">2020</option>
+                <option value="19">2019</option>
+                <option value="18">2018</option>
+                <option value="17">2017</option>
+            </select>년
+            
+            
+            <select name="month"> 
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>월
+            
+            <select name="day"> 
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>일
+            
+            
+            
+            <br><br><br> 
+        </form>
+    
+    
+
+    <body>
+    
+    
+    </body>
+
+</html>
