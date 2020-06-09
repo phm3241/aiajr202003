@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+        <title>CSS3 선택자 Selector</title>
+        <meta charset="utf-8">
+        
+        <style>
+            
+            /* 속성선택자
+            선택자 [속성이름] : 특정속성을 가지는 태그들을 선택
+            ex) input [type]
+            선택자 [속성이름=속성값] : 특정속성을 가지며, 속성에 특정값을 가지는 태그들을 선택
+            ex) input [type=password] 
+            */
+            
+            
+            /* 속성선택자 비교 */
+            input {
+                height: 30px;
+                margin: 5px;
+            }
+            
+            input[type] {
+                border: 2px solid blue;
+            }
+            
+            input[type=text] {
+                background-color: aqua;
+            }
+            
+            input[type=password] {
+                background-color: aquamarine
+            }
+            
+            img[alt] {
+                width: 50%;   /*화면비율의 50%*/             
+            }
+            
+            img[src$=jpg] { /* src$ 확장자 표시*/
+                border: 3px solid red;
+            }
+            
+            img[src$=png] {
+                border: 3px solid green;
+            }
+            
+            
+            a[href=naver.html]{
+                
+            }
+            
+            
+            /* 후손선택 : 선택의 범위를 제한 
+            선택자 범위안의 선택자
+            div h1 {
+            }
+            */
+            
+            #header h1.title {
+                color: red;
+            }
+            
+            
+            
+        </style>
+        
+    </head>
+
+    
+    <body>
+        <hr>
+        <h1>속성선택자</h1>
+        <hr><br>
+        
+        
+        <h3>후손선택자, 자손선택자</h3>
+        <!--조상,후손, 자손 선택자와 아이디 선택자 함께 사용-->
+        <div id="header">
+            <h1 class="title">Title</h1>
+            
+            <div id="nav">
+                <h1> Navigation</h1>
+            </div>
+            
+            <h1> etc </h1>
+        
+        </div>
+        
+        <div id="section">
+            <h1 class="title">Title</h1>
+            <p>안녕하세요</p>
+        </div>
+            
+        
+        <br><br>
+        
+        <form>
+            <input>
+            <br>
+            <input type="text">
+            <br>
+            <input type="password">
+        </form>
+        
+        
+        
+        <br><br><br><br>
+        
+            
+            
+        <h3>이미지태그 속성선택 </h3>
+        <br>
+        <img src="../images/sunmoo.jpg">
+        <img src="../images/ruru.jpg">
+        <img src="../images/flower.png".jpg alt="flower">
+        
+    
+    </body>
+</html>
