@@ -73,6 +73,107 @@
             }
             
             
+            /*배경속성*/
+            body {
+                background-image: url('../images/flower.png');
+                background-size: 10%;
+                /*background-size: 50% 100px;*/
+                background-size: 25%;
+                background-repeat: no-repeat; /*배경반복.*/
+                background-position: top;
+                background-attachment: fixed; /*스크롤을 하더라도 위치고정*/
+            }
+            
+            
+            /*박스속성*/
+            hr {
+                border: 0;
+                border-top: thin solid #aaaaaa;               
+            }
+            
+            
+            div.box {
+                width: 200px;
+                height: 200px;
+                /*border: 1px solid #aaaaaa;*/
+            }
+            
+            #box1 {
+                background-color: bisque;
+                border-width: 10px;
+                border-style: dashed;
+                border-color: gray;
+                
+                /*특정위치로 레이아웃할 때, padding, margin사용 */
+                padding: 10px;
+                padding-top=50;
+                
+                margin: 10px;
+                margin-top: 100px;
+                
+                /*padding 그냥 쓰면 4방향모두 10px, 
+                    width 200px + padding 20px + border-width 20px
+                    총 width 는 240px 
+                    따라서 총 width는 border, padding 등도 같이 고려해야한다.*/
+            }
+            
+            #box2 {
+                background-color: rosybrown;
+                border: 1px solid #eeeeee;
+                border-radius: 100px; 
+                /*모서리 둥글기 속성. 100px으로 하면 원이된다.*/
+            }
+            
+            
+            img {
+                
+                border-radius: 500px; 
+            }
+            
+            
+            
+            
+            /* display 속성*/
+            
+            span {
+                border: 1px solid red;
+            }
+            
+            /*div는 속성이 block인데,display 속성에 따라 변할 수 있다.*/
+            #box {
+                border: 1px solid blue;
+                /*display: none;*/
+                display: inline; 
+            }
+            
+            /*span은 속성이 inline인데, display 속성에 따라 변할 수 있다.*/
+            #sp {
+                display: block;
+            }
+            
+            #bg {
+                width: 100%;
+                height: 300px;
+                background-image: url('../images/sunmoo.jpg');
+                background-size: cover;
+                
+                color: white;
+                font-size: 3em;
+                text-align: center; /*수평방향의 중앙정렬*/
+                line-height: 300px; /*수직방향의 중앙정렬*/
+                
+                
+            }
+            
+            
+            .font_kor {
+                font-family: '바탕체', '돋움', '돋움체';
+                
+                
+            }
+            
+            
+            
             
         </style>
     
@@ -80,6 +181,61 @@
 
     
     <body>
+        <hr>
+        <h1>CSS속성</h1>
+        <hr><br><br>
+        
+        
+        <div id="bg">순무야</div>
+        
+        
+        
+        <h2>display 속성</h2><br>
+        -none, block, inline, inline-block 으로 기존의 형식을 변경할 수 있다.<br><br><br>
+        
+        <span id="sp">Dummy</span> 
+        <div id="box"> 
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span> 
+        </div> 
+        <span>Dummy</span>
+        
+        
+        
+        
+        
+        
+        
+        <br><br><br>
+        <h2>박스속성 : width, height, border, padding, margin</h2>
+        총 width는 border, padding 등도 같이 고려해야한다. <br>
+        border-top 등 .. 상세속성은 왼쪽 상단에서 시계방향순서대로 적용
+        
+        <div class="box" id=box1>
+            text
+        </div>
+        
+        <div class="box" id=box2>
+        </div>
+        
+        
+        <img src="../images/sunmoo.jpg">
+        
+        
+        
+        <br><br><br>
+        <hr>
+        <h2>크기단위, 색상단위</h2>
+        - <b>크기단위</b> <br>
+        - px(절대적단위) <br>
+        - %(백분율단위, 브라우저의 크기기준) <br> 
+        - em(배수단위, 폰트기본사이즈의 배수) <br><br> 
+        - <b>색상단위</b> <br> 
+        - rgb(red,green, blue) <br> 
+        - rgba(red,green, blue, alpha) *alpha는 투명도 <br> 
+        - #000000 <br> 
+        - 키워드(blue, red..) <br><br><br> 
+        
+        
         
         <table>
             <tr>
@@ -103,6 +259,7 @@
                 <td>HTML5-200%</td>
             </tr>
         </table>
+        
         
         
     
