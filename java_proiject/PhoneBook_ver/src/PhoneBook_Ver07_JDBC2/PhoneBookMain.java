@@ -1,4 +1,4 @@
-package PhoneBook_Ver07_JDBC;
+package PhoneBook_Ver07_JDBC2;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class PhoneBookMain {
 	public static void main(String[] args) {
 		
 		
-		PbUnivManager uManager = new PbUnivManager();
+		PbManager manager = new PbManager();
 		
 		
 		/* 데이터베이스 드라이버 로드 */
@@ -70,20 +70,19 @@ public class PhoneBookMain {
 			
 			switch(select){
 			case MainMenu.INSERT_INFO:
-				frType();
-				uManager.univInsert();
+				manager.insert();
 				break;
 			case MainMenu.SEARCH_INFO:
-				manager.showInfo();
+//				manager.showInfo();
 				break;
 			case MainMenu.DELETE_INFO:
-				manager.deleteInfo();
+//				manager.deleteInfo();
 				break;
 			case MainMenu.EDIT_INFO:
-				manager.editInfo();
+//				manager.editInfo();
 				break;
 			case MainMenu.SHOW_ALL_INFO:
-				manager.showAllInfo();
+//				manager.showAllInfo();
 				break;
 			case MainMenu.EXIT:
 				System.out.println("프로그램을 종료합니다.");
