@@ -3,6 +3,11 @@
     <head>
         <title>CSS 속성</title>
         <meta charset="utf-8">
+        
+        <!--웹페이지가 로드될 때 글씨체가 로드된다?-->
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+        
+        
         <style>
             /*
             css에서 사용하는 단위 : px, %, em
@@ -167,9 +172,15 @@
             
             
             .font_kor {
-                font-family: '바탕체', '돋움', '돋움체';
-                
-                
+                font-family: '바탕체', '돋움', '돋움체'; 
+            }
+            
+            .font_web {
+                font-family: 'Nanum Gothic', sans-serif;
+            }
+            
+            .font_penscript {
+                font-family: 'Nanum Pen Script', cursive;
             }
             
             
@@ -186,7 +197,7 @@
         <hr><br><br>
         
         
-        <div id="bg">순무야</div>
+        <div id="bg" class="font_penscript">순무야</div>
         
         
         
