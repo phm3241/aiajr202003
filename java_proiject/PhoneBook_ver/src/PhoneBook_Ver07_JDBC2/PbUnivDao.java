@@ -90,17 +90,13 @@ public class PbUnivDao {
 
 	} // univList() end
 
-	public int basicInsert(PbBasicDto info) {
+	public int basicInsert(PbBasicDto info, Connection conn) {
 
 		// jdbc 객체 선언
-		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
 
 		try {
-
-			// 드라이버 연결
-			conn = ConnectionProvider.getConnection();
 
 			// sql
 			String sql = "insert into phoneinfo_basic (idx, fr_name, fr_phonenumber, fr_email, fr_address, fr_regdate)   "
@@ -119,7 +115,7 @@ public class PbUnivDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-			// ◆ 실수부분수정 : close()구문 catch블럭에서 처리 ㅡ> finally에서 처리
+		// ◆ 실수부분수정 : close()구문 catch블럭에서 처리 ㅡ> finally에서 처리
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -144,18 +140,14 @@ public class PbUnivDao {
 
 	
 	
-	public int univInsert(PbUnivDto info) {
+	public int univInsert(PbUnivDto info, Connection conn) {
 
 		// jdbc 객체 선언
-		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
 		
 		
 		try {
-			
-			// 드라이버 연결
-			conn = ConnectionProvider.getConnection();
 
 			// sql
 			String sql1 = "insert into phoneInfo_univ (idx, fr_u_major, fr_u_year, fr_ref)   "
@@ -183,13 +175,6 @@ public class PbUnivDao {
 				}
 			}
 
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
 		}
 
 		return resultCnt;
@@ -198,18 +183,14 @@ public class PbUnivDao {
 	
 	
 	
-	public int comInsert(PbComDto info) {
+	public int comInsert(PbComDto info, Connection conn) {
 
 		// jdbc 객체 선언
-		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int resultCnt = 0;
 		
 		
 		try {
-			
-			// 드라이버 연결
-			conn = ConnectionProvider.getConnection();
 
 			// sql
 			String sql1 = "insert into phoneInfo_com (idx, fr_c_company, fr_ref)   "
@@ -249,25 +230,11 @@ public class PbUnivDao {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	
 	
 	
-	public List<PbUnivDto> univSearch(String searchname) {
+	public List<PbAllDto> search(String searchName) {
 
 		// jdbc 객체선언
 		Connection conn = null;
@@ -275,7 +242,7 @@ public class PbUnivDao {
 		ResultSet rs = null;
 
 		// PbUniv 타입 리스트 생성
-		List<PbUnivDto> univList = new ArrayList<>();
+		List<PbAllDto> searchList = new ArrayList<>();
 
 		try {
 
@@ -286,11 +253,12 @@ public class PbUnivDao {
 			// ◆ 실수부분수정 : sql문 이름검색 부분을 =로 했다.. ㅡ> like로 수정
 			// ◆ 실수부분수정 : %||?||%.. ㅡ> '%'||?||'%' 작은 따옴표추가
 
-			String sql = "select * from phoneinfo_basic b join phoneinfo_univ u on b.idx=u.fr_ref   "
-					+ " where fr_name like '%'||?||'%'";
+			String sql = "select * from phoneinfo_basic b, phoneinfo_univ u, phoneinfo_com c  "
+					+ " where b.idx=u.fr_ref and b.idx=c.fr_ref  "
+					+ " and fr_name like '%'||?||'%'";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, searchname);
+			pstmt.setString(1, searchName);
 
 			rs = pstmt.executeQuery();
 
@@ -303,15 +271,17 @@ public class PbUnivDao {
 				String regdate = rs.getString("fr_regdate");
 				String major = rs.getString("fr_u_major");
 				int grade = rs.getInt("fr_u_year");
+				String company = rs.getString("fr_c_company");
 
-				PbUnivDto univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade);
-				univList.add(univ);
+				PbAllDto result = 
+						new PbAllDto(idx, name, phonenumber, address, email, regdate, major, grade, company);
+				searchList.add(result);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-			// ◆ 실수부분수정 : close()구문 catch블럭에서 처리 ㅡ> finally에서 처리
+		// ◆ 실수부분수정 : close()구문 catch블럭에서 처리 ㅡ> finally에서 처리
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -328,12 +298,14 @@ public class PbUnivDao {
 					e1.printStackTrace();
 				}
 			}
-		}
+		} //finally end
 
-		return univList;
-	}
+		return searchList;
+		
+	} //Search() end
+	
 
-	public int univDelete(String name) {
+	public int delete(String name) {
 
 		// jdbc 객체 선언
 		Connection conn = null;
@@ -354,7 +326,7 @@ public class PbUnivDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 
-			// ◆ 실수부분수정 : close()구문 catch블럭에서 처리 ㅡ> finally에서 처리
+		// ◆ 실수부분수정 : close()구문 catch블럭에서 처리 ㅡ> finally에서 처리
 		} finally {
 			if (stmt != null) {
 				try {

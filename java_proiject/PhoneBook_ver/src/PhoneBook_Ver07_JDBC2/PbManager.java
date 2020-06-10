@@ -56,185 +56,230 @@ public class PbManager {
 
 	} // univList() end
 
-	
-	
-	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	public void insert() {
 
-		// 변수선언 및 초기화
-		int select = 0;    			// 사용자 선택 번호
-		PbBasicDto info = null;		// 객체생성 변수
-		String name = null, phoneNumber = null, address = null, email = null;   //사용자 입력변수
+		// 사용자 선택 번호
+		int select = 0; 
 		
-		int idx = 0;  				// idx는 0으로 초기화, 데이터처리시 시퀀스로 입력 
-		LocalDate today = LocalDate.now(); 	 //regdate는 현재시간
+		// 객체생성 변수
+		PbBasicDto info = null; 
+		
+		// 기본친구 입력변수
+		String name = null, phoneNumber = null, address = null, email = null; 
+		
+		// 학교친구 입력변수
+		String major = null; int grade = 0; 
+		
+		// 회사친구 입력변수
+		String company = null;  
+		
+		// idx는 0으로 초기화, 데이터처리시 시퀀스로 입력
+		int idx = 0; 
+		
+		// regdate는 현재시간
+		LocalDate today = LocalDate.now(); 
 		String regdate = today.toString();
-		
-		int resultCnt = 0;			// 데이터처리 후 결과처리 행개수 
-		
-		
-		// 사용자 입력요청 1 : 저장할 친구그룹
-		// 다시 입력받는 경우를 위해, while문.
-		while (true) {
 
-			System.out.println("저장하고자 하는 그룹의 번호를 입력해주세요.");
-			System.out.println("1.Basic ㅣ 2.Univ ㅣ 3.com ");
+		// 데이터처리 후 결과처리 행개수
+		int resultCnt = 0; 
 
-			try {
-				select = PhoneBookMain.kb.nextInt();
+		// 드라이버 연결 객체 
+		Connection conn = null;
 
-				// 정상범위 1~3를 벗어났을 때, 강제적 예외발생!
-				if (!(select >= 1 && select <= 3)) {
-					BadNumberException e = new BadNumberException("잘못된 메뉴번호 입력");
-					throw e;
+		
+		try {
+			
+			// 드라이버 연결
+			conn = ConnectionProvider.getConnection();
+
+			// 자동커밋되지 않도록 처리
+			conn.setAutoCommit(false);
+
+			
+			// 사용자 입력요청 1 : 저장할 친구그룹 선택 ㅡ> 다시 입력받는 경우를 위해 while문.
+			while (true) {
+
+				System.out.println("저장하고자 하는 그룹의 번호를 입력해주세요.");
+				System.out.println("1.Basic ㅣ 2.Univ ㅣ 3.com ");
+
+				
+				try {
+					select = PhoneBookMain.kb.nextInt();
+
+					
+					// 정상범위 1~3를 벗어났을 때, 강제적 예외발생!
+					if (!(select >= 1 && select <= 3)) {
+						BadNumberException e = new BadNumberException("잘못된 메뉴번호 입력");
+						throw e;
+					}
+					
+					
+				} catch (InputMismatchException e) {
+					System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
+					continue;
+				} catch (BadNumberException e) {
+					System.out.println("메뉴범위를 벗어난 숫자입력입니다. \n 확인하시고 다시 입력해주세요");
+					continue;
+				} catch (Exception e) { 
+					System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
+					continue;
+				} finally {
+					PhoneBookMain.kb.nextLine();
 				}
-			} catch (InputMismatchException e) {
-				System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
-				continue;
-			} catch (BadNumberException e) {
-//				System.out.println(e.getMessage());
-				System.out.println("메뉴범위를 벗어난 숫자입력입니다. \n 확인하시고 다시 입력해주세요");
-				continue;
-			} catch (Exception e) { // 생각치 못한 오류발생이 있을 수 있기 때문에.
-				System.out.println("잘못된 메뉴입력입니다. \n 확인하시고 다시 입력해주세요");
-				continue;
-			} finally {
+
+				break;
+
+			} // while end
+
+			
+			
+			// 사용자 입력요청 2 : 기본 정보 수집 (이름, 전번, 주소, 이메일)
+			while (true) {
+
+				System.out.println("이름을 입력해주세요.");
+				name = PhoneBookMain.kb.nextLine();
+
+				System.out.println("전화번호를 입력해주세요.");
+				phoneNumber = PhoneBookMain.kb.nextLine();
+
+				System.out.println("주소를 입력해주세요.");
+				address = PhoneBookMain.kb.nextLine();
+
+				System.out.println("이메일을 입력해주세요.");
+				email = PhoneBookMain.kb.nextLine();
+
+				
+				try {
+
+					// 예외가 생긴다면, 강제 예외발생!
+					// trim은 앞뒤 공백 잘라주는 기능. 그리고나서 isEmpty 공백문자확인기능.
+					if (name.trim().isEmpty() || phoneNumber.trim().isEmpty() || address.trim().isEmpty()
+							|| email.trim().isEmpty()) {
+
+						StringEmptyException e = new StringEmptyException();
+						throw e;
+					}
+				} catch (StringEmptyException e) {
+					System.out.println("기본정보는 공백없이 모두 입력해주셔야합니다.");
+					System.out.println("다시 입력해주세요\n.");
+					continue;
+				}
+
+				break;
+
+			} // while end
+
+			
+			
+			// 사용자 입력정보 ㅡ>> 친구그룹 객체생성
+			switch (select) {
+
+			case MainMenu2.BASIC:
+
+				// 2.2.2 기본 클래스로 인스턴스 생성
+				info = new PbBasicDto(idx, name, phoneNumber, email, address, regdate);
+
+				// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
+				// dao에서 데이터 입력처리 후, 처리한 행개수 반환
+				resultCnt = dao.basicInsert(info, conn);
+				break;
+
+			case MainMenu2.UNIV:
+				System.out.println("전공(학과)를 입력해주세요.");
+				major = PhoneBookMain.kb.nextLine();
+				System.out.println("학년 정보를 입력해주세요.");
+				grade = PhoneBookMain.kb.nextInt();
 				PhoneBookMain.kb.nextLine();
-				// 버퍼발생을 없애주기 위해, finally에 넣어 예외가 발생하든 안하든 실행됨.
+
+				// 2.2.3 대학 클래스로 인스턴스 생성
+				info = new PbUnivDto(idx, name, phoneNumber, email, address, regdate, major, grade);
+
+				// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
+				// dao에서 데이터 입력처리 후, 처리한 행개수 반환
+				resultCnt += dao.univInsert((PbUnivDto) info, conn);
+				break;
+
+			case MainMenu2.COMPANY:
+				System.out.println("회사의 이름을 입력해주세요.");
+				company = PhoneBookMain.kb.nextLine();
+
+				// 2.2.4 회사 클래스로 인스턴스 생성
+				info = new PbComDto(idx, name, phoneNumber, email, address, regdate, company);
+
+				// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
+				// dao에서 데이터 입력처리 후, 처리한 행개수 반환
+				resultCnt += dao.comInsert((PbComDto) info, conn);
+				break;
+
+			} // switch end
+
+			// 입력결과출력
+			if (resultCnt > 0) {
+				System.out.println("정상적으로 입력되었습니다.");
+				System.out.println(resultCnt + "개 행 입력되었습니다.");
+			} else {
+				System.out.println("정상적으로 입력되지 않았습니다. 확인 후 다시 입력해주세요.");
 			}
 
-			break;
-
-		} // while end
-
-		
-		
-		// 사용자 입력요청 2 : 기본 정보 수집 (이름, 전번, 주소, 이메일)
-		while (true) {
-
-			System.out.println("이름을 입력해주세요.");
-			name = PhoneBookMain.kb.nextLine();
-
-			System.out.println("전화번호를 입력해주세요.");
-			phoneNumber = PhoneBookMain.kb.nextLine();
-
-			System.out.println("주소를 입력해주세요.");
-			address = PhoneBookMain.kb.nextLine();
-
-			System.out.println("이메일을 입력해주세요.");
-			email = PhoneBookMain.kb.nextLine();
+		} catch (SQLException e1) {
+			if(conn != null) {
 			
-			
-
-			try {
-
-				// 예외가 생긴다면, 강제 예외발생!
-				// trim은 앞뒤 공백 잘라주는 기능. 그리고나서 isEmpty 공백문자확인기능.
-				if (name.trim().isEmpty() || phoneNumber.trim().isEmpty() || address.trim().isEmpty()
-						|| email.trim().isEmpty()) {
-
-					StringEmptyException e = new StringEmptyException();
-					throw e;
+				try {
+					conn.rollback();
+					
+				} catch (SQLException e) {
+					System.out.println("rollback 에러!");
+					e.printStackTrace();
 				}
-			} catch (StringEmptyException e) {
-				System.out.println("기본정보는 공백없이 모두 입력해주셔야합니다.");
-				System.out.println("다시 입력해주세요\n.");
-				continue;
 			}
-
-			break;
-
-		} // while end
-
-		
-		// 사용자 입력정보 ㅡ>> 친구그룹 객체생성
-		switch (select) {
-
-		case MainMenu2.BASIC:
-
-			// 2.2.2 기본 클래스로 인스턴스 생성
-			info = new PbBasicDto(idx, name, phoneNumber, email, address, regdate);
-			break;
-
 			
-		case MainMenu2.UNIV:
-			System.out.println("전공(학과)를 입력해주세요.");
-			String major = PhoneBookMain.kb.nextLine();
-			System.out.println("학년 정보를 입력해주세요.");
-			int grade = PhoneBookMain.kb.nextInt();
-			PhoneBookMain.kb.nextLine();
-
-			// 2.2.3 대학 클래스로 인스턴스 생성
-			info = new PbUnivDto(idx, name, phoneNumber, email, address, regdate, major, grade);
-			break;
-
+		} if (conn != null) {
 			
-		case MainMenu2.COMPANY:
-			System.out.println("회사의 이름을 입력해주세요.");
-			String company = PhoneBookMain.kb.nextLine();
-
-			// 2.2.4 회사 클래스로 인스턴스 생성
-			info = new PbComDto(idx, name, phoneNumber, email, address, regdate, company);
-			break;
-
-		} // switch end
-
-		
-		
-		// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
-		// dao에서 데이터 입력처리 후, 처리한 행개수 반환
-		resultCnt = dao.basicInsert(info);
-		resultCnt += dao.univInsert((PbUnivDto) info);
-		resultCnt += dao.comInsert((PbComDto) info);
-
-
-		// 입력결과출력
-		if (resultCnt > 0) {
-			System.out.println("정상적으로 입력되었습니다.");
-			System.out.println(resultCnt + "개 행 입력되었습니다.");
-		} else {
-			System.out.println("정상적으로 입력되지 않았습니다. 확인 후 다시 입력해주세요.");
+			try {
+				conn.close();
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 
 	} // insert() end
 
-
-
 	
+	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	public void search() {
 
-	public void univSearch() {
-		
 		// PbUniv타입 리스트 생성
-		List<PbUnivDto> univList = new ArrayList<>();
-		
-		System.out.println("찾으시는 대학친구 이름을 입력해주세요.");
+		List<PbAllDto> result = new ArrayList<>();
+
+		System.out.println("찾으시는 친구 이름을 입력해주세요.");
 		String searchName = PhoneBookMain.kb.nextLine();
-		
-		
-		univList = dao.univSearch(searchName);
-		
-		
-		if(univList != null) {
-			for(int i=0; i<univList.size(); i++) {
-				System.out.printf("%5s", univList.get(i).getIdx()+"\t");
-				System.out.printf("%5s", univList.get(i).getName()+"\t");
-				System.out.printf("%12s", univList.get(i).getPhoneNumber()+"\t");
-				System.out.printf("%12s", univList.get(i).getAddress()+"\t");
-				System.out.printf("%12s", univList.get(i).getEmail()+"\t");
-				System.out.printf("%12s", univList.get(i).getRegdate()+"\t");
-				System.out.printf("%12s", univList.get(i).getMajor()+"\t");
-				System.out.printf("%12s", univList.get(i).getGrade()+"\n");
+
+		result = dao.search(searchName);
+
+		if (result != null) {
+			for (int i = 0; i < result.size(); i++) {
+				System.out.printf("%5s", result.get(i).getIdx() + "\t");
+				System.out.printf("%5s", result.get(i).getName() + "\t");
+				System.out.printf("%12s", result.get(i).getPhoneNumber() + "\t");
+				System.out.printf("%12s", result.get(i).getAddress() + "\t");
+				System.out.printf("%12s", result.get(i).getEmail() + "\t");
+				System.out.printf("%12s", result.get(i).getRegdate() + "\t");
+				System.out.printf("%12s", result.get(i).getMajor() + "\t");
+				System.out.printf("%12s", result.get(i).getGrade() + "\t");
+				System.out.printf("%12s", result.get(i).getCompany() + "\n");
 			}
-			
-			
+
 		} else {
 			System.out.println("찾으시는 검색결과가 없습니다. 확인 후 다시 검색해주세요. ");
 		}
 	}
 
-	public void univDelete() {
+	public void Delete() {
 
-		System.out.println("삭제할 대학친구의 이름을 입력해주세요.");
+		System.out.println("삭제할 친구의 이름을 입력해주세요.");
 		String searchName = PhoneBookMain.kb.nextLine();
 
 		// 삭제할 이름 입력변수 ㅡ> dao에 매개변수로 전달
@@ -250,6 +295,8 @@ public class PbManager {
 		}
 	}
 
+	
+	//■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	public void univEdit() {
 
 		// 데이터베이스 드라이버 연결

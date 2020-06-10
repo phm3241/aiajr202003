@@ -73,7 +73,7 @@ public class PhoneBookMain {
 				manager.insert();
 				break;
 			case MainMenu.SEARCH_INFO:
-//				manager.showInfo();
+				manager.search();
 				break;
 			case MainMenu.DELETE_INFO:
 //				manager.deleteInfo();
@@ -102,34 +102,7 @@ public class PhoneBookMain {
 		
 		
 	}// main end
-	
-	
-//	// 친구 타입 선택하는 메서드 
-//	public static PbBasicDto frType() {
-//		
-//		System.out.println("친구의 타입을 선택해주세요.");
-//		System.out.println(" 1.Basic ㅣ 2. Univ ㅣ 3. company ");
-//		int select=kb.nextInt();
-//		kb.nextLine();
-//		
-//		if(select==1) {
-//			PbBasicDto basic=new PbBasicDto();
-//			return basic;
-//			
-//		} else if(select==2) {
-//			PbBasicDto univ=new PbUnivDto();
-//			return univ;
-//			
-//		} else if (select==3) {
-//			PbBasicDto com=new PbComDto();
-//			return com;
-//		} else {
-//			System.out.println("메뉴의 숫자가 아닙니다. 확인 후 번호를 다시 선택해주세요.");
-//		}
-//		return null ;
-//
-//
-//	}
+
 
 } //class end
 
