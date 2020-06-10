@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;                
+            }    
+            
+            div.border {
+                border: 1px solid #AAAAAA;
+            }
+            
+            #header {
+                
+                /*표현 영역의 사이즈설정*/
+                width: 798px;
+                height: 100px;
+                
+                /*배경색*/
+                background-color: #FF0000;
+                
+                /*영역의 수평방향의 중앙 위치*/
+                margin: 0 auto;
+                
+                /*텍스트의 정렬: 수평/수직 중앙*/
+                text-align: center;
+                line-height: 100px; 
+                
+                /*텍스트 설정*/
+                font-size: 2em;   /*기본폰트크기 16px기준*/
+                color: aliceblue;
+                font-weight: bold;
+                
+            }
+            
+            
+            #nav {
+                
+                /*표현 영역의 사이즈설정*/
+                width: 798px;
+                height: 30px;
+                
+                /*배경색*/
+                background-color: green;
+                
+                /*영역의 수평방향의 중앙 위치*/
+                margin: 0 auto;
+                
+                /*텍스트의 정렬: 수평/수직 중앙*/
+                text-align: center;
+                line-height: 30px; 
+                
+                /*텍스트 설정*/
+                font-size: 32px;   /*기본폰트크기 16px기준*/
+                color: aliceblue;
+                font-weight: bold;
+                
+            }
+                        
+            
+            
+            #aside {
+                
+                /*표현 영역의 사이즈설정*/
+                width: 198px;
+                height: 300px;
+                
+                /*배경색*/
+                background-color: violet;
+                
+                /*영역의 수평방향의 중앙 위치*/
+                /*margin: 0 auto;*/
+                
+                /*텍스트의 정렬: 수평/수직 중앙*/
+                text-align: center;
+                line-height: 300px; 
+                
+                /*텍스트 설정*/
+                font-size: 2em;   /*기본폰트크기 16px기준*/
+                color: aliceblue;
+                font-weight: bold;
+                
+                /*수평방향 정렬*/
+                float: left;
+                
+            }
+            
+            
+            #content {
+                
+                /*표현 영역의 사이즈설정*/
+                width: 598px;
+                height: 300px;
+                
+                /*배경색*/
+                background-color: blue;
+                
+                /*영역의 수평방향의 중앙 위치*/
+                /*margin: 0 auto;*/
+                
+                /*텍스트의 정렬: 수평/수직 중앙*/
+                text-align: center;
+                line-height: 300px; 
+                
+                /*텍스트 설정*/
+                font-size: 2em;   /*기본폰트크기 16px기준*/
+                color: aliceblue;
+                font-weight: bold;
+                
+                /*수평방향 정렬*/
+                float: right;
+                
+            }
+            
+            
+            /*aside와 content를 묶어서 처리해주기 위해 
+              div로 묶어서 스타일적용 */
+            #wrap {
+                /*표현영역의 사이즈*/
+                width: 800px;
+                
+                
+                /*영역의 수평방향의 중앙 위치*/
+                margin: 0 auto;
+                
+                
+                /*footer가 aside와 content 뒤로가서 안보일때
+                 (float속성을 받고있어서..)
+                 해결방법 2가지 
+                 ㅡ> 첫번째 방법: float속성의 범위를 현재 영역으로 한정*/
+                /*overflow: hidden;*/
+                
+                
+                
+            }
+            
+            
+            
+            #footer {
+                
+                 /*표현 영역의 사이즈설정*/
+                width: 798px;
+                height: 100px;
+                
+                /*배경색*/
+                background-color: #FF0000;
+                
+                /*영역의 수평방향의 중앙 위치*/
+                margin: 0 auto;
+                
+                /*텍스트의 정렬: 수평/수직 중앙*/
+                text-align: center;
+                line-height: 100px; 
+                
+                /*텍스트 설정*/
+                font-size: 2em;   /*기본폰트크기 16px기준*/
+                color: aliceblue;
+                font-weight: bold;
+                
+                /*footer가 aside와 content 뒤로가서 안보일때
+                 (float속성을 받고있어서..)
+                 해결방법 2가지  
+                 ㅡ> 2번째 방법: float 속성 해제*/
+                clear: both;
+                
+                
+            }
+            
+        
+        </style>
+        
+    </head>
+
+    <body>
+    
+        
+        <div id="header" class="border"> h e a d e r </div>
+        <div id="nav" class="border"> navigation </div>
+        
+        <div id="wrap">
+            <div id="aside" class="border"> aside </div>
+            <div id="content" class="border"> content </div>
+        </div>
+        
+        <div id="footer" class="border"> footer </div>
+        
+        
+        
+        
+        
+    
+    </body>
+    
+    
+</html>
