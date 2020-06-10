@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>절대위치</title>
+        <meta charset="utf-8">
+        <style>
+            
+            /*초기화의 의미로..*/
+            *{ 
+                margin: 0;
+                padding: 0; 
+            }
+            
+            #wrap {
+                width: 400px;
+                height: 200px;
+                border: 5px solid #DDD;
+                
+                margin: 50px auto;  /*상하를 주고 auto를 하면 중앙정렬이 된다.*/
+            }
+            
+            .circle {
+                width: 50px;
+                height: 50px;
+                border: 1px solid;
+                
+                border-radius: 50%;  /*사이즈에 상관없이 50%하면 원이만들어진다.*/
+                
+                text-align: center;
+                line-height: 50px;
+                
+                /**/
+                /*position: absolute;*/
+                position: relative;
+            
+            }
+        
+            .c1 {
+                background-color: red;
+                left: 5px;
+                top: 5px;
+            }            
+            
+            .c2 {
+                background-color: pink;
+                right: 5px;
+                top: 5px;
+            }            
+            
+            .c3 {
+                background-color: blueviolet;
+                right: 5px;
+                bottom: 5px;
+            }            
+            
+            .c4 {
+                background-color: darkred;
+                left: 5px;
+                bottom: 5px;
+            }            
+            
+
+            
+        
+        </style>
+        
+    </head>
+
+    <body>
+        <hr>
+        <br><h1>절대위치</h1><br>
+        <hr><br><br>
+        
+        <div id="wrap">
+            <div class="circle c1">1</div>
+            <div class="circle c2">2</div>
+            <div class="circle c3">3</div>
+            <div class="circle c4">4</div>
+        </div>
+        
+    </body>
+
+</html>
