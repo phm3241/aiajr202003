@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>사용자가 만든 버튼</title>
+        <meta charset="utf-8">
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            
+            
+            #btn {
+                
+                /* 기존의 inline속성 ㅡ> block속성으로 변경하여 width, height 설정!
+                    block 속성으로 바꿔주었기 때문에 width, height 설정이 가능하다.
+                    inline 속성은 width, height 변경이 불가.
+                    line-height가 있어서 세로폭도 버튼크기만큼 잡힌다. */
+                
+                display:  block;
+                
+                
+                /* 배경색 */
+                background-color: darkorange;
+                
+                /* 표현영역의 사이즈 */
+                width: 200px;
+                height: 100px;
+                
+                /* 요소간의 간격 설정 */
+                margin: 30px;
+                
+                /* border 설정 */
+                border: 10px solid;
+                border-color: bisque;
+                border-radius: 40px;    /* 모서리 둥글리기 */
+                
+                /* 텍스트의 정렬 */
+                text-align: center;     /* 수평방향의 정렬 */
+                line-height: 100px;     /* 수직방향의 정렬 */
+                
+                /* 텍스트 설정*/
+                font-size: 2em;
+                font-style: italic;
+                font-weight: bold;
+                
+            }
+            
+            
+            /* 자식태그 선택 없이 그냥 btn:link 선택 */           
+            #btn:link {
+                color: beige;
+            }
+            
+            /* 방문한 링크 */
+            #btn:visited {
+                color: darkred;
+            }
+            
+            /* 마우스가 올라갔을때 */
+            #btn:hover {   
+                color: yellow;
+                background-color: darkred;
+            }
+            
+            
+        
+        </style>
+        
+    </head>
+
+    
+    <body>
+        <hr>
+        <br><h1>button_div 태그없이</h1><br>
+        <hr><br><br>
+
+        
+        <a href="#" id="btn">Click</a></div>
+        
+        
+    </body>
+
+</html>
