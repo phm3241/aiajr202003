@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> 절대좌표 위치지정 </title>
+        <meta charset="utf-8">
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .box {
+                width: 100px;
+                height: 100px;
+                
+                border: 1px solid black;
+                
+                font-size: 1.5em;
+                text-align: center;
+                
+                line-height: 100px;
+                
+                /* 위치 속성*/
+                position: absolute;   
+                /*absolute : 절대좌표형식, 설정한 위치로 고정됨.
+                    스크롤 등으로도 위치가 별하지 않는다.*/
+                
+            }
+
+            
+            /* position절대좌표를 잡고, 상하좌우 기준으로 원하는 상세위치에 고정가능.*/
+            
+            
+            .red {
+                background-color: red;
+                left: 50px;
+                top: 50px;
+                
+                /* z-index : 화면에 노출되는 순서,  값이 높을수록 맨 위에 노출 */
+                z-index: 100;
+            }
+            
+            .green {
+                background-color: green;
+                left: 100px;
+                /*right: 100px;*/
+                top: 100px;
+                z-index: 50;
+                
+            }
+            
+            .blue {
+                background-color: blue;
+                left: 150px;
+                top: 150px;
+                /*right: 10px;
+                bottom: 10px;*/
+                z-index: 10;
+            }
+            
+            
+            
+            #wrap {
+                width: 50%;
+                height: 200px;  /*height는 %이 안된다. 스크롤이 되기 떄문에*/
+                border: 3px solid;
+                
+                position: relative;
+                overflow: auto;
+                /*overflow: hidden;*/
+            }
+        
+        </style>
+        
+    </head>
+
+    <body>
+        <hr>
+        <br><h1>위치속성</h1><br>
+        - absolute : 절대좌표형식, 설정한 위치로 고정됨. <br>
+                     스크롤 등으로도 위치가 변하지 않는다. <br>
+        - z-index : 화면에 노출되는 순서,  값이 높을수록 맨 위에 노출 <br><br>
+        <hr><br><br>
+
+        
+        
+        <h2>Title : 블록 안에 절대좌표로 블록을 위치합니다.</h2>
+        
+        <div id="wrap">
+        <div class="box red"> red </div>
+        <div class="box green"> green </div>
+        <div class="box blue"> blue </div>
+        </div>
+
+
+        <h2>페이지의 하단입니다. </h2>
+        
+    
+    </body>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+</html>
