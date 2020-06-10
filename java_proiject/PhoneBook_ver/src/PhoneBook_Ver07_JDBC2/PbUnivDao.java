@@ -104,7 +104,7 @@ public class PbUnivDao {
 
 			// sql
 			String sql = "insert into phoneinfo_basic (idx, fr_name, fr_phonenumber, fr_email, fr_address, fr_regdate)   "
-					+ " values(select pb_basic_idx_seq.nextval from phoneinfo_basic; , ?, ?, ?, ?, ?)";
+					+ " values(pb_basic_idx_seq.nextval, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, info.getName());
@@ -159,8 +159,7 @@ public class PbUnivDao {
 
 			// sql
 			String sql1 = "insert into phoneInfo_univ (idx, fr_u_major, fr_u_year, fr_ref)   "
-					+ " values(select pb_univ_idx_seq.nextval from phoneInfo_univ;, ?, ?,   "
-					+ " select pb_basic_idx_seq.currval from phoneinfo_basic;)";
+					+ " values(pb_univ_idx_seq.nextval, ?, ?, pb_basic_idx_seq.currval)";
 			
 			pstmt = conn.prepareStatement(sql1);
 	
@@ -214,8 +213,7 @@ public class PbUnivDao {
 
 			// sql
 			String sql1 = "insert into phoneInfo_com (idx, fr_c_company, fr_ref)   "
-					+ " values(select pb_com_idx_seq.nextval from phoneInfo_com;, ?,   "
-					+ " select pb_basic_idx_seq.currval from phoneinfo_basic;)";
+					+ " values(pb_com_idx_seq.nextval, ?, pb_basic_idx_seq.currval)";
 			pstmt = conn.prepareStatement(sql1);
 	
 			pstmt.setString(1, info.getCompany());
