@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: 'Nanum Gothic',
+
+}
+
+
+
+#mainWrap {
+
+    width: 860px;
+    height: 1400px;
+
+    background-color: lightgray;
+
+    margin: 0 auto;
+}
+
+
+
+#mainPage {
+    position: relative;
+
+    width: 800px;
+    height: 1360px;
+
+    /*border: 1px solid #666666;*/
+    border-radius: 10px;
+
+    background-color: white;
+
+    margin: 0 auto;
+    padding: 0 20px;
+
+    top: 10px;
+}
+
+#header {
+
+    /*표현 영역의 사이즈설정*/
+    width: 720px;
+    height: 70px;
+
+    /*배경색(영역확인용)*/
+    /*background-color: beige;*/
+
+    /*영역의 수평방향의 중앙 위치*/
+    margin: 0 auto;
+
+    /*텍스트의 정렬: 수평/수직 중앙*/
+    text-align: left;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 80px;
+
+}
+
+
+#header > h1 {
+    font-size: 30px;
+    color: black;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+#header > h4 {
+    font-size: 16px;
+    color: black;
+    font-weight: lighter;
+}
+
+
+.line {
+    border: 1px solid gray;
+}
+
+
+/*------------------------------------------------*/
+#nav {
+
+    /*표현 영역의 사이즈설정*/
+    width: 800px;
+    height: 40px;
+
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+
+    /*배경색(영역확인용)*/
+    /*background-color: burlywood;*/
+    
+    /*묶어둔 두 요소(링크, 검색) 외에는 숨기기*/
+    /*다른 요소가 안보일 수 있으므로, 설정이 중요하다*/
+    overflow: hidden;
+}
+
+.menu > li {
+
+    /*표현 영역의 사이즈설정*/
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+
+    /*배경색(영역확인용)*/
+    /*background-color: azure;*/
+
+    /*리스트 앞에 도트 있던 것들의 스타일*/
+    list-style: none;
+
+    /*왼쪽으로 정렬 및 간격조정*/
+    float: left;
+    padding: 0 20px;
+
+    
+}
+
+/* 링크 표시 */
+.menu > li > a:link {
+    color: black;
+}
+
+/* 방문한 링크 */
+.menu > li > a:visited {
+    color: red;
+}
+
+/* 마우스가 올라갔을때 */
+.menu > li > a:hover {
+    color: red;
+    background-color: yellow;
+}
+
+
+
+
+/*------------------------------------------------*/
+/* 검색란 */
+.search {
+    height: 40px;
+    float: right;
+    overflow: hidden;
+    line-height: 35px;
+    /*vertical-align: bottom;*/
+}
+
+
+#nav > div.search > input[type=text] {
+
+    width: 200px;
+    height: 23px;
+
+    border: 1px solid #aaa;
+    border-radius: 10px 0 0 10px;
+    /*vertical-align: middle;*/
+
+}
+
+#nav > div.search > input[type=submit] {
+
+    width: 50px;
+    height: 25px;
+
+    border: 1px solid #aaa;
+    border-radius: 0 10px 10px 0;
+
+
+    margin-left: -6px;
+    /*vertical-align: middle;*/
+
+
+}
+
+
+
+/*------------------------------------------------*/
+/* content + aside */
+#wrap {
+    width: 800px;
+    
+    /*묶어둔 두 요소(링크, 검색) 외에는 숨기기*/
+    /*다른 요소가 안보일 수 있으므로, 설정이 중요하다*/
+    overflow: hidden;
+}
+
+
+/*------------------------------------------------*/
+#content {
+    width: 600px;
+    height: 1080px;
+    float: left;
+    /*background-color: floralwhite;*/
+    padding-top: 20px;
+}
+
+#content > h2 {
+    padding: 10px 0;
+}
+
+#content > h4 {
+    font-weight: 100;
+}
+
+.img {
+    width: 430px;
+    height: 280px;
+    padding: 20px 0;
+}
+
+#content > p {
+    font-size: 14px;
+    line-height: 180%;
+
+}
+
+#content > hr {
+    border: : 0;
+    border-color: gainsboro;
+    border-top: thin;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+/*------------------------------------------------*/
+#aside {
+    width: 170px;
+    height: 1100px;
+    float: right;
+    /*background-color: antiquewhite;*/
+
+    padding-left: 30px;
+
+}
+
+
+.list {
+    padding: 0 15px;
+    color: dimgray;
+    list-style: none;
+}
+
+.cTitle {
+    font-size: 20px;
+    font-weight: bold;
+    list-style: none;
+    padding-top: 30px;
+    padding-bottom: 10px;
+
+}
+
+
+/*------------------------------------------------*/
+#footer {
+    width: 800px;
+    height: 30px;
+
+    text-align: center;
+    line-height: 180%;
+
+    border: 0;
+    border-top: 1px solid #aaa;
+    padding-top: 10px;
+}
+
+#footer > h4.createdBy {
+    color: blue;
+}
