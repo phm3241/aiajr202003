@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Javascript 기본문법 </title>
+
+    <script>
+        // 데이터의 출력
+        // alert() 함수 : 문자열, 숫자, 함수, 객체, 배열
+        // console.log() : 문자열, 숫자, 함수, 객체, 배열 
+        
+        // 데이터 : 문자
+        // 문자표현 ㅡ> '' 또는 " "
+        // alert('"String"');
+
+        // 데이터 : 숫자
+        // 정수와 실수를 구분하지 않는다.
+        // alert(10);
+        // alert(3.14);
+
+        // 연산자 : 산술연산자 ( +, -, *, /, % )
+        // 우선 순위는 () 최우선, 기본 순서와 동일
+        // alert((1+10)*2);
+
+        // 데이터 : bool (true/false)
+        // if(bool)
+        // 0 ㅡ> false, 1ㅡ> true
+        // alert(true);
+
+        // 연산자 : 비교연산자 (> < <= >= == != )
+        // 비교연산의 결과 : bool
+        // alert(10>1);
+
+        // 연산자 : 논리연산자 (&& || !)
+        // var num = 10;
+        // alert(num>5 && num<=10);
+
+
+
+        //-------------------------------------------------------------------------------------------------------
+        // 변수 : 데이터를 저장하는 목적
+        // 변수 선언방법 : var 변수명;  
+        // 변수 초기화방법 : var 변수명=데이터;
+        // 변수 재선언해도 오류나지 않음. 
+
+        // var name='king';
+
+        // var name=100;
+
+        {
+            // var check=true;
+        }
+        // check=false;
+        
+        // alert(num);
+        // alert(name);
+
+
+        //-------------------------------------------------------------------------------------------------------
+        // let : 지역변수로 사용
+        // 똑같은 변수명이더라도 블럭 안에서 지역변수로 사용가능
+        {
+            // let check=10;
+            // alert(check);
+        }
+
+        // alert(check);
+
+        // let age=20;
+        // let age=30;
+
+
+        // const : 상수
+        //  const pi=3.14;
+        //  pi=10;
+
+
+
+        //-------------------------------------------------------------------------------------------------------
+         // 변수 초기화 : 변수에 데이터 대입
+         // 문자열, 숫자, bool, function 함수, Object 객체, Array 배열
+         // 함수 : function 함수이름(매개변수) { 실행코드 } <ㅡ 이름이 있는 함수의 경우이다. 
+         // 익명함수 : function(매개변수) { 실행코드 } <ㅡ 변수에 넣을 때는 이름이 없는 익명함수를 넣는다.
+         // 객체 : {}  <ㅡ 요소가 없는 객체의 생성
+         // 배열 : []  <ㅡ 요소가 없는 배열의 생성
+         
+        //  num + 1; // 변수선언이 안된경우
+
+
+
+        // 변수 선언만 했을 경우. 
+        // var number;     // type : undefined
+        // alert(number); // 값이 들어가있지 않아서  undefined라고 출력됨. 
+
+        // alert(number + 1); // 값이 들어가있지 않았기 떄문에, 연산이 안되서 NaN이라고 출력됨. Not a Number의 약자. 
+
+
+        // var stringVar = '문자열';        // type : string
+        // var numberVar = 273;            // type : // number
+        // var booleanVar = false;         // type :  boolean
+        // var functionVar = function(){alert('function')};  // type : function,   alert(functionVar); ㅡ> function(){alert('function')}
+        // var ObjectVar = {};             // type :/ object,   alert(ObjectVar); ㅡ>  [object Object]      
+        // var arrayVar = [1,2,3];         // type : object
+        
+        // 변수 타입확인 
+        // alert(typeof(arrayVar)); 
+        
+        // if(typeof(booleanVar)=='undefined'){
+        // }
+
+        // alert(stringVar);
+        // alert(numberVar);
+        // alert(booleanVar);
+        // alert(functionVar);
+        // alert(ObjectVar);
+        // alert(arrayVar);
+
+        // 함수호출 ㅡ> {alert('function')} 실행됨 
+        // functionVar(); 
+
+        
+        //-------------------------------------------------------------------------------------------------------
+        // 복합대입 연산자 : +=, -=, *=, /=
+        // +=
+        
+        var html_str ='';
+        html_str += '<div>\n';
+        html_str += '<h1>인사</h1>\n';
+        html_str += '<p>안녕하세요</p>\n';
+        html_str += '<div>\n';
+
+        // alert(html_str);
+
+        // document.write(html_str);
+        
+
+        //-------------------------------------------------------------------------------------------------------
+        // var html_val = document.body.innerHTML;
+        // alert(html_val);
+        // ㅡㅡ>> 이 위치에서 실행하게되면, 오류가 난다.
+        // 위에서 아래로 실행되기 때문에 아직 innerHTML에는 들어있는 html태그가 없다.
+        // 따라서 </html> 뒤에 <script>로 위치시키거나, window.onload = function(){ } 로 작성
+        
+
+        // window.onload = function(){ } 
+        // 실행시점 : 브라우저가 태그들을 다 읽고 화면에 로드하는 시점에
+        // 실행내용 : onload의 속성에 있는 이벤트처리함수(function())가 블록의 코드를 실행해준다. 
+
+        // window.onload = function(){
+
+        //     // prompt() : 사용자의 문자열 입력받는 함수
+        //     var message = prompt('이름을 입력하세요');
+
+        //     // confirm() : 사용자의 의사를 물어보는 함수(yes / no)
+        //     var check = confirm('입력된 이름을 사용하시겠습니까?');
+
+
+        //     var list ='';
+        //     list += '<ul>\n';  
+            
+        //         if(check){
+        //             list += '   <li>'+message+'</li>';
+        //         } 
+            
+        //     list += '   <li>javascript!</li>';
+        //     list += '   <li>jQuery</li>';
+        //     list += '<ul>';
+            
+        //     document.body.innerHTML=list;
+        //     // innerHTML에 원래 가지고 있던 html태그인 <h1>자바~ </p>는 사라지고
+        //     // li의 내용이 담긴다. 
+
+        // }
+
+
+
+        //-------------------------------------------------------------------------------------------------------
+        // 형변환 : 숫자와 문자열의 자료형 변환
+
+        // alert(1+2);  // 3 결과출력
+
+        // 덧셈(+) 연산의 경우 문자열 우선
+        // alert('1'+ 2);  // '1' +'2' = '12' 결과출력 (숫자2가 문자'2'로 변환되어 연산)
+        
+        // 덧셈(+) 연산이 아닌 다른 연산의 경우 숫자 연산 우선
+        // alert(10 *'2');   // 20 결과출력
+
+        // alert(7 * 'n');  // NaN : Not a Number 결과출력 (숫자가 아니기 때문에)
+
+        
+        //-------------------------------------------------------------------------------------------------------
+        // 형변환 함수 : 숫자로 변환 ㅡ> Number()
+
+        // var n = prompt('숫자를 입력해주세요.');
+        // alert(typeof(n));  // String 결과출력
+        
+        // var userNumber = Number(n);     
+        // alert(typeof(userNumber));  // number 결과출력
+
+        // if의 조건문에 변수만 넣어서도 논리값을 쓸 수 있다. 
+        // 아래 불리언 자동형변환 내용 참고
+        // if(userNumber){
+            // alert(userNumber + 1 );  
+            // 위에서 숫자를 입력하지 않았을 때는 NaN 결과출력
+        // }
+
+        // 자동형변환 : 자동으로 불리언 자료형으로 변환.
+        // 조건문 사용/ 논리 부정 연산자 사용. 
+        // 아래의 경우 모두 false가 출력된다. 
+        // alert(!!0);     // false 결과출력,   alert(!0);ㅡ> true 결과출력
+        // alert(!!NaN);
+        // alert(!!'');
+        // alert(!!null);
+        // alert(!!undefined);
+        
+        
+        // 형변환 함수 : Boolean 
+        // 아래 경우는 모두 false 결과출력 ㅡ> 이 5가지경우 외에는 모두 true
+        // alert(Boolean(0));
+        // alert(Boolean(NaN));
+        // alert(Boolean(''));
+        // alert(Boolean(null));
+        // alert(Boolean(undefined));
+
+
+        // 자동형변환 케이스 : 모두 true 결과출력
+        // alert('' == false);
+        // alert('' == 0);
+        // alert(0 == false);
+        // alert('2' == 2);  
+
+
+        // 데이터타입 일치여부 확인 ===, !== : 모두 false 결과출력
+        // alert('' === false); 
+        // alert('' === 0);
+        // alert(0 === false);
+        // alert('2' === 2); 
+
+
+
+        //-------------------------------------------------------------------------------------------------------
+        // 날짜 시간을 정의하는 객체
+
+        // var now = new Date();
+
+        // alert(now.getTime()); // 1591861777198 결과출력 (1997년1월1일부터 현재까지의 시간)
+        // alert(now.getHours()); // 16 결과출력 (현재시간)
+
+
+
+        //-------------------------------------------------------------------------------------------------------
+        // 짧은 조건문 : 좌변이 거짓일 때만 우변이 실행
+        // 첫 번째 문장 : 좌변이 참이므로 우변 무시 • 두 번째 문장 : 좌변이 거짓이므로 우변이 참인지 거짓인지 검사
+        // 두 번째 문장 : 좌변이 거짓이므로 우변이 참인지 거짓인지 검사
+ 
+        // true || alert('논리값이 참입니다.');     // 좌변이 true이므로, 우변이 실행되지 않는다. 
+        // false || alert('논리값이 거짓입니다.');  // 좌변이 false이므로, 우변이 실행된다. * false의 경우는,, 데이터가 null, NaN, ''일때이다.
+        
+
+        // ex. 입력값이 없을때, 우변이 실행된다. 
+        // var msg = prompt('입력');
+        // msg || alert('입력값이 없습니다.');
+        
+
+
+        //-------------------------------------------------------------------------------------------------------
+        // 반복문 : for(초기식; 조건식; 증감식){ }
+        // 배열의 요소를 일괄 참조할 때 사용
+        // 배열 : 여러개의 변수를 묶음으로 처리
+        // 배열의 요소는 "어떤 타입이어도 가능"하다. 
+
+        // 배열의 생성 : []요소의 표현, 정의
+        // var arr = [10, 20, 50, 99, 100];
+        
+        // for(var i=0; i<arr.length; i++){
+        //     alert(arr[i]);
+        // }
+
+        var arr = [10,'string', true, function(){}, {}, [1,2] ];
+        // alert(arr);     // 10,string,true,function(){},[object Object],1,2 결과출력
+        
+        
+        for(var i in arr){
+            alert(arr[i]);
+        }
+
+
+        var rnum = Math.random()*100 +1;
+        // parseInt : 정수로 변환
+        alert(parseInt(rnum));
+
+
+
+
+        
+
+
+    </script>
+
+</head>
+<body>
+
+    <h1>자바스크립트 예제를 하고 있습니다.</h1>
+    <p>재미있는 자바스크립트</p>
+    
+    <!-- html은 화면에 보여지는 태그의 시작과 끝, <script>를 아래에서 핻 된다. -->
+</body>
+
+</html>  
+
+<script>
+    // body 안에 있는 html들이 innerHTML이라는 변수에 들어가 있다. 
+    // var html_val = document.body.innerHTML;
+    // // alert(html_val);
+
+    // var list ='';
+    // list += '<ul>\n';
+    // list += '   <li>javascript!</li>';
+    // list += '   <li>jQuery</li>';
+    // list += '<ul>';
+    
+    // document.body.innerHTML=list;
+    // innerHTML에 원래 가지고 있던 html태그인 <h1>자바~ </p>는 사라지고
+    // li의 내용이 담긴다. 
+    
+
+</script>
