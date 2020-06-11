@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> High-Low Game </title>
+
+    <script>
+        
+        window.onload = function(){
+
+        var restart=true;
+
+        while(restart){
+            alert('---<<<<< H i g h - L o w  G a m e  >>>>>--- \n 1부터 100까지의 랜덤 숫자를 맞추는 게임입니다. \n 입력된 숫자에 따라 High-Low-정답! 으로 진행됩니다. \n 게임을 시작하시겠습니까?');
+            
+            var ranNum = Math.random()*100+1;
+            var rnum = parseInt(ranNum);
+
+            for(var i=1; i<11; i++){
+            
+                var inputNum = prompt('숫자를 입력해주세요.');
+                var num = Number(inputNum);
+
+                // 정답인 경우 ㅡ> 게임 재실행 여부 선택
+                if(rnum === num){
+                    restart = confirm('\" '+num+' \"\n 정답입니다! \n '+i+'번째에 맞추셨습니다. \n 게임을 다시 하시겠습니까?');
+                    restart || alert('게임을 종료합니다.');
+                    break;
+                
+
+                // 입력값이 잘못된 경우
+                } else if(num == false){
+                    alert('입력값이 없습니다. 숫자를 다시 입력해주세요.')
+
+
+                // High인 경우 
+                } else if(rnum > num){
+                    alert('--현재 '+i+' 번 입력--\n (남은 기회 : '+(10-i)+' 번 \n\n High ! '+num+ '보다 큰 숫자입니다. \n 숫자를 다시 입력해주세요.');
+
+                
+
+                // Low인 경우                 
+                }else {
+                    alert('--현재 '+i+' 번 입력--\n (남은 기회 : '+(10-i)+' 번 \n\n Low ! '+num+ '보다 작은 숫자입니다. \n 숫자를 다시 입력해주세요.');
+                }
+            
+            }
+        }
+        }   
+        
+
+    </script>
+
+
+</head>
+<body>
+    
+    <h1> High-Low Game </h1>
+
+</body>
+</html>
