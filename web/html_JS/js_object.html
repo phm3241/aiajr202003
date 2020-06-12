@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript : Object 객체</title>
+
+    <script>
+
+        var obj = {};   // 기본객체 생성 = new Object();
+
+        console.log(typeof(obj));
+
+        var obj = {
+            number : 1,
+            str : 'String',
+            check : false,
+            method : function(){},
+            object : {},
+            array : [1,2,3]
+        };
+
+        // 참조하는 방법 : 변수.속성이름 ,  객체 전체도 출력가능
+        console.log(obj.number); 
+        console.log(obj); 
+
+
+
+        // 같은 내부멤버(변수, 메서드) 호출할 때 : this.속성이름 
+        var person = {
+            name : '손흥민',
+            age : 27,
+            hello : function(){
+                alert('안녕하세요. 저는 '+this.name+'입니다.');
+                alert(this.age+ '세 입니다.');
+                this.bye();
+                },
+            bye : function(){
+                alert('bye~!!');
+                }    
+        };
+
+        person.hello();
+
+
+
+
+    </script>
+
+
+</head>
+<body>
+    
+</body>
+</html>
