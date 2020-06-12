@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Javascript : function 함수 </title>
+
+    <script>
+
+        // 메모리에 다 로드가 되는시점에 기능이 실행된다. 
+        // window.onload = function(){
+            
+        //     alert("page load!");
+        
+        // };
+
+
+        // 함수 : 기능
+        // function 함수이름(매개변수) {
+        //     처리코드;
+        //     return [데이터..선택적];
+        // };
+
+        // 변수에 함수를 할당할 때, 함수이름이 변수이름이 되므로, 이름없는 함수로 할당한다. 
+        // var 변수이름 = function(매개변수) {
+        //     처리코드;
+        //     [return [데이터..선택적];]
+        // };
+
+        
+        // 숫자 두개를 받아서               ㅡ> 매개변수
+        // 두 수의 더하기 연산(+)을 한 후    ㅡ> 데이터 처리
+        // 결과를 반환하는 함수             ㅡ> return
+        
+        // 선언적 함수: 이름있는 함수 정의방법 (명시적으로 함수이름)
+        // function func_add1(num1, num2){
+        //     var result = num1 + num2;
+        //     return result;
+        // };
+
+        // alert(func_add1(10, 20));
+
+
+        // 익명함수 : 이름없는 함수 정의방법 (변수의 이름으로 함수이름)
+        // var func_add2 = function(n1, n2){
+        //     return n1+n2;
+        // };
+        
+        // alert(func_add2(100, 200));
+
+
+
+        //--------------------------------------------------------------------------------------------------
+        // 가변 매개변수 : arguments 배열을 이용 (arguments는 javascrip에서 제공해주는 변수..)
+        // function sumAll(){
+            // aguments는 가변매개변수로 전달되는 값들을 배열로 저장하고 있는 변수이다.
+            
+            // var output = 0;
+            // for(var i=0; i<arguments.length; i++){
+            //     output +=arguments[i];
+            //     console.log('output +'+arguments[i] + ' => ' + output)
+            // }
+            // return output;
+        // };
+
+        // 함수호출
+        // alert(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+
+
+        //--------------------------------------------------------------------------------------------------
+        // 콜백 함수 : 매개변수로 전달된 함수
+        // 정의하는 함수 내부에서 실행할 목적으로 구성한다. 
+        // function callTenTimes(callback){
+
+        //     if(typeof(callback)=='function'){
+        //         for(var i=0; i<10; i++){ 
+        //                 callback();
+        //         };
+        //     };
+        // };
+
+        // var cnt=0;
+
+        // var handler = function(){
+        //     // 확인용으로 콘솔 출력
+        //     console.log('handler function'+cnt++);
+        // };
+
+        // callTenTimes(handler);
+
+
+
+        //--------------------------------------------------------------------------------------------------
+        // javascript 내장함수
+        // alert(), prompt(), confirm()
+        // setTimeout(callback, ms) : ms 이후에 callback 함수를 "한번" 실행해준다. 
+        // setInterval(callback, ms) : ms 간격으로 callback 함수 실행을 "반복한다."
+
+        // 내장함수 선언 : body에 1초마다 변하는 시간정보 출력
+        // var intervalID = setInterval(function(){
+        //     document.body.innerHTML='<h1>'+new Date()+'</h1>';
+        // }, 1000);
+
+        // setTimeout(function(){
+        //     clearInterval(intervalID);
+        // }, 1000*10);
+        
+        // ms 시간표시할 때 
+        // 1000 = 1초
+        // 1000*60 = 1분
+        // 1000*60*60*24*365 = 1년 
+
+
+        //--------------------------------------------------------------------------------------------------
+        // javascript 내장함수 
+        // eval(String) : 코드 실행 함수, 문자열 ㅡ> 자바스크립트 코드로 실행하는 함수
+        // 자바스크립트는 문자열을 코드로 실행할 수 있는 특별한 함수를 제공  
+        
+        var jsCode = '';
+        jsCode += 'var number=100;';
+        jsCode += 'alert(number);';
+
+       //  eval(jsCode);
+
+
+       //--------------------------------------------------------------------------------------------------
+       // javascript 내장함수 
+       // 숫자함수
+       // Number()
+       // parseInt() : 정수로 변환
+       // parseFloat() : 실수로 변환
+
+       // HTML5 <input type="text"> ==> String으로 받은 데이터를 js에서 Number로 변환해주는 작업이 필요하기 때문에,
+       // Number(). parseInt() 숫자함수를 사용해야한다. 
+
+
+       var won = '1000원';
+       var doller = '1.5$';
+
+       console.log('Number() : '+Number(won)+' , '+Number(doller));         // Number() : NaN , NaN 결과출력
+       console.log('parseInt() : '+parseInt(won)+' , '+parseInt(doller));   // parseInt() : 1000 , 1 결과출력
+       console.log('parseFloat() : '+parseFloat(won)+' , '+parseFloat(doller));   // parseFloat() : 1000 , 1.5 결과출력
+
+        // Number() 함수는 1000원 ㅡ> 원 때문에 NaN라고 오류메시지.. 숫자가 아니라고 인식하기 때문에..
+        // parseInt 는 잘못되 있는 문자열이 들어오더라도 앞에있는 1000을 표현해 줄 수 있다. 좀더 유연하게 숫자 표현이 가능하다
+
+
+
+
+       //--------------------------------------------------------------------------------------------------
+        
+       
+       
+
+
+
+    </script>
+
+
+</head>
+<body>
+    
+</body>
+</html>
