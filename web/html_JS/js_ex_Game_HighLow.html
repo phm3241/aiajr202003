@@ -1,16 +1,29 @@
+<!-- 실습예제)
+    자바스크립트로 하이로우 게임을 만들어봅시다.
+
+    규칙 
+    - 1~100 사이의 임의의 숫자를 찾는 게임
+    - 맞추는 횟수는 10회로 제한
+    - 10회 이전에 맞추면 게임에서 승리
+    - 10회가 넘어가면 게임에서 패패 
+    -->
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> High-Low Game </title>
-
+    
+    
     <script>
         
         window.onload = function(){
 
         var restart=true;
-
+        
+        // 게임 재실행 반복
         while(restart){
             alert('---<<<<< H i g h - L o w  G a m e  >>>>>--- \n 1부터 100까지의 랜덤 숫자를 맞추는 게임입니다. \n 입력된 숫자에 따라 High-Low-정답! 으로 진행됩니다. \n 게임을 시작하시겠습니까?');
             
@@ -57,6 +70,7 @@
 <body>
     
     <h1> High-Low Game </h1>
+    <!-- 숫자 쓸때마다 화면에 남도록 해볼까... -->
 
 </body>
 </html>
