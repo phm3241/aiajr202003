@@ -2,6 +2,7 @@ package PhoneBook_Ver07_JDBC2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Ref;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -52,8 +53,9 @@ public class PbUnivDao {
 				String regdate = rs.getString("fr_regdate");
 				String major = rs.getString("fr_u_major");
 				int grade = rs.getInt("fr_u_year");
+				int ref = 0;
 
-				PbUnivDto univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade);
+				PbUnivDto univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade, ref);
 				univList.add(univ);
 
 			}
@@ -124,14 +126,6 @@ public class PbUnivDao {
 					e1.printStackTrace();
 				}
 			}
-
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
 		}
 
 		return resultCnt;
@@ -158,7 +152,7 @@ public class PbUnivDao {
 			pstmt.setString(1, info.getMajor());
 			pstmt.setInt(2,info.getGrade());
 	
-			resultCnt = pstmt.executeUpdate();
+			resultCnt += pstmt.executeUpdate();
 
 			
 		} catch (SQLException e) {
@@ -174,7 +168,7 @@ public class PbUnivDao {
 					e1.printStackTrace();
 				}
 			}
-
+		
 		}
 
 		return resultCnt;
@@ -215,13 +209,6 @@ public class PbUnivDao {
 				}
 			}
 
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
 		}
 
 		return resultCnt;
@@ -253,8 +240,8 @@ public class PbUnivDao {
 			// ◆ 실수부분수정 : sql문 이름검색 부분을 =로 했다.. ㅡ> like로 수정
 			// ◆ 실수부분수정 : %||?||%.. ㅡ> '%'||?||'%' 작은 따옴표추가
 
-			String sql = "select * from phoneinfo_basic b, phoneinfo_univ u, phoneinfo_com c  "
-					+ " where b.idx=u.fr_ref and b.idx=c.fr_ref  "
+			String sql = "select * from phoneinfo_basic b, phoneinfo_univ u, phoneinfo_com c    "
+					+ " where b.idx=u.fr_ref(+) and b.idx=c.fr_ref(+)     "
 					+ " and fr_name like '%'||?||'%'";
 
 			pstmt = conn.prepareStatement(sql);
@@ -304,6 +291,10 @@ public class PbUnivDao {
 		
 	} //Search() end
 	
+	
+	
+	
+	
 
 	public int delete(String name) {
 
@@ -318,8 +309,8 @@ public class PbUnivDao {
 
 			// ◆ 실수부분수정 : 삭제를 sql문 2개(basic, univ) ㅡ> sql문 1개(join)
 			// sql
-			String sql = "select * from phoneinfo_basic b join phoneinfo_univ u on b.idx=u.fr_ref   "
-					+ "where fr_name = '" + name + "'";
+			String sql = "select * from phoneinfo_basic    "
+					+ " where fr_name = '" + name + "'";
 			stmt = conn.createStatement();
 			resultCnt = stmt.executeUpdate(sql);
 
@@ -440,8 +431,9 @@ public class PbUnivDao {
 				String regdate = rs.getString("fr_regdate");
 				String major = rs.getString("fr_u_major");
 				int grade = rs.getInt("fr_u_year");
+				int ref = 0;
 
-				univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade);
+				univ = new PbUnivDto(idx, name, phonenumber, address, email, regdate, major, grade, ref);
 			}
 
 		} catch (SQLException e) {
