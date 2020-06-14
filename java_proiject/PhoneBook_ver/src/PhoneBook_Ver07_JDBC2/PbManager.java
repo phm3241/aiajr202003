@@ -63,7 +63,10 @@ public class PbManager {
 		int select = 0; 
 		
 		// 객체생성 변수
-		PbBasicDto info = null; 
+		PbBasicDto bInfo = null; 
+		PbUnivDto uInfo = null; 
+		PbComDto cInfo = null; 
+		
 		
 		// 기본친구 입력변수
 		String name = null, phoneNumber = null, address = null, email = null; 
@@ -74,10 +77,11 @@ public class PbManager {
 		// 회사친구 입력변수
 		String company = null;  
 		
-		// idx는 0으로 초기화, 데이터처리시 시퀀스로 입력
+		// 변수 idx, ref는 0으로 초기화, 데이터처리시 시퀀스로 입력
 		int idx = 0; 
+		int ref = 0;
 		
-		// regdate는 현재시간
+		// 변수 regdate는 현재시간
 		LocalDate today = LocalDate.now(); 
 		String regdate = today.toString();
 
@@ -105,8 +109,9 @@ public class PbManager {
 
 				
 				try {
+					
+					// 친구 그룹 선택
 					select = PhoneBookMain.kb.nextInt();
-
 					
 					// 정상범위 1~3를 벗어났을 때, 강제적 예외발생!
 					if (!(select >= 1 && select <= 3)) {
@@ -143,19 +148,20 @@ public class PbManager {
 				System.out.println("전화번호를 입력해주세요.");
 				phoneNumber = PhoneBookMain.kb.nextLine();
 
-				System.out.println("주소를 입력해주세요.");
-				address = PhoneBookMain.kb.nextLine();
-
 				System.out.println("이메일을 입력해주세요.");
 				email = PhoneBookMain.kb.nextLine();
+				
+				System.out.println("주소를 입력해주세요.");
+				address = PhoneBookMain.kb.nextLine();
+				
 
 				
 				try {
 
 					// 예외가 생긴다면, 강제 예외발생!
 					// trim은 앞뒤 공백 잘라주는 기능. 그리고나서 isEmpty 공백문자확인기능.
-					if (name.trim().isEmpty() || phoneNumber.trim().isEmpty() || address.trim().isEmpty()
-							|| email.trim().isEmpty()) {
+					if (name.trim().isEmpty() || phoneNumber.trim().isEmpty() 
+							|| email.trim().isEmpty() || address.trim().isEmpty()) {
 
 						StringEmptyException e = new StringEmptyException();
 						throw e;
@@ -169,21 +175,19 @@ public class PbManager {
 				break;
 
 			} // while end
-
 			
+			
+			// 2.2.2 기본 클래스로 인스턴스 생성
+			bInfo = new PbBasicDto(idx, name, phoneNumber, email, address, regdate);
+			// 생성한 basic객체 ㅡ> dao에 매개변수로 전달
+			// dao에서 데이터 입력처리 후, 처리한 행개수 반환
+			resultCnt = dao.basicInsert(bInfo, conn);
 			
 			// 사용자 입력정보 ㅡ>> 친구그룹 객체생성
 			switch (select) {
 
-			case MainMenu2.BASIC:
-
-				// 2.2.2 기본 클래스로 인스턴스 생성
-				info = new PbBasicDto(idx, name, phoneNumber, email, address, regdate);
-
-				// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
-				// dao에서 데이터 입력처리 후, 처리한 행개수 반환
-				resultCnt = dao.basicInsert(info, conn);
-				break;
+//			case MainMenu2.BASIC:
+//				break;
 
 			case MainMenu2.UNIV:
 				System.out.println("전공(학과)를 입력해주세요.");
@@ -193,11 +197,11 @@ public class PbManager {
 				PhoneBookMain.kb.nextLine();
 
 				// 2.2.3 대학 클래스로 인스턴스 생성
-				info = new PbUnivDto(idx, name, phoneNumber, email, address, regdate, major, grade);
+				uInfo = new PbUnivDto(idx, name, phoneNumber, email, address, regdate, major, grade, ref);
 
 				// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
 				// dao에서 데이터 입력처리 후, 처리한 행개수 반환
-				resultCnt += dao.univInsert((PbUnivDto) info, conn);
+				resultCnt += dao.univInsert(uInfo, conn);
 				break;
 
 			case MainMenu2.COMPANY:
@@ -205,11 +209,11 @@ public class PbManager {
 				company = PhoneBookMain.kb.nextLine();
 
 				// 2.2.4 회사 클래스로 인스턴스 생성
-				info = new PbComDto(idx, name, phoneNumber, email, address, regdate, company);
+				cInfo = new PbComDto(idx, name, phoneNumber, email, address, regdate, company, ref);
 
 				// 생성한 univ객체 ㅡ> dao에 매개변수로 전달
 				// dao에서 데이터 입력처리 후, 처리한 행개수 반환
-				resultCnt += dao.comInsert((PbComDto) info, conn);
+				resultCnt += dao.comInsert(cInfo, conn);
 				break;
 
 			} // switch end
@@ -259,13 +263,13 @@ public class PbManager {
 
 		result = dao.search(searchName);
 
-		if (result != null) {
+		if (result != null && !result.isEmpty()) {
 			for (int i = 0; i < result.size(); i++) {
 				System.out.printf("%5s", result.get(i).getIdx() + "\t");
 				System.out.printf("%5s", result.get(i).getName() + "\t");
 				System.out.printf("%12s", result.get(i).getPhoneNumber() + "\t");
-				System.out.printf("%12s", result.get(i).getAddress() + "\t");
 				System.out.printf("%12s", result.get(i).getEmail() + "\t");
+				System.out.printf("%12s", result.get(i).getAddress() + "\t");
 				System.out.printf("%12s", result.get(i).getRegdate() + "\t");
 				System.out.printf("%12s", result.get(i).getMajor() + "\t");
 				System.out.printf("%12s", result.get(i).getGrade() + "\t");
