@@ -135,8 +135,6 @@ where b.idx=u.fr_ref(+) and b.idx=c.fr_ref(+);
 
 
 
-
-
 -- 2. 학교 친구 목록 출력
 select *
 from phoneinfo_basic b join phoneinfo_univ u
