@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> JSON 객체 </title>
+
+    <!-- javascript 객체  -->
+    <script src="../js/json_test.js"></script>
+    
+    <script>
+  
+        // javascript 객체 
+        var book = { 
+            name: 'java',
+            price: 10000,
+            publisher: 'Orange Media'
+        };
+
+        // javascript 객체 콘솔로 확인
+        console.log(book);
+
+
+        // 저장하거나 데이터 전송을 위해 Json객체(String)러 변환하기 
+        //  : JSON 내장객체의 .stringify() 메서드 사용
+        // JavaScript Object ㅡ> Json (String)
+        var jsondata = JSON.stringify(book);
+        
+        console.log('jsondata type : ' + typeof(jsondata));
+         
+        window.onload = function(){
+            document.getElementById('json').innerHTML = jsondata;
+
+
+            // String JSON
+            var newdata ='{"memberid":"cool","membername":"COOL","age":27,"program":["java","python","javascript"]}';
+            console.log('newdata type : '+typeof(newdata));
+
+            // Json (String) ㅡ> JavaScript Object 
+            var newObj = JSON.parse(newdata);
+            console.log('newObj type : '+ typeof(newObj));
+            console.log(newObj);
+
+            // 객체로 변환되었으므로 memberid를 불러올 수 있다.
+            alert(newObj.memberid);
+
+        };
+
+
+    </script>
+
+
+</head>
+
+
+<body>
+    
+    <h1 id="json"> 안녕하세요 </h1>
+
+
+
+</body>
+</html>
