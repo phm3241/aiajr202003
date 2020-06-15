@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Window Object </title>
+
+    <script>
+        // window.open();
+        // window.open('http:www.naver.com', 'new');
+        // window.open('http:www.daum.net', 'new2', 'width=500, height=500, location=1, menubar=1, status=1, toolbar=1');
+                    
+        
+        // var child = window.open('', '', 'width=300, height=200');
+
+
+        // var html = '';
+        // html += '<img src="https://funshop.akamaized.net/products/0000058531/vs_image800.jpg">';
+        // html += '<br>';
+        // html += '<input type="button" value="닫기" onclick="window.close();">';
+
+        // child.document.write('<h1> 안녕하세요. from parent </h1>');
+        // child.document.write(html);
+
+        // href 소성이 페이지를 로드하거나, 다른페이지로 로드한다. 
+        // alert(location.href);
+        // console.log(location.href);
+        // console.log(location);
+        
+        // 3초 있다가 현재주소를 naver 주소로 이동 (임의로 특정페이지로 로드시킬 수 있다.) 
+        // setTimeout(function(){
+        //     location.href='https:www.naver.com';
+        // }, 3000); 
+
+
+        // document.getElementById('test') 가 test를 캐스팅해야하는데, 안된다. = null 이다.
+        // 오류메시지 : Uncaught TypeError: Cannot read property 'innerText' of null
+        // var html_val = document.getElementById('test').innerText;
+
+        // alert(html_val);
+
+
+    </script>
+
+</head>
+
+    <h1 id="test"> 안녕하세요 </h1>
+
+    <script>
+        // document.getElementById('test') 가 이 위치에 있어야 test를 캐스팅된다. 
+        // 메모리에 올라갔기 때문에.. 
+        var html_val = document.getElementById('test').innerText;
+        alert(html_val);
+
+    </script>
+
+
+
+<body>
+
+
+
+</body>
+</html>
