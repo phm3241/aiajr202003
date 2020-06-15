@@ -33,11 +33,22 @@
         // }, 3000); 
 
 
+        // -------------------------------------------------------------------------------------------------
+        // 위에서부터 실행되므로 test가 없어서 오류나게 된다. 
         // document.getElementById('test') 가 test를 캐스팅해야하는데, 안된다. = null 이다.
         // 오류메시지 : Uncaught TypeError: Cannot read property 'innerText' of null
         // var html_val = document.getElementById('test').innerText;
-
         // alert(html_val);
+        
+
+        // window 객체의 이벤트속성 onload를 재정의(오버라이딩)
+        // 모든 태그들이 메모리에 올라가는 시점에 함수가 실행된다. 
+        window.onload = function() {  // 이렇게 쓰는 함수를 핸들러 함수라고 한다. 
+            var html_val = document.getElementById('test').innerText;
+            alert(html_val);
+
+        }
+
 
 
     </script>
