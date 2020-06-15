@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Document Object </title>
+
+    <script>
+        
+        // body 태그가 있는 상태여야 하기 때문에.. onload 속성 처리, 문서객체 다룰 때는 onload 필수이다. 
+        window.onload = function(){
+
+            //------------------------
+            // 태그를 만들어서 동적으로 넣어주는 작업. 
+            // 마감태그가 있을 때, 
+            // Tag Element 생성
+            var h1 = document.createElement('h1');  // <h1></h1>
+
+            // Text Node 생성
+            var text = document.createTextNode('js에서 동적으로 만든 태그입니다.'); 
+            
+            // 부모태그에 자식 텍스트를 보내는 함수.
+            // <h1>안녕하세요</h> 형태로 만들기
+            h1.appendChild(text);
+            
+
+            //------------------------
+            // 태그를 만들어서 동적으로 넣어주는 작업. 
+            // 단일태그 일때, 
+
+            // Tag Element 생성
+            var img = document.createElement('img');
+            // img.src='../images/sunmoo.jpg';
+
+            // 속성처리도 가능
+            // img.width=200; 
+            // img.height=100;
+            // img.alt='js img test';    //이미지가 없을 때 안내글
+            
+            img.setAttribute('src','../images/sunmoo.jpg');
+            img.setAttribute('data-role', 'test-Image');  
+            // data-role 임의로 지정해준 속성, 약속된 것속성은 img.width 이렇게 들어가면되고, 
+            // 약속되지 않은 이외의 속성은 setAttribute('속성이름', '새로운경로') 메서드를 사용해서 속성을 추가해야한다. ㅇ
+            
+
+
+            // body에 넣어주기
+            // body Tag는 골격태그이기 때문에 아래처럼 가져올 수 있다. 
+            // 위에서 onload하여 오류나지 않게 한다. 
+            // document.body.appendChild(h1);
+            // document.body.appendChild(img);
+
+
+            // 정적 문서에서 문서객체로 캐스팅하는 방법
+            // ★★기억하기!★ 대표적인 메서드는 document.getElementById('아이디의 속성값') 
+            // 초창기 자바스크립트 때부터 나온 메서드. 
+            // id로 가져와야하기 때문에 id 중복되지 않도록 한다. 
+            var title = document.getElementById('title');
+            console.log(title.innerHTML); 
+            
+            // 기존내용에 내용추가가능
+            title.innerHTML= title.innerHTML+'<i>안녕하세요</i>';   
+
+            
+            // 여러 문서객체 값을 가져오는 것. 
+            // .getElementsByName('job')로 배열로 가져올 수 있다. 
+            var jobs = document.getElementsByName('job');
+            console.log(jobs[0].value);
+            console.log(jobs[1].value);
+
+            var inputs = document.getElementsByTagName('input');
+            // console.log(inputs); 
+            console.log(inputs[0].value); 
+            console.log(inputs[1].value); 
+
+
+            // 값을 넣어주기
+            inputs[0].value='프로그래머가 새로운 데이터를 입력합니다.'; 
+            inputs[1].value='test ok!!';
+
+
+            var h1 = document.querySelector('#title');
+
+            h1.style.color='red';
+
+            console.log(h1.innerHTML);  // 콜솔 출력(태그까지출력) : html 문서 내부에 정의된 h1태그입니다. <i>안녕하세요</i>
+            console.log(h1.innerText);  // 콜솔 출력(텍스트요소만) : html 문서 내부에 정의된 h1태그입니다. 안녕하세요
+
+            var h1s = document.querySelectorAll('input[type=text]');
+            console.log(h1s);
+            console.log(h1s[0].value);
+            console.log(h1s[1].value);
+            
+            
+            // 여기서 change()함수 정의하고 style 줄수도 있다. 
+            var btn_change = document.getElementById('btn');
+            btn_change.onclick=function(){
+                header.style.color='blue';
+            }
+
+
+            // 문서객체 제거하기
+            document.getElementById('btn_del').onclick=function() {
+                // 삭제대상 엘리먼트 캐스팅
+                var h1_Del = document.getElementById('title');
+
+                // 삭제대상의 부모 엘리먼트 캐스팅
+                var wrap = document.getElementById('wrap');
+
+                // 부모 엘리먼트에서 자식 엘리몬트를 삭제
+                wrap.removeChild('h1_Del');
+
+
+            };
+
+
+        };
+
+        function change() {
+            // var header = document.getElementById('title');
+
+            // header.style.color='blue';
+        }
+
+        
+
+
+
+    </script>
+
+
+</head>
+
+
+<body>
+
+    <div id="wrap"> 
+        <!-- id가 중복되면 안된다.  -->
+        <h1 id="title"> html 문서 내부에 정의된 h1태그입니다. </h1>
+        <!-- <h2 id="title"> html 문서 내부에 정의된 h2태그입니다. </h2> -->
+    </div>
+
+
+
+
+   
+
+    <input type="text" name="job" value="tester" readonly>
+    <input type="text" name="job" value="modeler">
+    <br>
+
+    <input type="button" value="change" id="btn" >  <!-- change() 함수는 자바스크립트를 호출함. -->
+    <!-- <input type="button" value="change" id="btn" onclick="change()">  change() 함수는 자바스크립트를 호출함. -->
+
+    <!-- 문서객체 제거버튼 -->
+    <input type="button" value="h1 tag delete" id="btn_del">
+
+    
+</body>
+</html>
