@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J avascript Event </title>
+
+    <style>
+        h1{
+            border : 3px solid;
+        }
+    </style>
+
+    <script>
+        
+        window.onload=function(){
+        
+            var header1=document.getElementById('header1');
+
+            // 캐스팅
+            header1.onclick = function(e){
+
+                var event = e || window.event;
+                console.log(event);
+
+                alert(this.innerText);  
+                // div block전체가 클릭할 수 있는 영역이 된다. 
+                //i innerText로 가져오면, 태그없이 텍스트만 나온다.
+                
+                this.style.color='red';
+                this.style.backgroundColor='Yellow';            
+            };
+            
+            // setTimeout(function(){
+            //     header1.onclick(); // 사용자가 클릭하지 않아도 3초이후에 강제 이벤트(클릭) 발생
+            // },3000);
+
+
+            var myForm = document.getElementById('my-form');
+            
+
+            // return을 false로 해두게 되면 제출되지 않는다.
+            // 유효성검사를 할 수 있다.  
+            myForm.onsubmit = function(){
+
+                var uid = document.getElementById('uid');
+                
+                // 공백여부 유효성검사 ㅡ> 공백이면 사이트이동하지 않는다. 
+                console.log(uid.value);
+                if(uid.value == null || uid.value.length < 1 ){
+                    alert('아이디 정보를 입력해주세요.');
+                    return false;
+                }
+
+                // return false;
+            }
+
+
+
+        };
+
+        function show(d){
+            alert(d);
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+    <form action="http://www.naver.com" id="my-form">
+
+        <label>아이디</label>
+        <input type="text" name="uid" id="uid">
+        <!-- https://www.naver.com/?uid=test  주소표시줄에 이렇게 나오게 된다. -->
+
+
+        <label>비밀번호</label>
+        <input type="password" name="pw" id="pw">
+
+        <label>비밀번호</label>
+        <input type="password" name="repw" id="repw">
+
+        <input type="submit">
+
+
+    </form>
+
+
+
+
+    
+    <h1 id="header1"> HEADER </h1>
+
+    <!-- 인라인방식 : h1을 캐스팅하지 않고, onclick에 함수를 연결해준 방식, -->
+    <!-- 권장하지는 않고, 프로토타입할떄만. -->
+    <h1 id="header2" onclick="show('String')" style="background-color: yellow;"> header-2</h1>
+
+
+
+
+</body>
+</html>
