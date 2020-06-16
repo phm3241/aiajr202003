@@ -49,11 +49,90 @@
                 console.log(uid.value);
                 if(uid.value == null || uid.value.length < 1 ){
                     alert('아이디 정보를 입력해주세요.');
+                    uid.focus();  // 문서객체안에 거의 다 들어가 있다. 커서가 이쪽으로 표시된다. 
+                    return false;
+                    // return false;
+                };
+
+                // 비밀번호 유효성검사 : 1. 캐스팅
+                var pw = document.getElementById('pw');
+                var repw = document.getElementById('repw');
+                
+                // 비밀번호 유효성검사 : 2. 비밀번호 공백확인
+                if(pw.value == null || pw.value.length < 1 ){
+                    alert('비밀번호 정보를 입력해주세요.');
+                    pw.focus();
+                    return false;
+                    // return false;
+                };
+
+                // 비밀번호 유효성검사 : 3. 비밀번호 체크 공백확인
+                if(repw.value == null || repw.value.length < 1 ){
+                    alert('비밀번호 체크정보를 입력해주세요.');
+                    repw.focus();
+                    return false;
+                    // return false;
+                };
+
+                // 비밀번호 유효성검사 : 3. 비밀번호 체크 공백확인
+                if(pw.value != repw.value){
+                    alert('비밀번호와 체크비밀번호 일치하지 않습니다');
+                    return false;
+                };
+
+                // 개인정보 동의 체크 상태 확인 : true /false 
+                var agree = document.getElementById('agree');
+                console.log(agree.checked);
+                if(!agree.checked){
+                    alert('개인정보 동의에 동의 해주세요');
                     return false;
                 }
 
-                // return false;
-            }
+
+                var div1 = document.getElementById('box1');
+                var div2 = document.getElementById('box2');
+                var h1 = document.getElementById('h1');
+
+                // div1.onclick = function(){
+                //     alert('box1-onclick');
+                // };
+                
+                // 이 방식으로 할 수도 있는데, Jquery에서 처리하는 방법을 주로 사용
+                div1.addEventListener('click', function(){
+                    alert('box1-onclick');
+                });
+
+
+
+                div2.onclick = function(){
+                    alert('box2-onclick');
+                };
+
+                h1.onclick = function(e){ // onclick에 대한 이벤트 객체 받기 e
+                     
+                    var event = e || window.event;
+
+                    alert('h1-onclick');
+
+                    // 이벤트의 전달을 막는다.
+                    // IE의 경우 (인터넷 익스플로어 기반은 일단 이런게 있다정도 알아두기)
+                    event.cancelBubble = true;
+
+                    // IE 이외의 브라우저의 경우 
+                    // (모바일의 기본브라우저는 크롬으로 선택되어 있어 이 경우를 대부분 사용)
+                    if(event.stopPropagation) {
+                        event.stopPropagation();
+                    };
+
+
+                };
+
+                
+                
+                
+            };
+
+
 
 
 
@@ -65,23 +144,100 @@
 
 
     </script>
+
+    <style>
+        /* 개인정보 동의 체크 전 ㅡ> 약관 안보이도록 */
+        #agree+div{
+            display: none;
+        }
+
+        /* 개인정보 동의 체크 후 ㅡ> 약관 보이도록 */
+        #agree:checked+div{
+            display: block;
+        }
+
+        .box {
+            border: 3px solid;
+            padding: 10px;
+            height: 30px;
+
+        }
+        #box1 {
+            background-color: aquamarine;
+        }
+
+        #box2 {
+            width: 75%;
+            background-color:blueviolet;
+        }
+
+        #box3 {
+            width: 50%;
+            background-color: rgb(190, 245, 118);
+            height: 30px;
+        }
+    </style>
+
 </head>
 
 <body>
 
+    <!-- 이벤트 버블링  -->
+    <!-- 
+    <div id="box1" class="box" onclick="console.log('box1-onclick')"">
+        <div id="box3" class="box" onclick="console.log('box2-onclick')">
+            <h1 id="box3" class="box" onclick="console.log('h1-onclick')"> 클릭하세요</h1>
+        </div>
+    </div> -->
+
+    <div id="box1" class="box" onclick="console.log('box1-onclick')"">
+        <div id="box3" class="box" onclick="console.log('box2-onclick')">
+            <h1 id="box3" class="box" onclick="console.log('h1-onclick')"> 클릭하세요</h1>
+        </div>
+    </div>
+    <hr>
+
+
+
     <form action="http://www.naver.com" id="my-form">
 
-        <label>아이디</label>
-        <input type="text" name="uid" id="uid">
+        <label for="uid">아이디</label>
+        <input type="text" name="uid" id="uid" placeholder="아이디를 입력하세요" autocomplete="">
+        <!-- 라벨에 for하고 id를 쓰면 '아이디' 글짜 누르면 입력란에 커서가 들어간다.(focus 기능처럼) -->
+        <!-- <input type="text" name="uid" id="uid" value="test" placeholder="아이디를 입력하세요"> -->
         <!-- https://www.naver.com/?uid=test  주소표시줄에 이렇게 나오게 된다. -->
+        <!-- value : 입력값이 들어가있다. 입력값을 지우면 사라진다. -->
+        <!-- placeholder : 뒷배경으로 글씨가 들어가있다. 커서가 들어가도 사라지지 않는다. -->
+        <!-- autocomplete : 형식에 맞도록 자동완성기능 -->
 
-
-        <label>비밀번호</label>
+        <label for="pw">비밀번호</label>
         <input type="password" name="pw" id="pw">
+        <br>
 
-        <label>비밀번호</label>
+        <label for="repw">비밀번호</label>
         <input type="password" name="repw" id="repw">
+        <br>
 
+        <label for="agree"> 개인정도 동의 </label>
+        <input type="checkbox" id="agree">
+        <div>
+            <textarea>
+                약관
+                개인정보 활용에 대한 안내입니다.
+
+            </textarea>
+
+        </div>
+        <!-- 텍스트레 라벨을 이용해서 버튼처럼 사용할 수도 있다. -->
+        <br>
+
+        <label> 체크</label>
+        <!-- checked 를 해두면, 체크가 되어있다.  -->
+        <input type="radio" name="gender" value="1" checked> 남
+        <input type="radio" name="gender" value="2"> 여
+
+
+        <br><br>
         <input type="submit">
 
 
