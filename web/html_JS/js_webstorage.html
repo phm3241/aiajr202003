@@ -11,8 +11,54 @@
         // key-value 형식으로 저장 
         // cookie : 4mb, javascript/Server Side에서 생성할 수 있다는 특징이 있다.
         //          서버로 요청을 보낼 때 모든 cookie정보를 함께 전송한다는 특징이 있다.
+        //          유지되는 시간설정이 가능하다. 
 
-        
+        // localStorage : 25~40mb, 
+
+        // ex. 쇼핑몰에 로그인하지 않고 장바구니에 물건을 담으면, 
+        // 예전에는 데이터베이스에 담았는데,  용량이 커지고, 서버의 성능저하 등 문제..
+        // ==> 일부 데이터는 브라우저에 저장하도록.. 
+        // ==> localStorage를 이용하여 여기에 담기 
+        //      : 개인화 자료들, 개인브라우저에서 사용됨? 메서드 이용해서 삭제하지 않으면, 생명주기가 없다. 계속 남아있는다. 
+
+
+        // sessionStorage은 과정에서 사용되고, 과정이 지나면, 사라진다. 
+        // localStorage은 생명주기가 없으므로, 데이터를 활용하고 최종적으로 만들어지면, 서버로 보낸다?
+
+        // -------------------------------------------------------------------------
+        // 저장
+        // 키값을 적어 저장한다
+        // setItem : 저장할 때  문자열로 String 저장된다. ★
+        // 또 똑같은 정보를 넣으면 기존 정보가 갱신된다. 
+        localStorage.setItem('name','손흥민');
+
+        // 탐색
+        // 키값으로 데이터를 꺼내올 수 있다. 
+        // getItem : 가져올때도 문자열 String이다 ★
+        var saveData = localStorage.getItem('name');
+
+        // 탐색결과 확인
+        console.log('저장데이터 : ' +saveData);
+
+        // 수정
+        localStorage.setItem('name','박지성');
+        var saveData = localStorage.getItem('name');
+        console.log('저장데이터 : ' +saveData);
+
+        // 삭제
+        // localStorage.removeItem('name');
+        // var saveData = localStorage.getItem('name');
+        // console.log('저장데이터 : ' +saveData);
+
+        // 전체삭제 : clear()
+        // localStorage.clear();
+
+
+        // sessionStorage--------------------------------------------
+        // sessionStorage은 과정에서 사용되고, 과정이 지나면, 사라진다. 
+        sessionStorage.setItem('sname', 'hong');
+
+
 
 
         
