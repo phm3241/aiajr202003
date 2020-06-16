@@ -32,39 +32,27 @@
         
         
         </style>
+        
+
     </head>
 
     <body>
-        <hr>
-        <h1> Login Form</h1>
-        <hr>
-        <h5>1. 테이블 사용없이 로그인 폼 작성</h5>
-        <h2>회 원 로 그 인</h2> 
-        
-        아이디(이메일)  <input type="text"> <br>
-        비밀번호 <input type="password"> <br>
-        <input type="submit" value="로그인">
-        
-        
-        
-        
-        
-        <br><br><br>
+ 
         <hr>
         <h5>2. 테이블로 로그인 폼 작성, 스타일 적용</h5>
         <h2>회 원 로 그 인</h2>
         
         <!--form tag는 table 전체를 감싼다-->
-        <form action="" method="get"> <!--action을 넣지 않아도 자기자신으로 호출한다.-->
+        <form action="" method="get" id="loginForm"> <!--action을 넣지 않아도 자기자신으로 호출한다.-->
         <table id="form">
             <tr>
                 <td>아이디(이메일)</td>
-                <td><input type="text" name="id"> <br></td>
+                <td><input type="text" name="id" id="id"> <br></td>
             </tr>
             
             <tr>
                 <td>비밀번호</td>
-                <td><input type="password" name="pw"> <br></td>
+                <td><input type="password" name="pw" id="pw"> <br></td>
             </tr>
             
             <tr>
@@ -79,3 +67,7 @@
     </body>
 
 </html>
+
+    <!-- 외부에서 스크립트 빼서 진행하고 불러오기  -->
+    <!-- 위치는 body 아래나 html 아래에서 ?  -->
+    <script src="../js/loginCheck.js">    </script>
