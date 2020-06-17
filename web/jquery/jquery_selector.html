@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery Selector</title>
+
+    <!-- jQuery CDN : 반드시 해줘야 jquery 사용가능하다.-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <script>
+
+        // $(document) : 자바스크립트 document문서를 jQuery 객체로 만들어두고 쓰겠다.라는 의미
+        $(document).ready(function(){
+
+
+            // 선택자 ㅡ> 선택해서 캐스팅하기 위해서.. ㅡ> $()
+            // $('*').css('color', function(){});
+            // $('*').css('color', 'red');
+            // $('div').css('color', 'red');  // 자식태그까지 영향을 받는다.
+
+            // 아이디 선택자
+            // $('#wrap').css('color', 'red');
+
+            // 클래스 선택자
+            // $('.title').css('color', 'blue');
+            // $('h1.title').css('color', 'blue');
+            // $('.title.item').css('color', 'blue');
+
+            // 자손선택자와 후손선택자
+            $('ul>li').css('color','green');
+            $('#wrap li').css('background-color','black');
+
+
+            // 동위선택 : 바로 뒤에오는 p태그 선택
+            $('#wrap>h1+p').css('font-weight', 'bold');
+
+            // 동위선택 : 뒤에오는 p 태그들 모두 선택 
+            $('#wrap>h1~p').css('font-size', '2em');
+
+            // 입력된 데이터를 가져오는 것. : val()  get해주는 것..
+            // var val= $('input[type=text]').val();
+            // var val= $('input[type=text]'); //val();
+            // alert(val.val());
+
+            // 필터선택자
+            var val= $('input:text');
+            // alert(val.val()); 
+
+
+            
+            // 입력된 데이터를 다른 값으로 변경하는 것. : val(' ') set해주는 것..
+            // $('input[type=text]').val('Hello~!!');
+            val.val('change~!!');
+
+            // 입력양식 필터선택자
+            setTimeout(function(){
+                var selectedVal = $('select.loc>option:selected');
+                // alert(selectedVal.val());
+
+
+                // jQery 배열관리 
+                // removeClass(' ') :  class=' ' 속성을 동적으로 삭제해주는 메서드
+                $('h1').removeClass('title');
+
+            },5000);
+
+
+
+            // 위치 필터선택자
+            // css 는 또다시 jQuery의 문서객체를 반환. 반환하는 타입이 나자신을 반환.
+            // 따라서 css 두개를 쓸 수 있다. : 왼쪽에서 오른쪽 순서로 객체에 메서드 적용 ㅡ> 객체 반환 ㅡ> 또 메서드 적용 가능. 
+            $('tr:odd').css('background-color', '#F9F9F9');
+            $('tr:even').css('background-color', '#9F9F9F');
+            $('tr:first').css('background-color', '#000000').css('color','#FFFFFF');
+
+
+
+
+
+
+
+            // ------------------------------------------------------------------------------
+            // 배열관리 : each메서드가 배열을 다룬다. for in 반복문처럼
+            // 자바스크립트 배열관리 : $.each() 메서드의 콜백함수로 관리한다. 
+            // each(배열의 원본, 함수(인덱스, 배열의 해당 인덱스 객체))
+            
+            // test 배열 생성
+            var arr = [
+                {name:'NAVER', url:'http://www.naver.com'},
+                {name:'DAUM', url:'http://www.daum.net'},
+                {name:'KAKAO', url:'http://www.kakao.com'}
+            ];
+
+            var html='';
+            
+            // each() 메서드 사용하는 2가지 형태 중  
+            // 1. $.each(object(배열넣기), function(index, item){})
+            $.each(arr,function(index, item){
+                html += '<h1><a href="'+item.url+'">'+item.name+'</a></h1>'
+
+            });
+
+
+            // innerHtml = html() : 
+            // html() 이렇게하면 get메서드와 같고, html('test') 이렇게 하면 set메서드와 같다.
+            // <div id="list"></div> 부분에 위에서 each메서드의 함수로 만든 html을 추가해준다. 
+            $('#list').html(html); 
+            
+
+            // each() 메서드 사용하는 2가지 형태 중  
+            // 2. $(selector).each(function(index, item){})
+            // 인덱스값에 따라서 순차적으로 변경시켜줄 수 있고, 
+            // 또는 함수를 통해 각요소들 마다 따로따로 적용을 해줄 수도 있다. 
+            $('h2').each(function(index, item){
+                // html() ㅡ> get 해온것.. 
+                $(item).html($(item).html()+':'+index);
+                if(index%2==0){
+                    $(item).css('background-color', 'gray');
+                } else {
+                $(item).css('background-color', 'green');
+                };
+            });
+
+
+            //-------------------------------------------------------------------
+            // jQery 배열관리 
+            // jQery의 배열객체는 따로 만드는 것이 아니라, 선택자로 여러개의 문서 객체를 선택할 떄 생성
+
+            // addClass('') 메서드 : 원래 있던 class=' ' 에 속성이 동적으로 추가된다. 
+            // addClass() 메서드 는 get메서드가되고, addClass(' ')는 set메서드가 된다.
+            // 대부분 jQuery 메서드가 이런형식. 
+            // 특정 상태일때, 특정이벤트일때, 클래스를 추가하거나, 삭제해서..스타일을 바꿀 수 있다. 
+
+            $('h1').addClass('check');
+
+
+            //-------------------------------------------------------------------
+            // 필터 메서드
+            // .css 하게되면 객체그대로를 반환하므로, 연속적으로 메서드 적용가능. (체이닝)
+            // 범위 안의 범위.
+            // end() 메서드는 가장 최근의 필터 하나를 지워준다. 
+            // end()하게되면 필터로 선택해둔 것이 지워지기 떄문에 다시 전체가 선택되어 css가 적용된다. 
+            $('h3').css('background-color', 'orange').filter(':even').css('color','white').end().css('font-weight','100').filter(':odd').css('color','blue');
+
+            
+
+
+            //-------------------------------------------------------------------
+            // XML 파싱..
+            var site = ' ';
+
+            site += '<sites>';
+            site += '   <site>';
+            site += '      <name>NAVER</name>';
+            site += '      <url>http://www.naver.com</url>';
+            site += '   </site>';
+            site += '   <site>';
+            site += '      <name>DAUM</name>';
+            site += '      <url>http://www.daum.net</url>';
+            site += '   </site>';
+            site += '   <site>';
+            site += '      <name>KAKAO</name>';
+            site += '      <url>http://www.kakao.com</url>';
+            site += '   </site>';
+            site += '</sites>';
+            
+            // site라는 xml문서를 ㅡ> $.parseXML(site)메서드로 xmlDoc이라는 xml객체로 만든다. 
+            var xmlDoc = $.parseXML(site);
+
+
+            var siteHtml = '';
+
+            //  xml객체 ㅡ> javascript객체로 만들고 ㅡ> 
+            $(xmlDoc).find('site').each(function(index){
+
+                // this는 fine에서 찾은 site들 중 첫번째 <site>이다. 
+                // 그리고 그 안에서 name 속성을 찾고, text를 가져온다. 
+                var name = $(this).find('name').text();
+                var url = $(this).find('url').text();
+
+                siteHtml +='<div class = "site">';
+                siteHtml +='    <h3>'+name+'</h3>';
+                siteHtml +='    <p>'+url+'</p>';
+                siteHtml +='</div>';
+
+            });
+
+
+            // 아이디 선택자로 캐스팅 해서 html을 넣어준다. 
+            $('#sites').html(siteHtml);
+
+
+            
+
+        });
+
+    </script>
+
+    <style>
+    
+        table {
+            width: 80%;
+        }
+
+        .check {
+            background-color: yellow;
+        }
+
+        .title{
+            font-style: italic;
+        }
+
+        
+        /* 아래에 있는 요소들이 배경으로 올라오지 않도록 이 요소를 넘어가는 것은 숨기기? */
+        #sites{
+            overflow: hidden;
+        }
+
+        #sites>div.site{
+            width: 200px;
+            padding: 20px;
+
+            border: 1px solid #ddd;
+            border-radius: 10px;
+
+            /* 수직방향이 아니라 수평방향으로 */
+            float: left;
+        }
+
+
+
+    
+    </style>
+    
+
+
+</head>
+<body>
+
+    <div id="sites">
+        
+    </div>
+
+
+
+
+    <h3>heading3 - 0</h3>
+    <h3>heading3 - 1</h3>
+    <h3>heading3 - 2</h3>
+    <h3>heading3 - 3</h3>
+    <h3>heading3 - 4</h3>
+    <h3>heading3 - 5</h3>
+    <h3>heading3 - 6</h3>
+    <h3>heading3 - 7</h3>
+
+    <h2>heading2 - 0</h2>
+    <h2>heading2 - 1</h2>
+    <h2>heading2 - 2</h2>
+    <h2>heading2 - 3</h2>
+    <h2>heading2 - 4</h2>
+
+
+
+
+
+    <div id='list'>
+
+
+    </div>
+    
+
+    <table border="1">
+        <tr> 
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr> 
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr> 
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr> 
+            <td>7</td>
+            <td>8</td>
+        </tr>
+        <tr> 
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr> 
+            <td>11</td>
+            <td>12</td>
+        </tr>
+        <tr> 
+            <td>13</td>
+            <td>14</td>
+        </tr>
+    </table>
+
+
+
+
+    <div id="wrap">
+
+       
+
+        <select class="loc">
+            <option value="seoul">서울</option>
+            <option value="busan">부산</option>
+            <option value="jeju">제주</option>
+        </select>
+
+        <input type="text" id="uid" value="jQuery">
+
+        <h1 class="title"> 안녕하세요 </h1>
+        <p class="title item">  반갑습니다. </p>
+
+        <ul>
+            <li>10</li>
+            <li>20</li>
+            <li>30</li>
+            <li>40</li>
+        </ul>
+
+        <p> 다음에 만나요</p>
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
