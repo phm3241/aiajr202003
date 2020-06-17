@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery Basic</title>
+
+    <!-- ★ jQuery를 사용하기 위해서는 반드시. 로드 필요.  -->
+    <!-- jQuery 라이브러리를 로드 : CDN통해서 처리 (외부에 있는 호스트에 있는 파일을 가져오는 방식.. 또는 다운받아서 해도 된다.) -->
+    <!-- 이부분은 없어도 된다. integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous" -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js" 
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    
+
+
+    <!-- 이제 여기서 jQuery코드작성 해주면된다.-->
+    <script>
+
+        // $() : window 객체 의미. 
+        //       () 괄호는 jquery 객체를 생성해주는 것. 윈도우가 가지고 있는 기본객체를 ()로 넣어주거나 
+        //       selector 넣어주면, document객체를 만들어준다. 
+        // $ : jquery 를 의미
+
+        
+
+        // 가장기본적으로 사용하는 구조
+        // window.document = $(document) 같은 표현이다. 
+        // ready : jQuery 객체, 
+
+        // ★ window.onload = function(){ }와 같다. 
+        $(document).ready(function(){
+
+            alert('reday method!');
+
+            // h1을 문서객체로 만들어주는 것과 같다. 캐스팅 뿐만아니라 이벤트 속성 부여도 가능. 
+            // $('.title') 이렇게도 선택자 가능하다. $('#title') 아이디 선택자, $('h1')
+            $('div>h2').click(function(){
+                alert('h1 tag');
+            });
+            
+        });
+
+
+
+
+    </script>
+
+</head>
+<body>
+    <div>
+        <h1 class="title"> 안녕하세요 </h1>
+        <h2 class="sub"> 안녕하세요 </h2>
+    </div>
+
+    
+</body>
+</html>
