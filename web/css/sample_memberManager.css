@@ -1,33 +1,4 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@phm3241 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-aiajin
-/
-aiajr202003
-1
-18
- Code
- Issues 0
- Pull requests 0 Actions
- Projects 0
- Wiki
- Security 0
- Insights
-aiajr202003/web/css/membermgr.css
-@aiajin aiajin 입력데이터에 따라 리스트 출력 - 테이블 이용
-50e251b 36 minutes ago
-86 lines (69 sloc)  1.36 KB
-  
+/* 먼저 초기화 */
 div, h1, form, header, body {
     margin:0;
     padding:0;
@@ -42,32 +13,40 @@ header>h1 {
     margin: 20px;;
 }
 
-#reg {
+
+
+/* div들에 대한 css */
+/* 후손선택자 사용와 , 통해서 선택 */
+#reg, #edit {
     padding:20px;
 }
 
-#reg td {
+#reg td, #edit td {
     width:150px;
 }
 
-#reg input {
+#reg input, #edit input {
     width:130px;
 }
 
-#reg label {
+/* 라벨 인라인 ㅡ> 블럭으로 변경하여 색상넣기. */
+/* 한 행이지만 두행처럼 보이는 효과가능  */
+#reg label, #edit label {
     display: block;
     background-color: black;
     color: floralwhite;
     padding : 5px;
 }
 
-#reg input[type=submit]{
+/* 속성선택 */
+#reg input[type=submit], #edit input[type=submit]{
     font-size: 1.2em;
     font-weight: bold;
     height:70px;
 }
 
-#reg input {
+/* input 안에 패딩을 주어 입력란 여유있도록 */
+#reg input, #edit input {
     padding: 10px;
 }
 
@@ -78,9 +57,9 @@ h2.title {
     margin : 10px 0;
 }
 
-#list {
+/* #list {
 
-}
+} */
 
 div.listarea {
     padding:20px;
@@ -114,15 +93,7 @@ div.listarea {
 .listtable td {
     text-align: center;
 }
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
+#edit {
+    display: none;
+}
