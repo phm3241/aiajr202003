@@ -13,7 +13,7 @@
             color: blanchedalmond;
         }
 
-        button.rmclass, button.attr {
+        button.rmclass, button.attr, button.css, button.btn {
             padding: 10px;
             font-size: 1.5em;
         }
@@ -21,6 +21,14 @@
         /* 이미지가 가지고 있는 영역을 인라인에서 블럭으로 바꿔주었다. */
         img {
             display: block;
+        }
+
+
+        div.memo {
+            padding: 10px;
+            border: 1px solid black;
+            margin: 10px;
+            color: blue;
         }
 
 
@@ -60,14 +68,17 @@
             console.log('imgPath : '+imgPath);
 
 
-            // setter 는 3가지 형태 
+            //---------------------------------------
+            // setter : 3가지 형태로 사용
             // jQuery.attr(속성이름, 속성값)
             // jQuery.attr(속성이름, 함수)   : 함수는 속성에 들어갈 수 있는 데이터를 반환해야한다. 
             // jQuery.attr({ })  : { } 객체 안에는 속성이름: 속성값 등을 정의
 
+            // 캐스팅
             var btn01=$('button.attr.string');
             var btn02=$('button.attr.func');
             var btn03=$('button.attr.obj');
+            var btn04=$('button.attr.rm');
 
             // var img01=$('img:first')
             var img01=$('img').first();
@@ -110,7 +121,136 @@
                     height: 100,
                     alt:'변경된 이미지 입니다.'
                 });
-            })
+            });
+
+            //---------------------------------------
+            // removeAttr() : 속성지워주는 메서드
+            btn04.click(function(){
+                $('img:last').removeAttr('src');
+            });
+
+
+
+            // -----------------------------------------------------------------------------------
+            // css() 메서드 : 속성값을 컨트롤
+            // -----------------------------------------------------------------------------------
+            
+            // jQuery.css(스타일 속성이름) : 현재 속성값을 반환하는 getter메서드이다.
+
+            var colorVal = $('div.memo').first().css('color');
+            console.log('colorVal : ' +colorVal);   
+            // 결과출력(키워드가 아니라 rgb표현으로 출력됨) : colorVal : rgb(0, 0, 255)
+
+
+            //---------------------------------------
+            // setter : 3가지 형태로 사용
+            // jQuery.css(스타일 속성이름, 속성값)
+            // jQuery.css(스타일 속성이름, 함수)
+            // jQuery.css(스타일 속성이름, 객체)
+
+            var btn05=$('button.css.string');
+            var btn06=$('button.css.func');
+            var btn07=$('button.css.obj');
+
+
+            // setter, 1번째 방법 
+            // jQuery.css(스타일 속성이름, 속성값)
+            // string, string
+            btn05.click(function(){
+                $('div.memo').css('color','red');
+            });
+
+            var colors=['orange', 'black', 'green']
+
+
+            // setter, 2번째 방법----왜 안될까.....---◆
+            // jQuery.css(스타일 속성이름, 함수)
+            // string, function(){}
+            btn06.click(function(){
+                $('div.memo').css('background-color', function(){
+                    return colors [index];
+                });
+            });
+
+
+            // setter, 3번째 방법
+            // jQuery.css(스타일 속성이름, 객체)
+            // {}
+            btn07.click(function(){
+                $('div.memo').css({
+                    fontSize:'2em',
+                    borderWidth: function(index){
+                        return (index+1)*10;
+                    }
+                })                
+            });
+
+
+
+
+
+            // -----------------------------------------------------------------------------------
+            // 태그안에 있는 내용을 가져오거나 넣어주는 메서드
+            // jQuery.html()
+            // jQuery.text()
+            // -----------------------------------------------------------------------------------
+
+            var headerDiv = $('div.header');
+
+            // console.log('html() : '+$('div.header').html());
+            console.log('html() : '+headerDiv.html());
+            console.log('text() : '+headerDiv.text());
+
+            // jQuery.html(html 문자열)
+            // html()메서드로 내용변경
+            // <h1>제목입니다</h1> ㅡ> <h3>변경된 문자열입니다.</h3>  
+            // headerDiv.html('<h3>변경된 문자열입니다.</h3>');
+
+            // jQuery.text(문자열)
+            // headerDiv.text('<h3>변경된 문자열입니다.</h3>');
+
+
+            // eq(index) :위치값
+            var btn08=$('button.btn.rm:eq(0)');
+            var btn09=$('button.btn.rm'.eq(1));  //--왜안될까...---◆
+
+
+            // jQuery.empty() : "객체 안의 내용"을 지워준다. 
+            // <div>의 내용인   <h1>제목입니다</h1>  부분만 삭제된다. 
+            btn08.click(function(){
+                headerDiv.empty();
+            });
+
+            // jQuery.remove() : 캐스팅 된 객체를 삭제해준다. 
+            btn09.click(function(){
+                headerDiv.remove();
+            });
+
+
+
+            // -----------------------------------------------------------------------------------
+            // 문서객체 생성◆
+            // .appendTo('body')
+            // -----------------------------------------------------------------------------------
+
+            var btn10 = $('button.btn.insert:first');
+            var btn11 = $('button.btn.insert:last');
+
+            btn10.click(function(){
+                var txt='body tag의 맨 나래에 요소가 추가됩니다.'
+                $('<h1></h1>').html(txt).appendTo('body');
+            });
+
+            
+            // ex. 입력 항목 추가 할때
+            btn11.click(function(){
+                var txt='제목 요소가 추가됩니다.'
+                $('<h3></h3>').html(txt).appendTo('div.header');
+
+            });
+
+
+
 
 
 
@@ -123,14 +263,43 @@
 
 <body>
 
-    <img src="../images/sunmoo.jpg" height="200">
-    <img src="../images/ruru.jpg" height="200">
-    <img src="../images/flower.png" height="200">
+    <button class="btn insert">body tag에 요소 추가</button>
+    <button class="btn insert">div.header에 요소 추가하기</button>
 
-    <button class="attr string">string-string</button>
+
+    <hr>
+
+    <button class="btn rm">내용 삭제</button>
+    <button class="btn rm">tag 삭제</button>
+
+    <hr> 
+
+    <div class="header">
+        <h1>제목입니다</h1>
+    </div>
+
+
+
+
+    <div class="memo">안녕하세요</div>
+    <div class="memo">반갑습니다</div>
+    <div class="memo">다음에 만나요</div>
+
+
+    <br><br><hr><br><br>
+
+    <!-- <img src="../images/sunmoo.jpg" height="200">
+    <img src="../images/ruru.jpg" height="200">
+    <img src="../images/flower.png" height="200"> -->
+
+    <button class="css string">string-string</button>
+    <button class="css func">string-function</button>
+    <button class="css obj">object{}</button>
+    
+    <!-- <button class="attr string">string-string</button>
     <button class="attr func">string-function</button>
     <button class="attr obj">object{}</button>
-
+    <button class="attr rm">removeAttr</button> -->
 
 
 
