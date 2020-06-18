@@ -61,7 +61,8 @@
         // jquery로 캐스팅ㅡ> .ready 메서드 
         $(document).ready(function(){
 
-            // 클래스 속성을 추가/삭제
+            // -----------------------------------------------------------------------------------
+            // 문서객체의 클래스 속성 추가/삭제
             // 추가 메서드 : addClass(클래스 속성값)
             // 삭제 메서드 : removeClass(클래스 속성값)
 
@@ -71,6 +72,9 @@
             $('button.rmclass').click(function(){
                 $('h1').removeClass('title');
             });
+
+
+
 
 
 
@@ -140,10 +144,16 @@
             });
 
             //---------------------------------------
-            // removeAttr() : 속성지워주는 메서드
+            // removeAttr(속성이름) : 속성지워주는 메서드
             btn04.click(function(){
                 $('img:last').removeAttr('src');
             });
+
+
+
+
+
+
 
 
 
@@ -238,15 +248,24 @@
                 headerDiv.empty();
             });
 
-            // jQuery.remove() : 캐스팅 된 객체를 삭제해준다. 
+            // jQuery.remove() : 캐스팅 된 "객체"를 삭제해준다. 
             btn09.click(function(){
                 headerDiv.remove();
             });
 
 
 
+
+
+
+
+
+
+
+
+
             // -----------------------------------------------------------------------------------
-            // 문서객체 생성◆..아무것도..안되네....ㅜ.....
+            // 문서객체 생성 및 삽입
             // .appendTo('body')
             // -----------------------------------------------------------------------------------
 
@@ -254,23 +273,17 @@
             var btn11 = $('button.btn.insert:last');
             var btn12 = $('button.btn.insert:eq(1)');
 
+
+            // $ ( ) 메서드의 매개변수에 
+            // HTML 태그를 문자열로 넣고, 
+            // 텍스트 노드 추가 ㅡ> (문서객체 생성)
+            // appendTo로 ㅡ> (문서객체 연결)
+
+            // 태그 생성 후 원하는 위치에 삽입
             btn10.click(function(){
-                var txt='body tag의 맨 나래에 요소가 추가됩니다.';
+                var txt='body tag의 맨 아래에 요소가 추가됩니다.';
                 $('<h1></h1>').html(txt).appendTo('body');
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             // 텍스트가 있는 태그 문서객체 생성 
             // ex. 입력 항목 추가 할때
@@ -280,54 +293,68 @@
 
             });
 
+
             btn12.click(function(){
-                // 단일태그 문서객체 생성 : 방법 2가지
+                // 단일태그 문서객체 생성 : 방법 2가지 (attr메서드 사용, {object} 사용)
+
+                // img 태그를 생성할 때는 $ ( ) 메서드로 문서 객체를 생성하고 
+                // attr ( ) 메서드로 속성을 입력
+                                
                 // $('<img>').attr('src', '../images/sunmoo.jpg').appendTo('div.header');
+
+
+                // $(A).appendTo(B) : A를 B의 뒷부분에 추가
                 // $('<img>', {
-                //     src: '../images/sunmmo.jpg',
+                //     src: '../images/sunmoo.jpg',
                 //     width: 100,
                 //     height: 100
+                // }).appendTo('div.header');
 
-                // }.appendTo('div.header'))
 
+                // $(A).prependTo(B) : A를 B의 앞부분에 추가
                 // $('<img>', {
-                //     src: '../images/sunmmo.jpg',
+                //     src: '../images/sunmoo.jpg',
                 //     width: 100,
                 //     height: 100
-
-                // }.prependTo('div.header'))
+                // }).prependTo('div.header');
                 
+
+                // $(A).insertAfter(B) : A를 B의 뒤에 추가
                 // $('<img>', {
-                //     src: '../images/sunmmo.jpg',
+                //     src: '../images/sunmoo.jpg',
                 //     width: 100,
                 //     height: 100
+                // }).insertAfter('div.header');
 
-                // }.insertAfter('div.header'))
-
+                // $(A).insertBefore(B) : A를 B의 앞에 추가
                 // $('<img>', {
-                //     src: '../images/sunmmo.jpg',
+                //     src: '../images/sunmoo.jpg',
                 //     width: 100,
                 //     height: 100
-
                 // }).insertBefore('div.header');
 
                 
                 // .append는 대상에 여러개를 넣을 수 있다. 
                 // .appendTo는 태그 객체를 여러개 넣을 수 없다..
-            //     $('div.header').append($('<img>',{src: '../images/sunmmo.jpg',
-            //         width: 100,
-            //         height: 100
-                
+                $('div.header').append($('<img>',{
+                    src: '../images/sunmoo.jpg',
+                    width: 100,
+                    height: 100
+                }), $('<div></div>'));
+
             });
-
-
             
 
-            setInterval(function(){
 
-            $('#imglist>img:first').appendTo('#imglist');
+            // -----------------------------------------------------------------------------------
+            // 문서객체 이동
+            // 기존 문서 객체를 선택하고 문서 객체 삽입 메서드를 사용하면 
+            // 문서 객체를 쉽게 다른 곳으로 이동시킬 수 있음
 
-            },2000);
+            // setInterval(function(){
+            // $('#imglist>img:first').appendTo('#imglist');
+
+            // },2000);
 
 
 
