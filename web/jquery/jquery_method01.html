@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> jQuery 문서객체 다루기 </title>
+    
+
+    <style>
+
+        .title {
+            background-color: black;
+            color: blanchedalmond;
+        }
+
+        button.rmclass, button.attr {
+            padding: 10px;
+            font-size: 1.5em;
+        }
+
+        /* 이미지가 가지고 있는 영역을 인라인에서 블럭으로 바꿔주었다. */
+        img {
+            display: block;
+        }
+
+
+
+    </style>
+
+    <!-- jquery libaray CDN을 통해서 로드. jqery하기 위해서 반드시 필요 -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    
+
+
+    <script>
+
+        // jquery로 캐스팅ㅡ> .ready 메서드 
+        $(document).ready(function(){
+
+            // 클래스 속성을 추가/삭제
+            // 추가 메서드 : addClass(클래스 속성값)
+            // 삭제 메서드 : removeClass(클래스 속성값)
+
+            $('h1').addClass('title');
+            $('h1').addClass('font');
+
+            $('button.rmclass').click(function(){
+                $('h1').removeClass('title');
+            });
+
+
+
+
+            // -----------------------------------------------------------------------------------
+            // attr() 메서드 : 속성을 변경
+            // -----------------------------------------------------------------------------------
+
+            // getter: attr(속성이름)
+            var imgPath = $('img').attr('src');
+            console.log('imgPath : '+imgPath);
+
+
+            // setter 는 3가지 형태 
+            // jQuery.attr(속성이름, 속성값)
+            // jQuery.attr(속성이름, 함수)   : 함수는 속성에 들어갈 수 있는 데이터를 반환해야한다. 
+            // jQuery.attr({ })  : { } 객체 안에는 속성이름: 속성값 등을 정의
+
+            var btn01=$('button.attr.string');
+            var btn02=$('button.attr.func');
+            var btn03=$('button.attr.obj');
+
+            // var img01=$('img:first')
+            var img01=$('img').first();
+
+            // $('button.attr.string').css('color', 'red');
+            btn01.css('color', 'red');
+
+            // $('button.attr.func').css('color', 'blue');
+            btn02.css('color', 'blue');
+            
+            // $('button.attr.obj').css('color', 'green');
+            btn03.css('color', 'green');
+
+
+            // setter, 1번째 방법 
+            // jQuery.attr(속성이름, 속성값)
+            // button 'string-string' 클릭시 ㅡ> 이미지 변경  
+            btn01.click(function(){
+                img01.attr('src', '../images/sunmoo2.jpg');
+            });
+
+
+            // setter, 2번째 방법
+            // jQuery.attr(속성이름, 함수)   : 함수는 속성에 들어갈 수 있는 데이터를 반환해야한다. 
+            // string-function(){}
+            btn02.click(function(){
+                $('img').attr('height', function(index){
+                    return (index+1)*100;
+                });
+            }); 
+
+
+            // setter, 3번째 방법
+            // jQuery.attr({ })  : { } 객체 안에는 속성이름: 속성값 등을 정의
+            // { }
+            btn03.click(function(){
+                $('img:last').attr({
+                    src:'../images/sunmoo.jpg',
+                    width: 100,
+                    height: 100,
+                    alt:'변경된 이미지 입니다.'
+                });
+            })
+
+
+
+        });
+
+    </script>
+
+
+</head>
+
+<body>
+
+    <img src="../images/sunmoo.jpg" height="200">
+    <img src="../images/ruru.jpg" height="200">
+    <img src="../images/flower.png" height="200">
+
+    <button class="attr string">string-string</button>
+    <button class="attr func">string-function</button>
+    <button class="attr obj">object{}</button>
+
+
+
+
+    <h1> 안녕하세요</h1>
+    <button class="rmclass">removeClass</button>
+    
+
+
+
+
+
+
+
+</body>
+</html>
