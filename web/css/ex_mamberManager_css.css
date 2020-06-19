@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: black;
+    color: seashell;
+
+    font-weight: normal;
+
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-bottom: 15px;;
+}
+
+.title {
+    color: gray;
+    
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: black;
+    font-weight: bold;
+}
+
+td  {
+    padding: 7px;
+}
+
+input {
+    height: 20px;
+}
+
+#submit {
+    /* 위치를 어떻게 했었지? */
+    width: 70%;
+    height: 30px;
+
+    background-color: black;
+    color: white;
+}
