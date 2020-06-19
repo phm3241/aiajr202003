@@ -57,18 +57,26 @@
             var id=$('#uid').val();
             var pw=$('#upw').val();
             var name=$('#uname').val();
+
+            console.log(id);
             
             // .push 메서드 : 배열에 저장
-            members.push(new members(id, pw, name));
+            members.push(new Member(id, pw, name));
             console.log(members);
 
             // 회원 리스트에 추가
-            displayTable(); 
+            showList(); 
 
         }
 
 
         function displayTable(){
+            
+            var listHTML = '';
+
+            var basicList = '<table><tr><td></td><tr></table>'
+            $('#showList+div').append(basicList);
+            
 
 
 
@@ -78,13 +86,22 @@
         $(document).ready(function(){
 
             // 먼저 브라우저에 회원리스트 출력
-            displayTable();
+            showList();
 
 
             // 등록버튼 클릭시 (sumit 이벤트 발생시)
             $('#submit').click(function(){
-                alert('회원으로 등록되었습니다.');
+                
+                // 버튼
+                $(this).addClass('click');
                 create();
+
+                // 팝업이 무조건 되는게 아니라..
+                // 추가가 잘 되었으면, 회원등록 팝업이 뜨도록..
+                // 조건을 어떻게 쓰지?
+                // if(){
+                //     alert('회원으로 등록되었습니다.');
+                // }
             });
             
 
@@ -131,7 +148,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <h4>비밀번호</h4>
+                            <label for="upw" class="subtitle">비밀번호</label>
                         </td>
                         <td>
                             <input type="password" id="upw" name="upw" required>
@@ -139,10 +156,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <h4>이름</h4>
+                            <label for="uname" class="subtitle">이름</label>
                         </td>
                         <td>
-                            <input type="text" id="unmae" name="unmae" required>
+                            <input type="text" id="uname" name="uname" required>
                         </td>
                     </tr>
                     <tr>
@@ -156,7 +173,10 @@
 
 
         <div id="list">
-            <h3 class="title">회원리스트</h3>
+            <h3 class="title" id="showList" name="showList" >회원리스트</h3>
+            <div>
+
+            </div>
 
         </div>
 
