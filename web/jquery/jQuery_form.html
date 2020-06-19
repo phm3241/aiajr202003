@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> jquery Form Control </title>
+    
+    <style>
+
+        
+        #myForm>label {
+            /* myForm 아래에 있는 label 줄바꿈되어 보이도록 display를 block형식의 영역으로 설정 */
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type=submit]{
+            margin-top: 20px;
+        }
+
+
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        
+
+        $(document).ready(function(){
+
+
+            // 키보드이벤트 
+            // keyup() : 키를 누르고 떼는 순간 이벤트 발생하는 메서드
+            $('#memo').keyup(function(){
+                // alert('key event');
+                // alert($(this).val());    입력한 데이터의 값
+                
+                // 입력한 데이터의 크기 (글자수)
+                // this는 keyup이라는 이벤트가 발생한 위치? 객체?
+                var strLength = $(this).val().length;
+
+
+                // 글자수 제한하고, 제한한 글자수만큼만 표시
+                // 자바스크립트 +더하기 연산 제외한 연산에서는 숫자연산으로 하기 때문에 가능
+                if((50-strLength)<0){
+
+                    alert('50자까지만 작성이 가능합니다.');
+
+                    // 사용자가 입력한 데이터에서 50글자만 저장
+                    var strVal = $(this).val().substr(0,50);
+
+                    // 
+                    $(this).val(strVal);
+                    strLength=50;
+                     
+                };
+
+                // 동위선택자로 선택 후 ㅡ> 위에서 계산된 글자수를 텍스트로 넣어준다. 
+                $('#memo+div.cnt').text(strLength);
+
+            });
+
+
+            // 입력양식 '월'의 옵션은 자바스크립트로 코드를 동적으로 만들어서 body의 #month 부분에 넣어주기
+            // 반복문으로 월 만들기
+            for(var i=1; i<13; i++){
+
+                var seleced = '';
+                
+                if(i==6){
+                    seleced = 'seleced';
+                }
+
+                $('#month').append('<option value="'+i+'" '+seleced+'>'+i+'</option>')
+
+            }
+
+
+
+
+
+
+
+
+
+
+        });
+
+        // var text = 'abcd';
+        // text.sub
+
+    </script>
+
+</head>
+
+<body>
+    
+    <form id="myForm">
+
+
+        <!-- 정규식 -->
+        <!-- 유효성검사를 편하게 할 수 있으나, 정규식 암호같은 작성방식을 외워야한다.  -->
+        <!-- []는 쓸 수 있는 문자열의 범위표현 -->
+        <label>우편번호</label>
+        <input type="text" pattern="[0-9]{5}" value="11111"> 숫자만 입력해주세요
+
+
+
+        <!-- 커서가 안쪽으로 들어가질 수 있도록 하는 for. -->
+        <label for="memo">memo</label>
+
+        <!-- 이벤트를 적용해야하는 위치 -->
+        <textarea id="memo"></textarea>
+        <!-- 글자수체크 하는 div -->
+        <div class="cnt">0</div>
+
+        <!-- laber for="uid"하게되면, 아이디 글자눌렀을 때 "uid"부분으로 커서가 들어간다. -->
+        <label for="uid">아이디</label>
+        <input type="text" 
+                id="uid"
+                pattern="[a-zA-Z0-9]{2,10}"
+                placeholder="ID" 
+                autocomplete="off" 
+                autofocus  
+                required>
+
+        <label for="age">age</label>
+        <input type="number" id="age" required>
+        <!-- 숫자타입으로 입력받더라도.. val() ㅡ> string 이기 때문에, 받을 때 string으로 받을수밖에 없다. 
+        따라서 Integer.parseInt, Number() 메서드로? 변환필요하므로, 숫자타입 입력받는 것이 좋다.  -->
+
+        <label for="date">date</label>
+        <input type="date" id="date" required>
+
+        <label for="datetime">datetime</label>
+        <input type="datetime-local" id="datetime" required>
+
+        
+        <!-- radio 타입은 여러개중 하나 선택하는 기능. name속성이 같아야한다. -->
+        <label for="gender1">gender</label>
+        <input type="radio" id="gender1" name="gender" value="m" checked>남
+        <input type="radio" id="gender2" name="gender" value="f">여
+
+        <label for="agree">개인정보 활용 동의</label>
+        <input type="checkbox" id="agree"> 개인정보 활용에 동의합니다. 
+
+        <!-- option의 값이 select의 value값이 된다. -->
+        <label for="year">년도</label>
+        <select id="year">
+            <option value="2020" selected>2020</option>
+            <option value="2019" >2019</option>
+            <option value="2018" >2018</option>
+        </select>
+
+
+        <label for="month">월</label>
+        <select id="month">
+            <!-- 이 부분 월의 옵션(1~12)은 자바스크립트로 코드만들어서 동적으로 추가하기  -->
+        </select>
+        
+
+
+
+        
+
+
+
+
+
+        <div>
+            <input type="submit" value="입력완성">
+        </div>
+
+
+
+
+    </form>
+
+
+</body>
+</html>
