@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegExp</title>
+
+    <style>
+        form>input {
+            padding: 15px;
+            font-size: 1.5em;
+        }
+
+    </style>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    
+    <script>
+
+        $(document).ready(function(){
+
+            // submit 이벤트 발생시, 유효성검사
+            $('form').submit(function(){
+
+                // 정규식 표현방법 1 : RegExp 객체를 생성해서 사용
+                // flag는 표현하지 않아도된다. 
+                var objCheck = new RegExp('[a-z]');
+
+                // 정규식 표현방법 2 : 객체초기화(Object initializer) 방법
+                var idCheck = /[a-z]/;
+
+                var uid = $('#uid').val();
+                
+                // 정규식 만들어둔 RegExp 객체에 test메서드로 유효성 검사  
+                // .test(유효성 검사 대상) 메서드 : 정규식 맞는지 확인 후 ㅡ> true/false 반환
+                // if(!objCheck.test(uid)){
+                //     alert('영문자 중 소문자만 입력이 가능합니다. ');
+                //     return false; // form의 action이 들어가지 않도록. 
+                // }
+
+                if(!idCheck.test(uid)){
+                    alert('영문자 중 소문자만 입력이 가능합니다. ');
+                    return false; // form 의 action이 들어가지 않도록. 
+                }
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+        });
+
+    </script>
+
+</head>
+
+<body>
+    
+    <form>
+
+        <!-- submit 눌렀을 때 text 유효성 검사 할 수 있는 테스트. -->
+        ID <input type="text" id="uid"><span></span>
+        <br> 
+        <input type="submit">
+
+    </form>
+
+
+
+
+    
+</body>
+</html>
