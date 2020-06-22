@@ -70,11 +70,23 @@
         }
 
 
+        // 회원 리스트 화면출력
         function displayTable(){
             
             var listHTML = '';
 
-            var basicList = '<table><tr><td></td><tr></table>'
+            var basicList = ' ';
+            basicList += '<table>';
+            basicList +=    '<tr>';
+            basicList +=         '<td>'+index+'</td>';
+            basicList +=         '<td>'+index+'</td>';
+            basicList +=         '<td>'+index+'</td>';
+            basicList +=         '<td>'+index+'</td>';
+            basicList +=         '<td>'+index+'</td>';
+            basicList +=    '<tr>';
+            basicList += '</table>';
+            
+            //  html 추가
             $('#showList+div').append(basicList);
             
 
