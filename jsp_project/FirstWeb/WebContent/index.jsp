@@ -1,8 +1,3 @@
-<!-- jsp "디렉티브 영역" : 설정들을 이쪽에서 해준다. 
-	 pageEncoding 응답, 만들어내야하는 코드의 인코딩
-	 , contentType(응답) : text/xml, json으로 변경가능. 
-	 아래에 있는 html 코드들은 jsp입장에서는 텍스트일 뿐이다. -->
-<!-- jsp쓰는 이유는 동적으로 페이지를 만들어준다. -->
 <%@ page import="java.util.Date"%>
 <%@ page language="java" 
 		 contentType="text/html; charset=UTF-8"
