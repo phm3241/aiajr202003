@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.10.4.js"></script>
+<style></style>
+</head>
+<body>
+	<h3>실명확인 회원가입</h3>
+        <hr>
+    
+        <form action="ex_regResult.jsp" method="get">
+        <table>
+            <tr>
+                <td colspan="2"> 
+                    <input type="radio" name="select" value="아이핀"> 아이핀
+                    <input type="radio" name="select" value="주민등록번호"> 주민등록번호 
+                </td>
+            </tr>
+            
+            <tr>
+                <td>이름</td>
+                <td><input type="text" name="uname" required></td>
+            </tr>
+            
+            <tr>
+                <td>주민등록번호</td>
+                <td>
+                    <input type="text" name="regNum01" required>  
+                    - <input type="password" name="regNum02" required>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2"> 
+                    <input type="checkbox" name="agree"> 주민등록번호 처리에 동의합니다.
+                </td>
+            </tr>
+            
+            <tr>
+                <td><input type="submit" value="  v 확인  " ></td>
+                <td></td>
+            </tr>
+            
+        </table> 
+        </form>
+        <hr>
+
+
+
+
+
+
+
+</body>
+</html>
