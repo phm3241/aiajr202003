@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 처리결과</title>
 </head>
 <body>
-	<h1>회원가입 전송결과</h1>
+	<h1>회원가입 처리결과</h1>
+	<h3>request.getParameter() 메서드로 사용자입력정보 가져오기 </h3>
 	
 	<table border="1">
 		<tr>
