@@ -32,14 +32,46 @@
 					String[] likes = request.getParameterValues("like");
 					
 					for(int i=0; i<likes.length; i++){
-						out.println(likes[i]+"<br>");   // java<br>
+						out.println(likes[i]);   // java<br>
 					}
 				%>
 				<%-- <td><%= request.getParameter("like") %></td> --%>
-			</td>
+			</td>			
+		</tr>
+		<tr>
+			<td>요청 메서드</td>
+			<td> <%= request.getMethod() %></td>
+		</tr>
+		<tr>
+			<td>쿠키 정보</td>
+			<td> 
+				 <%
+				 // 쿠키타입의 배열반환
+				 // Cookie : getName(), getValue()
+				 Cookie[] cookies = request.getCookies();
+				 for(int i=0; i<cookies.length; i++){
+					 out.println(cookies[i].getName()+"="+cookies[i].getValue());
+				 }
+				 %>
+			</td> 
+		</tr>
+		<tr>
+			<td>요청 정보 url</td>
+			<td> 
+				 <%= request.getProtocol() %> <br>
+				 <%= request.getRequestURL() %> <br> <!-- 전체 주소 -->
+				 <%= request.getRequestURI() %> <br> <!-- 사용자의 요청주소 -->
+			</td> 
+		</tr>
 			
-			
-		</tr>	
 	</table>
+	
+	
+	<!-- 위에서 사용한 request 객체가 요청정보를 담고 forward2.jsp에서도 쓰인다.
+	model2 방식에서 중요한 부분. -->
+	
+	<jsp:forward page="forward2.jsp"/>
+	
+	
 </body>
 </html>
