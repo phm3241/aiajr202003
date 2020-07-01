@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<style></style>
+</head>
+<body>
+
+	<!-- web.xml 에서 <welcome-file-list>에 지정해두었기 떄문에
+	context 경로만 쳐도 index.html과 index.jsp 파일이 실행되어 브라우저에 보인다.
+	index.html이 순서가 더 위에 있기 떄문에 먼저 실행되어 보이고,
+	여기서 index.jsp로 보낼 수도 있다.  -->
+	<script>
+		location.href='index.jsp'	
+	</script>
+</body>
+</html>
