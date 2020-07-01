@@ -8,49 +8,6 @@ function Member(uid, upw, uname){
     this.name = uname;
 };
 
-//  var id = uid;
-//  var pw = upw;
-//  var name = uname;
-// };
-
-// getter, setter 
-// this.getId = function(){
-//     return id;
-// };
-
-// this.setId = function(w){
-//     id = idw;
-// };
-
-// this.getPw = function(){
-//     return pw;
-// };
-
-// this.setPw = function(h){
-//     pw = upw;
-// };
-
-// this.getName = function(){
-//     return name;
-// };
-
-// this.setName = function(h){
-//     name = uname;
-// };
-
-    
-
-// 공통함수 정의 : 회원등록. 해서 저장하면,  
-// key = arr 로 저장된다. JSON형태로 들어간다.
-
-// Member.prototype.toString = function(){
-//     var tr = document.createElement('tr');
-//     var td = document.createElement('td');
-//     var id = members[i].getId;
-//     td.appendChild(id);
-// };
-
-
 // 배열생성
 var members = [];
 
