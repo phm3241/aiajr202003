@@ -1,3 +1,4 @@
+<%@page import="util.CookieBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -17,9 +18,11 @@
 	
 	<%
 		// 쿠키정보 수정는 새로운 객체 생성에서 덮어쓰면 된다. 
-		Cookie cookie = new Cookie("uid","hot");
-		cookie.setPath("/web/");
-		response.addCookie(cookie);
+		// Cookie cookie = new Cookie("uid","hot");
+		// cookie.setPath("/web/");
+			
+		//response.addCookie(cookie);
+		response.addCookie(CookieBox.createCookie("uid", "HOT", "/FirstWeb/", -1));
 	%>
 	
 	<a href="viewCookie.jsp">쿠키값 확인하기</a>

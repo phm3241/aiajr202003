@@ -23,13 +23,13 @@
 	<%@ include file="/include/header.jsp" %>
 	
 	<div>
-		<h1>로그인</h1>
+		<h1>로그인 완료 (처리결과)</h1>
 	</div>
 	
-	<form action="memberLoginForm.html" method="post">
-		ID <input type="text" class="login" name="id"> <br>
-		PW <input type="password" class="login" name="pw"> <br>
-		아이디 기억하기 <input type="checkbox" name="idCheck"> <br>
+	<form action="memberLoginForm.jsp" method="post">
+		ID <input type="text" class="login" name="id">
+		PW <input type="password" class="login" name="pw">
+		아이디 기억하기 <input type="checkbox" name="idCheck">
 		login <input type="submit" class="login" name="login">
 	</form>
 	
