@@ -37,7 +37,7 @@
 
 	<%-- <%@ include file="../include/header.jsp" %> --%>
 	<!-- 파일경로 찾을 때, / 슬래시로 시작하면, 절대경로. 루트가 된다.  -->
-	<%@ include file="/include/header.jsp" %>
+	<%@ include file="/include/header2.jsp" %>
 	
 	<div>
 		<h1>마이페이지</h1>
@@ -45,7 +45,7 @@
 	
 	<h2> id : <%= mInfo.getUid() %></h2>
 	<h2> pw : <%= mInfo.getPw() %></h2>
-	<a href="logout.jsp">logout</a>
+	<a href="/op/member/logout_sample2.jsp">logout</a>
 
 
 	<%@ include file="/include/footer.jsp" %>

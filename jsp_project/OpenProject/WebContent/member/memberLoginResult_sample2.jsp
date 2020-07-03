@@ -55,7 +55,7 @@
 </head>
 <body>
 
-	<%@ include file="/include/header.jsp"%>
+	<%@ include file="/include/header2.jsp"%>
 
 	<div>
 		<h1>로그인</h1>
@@ -84,8 +84,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td><a href="mypage/mypage.jsp">My Page</a></td>
-				<td><a href="logout.jsp">logout</a></td>
+				<td><a href="/op/member/mypage/mypage.jsp">My Page</a></td>
+				<td><a href="logout_sample2.jsp">logout</a></td>
 			</tr>
 		</table>
 
