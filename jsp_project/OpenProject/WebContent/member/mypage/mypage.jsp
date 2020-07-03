@@ -1,5 +1,21 @@
+<%@page import="model.MemberInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	// 세션정보 받아오기
+	MemberInfo mInfo = (MemberInfo)session.getAttribute("memberInfo1");
+	
+	if(mInfo==null){
+		// response.sendRedirect("memberLoginForm_sample2.jsp");
+		%>
+			<script>
+			alert('사용자 전용 페이지 입니다. \n 로그인 해주세요.');
+			location.href='sessionLoginForm.jsp';
+			</script>
+		<%
+	};
+%>
     
 <!DOCTYPE html>
 <html>
@@ -26,6 +42,10 @@
 	<div>
 		<h1>마이페이지</h1>
 	</div>
+	
+	<h2> id : <%= mInfo.getUid() %></h2>
+	<h2> pw : <%= mInfo.getPw() %></h2>
+	<a href="logout.jsp">logout</a>
 
 
 	<%@ include file="/include/footer.jsp" %>

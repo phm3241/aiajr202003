@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<% 
+	String uid = request.getParameter("uid");
+	String pw = request.getParameter("pw");
+	String chk = request.getParameter("remember");
+%>
+
+
+
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,14 +36,26 @@
 	</div>
 	
 	<form action="memberLoginForm.html" method="post">
-		ID <input type="text" class="login" name="id"> <br>
-		PW <input type="password" class="login" name="pw"> <br>
-		아이디 기억하기 <input type="checkbox" name="idCheck"> <br>
-		login <input type="submit" class="login" name="login">
+		<table>
+			<tr>
+				<td>ID</td>
+				<td><input type="text" class="login" name="uid"> </td>
+			</tr>
+			<tr>
+				<td>PW</td>
+				<td><input type="password" class="login" name="pw"> </td>
+			</tr>
+			<tr>
+				<td>아이디 기억하기</td>
+				<td><input type="checkbox" name="remember" value="r"> </td>
+			</tr>
+			<tr>
+				<td>login</td>
+				<td><input type="submit" class="login" name="login"> </td>
+			</tr>
+		</table>
 	</form>
 	
-	<%--@ include file="memberLoginForm.html" --%>
-
 
 	<%@ include file="/include/footer.jsp" %>
 	
