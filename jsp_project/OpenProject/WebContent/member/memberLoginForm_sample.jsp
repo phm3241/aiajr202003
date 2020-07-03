@@ -1,29 +1,31 @@
 <%@page import="util.CookieBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%
-	// 저장된 쿠기 확인하기
-	CookieBox cookieBox = new CookieBox(request);
 
+	// 저장된 쿠키 확인하기 
+	CookieBox cookieBox = new CookieBox(request);
 	String cookieUid = cookieBox.getValue("uid");
 	
 	String uidValue = "";
 	String checked = "";
 	
-	if(cookieUid != null){
+	if(cookieUid!=null){
 		uidValue = cookieUid;
 		checked = "checked";
 	}
-
 	
+	
+ 
 %>
+
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 
@@ -35,12 +37,14 @@
 	<%@ include file="/include/header.jsp" %>
 
 	<div>
-		<h1 class="subtitle">로그인</h1>memberLoginForm_sample.jsp
+		<h1 class="subtitle">로그인</h1>
 		
 		<hr>
 		
-		<form action="memberLoginResult_sample.jsp" method="post">
+		<form action="login.jsp" method="post">
 		
+			<!-- 이전 페이지 주소 저장 : request.getHeader("referer") -->
+			<input type="text" name="redirecUri" value="<%= request.getHeader("referer")%>" style=" width : 50% ;" >			
 			<table class="table">
 				<tr>
 					<td> ID </td>

@@ -20,22 +20,24 @@ public class LoginInfo {
 	}
 
 	
-	// getter, setter
+	// getter
+	// 회원정보 변경은 생성자 통해서 변경저장되어야하기 떄문에
+	// setter는 없어야한다. 
 	public String getUid() {
 		return uid;
 	}
 
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
+//	public void setUid(String uid) {
+//		this.uid = uid;
+//	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+//	public void setName(String name) {
+//		this.name = name;
+//	}
 
 	@Override
 	public String toString() {

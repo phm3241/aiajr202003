@@ -103,7 +103,7 @@
 %>
 <script>
 	alert("아이디 또는 비밀번호를 확인해주세요.");
-	histoty.go(-1);
+	history.go(-1);
 	
 </script>
 

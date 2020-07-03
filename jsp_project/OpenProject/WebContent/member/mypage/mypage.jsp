@@ -11,7 +11,8 @@
 		%>
 			<script>
 				alert('사용자 전용 페이지 입니다. \n 로그인 해주세요.');
-				location.href='sessionLoginForm.jsp';
+				location.href='/op/member/memberLoginForm_sample2.jsp';
+				
 			</script>
 		<%
 	};
@@ -43,8 +44,8 @@
 		<h1>마이페이지</h1>
 	</div>
 	
-	<h2> id : <%= mInfo.getUid() %></h2>
-	<h2> pw : <%= mInfo.getPw() %></h2>
+		<h2> id : <%= mInfo.getUid()%> </h2>
+		<h2> pw : <%= mInfo.getPw()%> </h2>
 	<a href="/op/member/logout_sample2.jsp">logout</a>
 
 
