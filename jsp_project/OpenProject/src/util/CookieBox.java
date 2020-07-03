@@ -6,37 +6,39 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+//  쿠기를 다루는 목적으로 작성
 public class CookieBox {
 	
-	// Cookie 목록을 저장해서 관리할 Map 생성
+	// Cookie 목록을 Map에 저장해서 관리
 	private Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
 	
-	// 생성자 ㅡ> 클라이언트 요청정보 받기 ㅡ> 쿠키배열에 담기 ㅡ> 쿠키박스 생성
+	// 생성자 통해서 Map에 정보 저장?
 	public CookieBox(HttpServletRequest request) {
 		
-		// 쿠기배열에 사용자 요청정보의 쿠키 담기
 		Cookie[] cookies = request.getCookies();
 		
-		// 배열에 담은 쿠키 ㅡ> 반복문으로  Map에 저장
+		// 쿠키 데이터를 Map에 모두 저장
 		for(int i=0; i<cookies.length; i++) {
+			
+			// Map 데이터 저장 
 			cookieMap.put(cookies[i].getName(), cookies[i]);
 		};
+			
 	};
 	
 	
-	
-	// name 키값으로 쿠키 객체 반환
+	// 쿠기 가져와 반환.
 	public Cookie getCookie(String name) {
+		
 		return cookieMap.get(name);
 	};
 	
-	
-	// 쿠키 객체 ㅡ> 쿠키 값 반환
+	// 쿠기의 값 반환 
 	public String getValue(String name) {
 		
 		String result = null;
 		
-		// 반환한 쿠키객체 cookie에 담아서
+		// 쿠키가 있는지 확인
 		Cookie cookie = getCookie(name);
 		
 		if(cookie != null) {
@@ -46,32 +48,34 @@ public class CookieBox {
 		return result;
 	};
 	
-	// name 키값으로 쿠키 객체 존재유무 확인
+	
+	// 키값을 가지고 쿠키값 존재유무 확인 : true/false
 	public boolean exist(String name) {
-		return cookieMap.get(name) !=null;
+		return cookieMap.get(name) != null;
 	};
 	
 	
-	
+
 	// 쿠키 객체 생성 메서드 : 오버로딩으로 만들기
 	// 인스턴스 생성없이 바로 바로 생성할 수 있는 static 메서드
 	public static Cookie createCookie(String name, String value) {
 		return new Cookie(name, value);
 	};
-	
+
 	
 	public static Cookie createCookie(String name, String value, String path, int maxAge) {
 		
-		// 기본객체 생성
 		Cookie cookie = new Cookie(name, value);
 		
-		// 경로 및 유지기간 설정
+		// 경로 설정
 		cookie.setPath(path);
+		
+		// maxAge 설정
 		cookie.setMaxAge(maxAge);
 		
 		return cookie;
 	};
-	
+
 	
 	public static Cookie createCookie(String name, String value, String domain, String path, int maxAge) {
 		
@@ -89,4 +93,18 @@ public class CookieBox {
 		return cookie;
 	};
 
-}; // class end
+	
+	
+	
+}  //class end 
+
+
+
+
+
+
+
+
+
+
+
