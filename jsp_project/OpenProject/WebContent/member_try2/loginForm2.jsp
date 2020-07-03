@@ -32,14 +32,14 @@
 </head>
 <body>
 
-	<%@ include file="/include/header.jsp" %>
+	<%@ include file="/member_try2/include/header.jsp" %>
 
 	<div>
 		<h1 class="subtitle">로그인</h1>
 		
 		<hr>
 		
-		<form action="memberLoginResult_sample2.jsp" method="post">
+		<form action="loginResult2.jsp" method="post">
 		
 			<table class="table">
 				<tr>
@@ -64,6 +64,6 @@
 		
 	</div>
 
-	<%@ include file="/include/footer.jsp" %>
+	<%@ include file="include/footer.jsp" %>
 </body>
 </html>

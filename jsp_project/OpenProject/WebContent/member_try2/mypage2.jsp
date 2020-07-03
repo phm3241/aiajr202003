@@ -11,7 +11,8 @@
 		%>
 			<script>
 				alert('사용자 전용 페이지 입니다. \n 로그인 해주세요.');
-				location.href='/op/member/memberLoginForm_sample2.jsp';
+				location.href='/op/member_try2/loginForm2.jsp';
+
 				
 			</script>
 		<%
@@ -38,18 +39,18 @@
 
 	<%-- <%@ include file="../include/header.jsp" %> --%>
 	<!-- 파일경로 찾을 때, / 슬래시로 시작하면, 절대경로. 루트가 된다.  -->
-	<%@ include file="/include/header2.jsp" %>
+	<%@ include file="/member_try2/include/header2.jsp" %>
 	
 	<div>
 		<h1>마이페이지</h1>
 	</div>
 	
-		<h2> id : <%= mInfo.getUid()%> </h2>
+		<h2> id :  </h2>
 		<h2> pw :  </h2>
-	<a href="/op/member/logout_sample2.jsp">logout</a>
+	<a href="logout2.jsp">logout</a>
 
 
-	<%@ include file="/include/footer.jsp" %>
+	<%@ include file="include/footer.jsp" %>
 	
 	
 	
