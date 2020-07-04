@@ -6,6 +6,7 @@
 	// 세션정보 받아오기
 	MemberInfo mInfo = (MemberInfo)session.getAttribute("memberInfo1");
 	
+	System.out.print("minfo = " + mInfo);
 	if(mInfo==null){
 		// response.sendRedirect("memberLoginForm_sample2.jsp");
 		%>
@@ -44,9 +45,26 @@
 	<div>
 		<h1>마이페이지</h1>
 	</div>
+		
+		<h2> id : <% 
+			if(mInfo != null) {
+				%> 		
+				<%= mInfo.getUid() %>			
+		
+		<% } %>
+		
+		</h2>
+		
+	<h2> pw : <% 
+			if(mInfo != null) {
+				%> 		
+				<%= mInfo.getPw() %>			
+		
+		<% } %>
+		
+		</h2>
+		
 	
-		<h2> id :  </h2>
-		<h2> pw :  </h2>
 	<a href="logout2.jsp">logout</a>
 
 
