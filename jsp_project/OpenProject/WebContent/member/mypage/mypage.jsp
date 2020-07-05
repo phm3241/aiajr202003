@@ -1,22 +1,14 @@
-<%@page import="model2.MemberInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ include file="/include/sessionCheck.jsp" %>
+
 <%
-	// 세션정보 받아오기
-	MemberInfo mInfo = (MemberInfo)session.getAttribute("memberInfo1");
-	
-	if(mInfo==null){
-		// response.sendRedirect("memberLoginForm_sample2.jsp");
-		%>
-			<script>
-				alert('사용자 전용 페이지 입니다. \n 로그인 해주세요.');
-				location.href='/op/member/memberLoginForm_sample2.jsp';
-				
-			</script>
-		<%
-	};
+	// incluede는 파일을 가져와서 현재 이 페이지에서 실행하기 때문에
+	// 세션체크 파일에 있는 변수 loginInfo를 바로 사용가능
+	// 세션 정보 있을 때 마이페이지 출력
+	if(loginInfo!=null){
 %>
+
     
 <!DOCTYPE html>
 <html>
@@ -38,22 +30,47 @@
 
 	<%-- <%@ include file="../include/header.jsp" %> --%>
 	<!-- 파일경로 찾을 때, / 슬래시로 시작하면, 절대경로. 루트가 된다.  -->
-	<%@ include file="/include/header2.jsp" %>
+	<%@ include file="/include/header.jsp" %>
 	
 	<div>
 		<h1>마이페이지</h1>
 	</div>
 	
-		<h2> id : <%= mInfo.getUid()%> </h2>
-		<h2> pw :  </h2>
-	<a href="/op/member/logout_sample2.jsp">logout</a>
+		<hr>
+		
+		<h3>로그인 회원 정보 </h3>
+		
+		<table class="table">
+			<tr>
+				<td>아이디</td>
+				<td><%= loginInfo.getUid() %></td>				
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><%= loginInfo.getUname() %></td>				
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td></td>				
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><%= loginInfo.getEmail() %></td>				
+			</tr>
+			<tr>
+				<td>사진</td>
+				<td><%= loginInfo.getPhoto() %></td>				
+			</tr>
+		</table>
+		
+	</div>
+
 
 
 	<%@ include file="/include/footer.jsp" %>
 	
 	
-	
-	
-	
 </body>
 </html>
+
+<% } %>
