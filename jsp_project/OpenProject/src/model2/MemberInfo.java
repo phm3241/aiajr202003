@@ -1,13 +1,13 @@
-package model;
+package model2;
 
-public class RequestMemberInfo {
+public class MemberInfo {
 
 	private String id; 
 	private String pw; 
 	private String uname;
 	
 	// 기본생성자는 그대로
-	public RequestMemberInfo() {
+	public MemberInfo() {
 	}
 	
 	

@@ -1,4 +1,4 @@
-<%@page import="model.MemberInfo"%>
+<%@page import="model2.LoginInfo"%>
 <%@page import="util.CookieBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -30,7 +30,7 @@
 	
 	if(uid.equals(pw)){
 		
-		session.setAttribute("memberInfo1", new MemberInfo(uid, pw));
+		session.setAttribute("login", new LoginInfo(uid, pw));
 		loginChk = true;	
 	} 
 
@@ -93,7 +93,7 @@
 
 	</div>
 
-	<%@ include file="include/footer.jsp"%>
+	<%@ include file="/member_try2/include/footer.jsp"%>
 </body>
 </html>
 

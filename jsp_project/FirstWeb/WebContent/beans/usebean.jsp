@@ -9,7 +9,7 @@ id : 식별자. 객체생성을 했으니 식별할 수 있는 이름 (속성의
 scope :  page, request, session, application - 속성을 사용할 수 있는 객체들의 속성에 저장하게 된다? 
 객체의 속성에 객체가 이미 있다면, 새롭게 생성하는 것이 아니라, 기존의 객체를 가져다 쓴다. 
 -->
-<jsp:useBean id="memberInfo" class="model.LoginInfo" scope="page"/>
+<jsp:useBean id="memberInfo" class="model.MemberInfo" scope="page"/>
 
 <!DOCTYPE html>
 <html>

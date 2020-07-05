@@ -1,78 +1,60 @@
-<%@page import="model.MemberInfo"%>
+<%@page import="model2.LoginInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+	pageEncoding="UTF-8"%>
+
 <%
 	// 세션정보 받아오기
-	MemberInfo mInfo = (MemberInfo)session.getAttribute("memberInfo1");
-	
-	System.out.print("minfo = " + mInfo);
-	if(mInfo==null){
-		// response.sendRedirect("memberLoginForm_sample2.jsp");
-		%>
-			<script>
-				alert('사용자 전용 페이지 입니다. \n 로그인 해주세요.');
-				location.href='/op/member_try2/loginForm2.jsp';
+	LoginInfo mInfo = (LoginInfo) session.getAttribute("login");
 
-				
-			</script>
-		<%
-	};
+		if (mInfo == null) {
 %>
-    
+				<script>
+					alert('사용자 전용 페이지 입니다. \n 로그인 해주세요.');
+					location.href = '/op/member_try2/loginForm2.jsp';
+				</script>
+<%
+			};
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>마이페이지</title>
-	
-	<!-- 실행시점이 컨테이너 내부에서 돌아가는 것이 아니라, 
-	브라우저에 로드가 된 후 실행되기 때문에, 
-	절대루트에서 콘택스트 경로 실행 후 갈 수 있도록 한다. 
-	context 경로를 가져오는 표현식 적용 -->
-	<!-- <link rel="stylesheet" href="/op/css/default.css"> -->
-	<link rel="stylesheet" href=" <%=request.getContextPath() %>/css/default.css">
-	<style>
-	</style>
+<meta charset="UTF-8">
+<title>마이페이지</title>
+
+<link rel="stylesheet" href=" <%=request.getContextPath()%>/css/default.css">
+<style>
+</style>
 </head>
 
 <body>
 
-	<%-- <%@ include file="../include/header.jsp" %> --%>
-	<!-- 파일경로 찾을 때, / 슬래시로 시작하면, 절대경로. 루트가 된다.  -->
-	<%@ include file="/member_try2/include/header2.jsp" %>
-	
+	<%@ include file="/member_try2/include/header2.jsp"%>
+
 	<div>
 		<h1>마이페이지</h1>
 	</div>
-		
-		<h2> id : <% 
-			if(mInfo != null) {
-				%> 		
-				<%= mInfo.getUid() %>			
-		
-		<% } %>
-		
-		</h2>
-		
-	<h2> pw : <% 
-			if(mInfo != null) {
-				%> 		
-				<%= mInfo.getPw() %>			
-		
-		<% } %>
-		
-		</h2>
-		
-	
+
+	<h2>
+		id :<% if (mInfo != null) { %>
+				<%= mInfo.getUid() %>
+			<% }; %>	
+	</h2>
+	<h2>
+		pw :<% if (mInfo != null) { %>
+				<%= mInfo.getPw() %>
+			<% }; %>	
+	</h2>
+
+
 	<a href="logout2.jsp">logout</a>
 
 
-	<%@ include file="include/footer.jsp" %>
-	
-	
-	
-	
-	
+	<%@ include file="/member_try2/include/footer.jsp"%>
+
+
+
+
+
 </body>
 </html>

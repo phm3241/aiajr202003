@@ -1,15 +1,15 @@
-<%@page import="model.MemberInfo"%>
+<%@page import="model2.LoginInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-	MemberInfo mInfo = (MemberInfo)session.getAttribute("memberInfo1");
+	LoginInfo mInfo = (LoginInfo)session.getAttribute("login");
 
 	if(mInfo == null) {
 		%>
 		<script>
 			alert('회원전용 게시판 입니다. 로그인 후 사용해 주세요.')
-			location.href='/op/member_try2/index2.jsp';
+			location.href='/op/member_try2/loginForm2.jsp';
 		</script> 
 		<%
 	}

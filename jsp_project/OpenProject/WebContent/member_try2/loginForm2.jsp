@@ -64,6 +64,6 @@
 		
 	</div>
 
-	<%@ include file="include/footer.jsp" %>
+	<%@ include file="/member_try2/include/footer.jsp" %>
 </body>
 </html>

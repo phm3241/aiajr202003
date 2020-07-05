@@ -1,12 +1,12 @@
-package model;
+package model2;
 
-public class MemberInfo {
+public class LoginInfo {
 
 	private String uid;
 	private String pw;
 	
 	
-	public MemberInfo(String uid, String pw) {
+	public LoginInfo(String uid, String pw) {
 		this.uid = uid;
 		this.pw = pw;
 	}

@@ -1,9 +1,9 @@
-<%@page import="model.MemberInfo"%>
+<%@page import="model2.LoginInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%
-	MemberInfo mInfo = (MemberInfo)session.getAttribute("memberInfo1");
+	LoginInfo mInfo = (LoginInfo)session.getAttribute("login");
 
 	if(mInfo != null) {
 		%>
