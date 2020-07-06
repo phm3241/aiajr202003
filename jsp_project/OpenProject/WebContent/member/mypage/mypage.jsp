@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><%= loginInfo.getUname() %></td>				
+				<td><%--= loginInfo.getUname() --%></td>				
 			</tr>
 			<tr>
 				<td>비밀번호</td>
@@ -55,11 +55,11 @@
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><%= loginInfo.getEmail() %></td>				
+				<td><%--= loginInfo.getEmail() --%></td>				
 			</tr>
 			<tr>
 				<td>사진</td>
-				<td><%= loginInfo.getPhoto() %></td>				
+				<td><%--= loginInfo.getPhoto() --%></td>				
 			</tr>
 		</table>
 		
