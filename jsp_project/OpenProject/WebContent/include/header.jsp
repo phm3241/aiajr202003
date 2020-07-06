@@ -8,7 +8,8 @@
 
     <h1 id="header">Open Project</h1>
 	<ul id="nav">
-		<li><a href="<%= request.getContextPath() %>/member/memberRegForm.jsp">회원가입</a></li>
+		<li><a href="${pageContext.request.contextPath}"<%= request.getContextPath() %>/member/memberRegForm.jsp">회원가입</a></li>
+		<li><a href=<%= request.getContextPath() %>/member/memberRegForm.jsp">회원가입</a></li>
 		<%
 		// 로그인 상태에 따라 메뉴가 다르게 노출
 		if(loginCheck){
