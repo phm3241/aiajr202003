@@ -33,19 +33,29 @@
   
   
   <!-- 데이터베이스 드라이버 로드 -->
-  <servlet>
+  <!-- <servlet>
   	<servlet-name>Loader</servlet-name>
   	<servlet-class>jdbc.Loader</servlet-class>
   	<init-param>
   		<param-name>jdbcDriver</param-name>
   		<param-value>oracle.jdbc.driver.OracleDriver,com.mysql.jdbc.Driver</param-value>
-  			<!-- StringTokenizer가 ,를 기준으로 잘라주므로.. 2개 같이 로드 가능하다. -->
+  			StringTokenizer가 ,를 기준으로 잘라주므로.. 2개 같이 로드 가능하다.
   	</init-param>
   	<init-param>
   		<param-name>msg</param-name>
   		<param-value>hello~ JSP~~ </param-value>
   	</init-param>
-  	<load-on-startup>1</load-on-startup>  <!-- 서버실행할 때 1번 실행(드라이버로드) -->
+  	<load-on-startup>1</load-on-startup>  서버실행할 때 1번 실행(드라이버로드)
+  </servlet> -->
+  
+  
+  
+  
+  <!-- 커넥션 풀 드라이버 등록 -->
+  <servlet>
+  	<servlet-name>DBCPInit</servlet-name>
+  	<servlet-class>jdbc.DBCPInit</servlet-class>
+  	<load-on-startup>1</load-on-startup>
   </servlet>
   
   
@@ -53,10 +63,7 @@
   
   
   
-  
-  
-  
-  <!-- 상태코드의 에러페이지 설정 -->
+  <!--상태코드의 에러페이지 설정 -->
   <error-page>
   	<error-code>404</error-code>
   	<location>/error/error_404.jsp</location>
