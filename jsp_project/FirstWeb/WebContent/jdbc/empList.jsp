@@ -1,9 +1,10 @@
-<%@page import="java.sql.SQLException"%>
-<%@page import="model.Emp"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
+<%@page import="guestbook.jdbc.ConnectionProvider"%>
+<%@ page import="java.sql.SQLException"%>
+<%@ page import="model.Emp"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.ResultSet"%>
 <%@ page import="java.sql.Statement"%>
 <%@ page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,18 +18,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<style>
-	table {
-		width: 80%;
-	}
 	
-	table td {
-		padding: 10px;
-	}
-	</style>
+	<!-- 
+	화면을 보여주는 empList_view.jsp 로 이동 
+	<style>
+		table {
+			width: 80%;
+		}
+		
+		table td {
+			padding: 10px;
+		}
+	</style> -->
+	
 </head>
 <body>
 
+	<!-- 위에는 데이터 처리하는 부분 : DAO(Data Access Object)  -->
 	<%
 		// 1. 드라이브로드
 		// 2. Connection 생성
@@ -52,7 +58,8 @@
 	
 
 	Connection conn = null;
-	Statement stmt = null;
+	
+	/* Statement stmt = null;
 	ResultSet rs = null;
 
 	List<Emp> empList = new ArrayList();
@@ -60,12 +67,17 @@
 	// DB Connection 정보
 	String dbUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
 	String user = "scott";
-	String pw = "tiger";
+	String pw = "tiger"; */
 
 	try {
-		// 2. Connection 생성
-		conn = DriverManager.getConnection(dbUrl, user, pw);
 		
+		// ConnectionProvider 
+		// 2. Connection 생성
+		// conn = DriverManager.getConnection(dbUrl, user, pw);
+		// conn = ConnectionProvider.getConnection();
+		
+		
+		/*
 		// 3. Statement 생성
 		stmt = conn.createStatement();
 
@@ -86,16 +98,29 @@
 		rs.close();
 		stmt.close();
 		conn.close();
-	}
+	} 
+	*/
 
 	// DB데이터를 가져와서 request의 속성에 저장.
 	request.setAttribute("empList", empList);
+	
+	
+
 	%>
 
 
-	<%-- 저장된 원본 데이터 : ${empList} --%>
+	<jsp:forward page="empList_view.jsp"/>
 
-	<table border=1>
+
+	<!-- 위에는 데이터 처리하는 부분 ㅡ> empList.jsp (사용자 요청의 처리부분) -->
+	<!-- --------------------------------------------------------------- -->
+	<!-- 아래는 화면에 보여지는 부분 ㅡ> empList_view.jsp로 분리 (Data의 출력)
+	  	   ===> forward로 보내기 empList_view.jsp로 결과페이지로 이동 -->
+
+
+
+	<%-- 저장된 원본 데이터 : ${empList} --%>
+	<%-- <table border=1>
 		<tr>
 			<th>사원 번호</th>
 			<th>사원 이름</th>
@@ -112,7 +137,7 @@
 			</tr>
 
 		</c:forEach>
-	</table>
+	</table> --%>
 
 
 
