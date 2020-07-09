@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>결과페이지 : 글작성</title>
 </head>
 <body>
 	
@@ -20,5 +20,9 @@
 	<c:if test="${writeResult == 0}">
 		<h1>글쓰기 실패!!</h1>
 	</c:if>
+	
+	<a href="list.jsp">목록보기</a>
+	
+	
 </body>
 </html>
