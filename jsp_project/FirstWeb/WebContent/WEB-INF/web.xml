@@ -35,11 +35,21 @@
 
 
 	<!-- 데이터베이스 드라이버 로드 -->
-	<!-- <servlet> <servlet-name>Loader</servlet-name> <servlet-class>jdbc.Loader</servlet-class> 
-		<init-param> <param-name>jdbcDriver</param-name> <param-value>oracle.jdbc.driver.OracleDriver,com.mysql.jdbc.Driver</param-value> 
-		StringTokenizer가 ,를 기준으로 잘라주므로.. 2개 같이 로드 가능하다. </init-param> <init-param> 
-		<param-name>msg</param-name> <param-value>hello~ JSP~~ </param-value> </init-param> 
-		<load-on-startup>1</load-on-startup> 서버실행할 때 1번 실행(드라이버로드) </servlet> -->
+	<servlet>
+		<servlet-name>Loader</servlet-name>
+		<servlet-class>jdbc.Loader</servlet-class>
+		<init-param>
+			<param-name>jdbcDriver</param-name>
+			<param-value>oracle.jdbc.driver.OracleDriver,com.mysql.jdbc.Driver</param-value>
+			<!-- StringTokenizer가 ,를 기준으로 잘라주므로.. 2개 같이 로드 가능하다. -->
+		</init-param>
+		<init-param>
+			<param-name>msg</param-name>
+			<param-value>hello~ JSP~~ </param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<!-- 서버실행할 때 1번 실행(드라이버로드) -->
+	</servlet>
 
 
 
@@ -128,16 +138,17 @@
 
 
 
-	<!-- 경로를 저장해두고 외부에서 가져다 쓸 수 있다. 
-		 자바는 코드가 바뀌게 되면 다시 컴파일해야하므로.. 경로는 외부에 따로 빼두고 가져와서 쓰는 방식으로 한다.
-		ServletContext를 가지고 있으면,  .getServletContext 메서드로 이 경로를 가지고 와서 쓸 수 있다.
-		ex. TestContextListener의 contextInitialized(WAS 시작 이벤트 메서드?) 에서 경로를 가져온다 -->
+	<!-- 경로를 저장해두고 외부에서 가져다 쓸 수 있다. 자바는 코드가 바뀌게 되면 다시 컴파일해야하므로.. 경로는 외부에 따로 
+		빼두고 가져와서 쓰는 방식으로 한다. ServletContext를 가지고 있으면, .getServletContext 메서드로 이 경로를 
+		가지고 와서 쓸 수 있다. ex. TestContextListener의 contextInitialized(WAS 시작 이벤트 메서드?) 
+		에서 경로를 가져온다 -->
 	<context-param>
 		<param-name>uploadPath</param-name>
-		<param-value>/uploadFile/member/photos</param-value>
+		<param-value>/uploadFile/member/photo</param-value>
+		<!-- <param-value>/file</param-value> -->
 	</context-param>
-	
-	
+
+
 
 
 

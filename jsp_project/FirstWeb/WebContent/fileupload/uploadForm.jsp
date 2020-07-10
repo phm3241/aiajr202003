@@ -13,13 +13,11 @@
 		 둘중하나라도 빠지면 파일업로드가 안된다.  
 		 이렇게 하게되면 입력정보를 useBean 액션으로 한번에 받는 것이 불가능..
 		 input type을 하나하나한 구분해서 받기 때문..-->
-	<form action="upload.jsp" method="post" enctype="multipart/form-data">
-		이름 : <input type="text" name="uname"> <br>
+	<form action="upload2.jsp" method="post" enctype="multipart/form-data">
+		이름 : <input type="text" name="sname"> <br>
 		학번 : <input type="text" name="sno"> <br>
 		과제파일 : <input type="file" name="report">
 		<input type="submit" value="제출">
 	</form>
-	
-	
 </body>
 </html>

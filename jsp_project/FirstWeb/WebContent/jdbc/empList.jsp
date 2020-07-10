@@ -1,4 +1,4 @@
-<%@page import="guestbook.jdbc.ConnectionProvider"%>
+<%--@page import="guestbook.jdbc.ConnectionProvider"--%>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="model.Emp"%>
 <%@ page import="java.util.ArrayList"%>
@@ -57,7 +57,7 @@
 	// Class.forName("oracle.jdbc.driver.OracleDriver");
 	
 
-	Connection conn = null;
+	// Connection conn = null;
 	
 	/* Statement stmt = null;
 	ResultSet rs = null;
@@ -69,7 +69,7 @@
 	String user = "scott";
 	String pw = "tiger"; */
 
-	try {
+	//try {
 		
 		// ConnectionProvider 
 		// 2. Connection 생성
@@ -102,7 +102,7 @@
 	*/
 
 	// DB데이터를 가져와서 request의 속성에 저장.
-	request.setAttribute("empList", empList);
+	// request.setAttribute("empList", empList);
 	
 	
 
