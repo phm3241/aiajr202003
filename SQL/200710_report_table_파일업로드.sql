@@ -10,3 +10,5 @@ create table report(
 create SEQUENCE report_seq;
 
 insert into report values(REPORT_SEQ.nextval, '길동', '1234', '/file/123456_report.ppt');
+
+select * from report;
