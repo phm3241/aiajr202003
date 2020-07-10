@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%
+    
+<%-- 필터를 사용해서 아래 세션체크해서 로그인 확인하는 코드들을 제거.
 	//String mId = (String)session.getAttribute("memeberID");
 	MemberInfo memberInfo = (MemberInfo)session.getAttribute("memberInfo");
 
@@ -10,15 +11,19 @@
 	if(memberInfo==null){
 		
 		//response.sendRedirect("sessionLoginForm.jsp");
-		%>
+		--%>
+		
+		<!-- 
 		<script>
 			alert('사용자 전용 페이지 입니다. \n 로그인 해주세요.');
-			location.href='sessionLoginForm.jsp';
-		</script>
-		<% 
+			location.href='../member/sessionLoginForm.jsp';
+		</script> 
+		-->
+		
+		<%-- 
 	};
 
-%>
+--%>
 
 <!DOCTYPE html>
 <html>
@@ -30,8 +35,8 @@
 	<h1>로그인을 한 사용자를 위한 페이지 입니다.</h1>
 	
 	<%-- <h3>로그인 아이디 : <%= mId %></h3> --%>
-	<h3>로그인 아이디 : <%= memberInfo.getUid() %></h3>
-	<a href="logout.jsp">로그아웃</a>
+	<h3>로그인 아이디 : <%--= memberInfo.getUid() --%></h3>
+	<a href="../member/logout.jsp">로그아웃</a>
 </body>
 </html>
 
