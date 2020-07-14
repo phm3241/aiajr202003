@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+</head>
+<body>
+
+	<h1>메뉴</h1>
+	
+	
+</body>
+</html>
+
+<script>
+
+	$(document).ready(function(){
+		
+		/* $.getJSON('data.json',function(data){ */
+		// 경로에 공공데이터포털에서 api 주소가 들어가면, json객체를 받아서 필요데이터를 출력할 수 있다.
+		$.getJSON('data_json.jsp',function(data){ 
+			
+			//요소 하나하나마다 함수적용
+			$.each(data, function(key, value){
+				
+				$('body').append('<h1>제품: '+value.name+', 가격: '+value.price+'</h1>');
+				
+			});
+			
+			
+			
+			
+		});
+		
+		
+	});
+	
+	
+	
+</script>

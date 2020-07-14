@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+</head>
+<body>
+
+	<form id="my-form">
+		<table>
+			<tr>
+				<td><label for="name">Name</label></td>
+				<td><input id="name" name="name" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label for="price">Region</label></td>
+				<td><input id="price" name="price" type="text" /></td>
+			</tr>
+		</table>
+		<input type="submit" value="Get Ajax String" />
+	</form>
+	<div id="wrap"></div>
+
+
+</body>
+</html>
+
+<script>
+
+
+	$(document).ready(function() {
+	
+		$('#my-form').submit(function(){
+			
+			// form에 있는 name속성들을 
+			// .serialize() : 입력 양식의 내용을 객체로 변환
+			var param1 = $(this).serialize();
+			$('#wrap').append('<h1> '+param1+' </h1>');
+			
+			// .serializeArray() : 객체의 내용을 요청 매개변수 문자열로 변환
+			var param2 = $(this).serializeArray()
+			$('#wrap').append('<h1> '+param2[1].name+' </h1>');
+				
+			return false;
+			
+			
+		});
+		
+		
+	});
+	
+	
+	
+</script>
+
+
