@@ -4,8 +4,10 @@
     
 	<h1 id="header">Open Project</h1>
 	<ul id="nav">
-		
-		<li><a href="${pageContext.request.contextPath}/member/memberRegForm.jsp">회원가입</a></li>
+	
+		<!-- .jsp였던 경로를 .do로 변경.. -->
+		<%-- <li><a href="${pageContext.request.contextPath}/member/memberRegForm.jsp">회원가입</a></li> --%>
+		<li><a href="${pageContext.request.contextPath}/member/memberRegForm.do">회원가입</a></li>
 		
 		<c:if test="${!empty loginInfo}">
 		<li><a href="<c:url value="member/logout.jsp"/>">로그아웃</a></li>

@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>OpenProjectMVC</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-  	<servlet-name>FrontColtroller</servlet-name>
-  	<servlet-class>controller.FrontController</servlet-class>
-  	<load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>FrontColtroller</servlet-name>
-  	<url-pattern>/</url-pattern>
-  	<!-- <url-pattern>*.do</url-pattern> -->
-  </servlet-mapping>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>OpenProjectMVC</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<!-- 데이터베이스 드라이버 로드 -->
+	<servlet>
+		<servlet-name>Loader</servlet-name>
+		<servlet-class>jdbc.Loader</servlet-class>
+		<init-param>
+			<param-name>jdbcDriver</param-name>
+			<param-value>oracle.jdbc.driver.OracleDriver,com.mysql.jdbc.Driver</param-value>
+			<!-- StringTokenizer가 ,를 기준으로 잘라주므로.. 2개 같이 로드 가능하다. -->
+		</init-param>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>FrontColtroller</servlet-name>
+		<servlet-class>controller.FrontController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FrontColtroller</servlet-name>
+		<!-- <url-pattern>/</url-pattern> -->
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- DBCP 등록 : 초기화 목적 -->
+	<servlet>
+		<servlet-name>DBCPInit</servlet-name>
+		<servlet-class>jdbc.DBCPInit</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- <servlet-mapping>
+		<servlet-name>DBCPInit</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping> -->
+
+
+
+
+
+
+
+
+
 </web-app>
+
+
+
+
+
+
+
