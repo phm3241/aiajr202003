@@ -22,6 +22,9 @@
 	</servlet>
 
 
+
+
+	<!-- FrontController 서블릿 등록 -->
 	<servlet>
 		<servlet-name>FrontColtroller</servlet-name>
 		<servlet-class>controller.FrontController</servlet-class>
