@@ -7,7 +7,8 @@
 	
 		<!-- .jsp였던 경로를 .do로 변경.. -->
 		<%-- <li><a href="${pageContext.request.contextPath}/member/memberRegForm.jsp">회원가입</a></li> --%>
-		<li><a href="${pageContext.request.contextPath}/member/memberRegForm.do">회원가입</a></li>
+		<%-- <li><a href="${pageContext.request.contextPath}/member/memberRegForm.do">회원가입</a></li> --%>
+		<li><a href="<c:url value="/member/memberRegForm.do"/>">회원가입</a></li>
 		
 		<c:if test="${!empty loginInfo}">
 		<li><a href="<c:url value="member/logout.jsp"/>">로그아웃</a></li>
@@ -20,6 +21,8 @@
 		<li><a href="<c:url value="/member/mypage/mypage.jsp"/>">마이페이지</a></li>
 		<li><a href="<c:url value="/guestbook/list.jsp"/>">방명록(비회원)</a></li>
 		<li><a href="<c:url value="/board/list.jsp"/>">방명록(회원제)</a></li>
+		<li><a href="<c:url value="/member/memberList.do"/>">관리자페이지(회원리스트)</a></li>
+		
 	</ul>
 	
 	
