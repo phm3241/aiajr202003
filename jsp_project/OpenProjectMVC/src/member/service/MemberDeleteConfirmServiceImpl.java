@@ -1,5 +1,6 @@
 package member.service;
 
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
@@ -23,11 +24,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.Service;
 
-public class MemberRegFormServiceImpl implements Service {
+public class MemberDeleteConfirmServiceImpl implements Service {
 
+	
 	@Override
 	public String getViewPage(HttpServletRequest request, HttpServletResponse response) {
-		return "/WEB-INF/views/member/regForm.jsp";
+		
+		return "/WEB-INF/views/member/deleteMemberConfirm.jsp";
 	}
 
+	
 }

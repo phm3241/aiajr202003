@@ -27,7 +27,16 @@
 
 회원가입
 1. 가입 폼 페이지
-	Service, view 필요
+	Service, View 필요
 2. 회원 데이터 처리(가입처리)
-	Service, dao(insert), view 필요
+	Service, Dao(insert), View 필요
+3. 아이디체크
+	Service, Dao(select), View(html이 아닌 text: Y or N)
+
+
+회원 리스트
+1. Service ㅡ> Dao ㅡ> ListView ㅡ> View
+	
+	
+
 
