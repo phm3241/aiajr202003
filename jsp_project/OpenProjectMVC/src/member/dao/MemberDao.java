@@ -26,7 +26,7 @@ public class MemberDao {
 		int resultCnt = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO member(uid, upw, uname, uphoto) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO project.member(uid, upw, uname, uphoto) VALUES(?, ?, ?, ?)";
 		
 		try {
 			
@@ -52,7 +52,7 @@ public class MemberDao {
 	
 	
 
-	// R 회원등록시 - 아이디 체크 메서드 
+	// R 회원등록시 - 아이디 중복체크 메서드 
 	public int selectById(Connection conn, String id) throws SQLException  {
 		
 		int resultCnt = 0;
@@ -63,7 +63,7 @@ public class MemberDao {
 		try {
 			
 			// 매개변수로 받은 id ㅡ> db에서 count로 확인
-			String sql = "select count(*) from member where uid=?";
+			String sql = "select count(*) from project.member where uid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,  id);
 			
@@ -94,7 +94,7 @@ public class MemberDao {
 		
 		try {
 
-			String sql = "select count(*) from member ";
+			String sql = "select count(*) from project.member ";
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -131,7 +131,7 @@ public class MemberDao {
 		try {
 			
 			String sql = "select idx, uid, upw, uname, uphoto, regdate  " + 
-						" from member  " + 
+						" from project.member  " + 
 						" order by regdate desc " + 
 						" limit ?,3 ";
 			pstmt = conn.prepareStatement(sql);
@@ -164,9 +164,62 @@ public class MemberDao {
 		};
 		
 		return memberList;
-	}
+	} //selectMemberList() end
+	
 
-
+	
+	
+	
+	
+	// R 회원 정보 출력 (수정할 때 원본확인)
+	public Member selectMemberInfo(Connection conn, String id) throws SQLException {
+		
+		Member member = new Member();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			String sql = "select idx, uid, upw, uname, uphoto, regdate  " + 
+						" from project.member where uid=?  ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				// 객체 만들어서 리스트에 넣어주기
+				member = new Member(
+						rs.getInt("idx"), 
+						rs.getString("uid"), 
+						rs.getString("upw"), 
+						rs.getString("uname"), 
+						rs.getString("uphoto"), 
+						rs.getDate("regdate"));
+			};
+			
+		} finally {
+			
+			if(rs != null) {
+				rs.close();
+			}
+			if(pstmt !=null) {
+				pstmt.close();
+			};
+			
+		};
+		
+		return member;
+	} //selectMemberInfo() end
+		
+	
+	
+	
+	
+	
 	
 	
 	
@@ -181,7 +234,7 @@ public class MemberDao {
 		try {
 		
 			// id 값으로 회원정보 찾기 ㅡ pw찾기
-			String sql = "select uid, upw from member where uid=? ";
+			String sql = "select uid, upw from project.member where uid=? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -210,8 +263,44 @@ public class MemberDao {
 		}
 		
 		return checkPw;
-	}
-
+	} //checkIdPw() end
+	
+	
+	
+	
+	
+	// U 회원정보 수정
+	public int editMember(Connection conn, Member member) throws SQLException {
+			
+			int resultCnt = 0;
+			
+			PreparedStatement pstmt = null;
+			String sql = "UPDATE project.member  " + 
+					 	" SET upw = ?, uname = ?, uphoto = ?  " + 
+					 	" WHERE uid = ?";
+			
+			try {
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, member.getUpw());
+				pstmt.setString(2, member.getUname());
+				pstmt.setString(3, member.getUphoto());
+				pstmt.setString(4, member.getUid());
+				
+				resultCnt = pstmt.executeUpdate();
+				
+				
+			} finally {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+			}
+			
+			return resultCnt;
+		} //editMember() end
+	
+	
+	
 
 
 	
@@ -224,7 +313,7 @@ public class MemberDao {
 		
 		try {
 			
-			String sql = "delete from member where uid=? ";
+			String sql = "delete from project.member where uid=? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -238,7 +327,14 @@ public class MemberDao {
 		}
 		
 		return resultCnt;
-	};
+		
+	}; //deleteMember() end
+	
+	
+	
+	
+	
+	
 
 
 	
