@@ -7,6 +7,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+
 	<%
 		// 파라미터로 받기
 		String serviceKey=request.getParameter("serviceKey");
