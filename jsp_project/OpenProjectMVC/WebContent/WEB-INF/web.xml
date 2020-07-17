@@ -44,17 +44,19 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-	<!-- <servlet-mapping> <servlet-name>DBCPInit</servlet-name> <url-pattern>*.do</url-pattern> 
-		</servlet-mapping> -->
+	<!-- <servlet-mapping> 
+		<servlet-name>DBCPInit</servlet-name> 
+		<url-pattern>*.do</url-pattern> 
+	</servlet-mapping> -->
 
 
-<!-- 	<session-config>
+	<session-config>
 
 		<session-timeout>600</session-timeout>
 
 		<tracking-mode>COOKIE</tracking-mode>
 
-	</session-config> -->
+	</session-config> 
 
 
 

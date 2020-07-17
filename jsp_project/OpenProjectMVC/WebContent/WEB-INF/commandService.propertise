@@ -2,6 +2,7 @@
 #uri=Class Full Name
 #/=service.IndexServiceImpl index.html
 /index.do=service.IndexServiceImpl
+
 # 회원 가입 페이지
 /member/memberRegForm.do=member.service.MemberRegFormServiceImpl
 # 회원 가입 처리
@@ -11,10 +12,20 @@
 # 회원 리스트 출력
 /member/memberList.do=member.service.MemberListServiceImpl
 
+
+# 회원 로그인 페이지
+/member/loginForm.do=member.service.MemberLoginFormServiceImpl
+# 회원 로그인 처리
+/member/login.do=member.service.MemberLoginServiceImpl
+
+
+
+
 # 회원 삭제 전 체크확인
 /member/deleteMemberConfirm.do=member.service.MemberDeleteConfirmServiceImpl
 # 회원 삭제 처리
 /member/deleteMember.do=member.service.MemberDeleteServiceImpl
+
 
 # 회원 수정 전 체크확인
 /member/editMemberConfirm.do=member.service.MemberEditConfirmServiceImpl
@@ -22,3 +33,5 @@
 /member/editForm.do=member.service.MemberGetInfoServiceImpl
 # 회원 수정 처리
 /member/editMember.do=member.service.MemberEditServiceImpl
+
+
