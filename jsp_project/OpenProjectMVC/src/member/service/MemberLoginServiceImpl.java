@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.Session;
+
 import jdbc.ConnectionProvider;
 import member.dao.MemberDao;
 import member.model.CookieBox;
@@ -16,13 +20,13 @@ public class MemberLoginServiceImpl implements Service {
 
 		MemberDao dao;
 		
-		// 아이디, 패스워드 받아오기
+		// 1. request 객체로 사용자 요청정보 받기
 		// 공백삭제해주기
-		String uid = request.getParameter("uid");
-		String upw = request.getParameter("upw");
+		String uid = request.getParameter("uid").trim();
+		String upw = request.getParameter("upw").trim();
 		String remember = request.getParameter("remember");
 		
-		
+		String rediectUri = request.getParameter("redirecUri");
 		
 		String cookieName = "uid";
 		String cookiePath = request.getContextPath();
@@ -39,7 +43,9 @@ public class MemberLoginServiceImpl implements Service {
 		
 		
 		Connection conn = null;
-		boolean check = false;
+		
+		// 로그인 체크를 위한 변수설정
+		boolean loginCheck = false;
 		
 		
 		try {
@@ -48,7 +54,12 @@ public class MemberLoginServiceImpl implements Service {
 			dao = MemberDao.getInstance();
 			
 			// dao : 아이디, 패스워드 일치 확인
-			check = dao.checkIdPw(conn, uid, upw);
+			loginCheck = dao.checkIdPw(conn, uid, upw);
+			
+			if(loginCheck) {
+				request.getSession()
+				session.setAttribute("loginInfo", loginCheck);
+			}
 			
 			
 		} catch (SQLException e) {
@@ -60,14 +71,14 @@ public class MemberLoginServiceImpl implements Service {
 		System.out.println("upw :"+upw);
 		System.out.println("remember :"+remember);
 		System.out.println("cookiePath :"+cookiePath);
-		System.out.println("id.pw확인결과 check :"+check);
+		System.out.println("id.pw확인결과 check :"+loginCheck);
 		
 		
 		
 		// 아이디를 속성에 저장
 		request.setAttribute("uid", uid);
 		// 로그인 성공여부 속성에 저장
-		request.setAttribute("login", check);
+		request.setAttribute("login", loginCheck);
 		
 		
 		
