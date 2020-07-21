@@ -3,6 +3,10 @@
 #/=service.IndexServiceImpl index.html
 /index.do=service.IndexServiceImpl
 
+#테스트
+/test.do=member.service.TestServiceImpl
+
+
 # 회원 가입 페이지
 /member/memberRegForm.do=member.service.MemberRegFormServiceImpl
 # 회원 가입 처리
