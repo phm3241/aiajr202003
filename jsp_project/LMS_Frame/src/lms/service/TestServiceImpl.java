@@ -18,7 +18,7 @@ public class TestServiceImpl implements Service {
 		
 		
 		
-		return "/WEB-INF/views/test.jsp";
+		return "/WEB-INF/view/test.jsp";
 		
 	}
 

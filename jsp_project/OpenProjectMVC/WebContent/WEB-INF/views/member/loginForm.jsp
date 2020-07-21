@@ -42,8 +42,11 @@
 		
 			<table class="table">
 				<tr>
+					<td></td>
+					<td> <input type="checkbox" name="idchk" id="idchk"> </td>
+				</tr>
+				<tr>
 					<td> ID </td>
-					<%-- <td> <input type="text" name="uid" value="<%= uidValue%>"> </td> --%>
 					<td> <input type="text" name="uid" value="${uidValue}"> </td>
 				</tr>
 				<tr>
