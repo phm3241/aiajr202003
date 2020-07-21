@@ -23,7 +23,7 @@
 		<div id="header">
 			<%--@ include file="/WEB-INF/views/include/header.jsp"--%>
 			<!-- 로그인번호가 학생이면, -->
-			<%-- <c:if test="${loginType != null}"> --%>
+			<c:if test="${loginType != null}">
 
 				<div id="mainInfo">
 					<div id="logo">
@@ -47,7 +47,7 @@
 					<li><a href="<c:url value="/student/sInfo.do"/>">내정보</a></li>
 				</ul>
 
-			<%-- </c:if> --%>
+			</c:if>
 
 
 
