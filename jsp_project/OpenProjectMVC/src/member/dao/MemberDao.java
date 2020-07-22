@@ -328,9 +328,43 @@ public class MemberDao {
 		
 		return resultCnt;
 		
-	}; //deleteMember() end
+	}
+
 	
 	
+	// json 형태로 바꿔주는 메서드?
+	public List<Member> selectTotalList(Connection conn) throws SQLException {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<Member> memberList = new ArrayList<Member>();
+		
+		String sql = "select * from project.member order by uname";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Member member = new Member();
+				member.setIdx(rs.getInt("idx"));
+				member.setUid(rs.getString("uid"));
+				member.setUpw(rs.getString("upw"));
+				member.setUname(rs.getString("uname"));
+				member.setUphoto(rs.getString("uphoto"));
+				
+				memberList.add(member);
+			}
+			
+		} finally {
+			if(pstmt != null) {
+				pstmt.close();
+			}
+		}
+		
+		return memberList;
+	}
 	
 	
 	

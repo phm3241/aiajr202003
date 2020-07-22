@@ -10,6 +10,8 @@
 		<%-- <li><a href="${pageContext.request.contextPath}/member/memberRegForm.jsp">회원가입</a></li> --%>
 		<%-- <li><a href="${pageContext.request.contextPath}/member/memberRegForm.do">회원가입</a></li> --%>
 		<li><a href="<c:url value="/member/memberRegForm.do"/>">회원가입</a></li>
+		<li><a href="<c:url value="/member/memberListToJson.do"/>">member-JSON</a></li>
+		<li><a href="<c:url value="/member/memberListToXML.do"/>">member-XML</a></li>
 		
 		<c:if test="${!empty login}">
 			<li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
