@@ -9,7 +9,7 @@
     margin-bottom: 10px;
     border: 1px solid blue;
 }
-#headerLeft {
+/* #headerLeft {
     padding: 1px;
     margin-bottom: 10px;
     border: 1px solid red;
@@ -18,7 +18,7 @@
     padding: 1px;
     margin-bottom: 10px;
     border: 1px solid blue;
-}
+} */
 #leftMenu {
     padding: 10px;
     margin-bottom: 10px;
@@ -29,12 +29,12 @@
     margin-bottom: 10px;
     border: 1px solid #999999;
 }
-#contentsAll {
+/* #contentsAll {
     clear: both;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #999999;
-}
+} */
 #footer {
     padding: 10px;
     border: 1px solid #999999;
