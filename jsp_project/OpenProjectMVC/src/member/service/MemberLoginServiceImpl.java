@@ -31,6 +31,7 @@ public class MemberLoginServiceImpl implements Service {
 		String cookieName = "uid";
 		String cookiePath = request.getContextPath();
 		
+		
 		// 체크가 null이 아니라면, 위에서 받아온 데이터 쿠키객체 생성 ㅡ> 쿠키박스에 저장하기
 		// 체크가 null이면, 새로운 쿠키생성 x, 기존에 있으면 삭제된다. 
 		if(remember !=null){
