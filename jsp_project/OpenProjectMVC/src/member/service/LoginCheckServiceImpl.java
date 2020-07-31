@@ -47,7 +47,7 @@ public class LoginCheckServiceImpl implements Service {
 		}
 		
 		
-		request.getSession("login")
+		request.getSession("login");
 		request.setAttribute("idCheck", result);
 		
 		//System.out.println("id:"+id);

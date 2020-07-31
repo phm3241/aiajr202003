@@ -58,7 +58,7 @@ public class MemberLoginServiceImpl implements Service {
 			loginCheck = dao.checkIdPw(conn, uid, upw);
 			
 			if(loginCheck) {
-				request.getSession()
+				request.getSession("login");
 				session.setAttribute("loginInfo", loginCheck);
 			}
 			
