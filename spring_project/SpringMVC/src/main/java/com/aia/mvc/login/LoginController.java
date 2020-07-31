@@ -28,7 +28,9 @@ class LoginController {
 	public String login(HttpServletRequest request, 
 						@RequestParam("uid") String userId, 
 						@RequestParam("upw") String userPw,
-						@ModelAttribute("login") LoginRequest loginRequest
+						@ModelAttribute("login") LoginRequest loginRequest 
+						//원래는 모델(클래스)의 이름으로 앞자리만 소문자로 바꿔서 loginRequest로 이름이 저장되는데, 
+						// @ModelAttribute로 다른이름으로 지정해줄수도 있다. view에서 이 이름으로 EL로 데이터를 쓸 수 있다.
 						) {
 		
 		String uid= request.getParameter("uid");
@@ -49,8 +51,9 @@ class LoginController {
 
 		
 		// 방법3: 파라미터로 받을 내용들이 많다면, 커맨드 객체로 받을 수 있다. 
+		// 많은 데이터를 한번에 받아올 수 있다는 것이 핵심. 
 		// @ModelAttribute("login") 어노테이션을 활용해서 이름을 지정해줄 수 있다. 
-		// 바인딩 : request.setAttribute() 를 자동으로 해주는 것
+		// 바인딩 : request.setAttribute() 를 자동으로 해서 객체를 만들어 넣어주는 것?
 		System.out.println("--커맨드 객체로 요청정보 받기-------------------");
 		System.out.println("loginRequest.getUid :" + loginRequest.getUid());
 		System.out.println("loginRequest.getUpw :" + loginRequest.getUpw());
