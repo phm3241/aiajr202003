@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- autowire을 사용하여 자동주입되도록 설정 ...  -->
+	
+	<!-- <bean id="memberDao" class="di.dao.MemberDao"></bean> 
+		 이렇게 쓰면 byName에서 "이름"이 다르기 때문에 실행시 null 오류가 난다. -->
+
+	<bean id="dao" class="di.dao.MemberDao"></bean>
+	<!-- <bean id="dao2" class="di.dao.MemberDao2"></bean> 
+		 이렇게도 등록하면 byType에서 "타입이 중복되기 때문에 실행시 No qualifying 오류가 난다.-->
+	
+	
+	<!-- dao를 받아야하므로.. 위에 dao 이름으로 등록되어있어야한다.  -->
+	<bean id="memberregSvc" class="di.service.MemberRegisterService2" autowire="byName" scope="prototype">
+	</bean>
+
+	<!-- 타입으로 자동주입되는 경우, 위에서 똑같은 dao이기 때문에 오류가 난다.  -->
+	<bean id="memberPwSvc" class="di.service.ChangePasswordService2" autowire="byType" scope="singleton">
+	</bean>	 
+
+</beans>

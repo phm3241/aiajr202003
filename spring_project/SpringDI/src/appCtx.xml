@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	
+	<!-- "memberDao"를 bean을 먼저 등록해주고, "memberregSvc"의 매개변수도 지정하여 설정해주어야한다.   -->
+	<bean id="memberDao" class="di.dao.MemberDao"></bean>
+
+	
+	<!-- 서비스의 객체 등록 순서는 중요하지 않고, id가 맞는 것이 중요하다.   -->
+
+	<!-- memberregSvc의 생성자는 매개변수가 있으므로, 위에서 먼저 매개변수로 받는 memberDao를 등록해주고, 매개변수 설정등록한다. -->	
+	<bean id="memberregSvc" class="di.service.MemberRegisterService">
+		<!-- 위에 등록한 memberDao 객체가 memberregSvc의 생성자에 매개변수에 주입된다. -->
+		<constructor-arg>
+			<ref bean="memberDao"/>
+		</constructor-arg>
+	</bean>
+
+	
+	<!-- 암호등록해주는 memberPwSvc도 생성자 매개변수를 등록해준다.  -->
+	<bean id="memberPwSvc" class="di.service.ChangePasswordService">
+		<constructor-arg ref="memberDao"/>
+	</bean>	 
+
+</beans>

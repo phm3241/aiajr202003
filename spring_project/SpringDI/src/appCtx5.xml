@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 나눠서 처리 후 import로 해도 가능하다. 같은파일 겹치지 않고 분업이 가능하다. -->
+	<import resource="classpath:config1.xml" />
+	<import resource="classpath:config2.xml" />
+
+</beans>
