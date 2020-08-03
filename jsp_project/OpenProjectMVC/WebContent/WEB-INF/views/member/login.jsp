@@ -1,5 +1,3 @@
-<%@page import="com.open.mvc.member.model.LoginInfo"%>
-<%@page import="com.open.mvc.member.model.CookieBox"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	

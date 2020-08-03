@@ -4,6 +4,8 @@ public class LoginRequest {
 
 	private String uid;
 	private String upw;
+	private String redirecUri;	// 이전경로
+	private String remember;	// 아이디 기억하기
 
 	public String getUid() {
 		return uid;
@@ -21,9 +23,26 @@ public class LoginRequest {
 		this.upw = upw;
 	}
 
+	public String getRedirecUri() {
+		return redirecUri;
+	}
+
+	public void setRedirecUri(String redirecUri) {
+		this.redirecUri = redirecUri;
+	}
+
+	public String getRemember() {
+		return remember;
+	}
+
+	public void setRemember(String remember) {
+		this.remember = remember;
+	}
+
 	@Override
 	public String toString() {
-		return "LoginRequest [uid=" + uid + ", upw=" + upw + "]";
+		return "LoginRequest [uid=" + uid + ", upw=" + upw + ", redirecUri=" + redirecUri + ", remember=" + remember
+				+ "]";
 	}
 
 }

@@ -30,8 +30,14 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
-
+	
+	<!-- DBCP -->
+	<servlet>
+		<servlet-name>DBCPInit</servlet-name>
+		<servlet-class>com.aia.op.jdbc.DBCPInit</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
 	<!-- 인코딩 필터 설정 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
