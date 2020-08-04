@@ -1,4 +1,4 @@
-package com.open.mvc.member.controller;
+package com.aia.op.member.controller;
 
 import java.sql.SQLException;
 
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.open.mvc.service.MemberListService;
 
+import com.aia.op.member.service.MemberListService;
 
 @Controller
 public class MemberListController {
