@@ -15,6 +15,12 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<!-- 파일 업로드 경로 : 회원 가입 시 회원 사진 업로드 경로 -->
+	<context-param>
+		<param-name>memberUploadPath</param-name>
+		<param-value>/upload/users</param-value>
+	</context-param>
+
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
@@ -30,14 +36,11 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	<!-- DBCP -->
-	<servlet>
-		<servlet-name>DBCPInit</servlet-name>
-		<servlet-class>com.aia.op.jdbc.DBCPInit</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	
+
+	<!-- DBCP : 이 부분은 이제 필요없고, root-context.xml쪽에 설정한다. -->
+	<!-- <servlet> <servlet-name>DBCPInit</servlet-name> <servlet-class>com.aia.op.jdbc.DBCPInit</servlet-class> 
+		<load-on-startup>1</load-on-startup> </servlet> -->
+
 	<!-- 인코딩 필터 설정 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

@@ -27,13 +27,12 @@ public class MemberDao {
 		rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
-			member = new Member(
-					rs.getInt("idx"),
-					rs.getString("uid"),
-					rs.getString("upw"),
-					rs.getString("uname"),
-					rs.getString("uphoto")
-					);
+			member = new Member();
+					member.setIdx(rs.getInt("idx"));
+					member.setUid(rs.getString("uid"));
+					member.setUpw(rs.getString("upw"));
+					member.setUname(rs.getString("uname"));
+					member.setUphoto(rs.getString("uphoto"));
 			
 			
 			
@@ -49,7 +48,7 @@ public class MemberDao {
 			}
 		}
 				
-		return resultCnt;
+		return 0;
 		
 	} // selectByIdPw() end
 
