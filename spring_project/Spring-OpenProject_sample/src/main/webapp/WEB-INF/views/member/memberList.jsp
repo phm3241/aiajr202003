@@ -14,6 +14,12 @@
 		width :50px;
 		height : 50px;
 	}
+	
+	div.searchBox {
+		border : 1px solid #DDD;
+		padding : 20px;
+		width : 80%
+	}
 </style>
 </head>
 <body>
@@ -28,20 +34,17 @@
 		<div>전체회원 ${listView.memberTotalCount} 명</div>
 		<hr>
 		
-		<!-- MemberDaoInterface의 설정 name들과 name 맞춰주기 : 자동으로 동적 SQL이 작성된다.-->
-		<div id="searchBox">
-			<form action="">
-				<select name="searchType">
-					<option name="id">ID</option>>
-					<option name="name">NAME</option>>
-					<option name="both">ID+NAME</option>>
-				</select>
-				<input type="text" name="keyword">			
-				<input type="submit" value="검색">			
-			</form>
+		<div class="searchBox">
+		<form>
+			<select name="searchType">
+				<option value="id">ID</option>
+				<option value="name">NAME</option>
+				<option value="both">ID + NAME</option>
+			</select>
+			<input type="text" name="keyword">
+			<input type="submit" value="검색">
+		</form>		
 		</div>
-
-
 
 		<table class="table">
 			<tr>
@@ -82,7 +85,8 @@
 		<div class="paging">
 			<c:forEach begin="1" end="${listView.pageTotalCount}" var="i">
 			
-			<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}" href="memberList?page=${i}" >${i}</a>
+			<a class="paging_num ${i == listView.currentPageNumber ? 'now_page' : ''}" 
+			href="memberList?page=${i}&searchType=${param.searchType}&keyword=${param.keyword}" >${i}</a>
 			
 			</c:forEach>
 		</div>

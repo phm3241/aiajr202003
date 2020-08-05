@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aia.op.jdbc.ConnectionProvider;
-import com.aia.op.member.dao.MemberDao;
 import com.aia.op.member.dao.MemberDaoInterface;
 import com.aia.op.member.dao.MybatisMemberDao;
 import com.aia.op.member.model.Member;
@@ -28,13 +27,10 @@ public class MemberRegService {
 //	@Autowired
 //	MybatisMemberDao dao;
 	
-	// 인터페이스로 만들어둔 dao
-	MemberDaoInterface dao;
+	private MemberDaoInterface dao;
 	
-	// 인터페이스를 매퍼 객체로 만들기 위해. 
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
-	
 	
 	
 	public int memberReg(
@@ -42,17 +38,14 @@ public class MemberRegService {
 			HttpServletRequest request
 			) {
 		
-		dao=sessionTemplate.getMapper(MemberDaoInterface.class);
-		
+		dao= sessionTemplate.getMapper(MemberDaoInterface.class);
 		
 		int result = 0;
 		
 		// Dao 메서드에 전달할 객체 : 입력할 데이터를 모두 설정하는 절차가 필요합니다.
 		Member member = regRequest.toMember();
 		
-		System.out.println("입력 전 IDX =====> "+ member.getIdx());
-		
-		
+		System.out.println("입력 전 IDX ===> " + member.getIdx());
 		
 		
 		try {
@@ -86,10 +79,9 @@ public class MemberRegService {
 				member.setUphoto("defalult.png");
 			}
 		
-			
 			result = dao.insertMember(member);
-			System.out.println("입력 후 IDX =====> "+ member.getIdx());
-
+			
+			System.out.println("입력 후 IDX ===> " + member.getIdx());
 			
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block

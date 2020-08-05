@@ -13,7 +13,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aia.op.member.dao.JdbcTemplateMemberDao;
 import com.aia.op.member.dao.MemberDaoInterface;
 import com.aia.op.member.model.Member;
 import com.aia.op.member.model.MemberListView;
@@ -26,12 +25,12 @@ public class MemberListService {
 
 //	@Autowired
 //	JdbcTemplateMemberDao dao;
-
+	
 	private MemberDaoInterface dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
-	
+
 	
 	public MemberListView getView(
 			HttpServletRequest request, 
@@ -39,23 +38,23 @@ public class MemberListService {
 		
 		dao = template.getMapper(MemberDaoInterface.class);
 		
-		// 검색데이터 : search type, keyword를 받아야한다.
+
+		Map<String, Object> search = new HashMap<String, Object>(); 
+//		search.put("searchType", searchType);
+//		search.put("keyword", keyword);
+
+		
+		
+		// 검색 데이터 : search type, keyword
 		String searchType = request.getParameter("searchType");
-		
-		if(searchType.isEmpty()) {
-			searchType = null;
-		};
-		
 		String keyword = request.getParameter("keyword");
-		if(keyword.isEmpty()) {
-			keyword = null;
-		};
 		
-		Map<String, String> search = new HashMap<String, String>();
-		
-		search.put("searchType", searchType);
-		search.put("keyword", keyword);
-		
+		if(searchType != null && !searchType.isEmpty()) {
+			search.put("searchType", searchType);
+		}
+		if(keyword != null && !keyword.isEmpty()) {
+			search.put("keyword", keyword);
+		}
 		
 		// view 로 전달할 결과 데이터
 		MemberListView listView = null;
@@ -82,19 +81,18 @@ public class MemberListService {
 
 		// 한 페이지에 누출할 리스트
 		List<Member> memberList = null;
-
 		
+		
+
 		if (totalCnt > 0) {
 			startRow = (currentPageNumber - 1) * MEMBER_CNT_PER_PAGE;
 
 			System.out.println(startRow);
 			
-			search.put("startRow", startRow+"");
-			search.put("count", MEMBER_CNT_PER_PAGE+"");
+			search.put("startRow", startRow);
+			search.put("count", MEMBER_CNT_PER_PAGE);
 
 			memberList = dao.selectList(search);
-			
-			
 		} else {
 			currentPageNumber = 0;
 			memberList = Collections.emptyList();

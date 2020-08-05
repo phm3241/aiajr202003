@@ -6,11 +6,134 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- sql에 대한 설정 : select,update, insert등 sql문과 반환타입설정, 파라미터 설정도 해준다. -->
 <!-- 인터페이스로 만들때는 namespace를 interface의 풀네임으로 설정. -->
 <mapper namespace="com.aia.op.mybatis.mapper.MemberDaoInterface">
+	
+	<!-- select의 결과를 객체에 바인딩(맵핑. 연결해서 저장해주는) 해주는 역할 
+		: 테이블의 컬럼명과 javaBeans의 변수의 이름이 틀린경우 사용.(Memeber객체의 property와 column의 이름이 다를떄 사용한다.) -->
+	<resultMap type="com.aia.op.member.model.Member" id="resultMember">
+		<id property="idx" column="idx" /> <!-- primary key를 지정해준다? -->
+		<result property="uid" column="uid"/> <!-- column의 "uid"값을 위에서 만든 Member 객체의 property에 setUid해주어라.  -->
+		<result property="upw" column="upw"/> 
+		<result property="uname" column="uname"/> 
+		<result property="uphoto" column="uphoto"/> 
+	</resultMap>
+	
+	
+	
+	
 	<!-- Dao 메서드 이름과 mapper 이름 일치시키면, 자동으로 만들어준다. -->
 	<select id="selectByIdpw"
 		resultType="com.aia.op.member.model.Member">
 		select*from project.member where uid=#{param1} and upw=#{param2}
 		<!-- #{uid} #{upw} 이렇게 하면 오류발생. arg1, arg2 이렇게 쓰거나 param1, param2 이렇게 써야한다. -->
 	</select>
+	
+	
+	
+	
+	
+	<!-- 검색: id, name, id or name 
+		map.put("searchType", "id") name, both
+		map.put("keyword", "cool")-->
+		
+	<!-- 여기에서 mqp은 HashMqp 객체 -->
+	<select id="totalCount" parameterType="map" resultType="int">
+	<!-- #{search.searchType} -->
+	
+	select count(*) from project.member
+
+	
+		<where> <!-- 이 where 태그는 where절을 만들지 않는다. 동적태그를 만들 때, 처름 or가 나오면 생략해준다.  -->
+			<if test="search.searchType != null and search.keyword !=null" >
+				<if test="search.searchType =='both'">
+					<include refid="whereID"/>
+					<include refid="whereName"/>
+				</if>
+				<if test="search.searchType =='id'">
+					<include refid="whereID"/>
+				</if>
+				<if test="search.searchType =='name'">
+					<include refid="whereName"/>
+				</if>
+			</if>
+		</where>
+	
+	</select>
+	
+	
+	<!-- 전체 게시물의 리스트 : List<Member> 로 반환 -->
+	<select id="selectList" parameterType="mqp" resultMap="resultMember">
+		
+		select*from project.member
+		
+		<where> <!-- 이 where 태그는 where절을 만들지 않는다. 동적태그를 만들 때, 처름 or가 나오면 생략해준다.  -->
+		
+			<if test="search.searchType != null and search.keyword !=null" >
+				<if test="search.searchType =='both'">
+					<include refid="whereID"/>
+					<include refid="whereName"/>
+				</if>
+				<if test="search.searchType =='id'">
+					<include refid="whereID"/>
+				</if>
+				<if test="search.searchType =='name'">
+					<include refid="whereName"/>
+				</if>
+			</if>
+		</where>
+		limit #{search.startRow},#{search.count}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	
+	<!-- 검색할 수 있는 SQL을 동적으로 만들어주는  -->
+	<sql id="whereID">
+		or uid like concat('%',${keyword},'%')
+	</sql>
+	<sql id="whereName">
+		or uname like concat('%',${keyword},'%')
+	</sql>
+	
+	
+	
+	
+	<insert id="insertMember"
+		parameterType="com.aia.op.member.model.Member" 
+		useGeneratedKeys="true"
+		keyProperty="idx"
+		
+		>  <!-- parameterType은 insert 실행할 떄 넘어오는 객체 타입 -->
+	 	
+	<!-- INSERT INTO project.member (uid, upw, uname, uphoto ) VALUES (?,?,?,?) -->
+	INSERT INTO project.member (uid, upw, uname, uphoto ) VALUES (#{uid}, #{upw}, #{uname}, #{uphoto})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>
