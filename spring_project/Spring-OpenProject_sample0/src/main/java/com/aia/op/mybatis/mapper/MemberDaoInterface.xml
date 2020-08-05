@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- sql에 대한 설정 : select,update, insert등 sql문과 반환타입설정, 파라미터 설정도 해준다. -->
+<!-- 인터페이스로 만들때는 namespace를 interface의 풀네임으로 설정. -->
+<mapper namespace="com.aia.op.mybatis.mapper.MemberDaoInterface">
+	<!-- Dao 메서드 이름과 mapper 이름 일치시키면, 자동으로 만들어준다. -->
+	<select id="selectByIdpw"
+		resultType="com.aia.op.member.model.Member">
+		select*from project.member where uid=#{param1} and upw=#{param2}
+		<!-- #{uid} #{upw} 이렇게 하면 오류발생. arg1, arg2 이렇게 쓰거나 param1, param2 이렇게 써야한다. -->
+	</select>
+
+</mapper>
