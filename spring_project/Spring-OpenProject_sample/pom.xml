@@ -175,15 +175,15 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency> 
-		
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.4.1</version>
-		</dependency> 
-		
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -211,6 +211,16 @@
 			<version>2.7</version>
 		</dependency>
 
+
+		<!-- jackson-databind 
+			json을 ㅡ> java Object로 변환해준다. 
+			java Object를 ㅡ> json으로 응답할 수 있게 해준다. -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.11.0</version>
+		</dependency>
 
 
 

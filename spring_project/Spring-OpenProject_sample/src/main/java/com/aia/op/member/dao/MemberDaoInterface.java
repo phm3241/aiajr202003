@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.aia.op.member.model.Member;
+import com.aia.op.member.model.MemberXML;
+import com.aia.op.member.model.MemberXmlList;
 
 
 public interface MemberDaoInterface {
@@ -15,6 +17,18 @@ public interface MemberDaoInterface {
 	// idx 기반으로 검색한 회원의 정보를 반환
 	// mapper에도 추가해주기. (MemberDaoInterface.xml)
 	public Member selectByIdx(int idx);
+	
+	// 20.08.06
+	// 전체 회원리스트 
+	// mapper에도 추가해주기. (MemberDaoInterface.xml)
+	public List<Member> selectTotalList();
+
+	
+	//20.08.06
+	// 전체 XML 회원리스트 
+	// mapper에도 추가해주기. (MemberDaoInterface.xml)
+	public List<MemberXML> selectTotalListXml();
+	
 	
 	
 	// 회원가입
