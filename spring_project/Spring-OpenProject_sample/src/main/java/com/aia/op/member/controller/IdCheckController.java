@@ -20,7 +20,10 @@ public class IdCheckController {
 			@RequestParam("uid") String uid
 			) {
 		
-		return idCheckService.checkId(uid);
+		return idCheckService.checkId(uid);   
+		// 원래는 뷰의 이름이 반환되었는데.. 
+		// @ResponseBody로 하게되면 html이 아닌 
+		// 반환하는 문자열 "Y" "N"을 응답처리한다. 따라서 jsp를 따로 만들 필요가 없다.  
 	}
 
 }

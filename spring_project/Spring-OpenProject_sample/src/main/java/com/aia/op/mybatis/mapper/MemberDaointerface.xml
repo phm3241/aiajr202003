@@ -10,95 +10,99 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		type="com.aia.op.member.model.Member">
 		<id property="idx" column="idx" />
 		<result property="uid" column="uid" />
-		<result property="upw" column="upw"/>
+		<result property="upw" column="upw" />
 		<result property="uname" column="uname" />
 		<result property="uphoto" column="uphoto" />
 
 	</resultMap>
 
-
+	
+	<!-- 20.08.06 -->
+	<select id="selectByIdx"
+		resultType="com.aia.op.member.model.Member"
+	>
+	select * from project.member where idx=#{id}
+	
+	</select>
+	
+	
+	
+	
 
 
 	<select id="selectByIdpw"
 		resultType="com.aia.op.member.model.Member">
 
-		select * from project.member where uid=#{param1} and upw=#{param2}
+		select * from project.member where uid=#{param1} and
+		upw=#{param2}
 
 	</select>
 
-	<!-- 검색 : id, name, id or name 
-	
-	map.put("searchType", "id") name, both 
-	map.put("keyword", "cool") 
-	
-	-->
-	
+	<!-- 검색 : id, name, id or name map.put("searchType", "id") name, both map.put("keyword", 
+		"cool") -->
+
 	<!-- map => HashMap -->
 	<select id="totalCount" parameterType="map" resultType="int">
-	<!-- #{search.searchType} -->
-	
-	select count(*) from project.member
-	
-	<where>
-		<if test="searchType != null">
-			<if test="searchType == 'both'">
-				<include refid="whereID"/>
-				<include refid="whereName"/>
+		<!-- #{search.searchType} -->
+
+		select count(*) from project.member
+		
+		
+		<where>
+			<if test="searchType != null">
+				<if test="searchType == 'both'">
+					<include refid="whereID" />
+					<include refid="whereName" />
+				</if>
+				<if test="searchType == 'id'">
+					<include refid="whereID" />
+				</if>
+				<if test="searchType == 'name'">
+					<include refid="whereName" />
+				</if>
 			</if>
-			<if test="searchType == 'id'">
-				<include refid="whereID"/>
-			</if>
-			<if test="searchType == 'name'">
-				<include refid="whereName"/>
-			</if>
-		</if>
-	</where>
-	
-	
+		</where>
+
+
+		<!-- 조건을 검색할 때.. <(작다)  >(크다) 라는 비교연산자 꺽쇠를 태그로 인식하기 때문에 아래처럼 써ㅣㅣ야한다.  -->
+		<!--     <![CDATA[  idx<10 and idx>1 ]]>      -->
+
+
 	</select>
-	
-	
-	<select id="selectList"
-			parameterType="map"
-			resultMap="resultMember"
-	>
-	
-	select * from project.member
-	
-	<where>
-		<if test="searchType != null">
-			<if test="searchType == 'both'">
-				<include refid="whereID"/>
-				<include refid="whereName"/>
+
+
+	<select id="selectList" parameterType="map"
+		resultMap="resultMember">
+
+		select * from project.member
+
+		<where>
+			<if test="searchType != null">
+				<if test="searchType == 'both'">
+					<include refid="whereID" />
+					<include refid="whereName" />
+				</if>
+				<if test="searchType == 'id'">
+					<include refid="whereID" />
+				</if>
+				<if test="searchType == 'name'">
+					<include refid="whereName" />
+				</if>
 			</if>
-			<if test="searchType == 'id'">
-				<include refid="whereID"/>
-			</if>
-			<if test="searchType == 'name'">
-				<include refid="whereName"/>
-			</if>
-		</if>
-	</where>
-	
-	limit #{startRow}, #{count}
-	
+		</where>
+
+		limit #{startRow}, #{count}
+
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 
 	<sql id="whereID">
+		<!-- 이렇게 쓰면 인식이 안되니까. 문자열을 연결해주는 concat을 사용  -->
+		<!-- or uid like ('%#{keyword}%') -->
+
 		or uid like concat('%',#{keyword},'%')
+
 	</sql>
 
 	<sql id="whereName">
@@ -109,34 +113,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<insert id="insertMember"
-			parameterType="com.aia.op.member.model.Member"
-			useGeneratedKeys="true"
-			keyProperty="idx"
-			
-		>
+		parameterType="com.aia.op.member.model.Member" useGeneratedKeys="true"
+		keyProperty="idx">
 
-		INSERT INTO project.member (uid, upw, uname, uphoto )
+		INSERT INTO project.member (uid, upw, uname, uphoto
+		)
 		VALUES (#{uid},#{upw},#{uname},#{uphoto})
 
 	</insert>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
