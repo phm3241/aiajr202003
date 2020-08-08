@@ -117,10 +117,11 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- jackson-databind 
-			json을 ㅡ> java Object로 변환해준다. 
-			java Object를 ㅡ> json으로 응답할 수 있게 해준다. -->
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<!-- 
+			jackson-databind 
+			Json -> Java Object
+			Java Object -> Json
+		-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

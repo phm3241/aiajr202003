@@ -6,18 +6,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Member {
-
 	private Integer id;
 	private String name;
-	
-	@JsonIgnore  // 생략하는 변수 설정
+	@JsonIgnore
 	private String email;
 	private String photo;
-	
-	@JsonFormat(pattern = "yyyy-MM-dd-HH:mm:ss", timezone = "Asia/Seoul") // 시간 포멧설정
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Date regdate;
-	
-	
 
 	public Member() {
 	}
@@ -68,12 +63,6 @@ public class Member {
 
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
-	}
-
-	@Override
-	public String toString() {
-		return "Member [id=" + id + ", name=" + name + ", email=" + email + ", photo=" + photo + ", regdate=" + regdate
-				+ "]";
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.aia.mm.controller;
+package com.aia.mm.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,41 +6,26 @@ import org.springframework.stereotype.Service;
 
 import com.aia.mm.dao.MemberDao;
 import com.aia.mm.model.Member;
-import com.aia.mm.model.MemberRegRequest;
 
 @Service
-public class MemberRegService {
+public class MemberViewService {
 	
 	private MemberDao dao;
 	
 	@Autowired
-	SqlSessionTemplate template;
-
+	private SqlSessionTemplate template;
 	
-	public int regMember(MemberRegRequest regRequest) {
-		
-		Member member = regRequest.toMember();
+	public Member getMember(int idx) {
 		
 		dao = template.getMapper(MemberDao.class);
 		
-		int result = dao.insertMember(member);
-		
-		return result;		
+		return dao.selectByIdx(idx);
 	}
 	
+	
+	
+	
+	
+	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
