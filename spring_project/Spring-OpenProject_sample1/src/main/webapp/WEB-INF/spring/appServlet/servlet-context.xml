@@ -40,6 +40,13 @@
 		</interceptor>
 	</interceptors>
 	
+	<!-- sha256 bean 등록. 기본생성자 -->
+	<beans:bean id="sha256" class="com.aia.op.util.Sha256"/>
+	
+	<!-- aes256util bean 등록 -->	
+	<beans:bean id="aes256util" class="com.aia.op.util.AES256Util">
+		<beans:constructor-arg value="0000000000000001"/>
+	</beans:bean>
 	
 	
 	

@@ -19,7 +19,7 @@
 		color : red;
 	}
 	#idchk {
-		display: none;
+		display: inline;
 	}
 </style>
 </head>
