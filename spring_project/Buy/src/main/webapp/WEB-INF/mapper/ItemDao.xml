@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 필수 : interface의 full name으로 설정 -->
+<mapper namespace="com.wifi.buy.dao.ItemDao">
+	
+	<!-- in item page  =======================================-->
+
+	
+	<!-- 참여신청 : 대기인원 추가 -->
+	<update id="addWait">
+		update wifi.item set count_w=count_w+1 where iidx=#{iidx}
+	</update>
+	
+	<!-- 참여취소 : 대기인원 빼기 -->
+	<update id="delWait">
+		update wifi.item set count_w=count_w-1 where iidx=#{iidx}
+	</update>
+	
+	<!-- aside 공구참여현황 =======================================-->
+
+	
+
+</mapper>
+
+
+
+
+
+

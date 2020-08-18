@@ -1,0 +1,11 @@
+1. 나의 공구 참여현황 보기
+  - order 테이블과 item 테이블를 사용한 view 테이블 생성
+[myorder]
+CREATE VIEW `myorder` AS
+    SELECT 
+        o.midx,
+        o.iidx,
+        o.state,
+        i.title
+    FROM order as o, item as i
+    WHERE o.iidx = i.iidx;
