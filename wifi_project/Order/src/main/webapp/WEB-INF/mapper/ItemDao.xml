@@ -6,10 +6,81 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 공구글 등록 -->
 	<insert id="regItem" parameterType="com.wifi.order.model.Item">
-		insert into wifi.item (title, price, count_m, count_w, receive, addr, location, content, photo, state, view_count, category, midx) 
-		values (#{title}, #{price}, #{count_m}, #{count_w}, #{receive}, #{addr}, #{location}, #{content}, #{photo}, #{state}, #{view_count}, #{category}, #{midx})
+		insert into wifi.item (title, price,  count_m, count_w, receive, addr, location, content, photo, state, view_count, midx, category) 
+		values (#{title}, #{price}, #{count_m}, #{count_w},  #{receive}, #{addr}, #{location}, #{content}, #{photo}, #{state}, #{view_count}, #{midx}, #{category})
 	</insert>
 	
+	
+	<!-- 공구글 상세보기 -->
+	<select id="viewItem" resultType="com.wifi.order.model.Item">
+		select * from wifi.item where iidx=#{iidx}
+	</select>
+
+
+	
+<!-- 	
+	공구글 리스트
+	<select id="" resultType="com.wifi.order.model.Item">
+		select * from wifi.item
+	</select>
+
+
+	
+
+	나의 공구판매현황
+	<select id="" resultType="com.wifi.order.model.Item">
+		select * from wifi.item where iidx=#{iidx} and midx=#{midx}
+	</select>
+	
+	나의 공구판매현황 : 해당 판매들의 참여자 리스트보기
+	<select id="" >
+	
+	</select>
+
+	나의 공구판매현황[모집중] : 참여자 거절하기
+	<update id="">
+		update from wifi.order set state=1 where iidx=#{param1} and midx=#{param2}
+	</update>
+
+
+
+	◆ 구매정원을 한번에 선택해서 넘기는데 어떻게 처리하지? c태그로 midx를 넣어준다?
+	나의 공구판매현황[모집중] : 구매자 선택하기
+	<insert id="">
+
+		insert into wifi.order (iidx, midx) values (iidx=#{param1}, midx=#{param2})
+	</insert>
+
+
+	나의 공구판매현황[모집완료] : QR코드 발급하기
+
+
+	◆ order + purchase join 해서
+	나의 공구판매현황[판매완료] : QR코드 사용처리하기
+	<update id="">
+		update wifi.purchase set state=1 where iidx=#{param1} and midx=#{param2}
+	</update>
+
+
+	나의 공구판매현황[판매완료] : 구매자 평점 등록하기
+	<insert id="" parameterType="com.wifi.order.model.Item_rvb">
+		insert into wifi.item_rvb (score_b, midx, iidx) values (#{score_b}, #{midx}, #{iidx})
+	</insert>
+
+
+
+	나의 공구판매현황[판매실패] : 글삭제하기
+	<delete id= "delItem">
+		delete from wifi.item where iidx=#{iidx} 
+	</delete> -->
 
 
 </mapper>
+
+
+
+
+
+
+
+

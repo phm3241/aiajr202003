@@ -33,35 +33,118 @@
          </div>
          
          <div id="search_area">
-         	검색하기<input type="text">
+         	검색하기<label for="gsearch">Search Google:</label>
+  				<input type="search" id="gsearch" name="gsearch">
          	<button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
          </div>
 
          <div id="regItemForm_page">
             <form class="regItemForm" onsubmit="return false;" method="POST" enctype="multipart/form-data">
-               제목 <input type="text"  name="tilte">
-               가격 <input type="text"  name="price">원
-               대기정원 <input type="text" name="count_w">명
-               모집인원 <input type="text" name="count_m">명
-               물품수령일시 <input type="text"  name="receive">
-               판매처 <input type="text" name="addr">
-               좌표 <input type="text" name="location">
-               본문 <input type="text" name="content">
-               첨부사진 <input type="text" name="photo">
-               카테고리 
-                  <select name="category">
-                     <option>1.과일</option>
-                     <option>2.육류</option>
-                     <option>3.채소</option>
-                     <option>4.생필품</option>
-                     <option>5.음료</option>
-                     <option>6.전체</option>
-                  </select>
-               작성자 <input type="text" value="작성자닉네임" disabled>
-               <input type="submit" value="공구글 등록" onclick="regItem();">
+            	<label for="tilte">제목</label>    
+	            <input type="text"  id="tilte" name="tilte">
+	            
+	            <label for="price">가격</label> 
+	            <input type="text"  id="price" name="price">원
+	            
+	            <label for="count_w">대기정원</label>    
+	            <input type="text" id="count_w" name="count_w">명
+	            
+	            <label for="count_w">모집인원</label>       
+	            <input type="text" id="count_m" name="count_m">명
+	            
+	            <label for="receive">물품수령일시</label>     
+	            <input type="text"  id="receive" name="receive">
+	               
+	            <label for="addr">판매처</label>      
+	            <input type="text" id="addr" name="addr">
+	            
+	            <label for="location">좌표</label>    
+	            <input type="text" id="location" name="location">
+	            
+	            <label for="content">본문</label>      
+	            <textarea id="content"  name="content" rows="10" cols="30">
+				내용을 작성해주세요.
+				</textarea>
+		        
+		        <label for="photo">첨부사진</label>
+		  		<input type="file" id="photo" name="photo">
+	               
+	            <label for="category">카테고리</label> 
+	                  <select id="category" name="category" size="6">
+	                     <option value="1">1.과일</option>
+	                     <option value="2">2.육류</option>
+	                     <option value="3">3.채소</option>
+	                     <option value="4">4.생필품</option>
+	                     <option value="5">5.음료</option>
+	                     <option value="6">6.전체</option>
+	                  </select>
+	                  
+	            <label for="regItem_midx">작성자</label>
+	            <input type="text" value="2" id="regItem_midx" name="midx" disabled>
+	            <input type="submit" value="공구글 등록" onclick="regItem();">
             </form>
 
-         </div>
+         </div>  <!-- regItemForm_page  end -->
+         
+         
+         
+         <!-- itemView 공구글 상세보기 -->
+         <div id="itemView" class="itemView">
+         	<div class="itemView_table">
+	         	<table border="1">
+	         		<tr>
+	         			<td>제목</td>
+	         			<td></td>
+	         		</tr>
+	         		<tr>
+	         			<td>작성자</td>
+	         			<td></td>
+	         		</tr>
+	         		<tr>
+	         			<td>첨부사진</td>
+	         			<td><img></img></td>
+	         		</tr>
+	         		<tr>
+	         			<td>카테고리</td>
+	         			<td><img></img></td>
+	         		</tr>
+	         		<tr>
+	         			<td>가격</td>
+	         			<td></td>
+	         		</tr>
+	         		<tr>
+	         			<td>모집정원</td>
+	         			<td></td>
+	         		</tr>
+	         		<tr>
+	         			<td>대기정원</td>
+	         			<td></td>
+	         		</tr>
+	         		<tr>
+	         			<td>물품수령일시</td>
+	         			<td></td>
+	         		</tr>
+	         		<tr>
+	         			<td>판매처</td>
+	         			<td></td>
+	         		</tr>
+	         		<tr>
+	         			<td>좌표</td>
+	         			<td></td>
+	         		</tr>
+	         		
+	         		<tr>
+	         			<td>본문</td>
+	         			<td></td>
+	         		</tr>
+	
+	         	</table>
+         	</div>
+         </div> <!-- itemView   end -->
+         	
+            
+	        
+                  
          
          
          
@@ -69,6 +152,7 @@
          <div id="itemlist_area">
             <div id="itemlist_big_area">
                <form action="joinCheck" onsubmit="return false">
+               
 	               <div class="item_card_big">
 	                  <img class="item_img_big" src="복숭아.jpg">
 	                  <div class="item_info">
@@ -108,6 +192,8 @@
                      </div>
                   </div>
                </div>
+               
+               
                <div class="item_card_big">
                   <img class="item_img_big" src="수박.jpg">
                   <div class="item_info">
@@ -125,8 +211,48 @@
                      </div>
                   </div>
                </div>
-            </div>
+               
+            </div>  <!-- itemlist_big_area   end-->
+            
+            
+            
+            
             <div id="itemlist_small_area">
+            
+               <div class="item_card">
+                  <img class="photo_main" src="수박.jpg">
+                  <div class="item_info">
+                     <h3 class="title">
+                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
+                     </h3>
+                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
+                     <span class="item_price">5000원</span> <span
+                        class="item_limitDate">당일마감</span>
+                  </div>
+               </div>
+               
+               <div class="item_card">
+                  <img class="item_img" src="사과.jpg">
+                  <div class="item_info">
+                     <h3 class="item_title">
+                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
+                     </h3>
+                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
+                     <span class="item_price">5000원</span> <span
+                        class="item_limitDate">당일마감</span>
+                  </div>
+               </div>
+               <div class="item_card">
+                  <img class="item_img" src="멜론.jpg">
+                  <div class="item_info">
+                     <h3 class="item_title">
+                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
+                     </h3>
+                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
+                     <span class="item_price">5000원</span> <span
+                        class="item_limitDate">당일마감</span>
+                  </div>
+               </div>
                <div class="item_card">
                   <img class="item_img" src="수박.jpg">
                   <div class="item_info">
@@ -160,41 +286,13 @@
                         class="item_limitDate">당일마감</span>
                   </div>
                </div>
-               <div class="item_card">
-                  <img class="item_img" src="수박.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div>
-               <div class="item_card">
-                  <img class="item_img" src="사과.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div>
-               <div class="item_card">
-                  <img class="item_img" src="멜론.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div>
-            </div>
-         </div>
+           
+            </div>  <!-- itemlist_small_area   end -->
+            
+            
+            
+         </div>  <!-- itemlist_area -->
+      
       </div>
       <!-- main_content_area end -->
 
