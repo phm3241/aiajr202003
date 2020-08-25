@@ -28,7 +28,8 @@ public class ItemRegService {
 		
 		// iidx, regdate, photo 가 없는 Item 객체를 먼저 생성
 		Item item = itemRequest.toItem();
-		
+		System.out.println("공구글 등록 service ");
+		System.out.println("item :"+item.toString());
 		dao = template.getMapper(ItemDao.class);
 		
 		
@@ -72,7 +73,8 @@ public class ItemRegService {
 			e.printStackTrace();
 		}
 		
-		
+		System.out.println("item(사진포함객체):"+item.toString());
+		System.out.println("dao.regItem(item); :"+dao.regItem(item));
 		return dao.regItem(item);
 	}
 

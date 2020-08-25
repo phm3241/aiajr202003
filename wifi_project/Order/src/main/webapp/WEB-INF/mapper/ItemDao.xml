@@ -18,15 +18,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	
-<!-- 	
-	공구글 리스트
-	<select id="" resultType="com.wifi.order.model.Item">
-		select * from wifi.item
+ 	
+	<!-- 공구글 리스트 -->
+	<select id="getItemlist" resultType="com.wifi.order.model.Item">
+		select * from wifi.item order by regdate desc;
 	</select>
+		<!-- select * from wifi.itemlist; -->
 
 
 	
-
+<!--
 	나의 공구판매현황
 	<select id="" resultType="com.wifi.order.model.Item">
 		select * from wifi.item where iidx=#{iidx} and midx=#{midx}

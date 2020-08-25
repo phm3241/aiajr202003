@@ -39,21 +39,22 @@
          </div>
 
          <div id="regItemForm_page">
-            <form class="regItemForm" onsubmit="return false;" method="POST" enctype="multipart/form-data">
+            <form class="regItemForm" onsubmit="return false;" >
             	<label for="tilte">제목</label>    
-	            <input type="text"  id="tilte" name="tilte">
+	            <input type="text"  id="tilte" name="tilte" required>
 	            
 	            <label for="price">가격</label> 
-	            <input type="text"  id="price" name="price">원
-	            
-	            <label for="count_w">대기정원</label>    
-	            <input type="text" id="count_w" name="count_w">명
+	            <input type="number"  id="price" name="price" required>원
 	            
 	            <label for="count_w">모집인원</label>       
-	            <input type="text" id="count_m" name="count_m">명
+	            <input type="number" id="count_m" name="count_m" required>명
+	            
+	            <label for="count_w">대기정원</label>    
+	            <input type="number" id="count_w" name="count_w" required>명
+	            
 	            
 	            <label for="receive">물품수령일시</label>     
-	            <input type="text"  id="receive" name="receive">
+	            <input type="datetime-local"  id="receive" name="receive" required>
 	               
 	            <label for="addr">판매처</label>      
 	            <input type="text" id="addr" name="addr">
@@ -63,21 +64,25 @@
 	            
 	            <label for="content">본문</label>      
 	            <textarea id="content"  name="content" rows="10" cols="30">
-				내용을 작성해주세요.
-				</textarea>
+				   내용을 작성해주세요.
+				   </textarea>
 		        
-		        <label for="photo">첨부사진</label>
-		  		<input type="file" id="photo" name="photo">
+		         <label for="photo">첨부사진</label>
+		  		   <input type="file" id="photo" name="photo">
 	               
 	            <label for="category">카테고리</label> 
 	                  <select id="category" name="category" size="6">
+	                     <option value="">카테고리선택</option>
 	                     <option value="1">1.과일</option>
 	                     <option value="2">2.육류</option>
 	                     <option value="3">3.채소</option>
 	                     <option value="4">4.생필품</option>
 	                     <option value="5">5.음료</option>
-	                     <option value="6">6.전체</option>
-	                  </select>
+	                     <option value="6" >6.전체</option>
+                     </select>
+
+               <input type="radio" name="state" class="state" value="0" checked>일반공구로 등록하기
+               <input type="radio" name="state" class="state" value="1">추천공구로 등록하기
 	                  
 	            <label for="regItem_midx">작성자</label>
 	            <input type="text" value="2" id="regItem_midx" name="midx" disabled>
@@ -151,7 +156,7 @@
          
          <div id="itemlist_area">
             <div id="itemlist_big_area">
-               <form action="joinCheck" onsubmit="return false">
+               <!-- <form action="joinCheck" onsubmit="return false">
                
 	               <div class="item_card_big">
 	                  <img class="item_img_big" src="복숭아.jpg">
@@ -163,11 +168,8 @@
 	                        <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
 	                        <span class="item_price">5000원</span> <span
 	                           class="item_limitDate">당일마감</span>
-	                        <!-- <h4 id=count_w>10</h4>
-	                        <h4 id=iidx>12</h4> -->
 	                     </div>
 	                     <div class="item_button_div">
-	                        <!-- <input type="button" class="item_Waiting_button" value="참여신청"> -->
 	                        <input type="submit" class="item_Waiting_button" value="참여신청" onclick="joinCheck();">
 	                     </div>
 	                  </div>
@@ -210,7 +212,7 @@
                         <input type="button" class="item_Waiting_button" value="참여신청">
                      </div>
                   </div>
-               </div>
+               </div> -->
                
             </div>  <!-- itemlist_big_area   end-->
             
@@ -219,7 +221,7 @@
             
             <div id="itemlist_small_area">
             
-               <div class="item_card">
+               <!-- <div class="item_card">
                   <img class="photo_main" src="수박.jpg">
                   <div class="item_info">
                      <h3 class="title">
@@ -285,7 +287,7 @@
                      <span class="item_price">5000원</span> <span
                         class="item_limitDate">당일마감</span>
                   </div>
-               </div>
+               </div> -->
            
             </div>  <!-- itemlist_small_area   end -->
             

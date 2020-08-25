@@ -35,7 +35,6 @@ public class ItemRegRequest {
 
 	public ItemRegRequest(String title, int price, int count_m, int count_w, Timestamp receive, String addr,
 			String location, String content, MultipartFile photo, int state, int view_count, int category, int midx) {
-		super();
 		this.title = title;
 		this.price = price;
 		this.count_m = count_m;

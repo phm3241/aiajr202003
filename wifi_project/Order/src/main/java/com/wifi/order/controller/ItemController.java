@@ -1,5 +1,7 @@
 package com.wifi.order.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,36 +13,41 @@ import com.wifi.order.model.Item;
 import com.wifi.order.model.ItemRegRequest;
 import com.wifi.order.service.ItemRegService;
 import com.wifi.order.service.ItemViewService;
+import com.wifi.order.service.ItemlistService;
 
 @RestController
 @RequestMapping("/item")
 public class ItemController {
 	
 	@Autowired
-	ItemRegService itemReg;
+	ItemRegService regService;
 
 	@Autowired
-	ItemViewService itemView;
+	ItemViewService viewService;
 
-	@Autowired
+	//@Autowired
 //	ItemDelService itemDel;
+	
+	@Autowired
+	ItemlistService itemlistService;
 	
 
 	
 	// 공구글 등록
 	@PostMapping
-	public int itemReg(HttpServletRequest request, ItemRegRequest itemRequest) {
+	public int regItem(HttpServletRequest request, ItemRegRequest itemRequest) {
 		
-		return itemReg.regItem(request, itemRequest);
-	}
+		System.out.println("공구글 등록 controller");
+		return regService.regItem(request, itemRequest);
+	};
 	
 	
 	// 공구글 상세보기
 	@GetMapping("/{iidx}")
-	public Item itemView(@PathVariable("iidx") int iidx) {
+	public Item viewItem(@PathVariable("iidx") int iidx) {
 		
-		return itemView.viewItem(iidx);
-	}
+		return viewService.viewItem(iidx);
+	};
 	
 	
 	// 공구글 수정
@@ -56,6 +63,11 @@ public class ItemController {
 	
 	
 	// 공구글 리스트
+	@GetMapping
+	public List<Item> getItemlist(){
+		
+		return itemlistService.getItemlist();
+	}
 	
 	
 	
