@@ -41,9 +41,18 @@
          <div id="search_area">
          	검색하기<label for="gsearch">Search</label>
   				<input type="search" id="gsearch" name="gsearch">
-         	<button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
          </div>
 
+         <button type="button" class="btn_regItem" onclick="">과일</button>
+         <button type="button" class="btn_regItem" onclick="">육류</button>
+         <button type="button" class="btn_regItem" onclick="">채소</button>
+         <button type="button" class="btn_regItem" onclick="">생필품</button>
+         <button type="button" class="btn_regItem" onclick="">음료</button>
+         <button type="button" class="btn_regItem" onclick="">최신순정렬</button>
+         <button type="button" class="btn_regItem" onclick="">평점순정렬</button>
+         <button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
+
+         
          <div id="regItemForm_page">
             <form id="regItemForm" onsubmit="return false;" >
             	<label for="title">제목</label>    
@@ -96,56 +105,62 @@
          
          <!-- itemView 공구글 상세보기 -->
          <div id="itemView" class="itemView">
-         	<div class="itemView_table">
+         	<!-- <div class="itemView_table">
 	         	<table border="1">
 	         		<tr>
 	         			<td>제목</td>
-	         			<td></td>
+	         			<td>ㅁㅁㅁ</td>
 	         		</tr>
 	         		<tr>
 	         			<td>작성자</td>
-	         			<td></td>
+	         			<td>ㅁㅁㅁ</td>
 	         		</tr>
 	         		<tr>
 	         			<td>첨부사진</td>
-	         			<td><img></img></td>
+	         			<td><img>ㅁㅁㅁ</img></td>
 	         		</tr>
 	         		<tr>
 	         			<td>카테고리</td>
-	         			<td><img></img></td>
+	         			<td><img>ㅁㅁㅁ</img></td>
 	         		</tr>
 	         		<tr>
 	         			<td>가격</td>
-	         			<td></td>
+	         			<td>ㅁㅁㅁ</td>
 	         		</tr>
 	         		<tr>
 	         			<td>모집정원</td>
-	         			<td></td>
+	         			<td>ㅁㅁㅁ</td>
 	         		</tr>
 	         		<tr>
 	         			<td>대기정원</td>
-	         			<td></td>
+	         			<td>ㅁㅁㅁ</td>
 	         		</tr>
 	         		<tr>
 	         			<td>물품수령일시</td>
-	         			<td></td>
+	         			<td>ㅁㅁ</td>
 	         		</tr>
 	         		<tr>
 	         			<td>판매처</td>
-	         			<td></td>
+	         			<td>ㅁㅁ</td>
 	         		</tr>
 	         		<tr>
 	         			<td>좌표</td>
-	         			<td></td>
+	         			<td>ㅁㅁㅁ</td>
 	         		</tr>
 	         		
 	         		<tr>
 	         			<td>본문</td>
-	         			<td></td>
+	         			<td>ㅁㅁㅁ</td>
+                  </tr>
+                  <tr>
+	         			<td clospan="2">
+                        <input type="button" class="btn_join" value="참여신청" onclick="joincCheck()">
+                        <input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()"> 
+                     </td>
 	         		</tr>
 	
 	         	</table>
-         	</div>
+         	</div> -->
          </div> <!-- itemView   end -->
          	
             

@@ -18,7 +18,7 @@ function itemlist(){
 		success: function(data){
 			
 			var html = '';
-			var path="C:\Users\BIT02-20\Documents\GitHub\aiajr202003\wifi_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Order\upload\";
+			//var path='C:\Users\BIT02-20\Documents\GitHub\aiajr202003\wifi_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Order\img';
 				
 			for(var i=0; i<data.length; i++){
 				// 추천 공구글
@@ -41,7 +41,7 @@ function itemlist(){
 
 					html += '<button class="item_card">';
 					html += '	<input type="hidden" value="'+data[i].iidx+'">';
-					html += '	<img class="item_img" src="'+path+data[i].photo+'">';
+					html += '	<img class="item_img" src="'+data[i].photo+'">';
 					html += '	<div class="item_info">';
 					html += '		<h3 class="item_title">'+data[i].title+'</h3>';
 					html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
@@ -61,20 +61,19 @@ function itemlist(){
 				
 				// 일반공구글일 때 표시되는 위치
 				$('#itemlist_big_area').html(html);
-			
 		}
 
 
 	});
 
 
-} // itemlist() end
+}; // itemlist() end
 
 
 /*  */
 function regItemForm(){
    //$("#regItemForm_page").css("display","block");
-   $(".regItemForm").toggle();
+   $("#regItemForm").toggle();
    
 };
 
@@ -98,7 +97,7 @@ function regSubmit(){
 		}
 
 		regFormData.append('state', $('.state').val());
-		regFormData.append('viewCount', 123);
+		regFormData.append('viewCount', 0);
 		regFormData.append('category', $('#category').val());
 		regFormData.append('midx', $('#midx').val());	
 
@@ -115,11 +114,41 @@ function regSubmit(){
 				alert(data); 
 				//itemView(data.iidx);
 				//itemList();
-				document.getElementById('regItemForm').reset();
+				//document.getElementById('regItemForm').reset();
+
+				var html = '';
+					
+				html += '<div class="itemView_table">';
+				html += '	<table border="1">';
+				html += '		<tr><td>제목</td><td>'+$('#title').val()+'</td></tr>';
+				html += '		<tr><td>작성자</td><td>'+$('#midx').val()+'</td></tr>';
+				html += '		<tr><td>첨부사진</td><td>'+$('#photo').val()+'</td></tr>';
+				html += '		<tr><td>카테고리</td><td>'+$('#category').val()+'</td></tr>';
+				html += '		<tr><td>가격</td><td>'+$('#price').val()+'</td></tr>';
+				html += '		<tr><td>모집정원</td><td>'+$('#count_m').val()+'</td></tr>';
+				html += '		<tr><td>대기정원</td><td>'+$('#count_m').val()*2+'</td></tr>';
+				html += '		<tr><td>물품수령일시</td><td>'+moment($('#receive').val()).format('YYYY-MM-DD HH:mm:ss')+'</td></tr>';
+				html += '		<tr><td>판매처</td><td>'+$('#addr').val()+'</td></tr>';
+				html += '		<tr><td>좌표</td><td>'+$('#location').val()+'</td></tr>';
+				html += '		<tr><td>본문</td><td>'+$('#content').val()+'</td></tr>';
+				html += '		<tr><td clospan="2"><input type="button" class="btn_join" value="참여신청" onclick="joincCheck()">';
+				html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()"></td></tr>'; 
+				html += '	</table>';
+				html += '</div>';
+				
+				$('#itemView').html(html);
+				itemlist();
+
+			},
+
+			Error: function(error){
+				alert('공구등록 실패');
+				itemlist();
 			}
+			
 		});
 		
-		itemlist();
+		
 	};
 
 

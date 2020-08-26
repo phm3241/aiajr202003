@@ -33,7 +33,7 @@ public class ItemController {
 	
 
 	
-	// 공구글 등록
+	// 공구글 등록 : item 등록후 iidx 반환
 	@PostMapping
 	public int regItem(HttpServletRequest request, ItemRegRequest itemRequest) {
 		
