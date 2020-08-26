@@ -43,13 +43,14 @@
   				<input type="search" id="gsearch" name="gsearch">
          </div>
 
-         <button type="button" class="btn_regItem" onclick="">과일</button>
-         <button type="button" class="btn_regItem" onclick="">육류</button>
-         <button type="button" class="btn_regItem" onclick="">채소</button>
-         <button type="button" class="btn_regItem" onclick="">생필품</button>
-         <button type="button" class="btn_regItem" onclick="">음료</button>
-         <button type="button" class="btn_regItem" onclick="">최신순정렬</button>
-         <button type="button" class="btn_regItem" onclick="">평점순정렬</button>
+         <button type="button" class="btn_search_category" onclick="">과일</button>
+         <button type="button" class="btn_search_category" onclick="">육류</button>
+         <button type="button" class="btn_search_category" onclick="">채소</button>
+         <button type="button" class="btn_search_category" onclick="">생필품</button>
+         <button type="button" class="btn_search_category" onclick="">음료</button>
+         <button type="button" class="btn_search_category" onclick="">최신순정렬</button>
+         <button type="button" class="btn_search_category" onclick="">평점순정렬</button>
+         
          <button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
 
          

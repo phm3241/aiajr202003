@@ -2,12 +2,15 @@ package com.wifi.order.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wifi.order.dao.ItemDao;
@@ -35,6 +38,9 @@ public class ItemRegService {
 		
 		// 공구 등록한 결과데이터 변수 
 		int result = 0;
+		
+		// 공구 등록후 등록한 공구글의 iidx
+		int iidx = 0;
 		
 		try {
 			
@@ -83,13 +89,24 @@ public class ItemRegService {
 		result = dao.regItem(item);
 		
 		// 공구등록 성공이면, iidx 반환하기
-//		if(result==1) {
-//			String title = itemRequest.getTitle();
-//			int midx = itemRequest.getMidx();
-//			int iidx = dao.getIidx(title, midx);
-//		}
+		if(result==1) {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			String title = itemRequest.getTitle();
+			int midx = itemRequest.getMidx();
+			
+			System.out.println("title : "+title + ", midx: "+midx);
+			map.put("title",title);
+			map.put("midx",midx);
+			
+			iidx = dao.regItemIidx(map);
+			
+
+		} else {
+			iidx = 0;
+		}
 		
-		return result;
+		return iidx;
 	};
 
 

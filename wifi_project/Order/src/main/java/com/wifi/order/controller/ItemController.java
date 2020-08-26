@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.model.Item;
 import com.wifi.order.model.ItemRegRequest;
+import com.wifi.order.service.ItemDelService;
+import com.wifi.order.service.ItemRegIidxService;
 import com.wifi.order.service.ItemRegService;
 import com.wifi.order.service.ItemViewService;
 import com.wifi.order.service.ItemlistService;
@@ -25,8 +28,8 @@ public class ItemController {
 	@Autowired
 	ItemViewService viewService;
 
-	//@Autowired
-//	ItemDelService itemDel;
+	@Autowired
+	ItemDelService delService;
 	
 	@Autowired
 	ItemlistService itemlistService;
@@ -54,11 +57,11 @@ public class ItemController {
 	
 	
 	// 공구글 삭제
-//	@DeleteMapping("/iidx")
-//	public int itemDel(@PathVariable("iidx") int iidx) {
-//		
-//		return itemDel.delItem(iidx); 
-//	}
+	@DeleteMapping("/iidx")
+	public int delItem(@PathVariable("iidx") int iidx) {
+		
+		return delService.delItem(iidx); 
+	};
 	
 	
 	

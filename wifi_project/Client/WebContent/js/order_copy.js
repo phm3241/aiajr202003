@@ -39,7 +39,7 @@ function itemlist(){
 				// 일반 공구글
 				//} else{
 
-					html += '<button class="item_card">';
+					html += '<button class="item_card" onclick="itemView('+data[i].iidx+')">';
 					html += '	<input type="hidden" value="'+data[i].iidx+'">';
 					html += '	<img class="item_img" src="'+data[i].photo+'">';
 					html += '	<div class="item_info">';
@@ -109,34 +109,37 @@ function regSubmit(){
 			processData: false, // File 전송시 필수
 			contentType: false, // multipart/form-data
 			data : regFormData,
-			success : function(data){
+			success : function(iidx){
 				alert("공구등록완료");
-				alert(data); 
+				alert("등록한 공구 iidx : " + iidx); 
 				//itemView(data.iidx);
 				//itemList();
 				//document.getElementById('regItemForm').reset();
 
-				var html = '';
+				// var html = '';
 					
-				html += '<div class="itemView_table">';
-				html += '	<table border="1">';
-				html += '		<tr><td>제목</td><td>'+$('#title').val()+'</td></tr>';
-				html += '		<tr><td>작성자</td><td>'+$('#midx').val()+'</td></tr>';
-				html += '		<tr><td>첨부사진</td><td>'+$('#photo').val()+'</td></tr>';
-				html += '		<tr><td>카테고리</td><td>'+$('#category').val()+'</td></tr>';
-				html += '		<tr><td>가격</td><td>'+$('#price').val()+'</td></tr>';
-				html += '		<tr><td>모집정원</td><td>'+$('#count_m').val()+'</td></tr>';
-				html += '		<tr><td>대기정원</td><td>'+$('#count_m').val()*2+'</td></tr>';
-				html += '		<tr><td>물품수령일시</td><td>'+moment($('#receive').val()).format('YYYY-MM-DD HH:mm:ss')+'</td></tr>';
-				html += '		<tr><td>판매처</td><td>'+$('#addr').val()+'</td></tr>';
-				html += '		<tr><td>좌표</td><td>'+$('#location').val()+'</td></tr>';
-				html += '		<tr><td>본문</td><td>'+$('#content').val()+'</td></tr>';
-				html += '		<tr><td clospan="2"><input type="button" class="btn_join" value="참여신청" onclick="joincCheck()">';
-				html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()"></td></tr>'; 
-				html += '	</table>';
-				html += '</div>';
+				// html += '<div class="itemView_table">';
+				// html += '	<table border="1">';
+				// html += '		<tr><td>제목</td><td>'+$('#title').val()+'</td></tr>';
+				// html += '		<tr><td>작성자</td><td>'+$('#midx').val()+'</td></tr>';
+				// html += '		<tr><td>첨부사진</td><td>'+$('#photo').val()+'</td></tr>';
+				// html += '		<tr><td>카테고리</td><td>'+$('#category').val()+'</td></tr>';
+				// html += '		<tr><td>가격</td><td>'+$('#price').val()+'</td></tr>';
+				// html += '		<tr><td>모집정원</td><td>'+$('#count_m').val()+'</td></tr>';
+				// html += '		<tr><td>대기정원</td><td>'+$('#count_m').val()*2+'</td></tr>';
+				// html += '		<tr><td>물품수령일시</td><td>'+moment($('#receive').val()).format('YYYY-MM-DD HH:mm:ss')+'</td></tr>';
+				// html += '		<tr><td>판매처</td><td>'+$('#addr').val()+'</td></tr>';
+				// html += '		<tr><td>좌표</td><td>'+$('#location').val()+'</td></tr>';
+				// html += '		<tr><td>본문</td><td>'+$('#content').val()+'</td></tr>';
+				// html += '		<tr><td clospan="2"><input type="button" class="btn_join" value="참여신청" onclick="joincCheck()">';
+				// html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()"></td></tr>'; 
+				// html += '	</table>';
+				// html += '</div>';
 				
-				$('#itemView').html(html);
+
+				itemView(iidx);
+				
+				// $('#itemView').html(html);
 				itemlist();
 
 			},
@@ -164,17 +167,24 @@ function regSubmit(){
 					
 				html += '<div class="itemView_table">';
 				html += '	<table border="1">';
+				html += '		<tr><td>iidx</td><td>'+data.iidx+'</td></tr>';
 				html += '		<tr><td>제목</td><td>'+data.title+'</td></tr>';
 				html += '		<tr><td>작성자</td><td>'+data.midx+'</td></tr>';
 				html += '		<tr><td>첨부사진</td><td>'+data.photo+'</td></tr>';
 				html += '		<tr><td>카테고리</td><td>'+data.category+'</td></tr>';
 				html += '		<tr><td>가격</td><td>'+data.price+'</td></tr>';
-				html += '		<tr><td>모집정원</td><td>'+data.count_w+'</td></tr>';
-				html += '		<tr><td>대기정원</td><td>'+data.count_m+'</td></tr>';
+				html += '		<tr><td>모집정원</td><td>'+data.count_m+'</td></tr>';
+				html += '		<tr><td>대기정원</td><td>'+data.count_m*2+'</td></tr>';
 				html += '		<tr><td>물품수령일시</td><td>'+data.receive+'</td></tr>';
 				html += '		<tr><td>판매처</td><td>'+data.addr+'</td></tr>';
 				html += '		<tr><td>좌표</td><td>'+data.location+'</td></tr>';
 				html += '		<tr><td>본문</td><td>'+data.content+'</td></tr>';
+				html += '		<tr><td clospan="2">';
+				html += '			<input type="button" class="btn_join" value="참여신청" onclick="joincCheck()">';
+				html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()">'; 
+				html += '			<input type="button" class="btn_itmelist" value="글수정" onclick="editItem()">'; 
+				html += '			<input type="button" class="btn_itmelist" value="글삭제" onclick="delItem()">'; 
+				html += '		</td></tr>'; 
 				html += '	</table>';
 				html += '</div">';
 				
@@ -186,6 +196,24 @@ function regSubmit(){
 		});
 
 	} //itemView() end
+
+	
+	/* 공구 삭제 */
+	function delItem(iidx){
+
+		if(confirm('정말 삭제하시겠습니까?')){
+			$.ajax({
+				url: domain+'/item/'+iidx,
+				type: 'DELETE',
+				success: function(data){
+					alert('공구삭제 성공');
+					itemlist();
+				}
+	
+			});
+		}
+		
+	}
 
 
 

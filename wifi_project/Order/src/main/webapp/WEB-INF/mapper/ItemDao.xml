@@ -4,22 +4,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wifi.order.dao.ItemDao">
 
-	<!-- 공구글 등록 -->
+	<!-- 공구 등록 -->
 	<insert id="regItem" parameterType="com.wifi.order.model.Item">
 		insert into wifi.item (title, price, count_m, count_w, receive, addr, location, content, photo, state, view_count, category, midx) 
 		values (#{title}, #{price}, #{count_m}, #{count_w},  #{receive}, #{addr}, #{location}, #{content}, #{photo}, #{state}, #{view_count}, #{category}, #{midx})
 	</insert>
 	
-	<!-- 
-	<select id="getIidx" resultType="">
-		select iidx from wifi.item where title
-	</select> -->
+	<!-- 공구 등록 후 iidx 반환 -->
+	<select id="regItemIidx" parameterType="map" resultType="int" >
+		select iidx from wifi.item where title=#{title} and midx=#{midx}
+	</select> 
 	
-	<!-- 공구글 상세보기 -->
+	<!-- 공구 상세보기 -->
 	<select id="viewItem" resultType="com.wifi.order.model.Item">
 		select * from wifi.item where iidx=#{iidx}
 	</select>
- 	
+	
+	<!-- 공구상세보기하면, 조회수 +1 -->
+	<update id="viewCountUp">
+		update wifi.item set view_count = view_count+1 where iidx=#{iidx}
+	</update>
+	
+	<!-- 공구 삭제 -->
+ 	<delete id="delItem">
+ 		delete from wifi.item where iidx=#{iidx}
+ 	</delete>
  	
 	<!-- 공구글 리스트 : 최신순정렬 -->
 	<select id="getItemlist" resultType="com.wifi.order.model.Item">
@@ -27,14 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 공구글 리스트 : 평점순정렬 -->
-	<select id="getItemlistSort" resultType="com.wifi.order.model.Item">
+	<!-- <select id="getItemlistSort" resultType="com.wifi.order.model.Item">
 		select * from wifi.item i join wifi.itme_rvs r where i.midx=r.midx order by i.score_s desc;
-	</select>
+	</select> -->
 	
 	<!-- 공구검색(카테고리) : 과일  -->
-	<selet id="" resultType="com.wifi.order.model.Item">
+	<!-- <selet id="" resultType="com.wifi.order.model.Item">
 		select * from wifi.item where category=1 order by regdate desc;
-	</selet>
+	</selet> -->
 
 	<!-- 공구검색(카테고리) : 과일  -->
 

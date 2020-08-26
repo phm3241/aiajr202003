@@ -43,7 +43,20 @@
 }
 
 
-/* 검색. 글등록버튼 -------------------------- */
+/* 버튼 : 카테고리검색  */
+.btn_search_category {
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: lightgoldenrodyellow;
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+}
+
+
+
+/* 버튼 : 검색. 글등록버튼 -------------------------- */
 .btn_regItem {
 	width: 100px;
 	height: 40px;

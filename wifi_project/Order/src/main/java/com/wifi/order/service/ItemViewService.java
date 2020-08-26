@@ -17,8 +17,13 @@ public class ItemViewService {
 	
 	
 	public Item viewItem(int iidx) {
-	
+		
 		dao = template.getMapper(ItemDao.class);
+		System.out.println("공구 상세보기 service :" + iidx);
+		
+		// 조회수 +1
+		dao.viewCountUp(iidx);
+
 		
 		return dao.viewItem(iidx);
 	}
