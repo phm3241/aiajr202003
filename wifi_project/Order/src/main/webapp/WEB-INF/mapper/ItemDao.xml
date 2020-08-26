@@ -35,6 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from wifi.item order by regdate desc;
 	</select>
 
+	<!-- 공구 리스트 : 선택판매자 평점평균, 총갯수표시 -->
+	<select id="" resultType="map">
+		select midx, avg(score_s) as 평점평균, count(*) as 총평점수 from wifi.item_rvs group by midx having midx=#{midx}
+	</select>
+
 	<!-- 공구글 리스트 : 평점순정렬 -->
 	<!-- <select id="getItemlistSort" resultType="com.wifi.order.model.Item">
 		select * from wifi.item i join wifi.itme_rvs r where i.midx=r.midx order by i.score_s desc;
