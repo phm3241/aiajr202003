@@ -55,6 +55,7 @@ public class ItemRegService {
 			// 서버의 저장소에 실제 저장
 			File saveFile = new File(realPath, newFileName);
 			file.transferTo(saveFile);
+			System.out.println("파일저장위치 : " + realPath);
 			System.out.println("파일저장완료 : " + newFileName);
 
 			// 데이터베이스에 저장할 Item 객체의 데이터를 완성한다. : 사진경로
@@ -74,7 +75,6 @@ public class ItemRegService {
 		}
 		
 		System.out.println("item(사진포함객체):"+item.toString());
-		System.out.println("dao.regItem(item); :"+dao.regItem(item));
 		return dao.regItem(item);
 	}
 

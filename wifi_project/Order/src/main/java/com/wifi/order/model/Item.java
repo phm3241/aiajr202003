@@ -32,13 +32,13 @@ public class Item {
 
 	
 
-	public Item(int iidx, String title, int price, int count_w, int count_m, Timestamp regdate, Timestamp receive,
-			String addr, String location, String content, String photo, int state, int view_count, int midx, int category ) {
+	public Item(int iidx, String title, int price, int count_m, int count_w, Timestamp regdate, Timestamp receive,
+			String addr, String location, String content, String photo, int state, int view_count, int category, int midx) {
 		this.iidx = iidx;
 		this.title = title;
 		this.price = price;
-		this.count_w = count_w;
 		this.count_m = count_m;
+		this.count_w = count_w;
 		this.regdate = regdate;
 		this.receive = receive;
 		this.addr = addr;
@@ -47,8 +47,8 @@ public class Item {
 		this.photo = photo;
 		this.state = state;
 		this.view_count = view_count;
-		this.midx = midx;
 		this.category = category;
+		this.midx = midx;
 	}
 	
 	
@@ -87,13 +87,7 @@ public class Item {
 		this.price = price;
 	}
 	
-	public int getCount_w() {
-		return count_w;
-	}
 	
-	public void setCount_w(int count_w) {
-		this.count_w = count_w;
-	}
 	
 	public int getCount_m() {
 		return count_m;
@@ -101,6 +95,15 @@ public class Item {
 	
 	public void setCount_m(int count_m) {
 		this.count_m = count_m;
+	}
+	
+	
+	public int getCount_w() {
+		return count_w;
+	}
+	
+	public void setCount_w(int count_w) {
+		this.count_w = count_w;
 	}
 	
 	public Timestamp getRegdate() {
@@ -116,6 +119,7 @@ public class Item {
 		return receive;
 	}
 	
+	@JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss", timezone = "Asia/Seoul")
 	public void setRedeive(Timestamp redeive) {
 		this.receive = redeive;
 	}
@@ -168,6 +172,14 @@ public class Item {
 		this.view_count = view_count;
 	}
 	
+	public int getCategory() {
+		return category;
+	}
+	
+	public void setCategory(int category) {
+		this.category = category;
+	}
+
 	public int getMidx() {
 		return midx;
 	}
@@ -176,13 +188,6 @@ public class Item {
 		this.midx = midx;
 	}
 	
-	public int getCategory() {
-		return category;
-	}
-	
-	public void setCategory(int category) {
-		this.category = category;
-	}
 	
 	
 
@@ -191,17 +196,35 @@ public class Item {
 	public java.util.Date getToDate() {// ${member.toDate}
 		return new java.util.Date(regdate.getTime());
 	}
-	
-	
-	
-	
+
+
+
 	@Override
 	public String toString() {
-		return "Item [iidx=" + iidx + ", title=" + title + ", price=" + price + ", count_w=" + count_w + ", count_m="
-				+ count_m + ", regdate=" + regdate + ", receive=" + receive + ", addr=" + addr + ", location="
-				+ location + ", content=" + content + ", photo=" + photo + ", state=" + state + ", view_count="
-				+ view_count + ", midx=" + midx + ", category=" + category + "]";
+		return "Item [iidx=" + iidx + 
+				"  , title=" + title + 
+				"  , price=" + price + 
+				"  , count_m=" + count_m + 
+				"  , count_w="+ count_w + 
+				"  , regdate=" + regdate + 
+				"  , receive=" + receive + 
+				"  , addr=" + addr + 
+				"  , location="+ location + 
+				"  , content=" + content + 
+				"  , photo=" + photo + 
+				"  , state=" + state + 
+				"  , view_count="+ view_count + 
+				"  , category=" + category + 
+				"  , midx=" + midx + "]";
 	}
+
+
+
+	
+	
+	
+	
+	
 
 	
 	

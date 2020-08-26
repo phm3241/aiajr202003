@@ -8,6 +8,7 @@ var domain = "http://localhost:8080/order";
 
  });
 
+
  
 function itemlist(){
 	
@@ -17,6 +18,7 @@ function itemlist(){
 		success: function(data){
 			
 			var html = '';
+			var path="C:\Users\BIT02-20\Documents\GitHub\aiajr202003\wifi_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Order\upload\";
 				
 			for(var i=0; i<data.length; i++){
 				// 추천 공구글
@@ -39,13 +41,13 @@ function itemlist(){
 
 					html += '<button class="item_card">';
 					html += '	<input type="hidden" value="'+data[i].iidx+'">';
-					html += '	<img class="item_img" src="'+data[i].photo+'">';
+					html += '	<img class="item_img" src="'+path+data[i].photo+'">';
 					html += '	<div class="item_info">';
 					html += '		<h3 class="item_title">'+data[i].title+'</h3>';
-					html += '			<span class="seller_name">'+data[i].midx+'</span>';
+					html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
 					//html += '			<span class="seller_rating">'+data[i].score_s+'<span></span></span><br>';
-					html += '			<span class="item_price">'+data[i].price+'</span> ';
-					html += '			<span class="item_limitDate">'+data[i].receive+'</span>';
+					html += '			<span class="item_price">가격 : '+data[i].price+'</span> ';
+					html += '			<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
 					html += '	</div>';
 					html += '</button>';
 				//}
@@ -76,28 +78,32 @@ function regItemForm(){
    
 };
 
-/* 공구글 등록 */
-function regItem(){
-		
+/* 공구등록 */
+function regSubmit(){
+
 		var regFormData = new FormData();
+
 		regFormData.append('title', $('#title').val());
 		regFormData.append('price', $('#price').val());
 		regFormData.append('count_m', $('#count_m').val());
-		regFormData.append('count_w', $('#count_w').val());
-		regFormData.append('receive', $('#receive').val());
-		//regFormData.append('receive', moment($('#receive').val()).format('YYYY-MM-DD HH:mm:ss'));
+		regFormData.append('count_w', $('#count_m').val()*2);
+		regFormData.append('receive', moment($('#receive').val()).format('YYYY-MM-DD HH:mm:ss'));
 		regFormData.append('addr', $('#addr').val());
 		regFormData.append('location', $('#location').val());
 		regFormData.append('content', $('#content').val());
-		regFormData.append('category', $('#category').val());
-		regFormData.append('midx', $('#midx').val());
-		regFormData.append('state', $('.state').val());
-		regFormData.append('view_count', 0);
+
 		// 파일 첨부
 		if($('#photo')[0].files[0] != null){
-			regFormData.append('photo',$('#photo')[0].files[0]);
-		};
-		alert(regFormData); 
+		regFormData.append('photo', $('#photo')[0].files[0]);
+		}
+
+		regFormData.append('state', $('.state').val());
+		regFormData.append('viewCount', 123);
+		regFormData.append('category', $('#category').val());
+		regFormData.append('midx', $('#midx').val());	
+
+		alert("regFormData.title"+regFormData.title); 
+
 		$.ajax({
 			url : domain+'/item',
 			type : 'POST',
@@ -107,12 +113,13 @@ function regItem(){
 			success : function(data){
 				alert("공구등록완료");
 				alert(data); 
-				itemView(data.iidx);
+				//itemView(data.iidx);
 				//itemList();
 				document.getElementById('regItemForm').reset();
 			}
 		});
 		
+		itemlist();
 	};
 
 

@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 공구글 등록 -->
 	<insert id="regItem" parameterType="com.wifi.order.model.Item">
-		insert into wifi.item (title, price,  count_m, count_w, receive, addr, location, content, photo, state, view_count, midx, category) 
-		values (#{title}, #{price}, #{count_m}, #{count_w},  #{receive}, #{addr}, #{location}, #{content}, #{photo}, #{state}, #{view_count}, #{midx}, #{category})
+		insert into wifi.item (title, price, count_m, count_w, receive, addr, location, content, photo, state, view_count, category, midx) 
+		values (#{title}, #{price}, #{count_m}, #{count_w},  #{receive}, #{addr}, #{location}, #{content}, #{photo}, #{state}, #{view_count}, #{category}, #{midx})
 	</insert>
 	
 	

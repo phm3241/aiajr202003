@@ -34,7 +34,7 @@ public class ItemRegRequest {
 
 
 	public ItemRegRequest(String title, int price, int count_m, int count_w, Timestamp receive, String addr,
-			String location, String content, MultipartFile photo, int state, int view_count, int category, int midx) {
+			String location, String content, MultipartFile photo, int state, int category, int midx) {
 		this.title = title;
 		this.price = price;
 		this.count_m = count_m;
@@ -45,7 +45,7 @@ public class ItemRegRequest {
 		this.content = content;
 		this.photo = photo;
 		this.state = state;
-		this.view_count = view_count;
+		this.view_count = 0;
 		this.category = category;
 		this.midx = midx;
 	}
@@ -108,13 +108,13 @@ public class ItemRegRequest {
 	}
 
 
-
+	@JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss", timezone = "Asia/Seoul")
 	public Timestamp getReceive() {
 		return receive;
 	}
 
 
-
+	@JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss", timezone = "Asia/Seoul")
 	public void setReceive(Timestamp receive) {
 		this.receive = receive;
 	}
@@ -219,10 +219,19 @@ public class ItemRegRequest {
 
 	@Override
 	public String toString() {
-		return "ItemRequest [title=" + title + ", price=" + price + ", count_m=" + count_m + ", count_w=" + count_w
-				+ ", receive=" + receive + ", addr=" + addr + ", location=" + location + ", content=" + content
-				+ ", photo=" + photo + ", state=" + state + ", view_count=" + view_count + ", category=" + category
-				+ ", midx=" + midx + "]";
+		return "ItemRequest [title=" + title + 
+				"    	   , price=" + price + 
+				"  		   , count_m=" + count_m + 
+				"		   , count_w=" + count_w+ 
+				"          , receive=" + receive + 
+				"          , addr=" + addr + 
+				"          , location=" + location + 
+				"          , content=" + content+ 
+				"          , photo=" + photo + 
+				"          , state=" + state + 
+				"          , view_count=" + view_count + 
+				"          , category=" + category+ 
+				"          , midx=" + midx + "]";
 	}
 	
 	

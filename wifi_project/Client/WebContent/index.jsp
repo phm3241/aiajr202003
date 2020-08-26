@@ -6,7 +6,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
+
+
+
+
+
 <link rel="stylesheet" href="buy.css" type="text/css">
 <style>
    /* .panel{
@@ -33,25 +39,21 @@
          </div>
          
          <div id="search_area">
-         	검색하기<label for="gsearch">Search Google:</label>
+         	검색하기<label for="gsearch">Search</label>
   				<input type="search" id="gsearch" name="gsearch">
          	<button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
          </div>
 
          <div id="regItemForm_page">
-            <form class="regItemForm" onsubmit="return false;" >
-            	<label for="tilte">제목</label>    
-	            <input type="text"  id="tilte" name="tilte" required>
+            <form id="regItemForm" onsubmit="return false;" >
+            	<label for="title">제목</label>    
+	            <input type="text"  id="title" name=title required>
 	            
 	            <label for="price">가격</label> 
 	            <input type="number"  id="price" name="price" required>원
 	            
-	            <label for="count_w">모집인원</label>       
+	            <label for="count_m">모집인원</label>       
 	            <input type="number" id="count_m" name="count_m" required>명
-	            
-	            <label for="count_w">대기정원</label>    
-	            <input type="number" id="count_w" name="count_w" required>명
-	            
 	            
 	            <label for="receive">물품수령일시</label>     
 	            <input type="datetime-local"  id="receive" name="receive" required>
@@ -70,23 +72,22 @@
 		         <label for="photo">첨부사진</label>
 		  		   <input type="file" id="photo" name="photo">
 	               
-	            <label for="category">카테고리</label> 
-	                  <select id="category" name="category" size="6">
-	                     <option value="">카테고리선택</option>
+	             <label for="category">카테고리</label> 
+	                  <select id="category" name="category">
+	                     <option value="6" selected>전체</option>
 	                     <option value="1">1.과일</option>
 	                     <option value="2">2.육류</option>
 	                     <option value="3">3.채소</option>
 	                     <option value="4">4.생필품</option>
 	                     <option value="5">5.음료</option>
-	                     <option value="6" >6.전체</option>
                      </select>
 
                <input type="radio" name="state" class="state" value="0" checked>일반공구로 등록하기
                <input type="radio" name="state" class="state" value="1">추천공구로 등록하기
 	                  
 	            <label for="regItem_midx">작성자</label>
-	            <input type="text" value="2" id="regItem_midx" name="midx" disabled>
-	            <input type="submit" value="공구글 등록" onclick="regItem();">
+	            <input type="text" value="2" id="midx" name="midx" disabled>
+	            <input type="submit" value="공구등록" onclick="regSubmit();">
             </form>
 
          </div>  <!-- regItemForm_page  end -->
@@ -323,6 +324,5 @@
 </body>
 </html>
 
-<!-- <script text="text/javascript" src="js/order.js"></script> -->
 <script text="text/javascript" src="js/order_copy.js"></script>
 
