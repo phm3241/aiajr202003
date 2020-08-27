@@ -4,107 +4,158 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wifi.order.dao.ItemDao">
 
-	<!-- 공구 등록 -->
-	<insert id="regItem" parameterType="com.wifi.order.model.Item">
-		insert into wifi.item (title, price, count_m, count_w, receive, addr, location, content, photo, state, view_count, category, midx) 
-		values (#{title}, #{price}, #{count_m}, #{count_w},  #{receive}, #{addr}, #{location}, #{content}, #{photo}, #{state}, #{view_count}, #{category}, #{midx})
-	</insert>
-	
-	<!-- 공구 등록 후 iidx 반환 -->
-	<select id="regItemIidx" parameterType="map" resultType="int" >
-		select iidx from wifi.item where title=#{title} and midx=#{midx}
-	</select> 
-	
-	<!-- 공구 상세보기 -->
-	<select id="viewItem" resultType="com.wifi.order.model.Item">
-		select * from wifi.item where iidx=#{iidx}
+
+
+	<!-- 공구 리스트. 정렬 관련 =========================================================== -->
+
+	<!-- 공구 리스트 - 최신순정렬 : 아이템*판매자의 평점 조인 (평균평점. 총평점수). -->
+	<select id="getItemlist"
+		resultType="com.wifi.order.model.ItemJoinRvs">
+		select *
+		from (wifi.item i) join (select midx, avg(score_s) as rvs_avg, count(*) as
+		rvs_totalRow from wifi.item_rvs group by midx) r
+		on i.midx=r.midx order
+		by regdate desc;
 	</select>
-	
-	<!-- 공구상세보기하면, 조회수 +1 -->
-	<update id="viewCountUp">
-		update wifi.item set view_count = view_count+1 where iidx=#{iidx}
-	</update>
-	
-	<!-- 공구 삭제 -->
- 	<delete id="delItem">
- 		delete from wifi.item where iidx=#{iidx}
- 	</delete>
- 	
-	<!-- 공구글 리스트 : 최신순정렬 -->
-	<select id="getItemlist" resultType="com.wifi.order.model.Item">
-		select * from wifi.item order by regdate desc;
+
+
+	<!-- 공구 리스트 - 평점순정렬 : 아이템*판매자의 평점 조인 (평균평점. 총평점수). -->
+	<select id="getItemlistSort"
+		resultType="com.wifi.order.model.ItemJoinRvs">
+		select *
+		from (wifi.item i) join (select midx, avg(score_s) as rvs_avg, count(*) as
+		rvs_totalRow from wifi.item_rvs group by midx) r
+		on i.midx=r.midx order
+		by rvs_avg desc;
 	</select>
+
+
 
 	<!-- 공구 리스트 : 선택판매자 평점평균, 총갯수표시 -->
-	<select id="" resultType="map">
-		select midx, avg(score_s) as 평점평균, count(*) as 총평점수 from wifi.item_rvs group by midx having midx=#{midx}
+	<!-- <select id="" resultType="map"> select midx, avg(score_s) as 평점평균, 
+		count(*) as 총평점수 from wifi.item_rvs group by midx having midx=#{midx} </select> -->
+
+
+
+	<!-- 공구 상세보기 -->
+	<select id="viewItem"
+		resultType="com.wifi.order.model.ItemJoinRvs">
+		select *
+		from (wifi.item i) join (select midx, avg(score_s) as rvs_avg, count(*) as
+		rvs_totalRow from wifi.item_rvs group by midx) r
+		on i.midx=r.midx where
+		iidx=#{iidx};
 	</select>
 
-	<!-- 공구글 리스트 : 평점순정렬 -->
-	<!-- <select id="getItemlistSort" resultType="com.wifi.order.model.Item">
-		select * from wifi.item i join wifi.itme_rvs r where i.midx=r.midx order by i.score_s desc;
-	</select> -->
-	
-	<!-- 공구검색(카테고리) : 과일  -->
-	<!-- <selet id="" resultType="com.wifi.order.model.Item">
-		select * from wifi.item where category=1 order by regdate desc;
-	</selet> -->
-
-	<!-- 공구검색(카테고리) : 과일  -->
-
-	<!-- 공구검색(카테고리) : 과일  -->
-	
-	
-		<!-- select * from wifi.itemlist; -->
 
 
-	
-<!--
-	나의 공구판매현황
-	<select id="" resultType="com.wifi.order.model.Item">
-		select * from wifi.item where iidx=#{iidx} and midx=#{midx}
-	</select>
-	
-	나의 공구판매현황 : 해당 판매들의 참여자 리스트보기
-	<select id="" >
-	
-	</select>
-
-	나의 공구판매현황[모집중] : 참여자 거절하기
-	<update id="">
-		update from wifi.order set state=1 where iidx=#{param1} and midx=#{param2}
+	<!-- 공구상세보기하면, 조회수 +1 -->
+	<update id="viewCountUp">
+		update wifi.item set view_count = view_count+1 where
+		iidx=#{iidx}
 	</update>
 
 
 
-	◆ 구매정원을 한번에 선택해서 넘기는데 어떻게 처리하지? c태그로 midx를 넣어준다?
-	나의 공구판매현황[모집중] : 구매자 선택하기
-	<insert id="">
 
-		insert into wifi.order (iidx, midx) values (iidx=#{param1}, midx=#{param2})
+	<!-- 공구 등록. 수정. 삭제 관련 =========================================================== -->
+
+	<!-- 공구 등록 -->
+	<insert id="regItem" parameterType="com.wifi.order.model.Item">
+		insert into wifi.item (title,
+		price, count_m, count_w, receive, addr, location, content, photo,
+		state, view_count, category, midx)
+		values (#{title}, #{price},
+		#{count_m}, #{count_w}, #{receive}, #{addr},
+		#{location}, #{content},
+		#{photo}, #{state}, #{view_count},
+		#{category}, #{midx})
 	</insert>
 
 
-	나의 공구판매현황[모집완료] : QR코드 발급하기
+
+	<!-- 공구 등록 후 iidx 반환 -->
+	<select id="regItemIidx" parameterType="map" resultType="int">
+		select
+		iidx from wifi.item where title=#{title} and midx=#{midx}
+	</select>
 
 
-	◆ order + purchase join 해서
-	나의 공구판매현황[판매완료] : QR코드 사용처리하기
-	<update id="">
-		update wifi.purchase set state=1 where iidx=#{param1} and midx=#{param2}
+
+	<!-- 공구 삭제 -->
+	<delete id="delItem">
+		delete from wifi.item where iidx=#{iidx}
+	</delete>
+
+
+
+
+
+
+
+	<!-- 공구 검색 관련 =========================================================== -->
+
+	<!-- 공구검색(카테고리) : 과일 -->
+	<!-- <selet id="" resultType="com.wifi.order.model.Item"> select * from 
+		wifi.item where category=1 order by regdate desc; </selet> -->
+
+	<!-- 공구검색(카테고리) : 과일 -->
+
+	<!-- 공구검색(카테고리) : 과일 -->
+
+
+	<!-- select * from wifi.itemlist; -->
+
+
+
+
+
+	<!-- 내 공구 판매현황 관련 =========================================================== -->
+
+	<!-- 나의 공구판매현황 -->
+	<select id="" resultType="com.wifi.order.model.MyItem"> 
+		select seller, iidx, title, count_m, count_w, receive,
+				ifnull(oidx,-1) as oidx, ifnull(buyer,-1) as buyer, ifnull(ostate,-1) as ostate, 
+        		ifnull(pidx,-1) as pidx, ifnull(pstate, -1) as pstate
+		from wifi.myitem
+		where seller=#{midx};
+	</select>
+	
+	
+	<!-- 나의 공구판매현황 - 해당 판매들의 참여자 리스트보기 -->
+	<select id="">
+	</select>
+	
+	
+	
+	
+	
+	<!-- 나의 공구판매현황[모집중] - 참여자 거절하기 -->
+	<!-- <update id=""> update from wifi.order set state=1 where
+		iidx=#{param1} and midx=#{param2}
+	</update> -->
+	
+	<!-- ◆ 구매정원을 한번에 선택해서 넘기는데 어떻게 처리하지? c태그로 midx를 넣어준다?  -->
+	<!-- 나의 공구판매현황[모집중] : 구매자 선택하기 -->
+	<insert id=""> insert into wifi.order (iidx, midx) values
+		(iidx=#{param1},
+		midx=#{param2})
+	</insert>
+	
+	<!-- 나의 공구판매현황[모집완료] : QR코드 발급하기 ◆ order + purchase
+	join 해서 나의 공구판매현황[판매완료] : QR코드 사용처리하기
+	<update id=""> update wifi.purchase
+		set state=1 where iidx=#{param1} and midx=#{param2}
 	</update>
-
-
-	나의 공구판매현황[판매완료] : 구매자 평점 등록하기
+	나의 공구판매현황[판매완료]
+	: 구매자 평점 등록하기
 	<insert id="" parameterType="com.wifi.order.model.Item_rvb">
-		insert into wifi.item_rvb (score_b, midx, iidx) values (#{score_b}, #{midx}, #{iidx})
+		insert into wifi.item_rvb (score_b, midx, iidx) values (#{score_b}, #{midx},
+		#{iidx})
 	</insert>
-
-
-
 	나의 공구판매현황[판매실패] : 글삭제하기
-	<delete id= "delItem">
-		delete from wifi.item where iidx=#{iidx} 
+	<delete id="delItem"> delete
+		from wifi.item where iidx=#{iidx}
 	</delete> -->
 
 

@@ -11,45 +11,77 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.model.Item;
+import com.wifi.order.model.ItemJoinRvs;
 import com.wifi.order.model.ItemRegRequest;
+import com.wifi.order.model.MyItem;
 import com.wifi.order.service.ItemDelService;
-import com.wifi.order.service.ItemRegIidxService;
 import com.wifi.order.service.ItemRegService;
 import com.wifi.order.service.ItemViewService;
 import com.wifi.order.service.ItemlistService;
+import com.wifi.order.service.MyItemService;
+import com.wifi.order.service.itemlistSortService;
 
 @RestController
 @RequestMapping("/item")
 public class ItemController {
 	
 	@Autowired
-	ItemRegService regService;
+	ItemlistService itemlistService;
+
+	@Autowired
+	itemlistSortService itemlistSortService;
 
 	@Autowired
 	ItemViewService viewService;
 
 	@Autowired
-	ItemDelService delService;
-	
+	ItemRegService regService;
+
 	@Autowired
-	ItemlistService itemlistService;
+	ItemDelService delService;
+
+	@Autowired
+	MyItemService myitemService;
+	
 	
 
+//	공구 리스트 관련---------------------------------- 
 	
-	// 공구글 등록 : item 등록후 iidx 반환
+	// 공구 리스트 : 최신순 정렬
+	@GetMapping
+	public List<ItemJoinRvs> getItemlist(){
+		
+		return itemlistService.getItemlist();
+	}
+	
+	
+	// 공구 리스트 : 평점순 정렬
+	@GetMapping("/sort")
+	public List<ItemJoinRvs> getItemlistSort(){
+		
+		return itemlistSortService.getItemlistSort();
+	}
+
+	
+	// 공구 상세보기
+	@GetMapping("/{iidx}")
+	public ItemJoinRvs viewItem(@PathVariable("iidx") int iidx) {
+		
+		return viewService.viewItem(iidx);
+	};
+
+	
+	
+	
+	
+//	공구 등록. 수정. 삭제 관련----------------------------------
+	
+	// 공구 등록 : item 등록후 iidx 반환
 	@PostMapping
 	public int regItem(HttpServletRequest request, ItemRegRequest itemRequest) {
 		
 		System.out.println("공구글 등록 controller");
 		return regService.regItem(request, itemRequest);
-	};
-	
-	
-	// 공구글 상세보기
-	@GetMapping("/{iidx}")
-	public Item viewItem(@PathVariable("iidx") int iidx) {
-		
-		return viewService.viewItem(iidx);
 	};
 	
 	
@@ -65,22 +97,18 @@ public class ItemController {
 	
 	
 	
-	// 공구글 리스트
-	@GetMapping
-	public List<Item> getItemlist(){
+	
+//	내 공구 판매현황 관련----------------------------------
+	
+	// 내 판매글 
+	@GetMapping("/myitem/{midx}")
+	public List<MyItem> getMyItem(@PathVariable("midx") int midx){
 		
-		return itemlistService.getItemlist();
+		return myitemService.getMyItem(midx);
+		
 	}
 	
-	
-	
-	// 공구글 리스트 - 내가 작성한
-	
-	// 공구글 리스트 : 정렬(최신순)
 
-	// 공구글 리스트 : 정렬(평점순)
-	
-	// 공구글 검색 : 
 	
 
 }

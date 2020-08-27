@@ -48,8 +48,8 @@
          <button type="button" class="btn_search_category" onclick="">채소</button>
          <button type="button" class="btn_search_category" onclick="">생필품</button>
          <button type="button" class="btn_search_category" onclick="">음료</button>
-         <button type="button" class="btn_search_category" onclick="">최신순정렬</button>
-         <button type="button" class="btn_search_category" onclick="">평점순정렬</button>
+         <button type="button" class="btn_sort sort_reg"  onclick="itemlist()">최신순정렬</button>
+         <button type="button" class="btn_sort sort_rvs" onclick="itemlist_sort()">평점순정렬</button>
          
          <button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
 

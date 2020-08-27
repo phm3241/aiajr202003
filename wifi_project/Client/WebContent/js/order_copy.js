@@ -9,8 +9,11 @@ var domain = "http://localhost:8080/order";
  });
 
 
- 
+/* 공구 리스트 : 최신순 정렬(기본값) */ 
 function itemlist(){
+
+	$('.sort_rvs').css('background-color', 'aquamarine');
+	$('.sort_reg').css('background-color', 'teal');
 	
 	$.ajax({
 		url: domain+'/item',
@@ -28,7 +31,7 @@ function itemlist(){
 				// 	html += '	<img class="item_img_big" src="'+data[i].photo+'">';
 				// 	html += '	<div class="item_info">';
 				// 	html += '		<h3 class="item_title">'+data[i].title+'</h3>';
-				// 	html += '			<span class="seller_name">'+data[i].midx+'</span>';
+				// 	html += '			<span class="sell er_name">'+data[i].midx+'</span>';
 				// 	//html += '			<span class="seller_rating">'+data[i].score_s+'<span></span></span><br>';
 				// 	html += '			<span class="item_price">'+data[i].price+'</span> ';
 				// 	html += '			<span class="item_limitDate">'+data[i].receive+'</span>';
@@ -40,12 +43,13 @@ function itemlist(){
 				//} else{
 
 					html += '<button class="item_card" onclick="itemView('+data[i].iidx+')">';
-					html += '	<input type="hidden" value="'+data[i].iidx+'">';
+					//html += '	<input type="hidden" value="'+data[i].iidx+'">';
 					html += '	<img class="item_img" src="'+data[i].photo+'">';
 					html += '	<div class="item_info">';
 					html += '		<h3 class="item_title">'+data[i].title+'</h3>';
 					html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
-					//html += '			<span class="seller_rating">'+data[i].score_s+'<span></span></span><br>';
+					html += '			<span class="seller_rating">판매자 평균평점'+data[i].rvs_avg+'<span></span></span><br>';
+					html += '			<span class="seller_rating">판매자 총평점개수'+data[i].rvs_totalRow+'<span></span></span><br>';
 					html += '			<span class="item_price">가격 : '+data[i].price+'</span> ';
 					html += '			<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
 					html += '	</div>';
@@ -68,6 +72,76 @@ function itemlist(){
 
 
 }; // itemlist() end
+
+
+
+
+/* 공구 리스트 : 평점순 정렬 */ 
+function itemlist_sort(){
+
+	$('.sort_rvs').css('background-color', 'teal');
+	$('.sort_reg').css('background-color', 'aquamarine');
+
+	$.ajax({
+		url: domain+'/item/sort',
+		type: 'GET',
+		success: function(data){
+			
+			var html = '';
+			//var path='C:\Users\BIT02-20\Documents\GitHub\aiajr202003\wifi_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Order\img';
+				
+			for(var i=0; i<data.length; i++){
+				// 추천 공구글
+				// if(data[i].state == 1) {
+				// 	html += '<button class="item_card_big">';
+				// 	html += '	<input type="hidden" value="'+data[i].iidx+'">';
+				// 	html += '	<img class="item_img_big" src="'+data[i].photo+'">';
+				// 	html += '	<div class="item_info">';
+				// 	html += '		<h3 class="item_title">'+data[i].title+'</h3>';
+				// 	html += '			<span class="sell er_name">'+data[i].midx+'</span>';
+				// 	//html += '			<span class="seller_rating">'+data[i].score_s+'<span></span></span><br>';
+				// 	html += '			<span class="item_price">'+data[i].price+'</span> ';
+				// 	html += '			<span class="item_limitDate">'+data[i].receive+'</span>';
+				// 	html += '	</div>';
+				// 	html += '</button>';
+
+
+				// 일반 공구글
+				//} else{
+
+					html += '<button class="item_card" onclick="itemView('+data[i].iidx+')">';
+					//html += '	<input type="hidden" value="'+data[i].iidx+'">';
+					html += '	<img class="item_img" src="'+data[i].photo+'">';
+					html += '	<div class="item_info">';
+					html += '		<h3 class="item_title">'+data[i].title+'</h3>';
+					html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
+					html += '			<span class="seller_rating">판매자 평균평점'+data[i].rvs_avg+'<span></span></span><br>';
+					html += '			<span class="seller_rating">판매자 총평점개수'+data[i].rvs_totalRow+'<span></span></span><br>';
+					html += '			<span class="item_price">가격 : '+data[i].price+'</span> ';
+					html += '			<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
+					html += '	</div>';
+					html += '</button>';
+				//}
+
+			} // for end
+
+				// 추천공구글일 때 표시되는 위치
+				// if(data[i].state == 1){
+				// 	$('#itemlist_big_area').html(html);
+				// }
+				
+				// 일반공구글일 때 표시되는 위치
+				$('#itemlist_big_area').html(html);
+		}
+
+
+	});
+
+
+}; // itemlist_sort() end
+
+
+
 
 
 /*  */
@@ -170,6 +244,8 @@ function regSubmit(){
 				html += '		<tr><td>iidx</td><td>'+data.iidx+'</td></tr>';
 				html += '		<tr><td>제목</td><td>'+data.title+'</td></tr>';
 				html += '		<tr><td>작성자</td><td>'+data.midx+'</td></tr>';
+				html += '		<tr><td>작성자 평균평점</td><td>'+data.rvs_avg+'</td></tr>';
+				html += '		<tr><td>작성자 총평점수</td><td>'+data.rvs_totalRow+'</td></tr>';
 				html += '		<tr><td>첨부사진</td><td>'+data.photo+'</td></tr>';
 				html += '		<tr><td>카테고리</td><td>'+data.category+'</td></tr>';
 				html += '		<tr><td>가격</td><td>'+data.price+'</td></tr>';
@@ -180,10 +256,10 @@ function regSubmit(){
 				html += '		<tr><td>좌표</td><td>'+data.location+'</td></tr>';
 				html += '		<tr><td>본문</td><td>'+data.content+'</td></tr>';
 				html += '		<tr><td clospan="2">';
-				html += '			<input type="button" class="btn_join" value="참여신청" onclick="joincCheck()">';
+				html += '			<input type="button" class="btn_join" value="참여신청" onclick="joincCheck('+data.iidx+')">';
 				html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()">'; 
-				html += '			<input type="button" class="btn_itmelist" value="글수정" onclick="editItem()">'; 
-				html += '			<input type="button" class="btn_itmelist" value="글삭제" onclick="delItem()">'; 
+				html += '			<input type="button" class="btn_itmelist" value="글수정" onclick="editItem('+data.iidx+')">'; 
+				html += '			<input type="button" class="btn_itmelist" value="글삭제" onclick="delItem('+data.iidx+')">'; 
 				html += '		</td></tr>'; 
 				html += '	</table>';
 				html += '</div">';
@@ -201,17 +277,29 @@ function regSubmit(){
 	/* 공구 삭제 */
 	function delItem(iidx){
 
-		if(confirm('정말 삭제하시겠습니까?')){
 			$.ajax({
 				url: domain+'/item/'+iidx,
 				type: 'DELETE',
 				success: function(data){
 					alert('공구삭제 성공');
+					alert(data);
 					itemlist();
 				}
 	
 			});
-		}
+
+		// if(confirm("정말 삭제하시겠습니까?")){
+		// 	$.ajax({
+		// 		url: domain+'/item/'+iidx,
+		// 		type: 'DELETE',
+		// 		success: function(data){
+		// 			alert('공구삭제 성공');
+		// 			alert(data);
+		// 			itemlist();
+		// 		}
+	
+		// 	});
+		// }
 		
 	}
 

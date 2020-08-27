@@ -8,20 +8,23 @@ import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
 import com.wifi.order.model.Item;
+import com.wifi.order.model.ItemJoinRvs;
 
 @Service
 public class ItemlistService {
 
 	private ItemDao dao;
-	
+
 	@Autowired
 	private SqlSessionTemplate template;
-	
-	public List<Item> getItemlist() {
-		
-		dao = template.getMapper(ItemDao.class);
-		
-		return dao.getItemlist();
-	}
 
-}
+	
+	public List<ItemJoinRvs> getItemlist() {
+
+		dao = template.getMapper(ItemDao.class);
+		System.out.println("공구 리스트 최신순정렬  service");
+
+		return dao.getItemlist();
+	};
+
+};

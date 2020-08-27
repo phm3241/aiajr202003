@@ -54,6 +54,17 @@
 	display: inline-block;
 }
 
+/* 버튼 : 카테고리검색  */
+.btn_sort {
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: aquamarine;
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+}
+
 
 
 /* 버튼 : 검색. 글등록버튼 -------------------------- */
