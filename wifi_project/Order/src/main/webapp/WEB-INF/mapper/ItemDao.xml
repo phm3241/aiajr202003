@@ -121,6 +121,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where seller=#{midx};
 	</select>
 	
+	<!-- 판매실패 -->
+	<if test="receive-now() < 0 and count(pidx)==0">
+		
+	</if>
+	
+	
+	
+	
 	
 	<!-- 나의 공구판매현황 - 해당 판매들의 참여자 리스트보기 -->
 	<select id="">
