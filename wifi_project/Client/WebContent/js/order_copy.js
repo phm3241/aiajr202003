@@ -16,7 +16,7 @@ function itemlist(){
 	$('.sort_reg').css('background-color', 'teal');
 	
 	$.ajax({
-		url: domain+'/item',
+		url: domain+'/itmes',
 		type: 'GET',
 		success: function(data){
 			
@@ -44,7 +44,7 @@ function itemlist(){
 
 					html += '<button class="item_card" onclick="itemView('+data[i].iidx+')">';
 					//html += '	<input type="hidden" value="'+data[i].iidx+'">';
-					html += '	<img class="item_img" src="'+data[i].photo+'">';
+					html += '	<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 					html += '	<div class="item_info">';
 					html += '		<h3 class="item_title">'+data[i].title+'</h3>';
 					html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
@@ -83,7 +83,7 @@ function itemlist_sort(){
 	$('.sort_reg').css('background-color', 'aquamarine');
 
 	$.ajax({
-		url: domain+'/item/sort',
+		url: domain+'/itmes/sort',
 		type: 'GET',
 		success: function(data){
 			
@@ -95,7 +95,7 @@ function itemlist_sort(){
 				// if(data[i].state == 1) {
 				// 	html += '<button class="item_card_big">';
 				// 	html += '	<input type="hidden" value="'+data[i].iidx+'">';
-				// 	html += '	<img class="item_img_big" src="'+data[i].photo+'">';
+				// 	html += '	<img class="item_img_big" src="/order/upload/'+data[i].photo+'">';
 				// 	html += '	<div class="item_info">';
 				// 	html += '		<h3 class="item_title">'+data[i].title+'</h3>';
 				// 	html += '			<span class="sell er_name">'+data[i].midx+'</span>';
@@ -111,7 +111,7 @@ function itemlist_sort(){
 
 					html += '<button class="item_card" onclick="itemView('+data[i].iidx+')">';
 					//html += '	<input type="hidden" value="'+data[i].iidx+'">';
-					html += '	<img class="item_img" src="'+data[i].photo+'">';
+					html += '	<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 					html += '	<div class="item_info">';
 					html += '		<h3 class="item_title">'+data[i].title+'</h3>';
 					html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
@@ -144,12 +144,13 @@ function itemlist_sort(){
 
 
 
-/*  */
+/* 공구등록 폼  */
 function regItemForm(){
    //$("#regItemForm_page").css("display","block");
    $("#regItemForm").toggle();
    
 };
+
 
 /* 공구등록 */
 function regSubmit(){
@@ -178,7 +179,7 @@ function regSubmit(){
 		alert("regFormData.title"+regFormData.title); 
 
 		$.ajax({
-			url : domain+'/item',
+			url : domain+'/itmes',
 			type : 'POST',
 			processData: false, // File 전송시 필수
 			contentType: false, // multipart/form-data
@@ -233,7 +234,7 @@ function regSubmit(){
 	/* 공구글 상세보기 */
 	function itemView(iidx) {
 		$.ajax({
-			url: domain+'/item/'+iidx,
+			url: domain+'/itmes/'+iidx,
 			type: 'get',
 			success: function(data){
 				
@@ -246,7 +247,7 @@ function regSubmit(){
 				html += '		<tr><td>작성자</td><td>'+data.midx+'</td></tr>';
 				html += '		<tr><td>작성자 평균평점</td><td>'+data.rvs_avg+'</td></tr>';
 				html += '		<tr><td>작성자 총평점수</td><td>'+data.rvs_totalRow+'</td></tr>';
-				html += '		<tr><td>첨부사진</td><td>'+data.photo+'</td></tr>';
+				html += '		<tr><td>첨부사진</td><td><img class="item_img" src="/order/upload/'+data.photo+'"></td></tr>';
 				html += '		<tr><td>카테고리</td><td>'+data.category+'</td></tr>';
 				html += '		<tr><td>가격</td><td>'+data.price+'</td></tr>';
 				html += '		<tr><td>모집정원</td><td>'+data.count_m+'</td></tr>';
@@ -277,6 +278,7 @@ function regSubmit(){
 	/* 공구 삭제 */
 	function delItem(iidx){
 
+		if(confirm("정말 삭제하시겠습니까?")){
 			$.ajax({
 				url: domain+'/item/'+iidx,
 				type: 'DELETE',
@@ -287,77 +289,90 @@ function regSubmit(){
 				}
 	
 			});
-
-		// if(confirm("정말 삭제하시겠습니까?")){
-		// 	$.ajax({
-		// 		url: domain+'/item/'+iidx,
-		// 		type: 'DELETE',
-		// 		success: function(data){
-		// 			alert('공구삭제 성공');
-		// 			alert(data);
-		// 			itemlist();
-		// 		}
-	
-		// 	});
-		// }
+		}
 		
 	}
 
 
 
-	/* 공구글 리스트 */
-	/* function itemlist() {
-		
+
+	/* 내 판매글 참여자 리스트보기  */
+	/* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + pstate선택) 화면출력 */
+	function myItem_buyer(iidx) {
 		$.ajax({
-			url: 'http://localhost:8080/item',
-			type: 'get',
-			success: function(data){
-				//alert(JSON.stringify(data));
-				
-				//$('#memberList').html(JSON.stringify(data));
-				
-				var html = '';
-				
-				
-				for(var i=0; i<data.length; i++){
-					// 추천 공구글
-					if(data[i].state == 1){
-						html += '<div class="card">';
-						html += '	<ul>';
-						html += '		<li>idx : '+data[i].idx+'</li>';
-						html += '		<li>uid : '+data[i].uid+'</li>';
-						html += '		<li>upw : '+data[i].upw+'</li>';
-						html += '		<li>uName : '+data[i].uname+'</li>';
-						html += '		<li>uPhoto :'+data[i].uphoto+'</li>';
-						html += '		<li><input type="button" value="수정" onclick="editForm('+data[i].idx+')"> ';
-						html += '		<input type="button" value="삭제" onclick="deleteMember('+data[i].idx+')"></li>';
-						html += '	</ul>';
-						html += '</div>';
-					}
+		   url: domain+'/itmes/buyer/'+iidx,
+		   type: 'get',
+		   success: function(data){
+			  
+			  var html = '';
+			  for(var i=0; i<data.length; i++){
+				 var btn='';
+				 var state= '';
+				 var btnClass = '';
+				 var action = '';
+				 var btn = '';
+				 var stateColor= '';
+				 
 
-					// 일반 공구글
-					html += '<div class="card">';
-					html += '	<ul>';
-					html += '		<li>idx : '+data[i].idx+'</li>';
-					html += '		<li>uid : '+data[i].uid+'</li>';
-					html += '		<li>upw : '+data[i].upw+'</li>';
-					html += '		<li>uName : '+data[i].uname+'</li>';
-					html += '		<li>uPhoto :'+data[i].uphoto+'</li>';
-					html += '		<li><input type="button" value="수정" onclick="editForm('+data[i].idx+')"> ';
-					html += '		<input type="button" value="삭제" onclick="deleteMember('+data[i].idx+')"></li>';
-					html += '	</ul>';
-					html += '</div>';
-					
-				} // for end
-
-					// 추천공구글일 때 표시되는 위치
-					if(data[i].state == 1){
-						$('#itemlist_big_area').html(html);
-					}
-					
-					// 일반공구글일 때 표시되는 위치
-					$('#itemlist_big_area').html(html);
-				
-			} 
-		});
-	}; */
+				 if(data[i].ostated)
+				 switch(data[i].ostate){
+					case 1:
+					   state = '다음기회에...;'
+					   btnClass = 'aside_button order_del';
+					   btn='확인';
+					   action = 'order_del';
+					   stateColor = 'aside_mystate next';
+					   break;
+					   
+					case 0:
+					   state = '참여중';
+					   btnClass = 'aside_button order_del';
+					   btn='참여취소';
+					   action = 'order_del';
+					   stateColor = 'aside_mystate join';
+					   break;
+				 }
+	 
+				 switch(data[i].pstate){      
+					case 0:
+					   state = '구매자';
+					   btnClass = 'aside_button';
+					   btn='QR확인';
+					   action = 'qr';
+					   stateColor = 'aside_mystate buyer';
+					   break;
+					   
+					case 1:
+					   state = '구매 완료';
+					   btnClass = 'aside_button review';
+					   btn='평점 등록';
+					   action = 'toggle';
+					   stateColor = 'aside_mystate review';
+					   break;
+				 }
+				 html += '<div class="aside_mycard a'+data[i].iidx+'">';
+				 html += '   <div class="aside_mystatewrap">';
+				 html += '      <h4 class="'+stateColor+'">'+state+'</h4>';
+				 html += '      <div id="a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">test</div>';
+				 html += '   </div>';
+				 html += '      <input type="button" class="'+btnClass+'" onclick="'+action+'('+data[i].midx+','+data[i].iidx+')" value="'+btn+'"> <br>';
+				 html += '      <a href="'+data[i].iidx+'" class="aside_item_title" id="iidx">'+data[i].iidx+':'+data[i].title+'</a> <br>';
+				 if(data[i].pstate == 1){
+					html += '<form onsubmit="return false;">';
+					html += '   <div class="panel">';
+					html += '      <input class="score_s" type="number">';
+					html += '      <input class="insert_rvs" type="submit" value="평점 등록" onclick="review()">';
+					html += '      <input type="submit" class="purchase_del" onclick="order_del('+data[i].midx+','+data[i].iidx+')" value="글 삭제">';
+					html += '      <input type="hidden" class="midx" value="'+data[i].midx+'">';
+					html += '      <input type="hidden" class="iidx" value="'+data[i].iidx+'">';
+					html += '   </div>';
+					html += '</form>';
+				 }
+				 html += '</div>';
+			  }
+			  
+			  $('#aside_mylist').html(html);
+			  
+		   } 
+		})
+	 }; // myItemlist end

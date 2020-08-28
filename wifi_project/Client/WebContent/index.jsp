@@ -106,62 +106,7 @@
          
          <!-- itemView 공구글 상세보기 -->
          <div id="itemView" class="itemView">
-         	<!-- <div class="itemView_table">
-	         	<table border="1">
-	         		<tr>
-	         			<td>제목</td>
-	         			<td>ㅁㅁㅁ</td>
-	         		</tr>
-	         		<tr>
-	         			<td>작성자</td>
-	         			<td>ㅁㅁㅁ</td>
-	         		</tr>
-	         		<tr>
-	         			<td>첨부사진</td>
-	         			<td><img>ㅁㅁㅁ</img></td>
-	         		</tr>
-	         		<tr>
-	         			<td>카테고리</td>
-	         			<td><img>ㅁㅁㅁ</img></td>
-	         		</tr>
-	         		<tr>
-	         			<td>가격</td>
-	         			<td>ㅁㅁㅁ</td>
-	         		</tr>
-	         		<tr>
-	         			<td>모집정원</td>
-	         			<td>ㅁㅁㅁ</td>
-	         		</tr>
-	         		<tr>
-	         			<td>대기정원</td>
-	         			<td>ㅁㅁㅁ</td>
-	         		</tr>
-	         		<tr>
-	         			<td>물품수령일시</td>
-	         			<td>ㅁㅁ</td>
-	         		</tr>
-	         		<tr>
-	         			<td>판매처</td>
-	         			<td>ㅁㅁ</td>
-	         		</tr>
-	         		<tr>
-	         			<td>좌표</td>
-	         			<td>ㅁㅁㅁ</td>
-	         		</tr>
-	         		
-	         		<tr>
-	         			<td>본문</td>
-	         			<td>ㅁㅁㅁ</td>
-                  </tr>
-                  <tr>
-	         			<td clospan="2">
-                        <input type="button" class="btn_join" value="참여신청" onclick="joincCheck()">
-                        <input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()"> 
-                     </td>
-	         		</tr>
-	
-	         	</table>
-         	</div> -->
+
          </div> <!-- itemView   end -->
          	
             
@@ -213,23 +158,6 @@
                </div>
                
                
-               <div class="item_card_big">
-                  <img class="item_img_big" src="수박.jpg">
-                  <div class="item_info">
-                     <div class="item_info_div">
-                        <h3 class="item_title">
-                           <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                        </h3>
-                        <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                        <span class="item_price">5000원</span> <span
-                           class="item_limitDate">당일마감</span>
-                        <h4 id=item_idx>150</h4>
-                     </div>
-                     <div class="item_button_div">
-                        <input type="button" class="item_Waiting_button" value="참여신청">
-                     </div>
-                  </div>
-               </div> -->
                
             </div>  <!-- itemlist_big_area   end-->
             
@@ -329,9 +257,28 @@
             </div>  
          </div>
          
-         <div id="aside_mylist" class="aside_mylist">
+
+         <div id="aside_myOderlist" class="aside_myOderlist">
             
          </div>
+
+         <!-- 내 판매글 구매자 리스트 : 테스트 -->
+         <div id="aside_myItemlist" class="aside_myItemlist">
+            <div id="aside_myItem_buyer" class="aside_myItem_buyer">
+               <div class="aside_mycard">
+                  <h4 class="buyer_name">구매자 이름</h4>
+                  <span class="rvb_avg">구매자 평균평점</span><span class="rvb_total">/구매자 총평점수</span>
+                  <input type="button" class="" onclick="" value="상태버튼">
+                  <input type="hidden" class="midx" value="'+data[i].midx+'">
+                  <input type="hidden" class="iidx" value="'+data[i].iidx+'">
+               </div>   
+            </div>
+         </div>
+
+
+      
+
+
       </div>
       <!-- aside_area end -->
 

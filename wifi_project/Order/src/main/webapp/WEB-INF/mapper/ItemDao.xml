@@ -113,28 +113,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 내 공구 판매현황 관련 =========================================================== -->
 
 	<!-- 나의 공구판매현황 -->
-	<select id="" resultType="com.wifi.order.model.MyItem"> 
+	<!-- <select id="" resultType="com.wifi.order.model.MyItem"> 
 		select seller, iidx, title, count_m, count_w, receive,
 				ifnull(oidx,-1) as oidx, ifnull(buyer,-1) as buyer, ifnull(ostate,-1) as ostate, 
         		ifnull(pidx,-1) as pidx, ifnull(pstate, -1) as pstate
 		from wifi.myitem
 		where seller=#{midx};
-	</select>
-	
-	<!-- 판매실패 -->
-	<if test="receive-now() < 0 and count(pidx)==0">
-		
-	</if>
+	</select> -->
 	
 	
 	
 	
-	
-	<!-- 나의 공구판매현황 - 해당 판매들의 참여자 리스트보기 -->
-	<select id="">
-	</select>
-	
-	
+
 	
 	
 	

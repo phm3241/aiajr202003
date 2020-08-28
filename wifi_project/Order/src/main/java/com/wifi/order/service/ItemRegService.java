@@ -53,7 +53,7 @@ public class ItemRegService {
 		if(file != null && !file.isEmpty() && file.getSize() >0) {
 			
 			// 서버 내부의 경로
-			String uri ="/img";
+			String uri ="/upload";
 			
 			// 시스템의 실제(절대)경로
 			String realPath = request.getSession().getServletContext().getRealPath(uri);

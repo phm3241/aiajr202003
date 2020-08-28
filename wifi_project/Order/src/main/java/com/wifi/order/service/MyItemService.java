@@ -32,9 +32,11 @@ public class MyItemService {
 			if(pidx == -1) {
 				
 				myitem.get(i).setStatelabel(0); 
-			} else if(pidx) {
-				
-			}
+			} /*
+				 * else if(pidx) {
+				 * 
+				 * }
+				 */
 			
 			
 			

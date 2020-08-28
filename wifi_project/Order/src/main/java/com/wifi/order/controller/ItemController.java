@@ -13,16 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.model.Item;
 import com.wifi.order.model.ItemJoinRvs;
 import com.wifi.order.model.ItemRegRequest;
+import com.wifi.order.model.Item_rvb_avg;
 import com.wifi.order.model.MyItem;
 import com.wifi.order.service.ItemDelService;
 import com.wifi.order.service.ItemRegService;
 import com.wifi.order.service.ItemViewService;
 import com.wifi.order.service.ItemlistService;
+import com.wifi.order.service.MyItemBuyerService;
 import com.wifi.order.service.MyItemService;
 import com.wifi.order.service.itemlistSortService;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/items")
 public class ItemController {
 	
 	@Autowired
@@ -42,6 +44,10 @@ public class ItemController {
 
 	@Autowired
 	MyItemService myitemService;
+
+	@Autowired
+	MyItemBuyerService myBuyerService;
+	
 	
 	
 
@@ -89,7 +95,7 @@ public class ItemController {
 	
 	
 	// 공구글 삭제
-	@DeleteMapping("/iidx")
+	@DeleteMapping("/{iidx}")
 	public int delItem(@PathVariable("iidx") int iidx) {
 		
 		return delService.delItem(iidx); 
@@ -101,13 +107,19 @@ public class ItemController {
 //	내 공구 판매현황 관련----------------------------------
 	
 	// 내 판매글 
-	@GetMapping("/myitem/{midx}")
+	@GetMapping("/myitems/{midx}")
 	public List<MyItem> getMyItem(@PathVariable("midx") int midx){
 		
 		return myitemService.getMyItem(midx);
 		
 	}
 	
+	@GetMapping("/myitems/buyer/{iidx}")
+	public List<Item_rvb_avg> getMyItemBuyer(@PathVariable("iidx") int iidx){
+		
+		return myBuyerService.getMyItemBuyer(iidx);
+		
+	}
 
 	
 
