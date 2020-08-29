@@ -113,16 +113,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 내 공구 판매현황 관련 =========================================================== -->
 
 	<!-- 나의 공구판매현황 -->
-	<!-- <select id="" resultType="com.wifi.order.model.MyItem"> 
+	<select id="getMyItem" resultType="com.wifi.order.model.MyItem"> 
 		select seller, iidx, title, count_m, count_w, receive,
 				ifnull(oidx,-1) as oidx, ifnull(buyer,-1) as buyer, ifnull(ostate,-1) as ostate, 
         		ifnull(pidx,-1) as pidx, ifnull(pstate, -1) as pstate
 		from wifi.myitem
 		where seller=#{midx};
-	</select> -->
+	</select> 
+
 	
-	
-	
+	<!-- 내 판매글의 참여자리스트 -->
+	<select id="getMyItemBuyer" resultType="com.wifi.order.model.MyItemBuyer">
+		select * from wifi.myitem_buyer where iidx=#{iidx}; 	
+	</select>
 	
 
 	
@@ -135,10 +138,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- ◆ 구매정원을 한번에 선택해서 넘기는데 어떻게 처리하지? c태그로 midx를 넣어준다?  -->
 	<!-- 나의 공구판매현황[모집중] : 구매자 선택하기 -->
-	<insert id=""> insert into wifi.order (iidx, midx) values
+	<!-- <insert id=""> insert into wifi.order (iidx, midx) values
 		(iidx=#{param1},
 		midx=#{param2})
-	</insert>
+	</insert> -->
 	
 	<!-- 나의 공구판매현황[모집완료] : QR코드 발급하기 ◆ order + purchase
 	join 해서 나의 공구판매현황[판매완료] : QR코드 사용처리하기

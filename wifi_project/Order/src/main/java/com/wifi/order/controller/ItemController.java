@@ -1,7 +1,6 @@
 package com.wifi.order.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,10 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.wifi.order.model.Item;
 import com.wifi.order.model.ItemJoinRvs;
 import com.wifi.order.model.ItemRegRequest;
-import com.wifi.order.model.Item_rvb_avg;
+import com.wifi.order.model.MyItemBuyer;
 import com.wifi.order.model.MyItem;
 import com.wifi.order.service.ItemDelService;
 import com.wifi.order.service.ItemRegService;
@@ -107,15 +105,16 @@ public class ItemController {
 //	내 공구 판매현황 관련----------------------------------
 	
 	// 내 판매글 
-	@GetMapping("/myitems/{midx}")
+	@GetMapping("/myitem/{midx}")
 	public List<MyItem> getMyItem(@PathVariable("midx") int midx){
 		
 		return myitemService.getMyItem(midx);
 		
 	}
 	
-	@GetMapping("/myitems/buyer/{iidx}")
-	public List<Item_rvb_avg> getMyItemBuyer(@PathVariable("iidx") int iidx){
+	// 내 판매글 참여자리스트 
+	@GetMapping("/myitem/buyer/{iidx}")
+	public List<MyItemBuyer> getMyItemBuyer(@PathVariable("iidx") int iidx){
 		
 		return myBuyerService.getMyItemBuyer(iidx);
 		

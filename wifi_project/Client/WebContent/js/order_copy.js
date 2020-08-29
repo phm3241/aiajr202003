@@ -16,7 +16,7 @@ function itemlist(){
 	$('.sort_reg').css('background-color', 'teal');
 	
 	$.ajax({
-		url: domain+'/itmes',
+		url: domain+'/items',
 		type: 'GET',
 		success: function(data){
 			
@@ -83,7 +83,7 @@ function itemlist_sort(){
 	$('.sort_reg').css('background-color', 'aquamarine');
 
 	$.ajax({
-		url: domain+'/itmes/sort',
+		url: domain+'/items/sort',
 		type: 'GET',
 		success: function(data){
 			
@@ -179,7 +179,7 @@ function regSubmit(){
 		alert("regFormData.title"+regFormData.title); 
 
 		$.ajax({
-			url : domain+'/itmes',
+			url : domain+'/items',
 			type : 'POST',
 			processData: false, // File 전송시 필수
 			contentType: false, // multipart/form-data
@@ -234,7 +234,7 @@ function regSubmit(){
 	/* 공구글 상세보기 */
 	function itemView(iidx) {
 		$.ajax({
-			url: domain+'/itmes/'+iidx,
+			url: domain+'/items/'+iidx,
 			type: 'get',
 			success: function(data){
 				
@@ -280,7 +280,7 @@ function regSubmit(){
 
 		if(confirm("정말 삭제하시겠습니까?")){
 			$.ajax({
-				url: domain+'/item/'+iidx,
+				url: domain+'/items/'+iidx,
 				type: 'DELETE',
 				success: function(data){
 					alert('공구삭제 성공');
@@ -297,10 +297,11 @@ function regSubmit(){
 
 
 	/* 내 판매글 참여자 리스트보기  */
-	/* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + pstate선택) 화면출력 */
-	function myItem_buyer(iidx) {
+	/* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + ostate, pstate선택) 화면출력 */
+	function myitem(midx) {
+
 		$.ajax({
-		   url: domain+'/itmes/buyer/'+iidx,
+		   url: domain+'/myitem/'+midx,
 		   type: 'get',
 		   success: function(data){
 			  
@@ -351,12 +352,14 @@ function regSubmit(){
 					   break;
 				 }
 				 html += '<div class="aside_mycard a'+data[i].iidx+'">';
-				 html += '   <div class="aside_mystatewrap">';
-				 html += '      <h4 class="'+stateColor+'">'+state+'</h4>';
-				 html += '      <div id="a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">test</div>';
-				 html += '   </div>';
-				 html += '      <input type="button" class="'+btnClass+'" onclick="'+action+'('+data[i].midx+','+data[i].iidx+')" value="'+btn+'"> <br>';
-				 html += '      <a href="'+data[i].iidx+'" class="aside_item_title" id="iidx">'+data[i].iidx+':'+data[i].title+'</a> <br>';
+				 html += '	<div class="aside_myitem">';
+				 html += '  	<div class="aside_mystatewrap">';
+				 html += '      	<span class="btn_regItem'+stateColor+'">'+state+'</span>';
+				 html += '      	<span id="a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">test</span>';
+				 html += '   	</div>';
+				 html += '      <a href="'+data[i].iidx+'" class="aside_item_title">'+data[i].iidx+':'+data[i].title+'</a> <br>';
+				 html += '      <button type="button" class="btn_mybuyer_view" onclick="mybuyer('+data[i].iidx+')"> ▼ </button>';
+
 				 if(data[i].pstate == 1){
 					html += '<form onsubmit="return false;">';
 					html += '   <div class="panel">';
@@ -371,8 +374,82 @@ function regSubmit(){
 				 html += '</div>';
 			  }
 			  
-			  $('#aside_mylist').html(html);
+			  $('#aside_mylist_area').html(html);
 			  
 		   } 
 		})
-	 }; // myItemlist end
+	 }; // myitem end
+
+
+
+	/* 내 판매글 참여자 리스트보기  */
+	/* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + ostate, pstate선택) 화면출력 */
+	 function mybuyer(iidx) {
+
+		var iidx = 5;
+
+		$.ajax({
+		   url: domain+'/items/myitem/buyer/'+iidx,
+		   type: 'get',
+		   success: function(data){
+
+			var html = '';
+			for(var i=0; i<data.length; i++){
+			   var btn='';
+			   var state= '';
+			   var btnClass = '';
+			   var action = '';
+			   var btn = '';
+			   var stateColor= '';
+			   
+
+			   /* if(data[i].ostated)
+			   switch(data[i].ostate){
+				  case 1:
+					 state = '다음기회에...;'
+					 btnClass = 'aside_button order_del';
+					 btn='확인';
+					 action = 'order_del';
+					 stateColor = 'aside_mystate next';
+					 break;
+					 
+				  case 0:
+					 state = '참여중';
+					 btnClass = 'aside_button order_del';
+					 btn='참여취소';
+					 action = 'order_del';
+					 stateColor = 'aside_mystate join';
+					 break;
+			   }
+   
+			   switch(data[i].pstate){      
+				  case 0:
+					 state = '구매자';
+					 btnClass = 'aside_button';
+					 btn='QR확인';
+					 action = 'qr';
+					 stateColor = 'aside_mystate buyer';
+					 break;
+					 
+				  case 1:
+					 state = '구매 완료';
+					 btnClass = 'aside_button review';
+					 btn='평점 등록';
+					 action = 'toggle';
+					 stateColor = 'aside_mystate review';
+					 break;
+			   } */
+
+			   html += '<div class="aside_mybuyer a'+data[i].iidx+'">';
+			   html += '	<span class="buyer_name a'+data[i].buyer+'">'+data[i].name+'</span>';
+			   html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span>';
+			   html += '    <button type="button" class="btn_" onclick=""> 상태 </button>';
+			   html += '</div>';
+			}
+			
+			$('#aside_mybuyerlist').html(html);
+			$("#aside_mybuyerlist").toggle();
+
+		   }
+		});
+	 };  // mybuyer end

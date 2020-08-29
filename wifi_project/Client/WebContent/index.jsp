@@ -118,6 +118,7 @@
          
          <div id="itemlist_area">
             <div id="itemlist_big_area">
+
                <!-- <form action="joinCheck" onsubmit="return false">
                
 	               <div class="item_card_big">
@@ -137,26 +138,7 @@
 	                  </div>
 	               </div>
                </form>
-               
-               
-               <div class="item_card_big">
-                  <img class="item_img_big" src="사과.jpg">
-                  <div class="item_info">
-                     <div class="item_info_div">
-                        <h3 class="item_title">
-                           <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                        </h3>
-                        <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                        <span class="item_price">5000원</span> <span
-                           class="item_limitDate">당일마감</span>
-                        <h4 id=item_idx>150</h4>
-                     </div>
-                     <div class="item_button_div">
-                        <input type="button" class="item_Waiting_button" value="참여신청">
-                     </div>
-                  </div>
-               </div>
-               
+               -->
                
                
             </div>  <!-- itemlist_big_area   end-->
@@ -166,7 +148,8 @@
             
             <div id="itemlist_small_area">
             
-               <!-- <div class="item_card">
+               <!-- 
+               <div class="item_card">
                   <img class="photo_main" src="수박.jpg">
                   <div class="item_info">
                      <h3 class="title">
@@ -176,72 +159,15 @@
                      <span class="item_price">5000원</span> <span
                         class="item_limitDate">당일마감</span>
                   </div>
-               </div>
-               
-               <div class="item_card">
-                  <img class="item_img" src="사과.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div>
-               <div class="item_card">
-                  <img class="item_img" src="멜론.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div>
-               <div class="item_card">
-                  <img class="item_img" src="수박.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div>
-               <div class="item_card">
-                  <img class="item_img" src="사과.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div>
-               <div class="item_card">
-                  <img class="item_img" src="멜론.jpg">
-                  <div class="item_info">
-                     <h3 class="item_title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
                </div> -->
-           
+    
             </div>  <!-- itemlist_small_area   end -->
             
             
-            
-         </div>  <!-- itemlist_area -->
+         </div>  <!-- itemlist_area  end -->
       
-      </div>
-      <!-- main_content_area end -->
+      </div>   <!-- main_content_area end -->
+
 
 
       <div class="aside_area">
@@ -263,17 +189,76 @@
          </div>
 
          <!-- 내 판매글 구매자 리스트 : 테스트 -->
-         <div id="aside_myItemlist" class="aside_myItemlist">
-            <div id="aside_myItem_buyer" class="aside_myItem_buyer">
-               <div class="aside_mycard">
-                  <h4 class="buyer_name">구매자 이름</h4>
-                  <span class="rvb_avg">구매자 평균평점</span><span class="rvb_total">/구매자 총평점수</span>
-                  <input type="button" class="" onclick="" value="상태버튼">
-                  <input type="hidden" class="midx" value="'+data[i].midx+'">
-                  <input type="hidden" class="iidx" value="'+data[i].iidx+'">
-               </div>   
-            </div>
-         </div>
+         <div id="aside_mylist_area" class="aside_mylist">
+
+            <div id="aside_mycard" class="aside_mycard">
+                  
+                  <!-- 내 판매글 1 -->
+                  <div class="aside_myitem">
+                     <div class="aside_mystatewrap">
+                        <span class="btn_regItem">상태라벨</span>
+                        <span id="a'+data[i].iidx+'" onclick="cancleAlarm()">alarm</span><br>
+                     </div>
+                        <a href="" class="aside_item_title" id="iidx">공구제목</a>
+                        <button type="button" class="btn_mybuyer_view" onclick="mybuyer(5)"> ▼ </button>
+                  </div>  <!-- aside_myitem  end -->
+
+                  
+                  <!-- 내 판매글 1 의 참여자 또는 구매자 -->
+                  <div id="aside_mybuyerlist" class="aside_mybuyerlist">
+                     <hr>
+                     <div class="aside_mybuyer">
+                        <span class="buyer_name">구매자 이름</span>
+                        <span class="rvb_avg">평균평점</span><span class="rvb_total">/총평점수</span>
+                        <button type="button" class="btn_" onclick=""> 상태 </button>
+                     </div>   
+                     
+                  </div> <!-- aside_mybuyerlist end -->
+               
+            </div>  <!-- aside_mycard  end -->
+         
+         
+         </div>  <!-- aside_mylist_area  end -->
+
+
+
+
+
+
+<!-- 
+         
+         html += '<div class="aside_mycard a'+data[i].iidx+'">';
+            html += '   <div class="aside_mystatewrap">';
+            html += '      <h4 class="'+stateColor+'">'+state+'</h4>';
+            html += '      <div id="a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">test</div>';
+            html += '   </div>';
+            html += '      <input type="button" class="'+btnClass+'" onclick="'+action+'('+data[i].midx+','+data[i].iidx+')" value="'+btn+'"> <br>';
+            html += '      <a href="'+data[i].iidx+'" class="aside_item_title" id="iidx">'+data[i].iidx+':'+data[i].title+'</a> <br>';
+            if(data[i].pstate == 1){
+               html += '<form onsubmit="return false;">';
+               html += '   <div class="panel">';
+               html += '      <input class="score_s" type="number">';
+               html += '      <input class="insert_rvs" type="submit" value="평점 등록" onclick="review()">';
+               html += '      <input type="submit" class="purchase_del" onclick="order_del('+data[i].midx+','+data[i].iidx+')" value="글 삭제">';
+               html += '      <input type="hidden" class="midx" value="'+data[i].midx+'">';
+               html += '      <input type="hidden" class="iidx" value="'+data[i].iidx+'">';
+               html += '   </div>';
+               html += '</form>';
+            }
+            html += '</div>';
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
 
 
       

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.wifi.order.model.Item;
 import com.wifi.order.model.ItemJoinRvs;
+import com.wifi.order.model.MyItemBuyer;
 import com.wifi.order.model.MyItem;
 
 public interface ItemDao {
@@ -43,6 +44,9 @@ public interface ItemDao {
 	
 	// 내 판매글 
 	List<MyItem> getMyItem(int midx);
+	
+	// 내 판매글 참여자리스트
+	List<MyItemBuyer> getMyItemBuyer(int iidx);
 	
 	// 
 	

@@ -315,7 +315,6 @@
 
 .aside_mycard {
 	width: 85%;
-	height: 70px;
 	vertical-align: middle;
 	margin: 0 auto;
 	margin-bottom: 15px;
@@ -342,7 +341,7 @@
 }
 
 .aside_mystatewrap {
-	display: inline-block;
+	display: block;
 }
 
 .aside_mystate {
@@ -442,7 +441,8 @@
 	.aside_area {
 		display: none;
 	}
-=======
+
+
 @charset "UTF-8";
 
 * {
@@ -707,7 +707,6 @@
 
 .aside_mycard {
 	width: 85%;
-	height: 70px;
 	vertical-align: middle;
 	margin: 0 auto;
 	margin-bottom: 15px;
@@ -766,7 +765,7 @@
 }
 
 .aside_item_title {
-	float: left;
+	display: inline-block;
 	font-size: 1em;
 	font-weight: bold;
 }

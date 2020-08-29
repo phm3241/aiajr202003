@@ -2,12 +2,24 @@ package com.wifi.order.service;
 
 import java.util.List;
 
-import com.wifi.order.model.Item_rvb_avg;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.wifi.order.dao.ItemDao;
+import com.wifi.order.model.MyItemBuyer;
+
+@Service
 public class MyItemBuyerService {
 
-	public List<Item_rvb_avg> getMyItemBuyer(int iidx) {
+	private ItemDao dao;
+	
+	@Autowired
+	private SqlSessionTemplate template;
+	
+	public List<MyItemBuyer> getMyItemBuyer(int iidx) {
 		
+		dao = template.getMapper(ItemDao.class);
 		
 		return dao.getMyItemBuyer(iidx);
 	}

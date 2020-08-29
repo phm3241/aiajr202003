@@ -1,22 +1,22 @@
 package com.wifi.order.model;
 
 // 공구 구매자에 대한 평점정보 : 화면출력용
-public class Item_rvb_avg {
+public class MyItemBuyer {
 	
 	private int iidx;			// 판매글 번호
 	private int buyer;		  	// 구매자 번호 
 	private String name;	  	// 구매자 이름 
 	private int rvb_avg;		// 구매자 평점
 	private int rvb_totalRow;	// 구매자 총 평점개수
-	private int ostate;			// 구매자 주문상태값 : 0 참여중, 1 거절
-	private int pstate;			// 구매자 결제상태값 : 0 미수령, 1 수령
+	private int ostate;			// 구매자 주문상태값 : 0 참여중, 1 거절, 3 null
+	private int pstate;			// 구매자 결제상태값 : 0 미수령, 1 수령, 3 null
 	
 	
-	public Item_rvb_avg() {
+	public MyItemBuyer() {
 	}
 
 
-	public Item_rvb_avg(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate) {
+	public MyItemBuyer(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate) {
 		this.iidx = iidx;
 		this.buyer = buyer;
 		this.name = name;
