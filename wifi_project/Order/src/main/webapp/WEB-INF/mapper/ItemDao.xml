@@ -114,12 +114,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 나의 공구판매현황 -->
 	<select id="getMyItem" resultType="com.wifi.order.model.MyItem"> 
-		select seller, iidx, title, count_m, count_w, receive,
-				ifnull(oidx,-1) as oidx, ifnull(buyer,-1) as buyer, ifnull(ostate,-1) as ostate, 
-        		ifnull(pidx,-1) as pidx, ifnull(pstate, -1) as pstate
-		from wifi.myitem
-		where seller=#{midx};
+		select * from wifi.myitem where seller=#{midx} group by iidx;
 	</select> 
+	
+	-- 내 판매글 리스트 보기 : midx 받아서 ㅡ> 판매글 목록 (상태라벨, 제목) 화면출력
+ 
 
 	
 	<!-- 내 판매글의 참여자리스트 -->

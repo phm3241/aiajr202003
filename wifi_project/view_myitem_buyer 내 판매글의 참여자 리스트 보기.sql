@@ -15,3 +15,23 @@ SELECT * FROM wifi.myitem_buyer;
 -- 내 판매글 참여자 리스트 보기 : iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + pstate선택) 화면출력
 select * from wifi.myitem_buyer
 where iidx=2; 
+
+
+
+
+
+-- -------------------------------------------------------------
+-- 판매자 평점
+select * from wifi.item_rvs; 
+-- 판매자 평균평점 및 총평점개수
+select midx, avg(score_s) as rvs_avg, count(*) as rvs_totalRow from wifi.item_rvs group by midx;
+
+-- -------------------------------------------------------------
+-- 구매자 평점 
+select * from wifi.item_rvb;
+-- 구매자 평균평점 및 총평점개수
+select midx, avg(score_b) as rvb_avg, count(*) as rvb_totalRow from wifi.item_rvb group by midx;
+-- 구매자 이름 평균평점 및 총평점개수
+select r.midx, m.name, avg(score_b) as rvb_avg, count(*) as rvb_totalRow 
+from wifi.item_rvb r join wifi.member m on r.midx=m.midx
+group by midx having midx=1;

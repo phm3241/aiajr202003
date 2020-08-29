@@ -296,8 +296,8 @@ function regSubmit(){
 
 
 
-	/* 내 판매글 참여자 리스트보기  */
-	/* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + ostate, pstate선택) 화면출력 */
+	/* 내 판매글 리스트보기  */
+	/* midx 받아서 ㅡ> 판매글 목록(상태라벨, 제목) 화면출력 */
 	function myitem(midx) {
 
 		$.ajax({
@@ -307,86 +307,90 @@ function regSubmit(){
 			  
 			  var html = '';
 			  for(var i=0; i<data.length; i++){
-				 var btn='';
-				 var state= '';
-				 var btnClass = '';
-				 var action = '';
-				 var btn = '';
-				 var stateColor= '';
+				  var state= '';
+				  var stateMsg= '';
+				  var stateColor= '';
+				  var btn='';
+				  var btnClass = '';
+				  var action = '';
+				  var btn = '';
+				 
+				  
+				  // 상태라벨 - 모집중 : 기간중이고, 결제정보가 없으면 (구매자선정 전)
+				  // 필요버튼 - 거절버튼, 구매자선정 버튼
+				  if(data[i].receive_check >= 0 && data[i].pstate == -1){
+					  state = 0;
+					  stateMsg = '모집중';
+					  stateColor = 'aside_mystate join_ing';
+					  btn='';
+					  btnClass = 'aside_button order_del';
+					  action = '';
+
+				  // 상태라벨 - 모집완료 : 기간중이고, 결제정보가 있으면 (구매자선정 후)
+				  // 필요버튼 - 큐알발급버튼, 발급큐알보기버튼
+				  } else if(data[i].receive_check >= 0 && data[i].pstate != -1){
+					  state = 1;
+					  state = '모집완료';
+					  stateColor = 'aside_mystate join_ing';
+					  btn='';
+					  btnClass = 'aside_button order_del';
+					  action = '';
+				 
+					 
+				  // 상태라벨 - 판매완료 :  기간마감이고, 결제정보가 있으면 (미수령, 수령)
+				  // 필요버튼 - 구매자평점등록버튼, 글숨김버튼
+				  } else if(data[i].receive_check < 0 && data[i].pstate != -1){
+					  state = 2;
+					  stateMsg = '판매완료';
+					  stateColor = 'aside_mystate join_ing';
+					  btn='';
+					  btnClass = 'aside_button order_del';
+					  action = '';
+						
+
+				  // 상태라벨 - 판매실패 : 기간마감이고, 결제정보가 없으면 
+				  // 필요버튼 - 글숨김버튼
+				  } else if(data[i].receive_check < 0 && data[i].pstate == -1 ){
+					  state = 3;
+					  stateMsg = '판매실패';
+					  stateColor = 'aside_mystate join_ing';
+					  btn='';
+					  btnClass = 'aside_button order_del';
+					  action = '';
+						
+
+				  }	
+				  	
 				 
 
-				 if(data[i].ostated)
-				 switch(data[i].ostate){
-					case 1:
-					   state = '다음기회에...;'
-					   btnClass = 'aside_button order_del';
-					   btn='확인';
-					   action = 'order_del';
-					   stateColor = 'aside_mystate next';
-					   break;
-					   
-					case 0:
-					   state = '참여중';
-					   btnClass = 'aside_button order_del';
-					   btn='참여취소';
-					   action = 'order_del';
-					   stateColor = 'aside_mystate join';
-					   break;
-				 }
-	 
-				 switch(data[i].pstate){      
-					case 0:
-					   state = '구매자';
-					   btnClass = 'aside_button';
-					   btn='QR확인';
-					   action = 'qr';
-					   stateColor = 'aside_mystate buyer';
-					   break;
-					   
-					case 1:
-					   state = '구매 완료';
-					   btnClass = 'aside_button review';
-					   btn='평점 등록';
-					   action = 'toggle';
-					   stateColor = 'aside_mystate review';
-					   break;
-				 }
-				 html += '<div class="aside_mycard a'+data[i].iidx+'">';
+
+				 html += '<div class="aside_mycard c'+data[i].iidx+'">';
 				 html += '	<div class="aside_myitem">';
 				 html += '  	<div class="aside_mystatewrap">';
-				 html += '      	<span class="btn_regItem'+stateColor+'">'+state+'</span>';
-				 html += '      	<span id="a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">test</span>';
+				 html += '      	<span class="btn_regItem '+stateColor+'">'+state+'</span>';
+				 html += '      	<span class="alarm a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">alarmtest</span>';
 				 html += '   	</div>';
-				 html += '      <a href="'+data[i].iidx+'" class="aside_item_title">'+data[i].iidx+':'+data[i].title+'</a> <br>';
-				 html += '      <button type="button" class="btn_mybuyer_view" onclick="mybuyer('+data[i].iidx+')"> ▼ </button>';
+				 html += '      <a href="/order/items/'+data[i].iidx+'" class="aside_item_title">'+data[i].iidx+':'+data[i].title+'</a> <br>';
+				 html += '      <button type="button" class="btn_mybuyer_view" onclick="mybuyer('+data[i].iidx+','+state+')"> ▼ </button>';
+				 html += '	</div>';
 
-				 if(data[i].pstate == 1){
-					html += '<form onsubmit="return false;">';
-					html += '   <div class="panel">';
-					html += '      <input class="score_s" type="number">';
-					html += '      <input class="insert_rvs" type="submit" value="평점 등록" onclick="review()">';
-					html += '      <input type="submit" class="purchase_del" onclick="order_del('+data[i].midx+','+data[i].iidx+')" value="글 삭제">';
-					html += '      <input type="hidden" class="midx" value="'+data[i].midx+'">';
-					html += '      <input type="hidden" class="iidx" value="'+data[i].iidx+'">';
-					html += '   </div>';
-					html += '</form>';
-				 }
 				 html += '</div>';
 			  }
 			  
 			  $('#aside_mylist_area').html(html);
 			  
-		   } 
-		})
+		   } // for end
+		}) // ajax end
 	 }; // myitem end
 
 
 
 	/* 내 판매글 참여자 리스트보기  */
 	/* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + ostate, pstate선택) 화면출력 */
-	 function mybuyer(iidx) {
+	 function mybuyer(iidx,state) {
 
 		var iidx = 5;
+		
 
 		$.ajax({
 		   url: domain+'/items/myitem/buyer/'+iidx,
@@ -402,49 +406,55 @@ function regSubmit(){
 			   var btn = '';
 			   var stateColor= '';
 			   
+			   
+			   switch(state){
 
-			   /* if(data[i].ostated)
-			   switch(data[i].ostate){
-				  case 1:
-					 state = '다음기회에...;'
-					 btnClass = 'aside_button order_del';
-					 btn='확인';
-					 action = 'order_del';
-					 stateColor = 'aside_mystate next';
-					 break;
-					 
-				  case 0:
-					 state = '참여중';
-					 btnClass = 'aside_button order_del';
-					 btn='참여취소';
-					 action = 'order_del';
-					 stateColor = 'aside_mystate join';
-					 break;
+					// 판매글 상태 : 모집중 ㅡ>	거절버튼, 구매자선정 버튼
+				    case 0:
+
+				    break;
+				   
+					// 판매글 상태 : 모집완료 ㅡ> 큐알발급버튼, 발급큐알보기버튼
+				    case 1:
+					   
+				    break;
+				   
+					// 판매글 상태 : 판매완료 ㅡ> 구매자평점등록버튼, 글숨김버튼
+				    case 2:
+					   
+				    break;
+				   
+					// 판매글 상태 : 판매실패 ㅡ> 글숨김버튼
+				    case 3: 
+				   
+				    break;
+
+				   
 			   }
-   
-			   switch(data[i].pstate){      
-				  case 0:
-					 state = '구매자';
-					 btnClass = 'aside_button';
-					 btn='QR확인';
-					 action = 'qr';
-					 stateColor = 'aside_mystate buyer';
-					 break;
-					 
-				  case 1:
-					 state = '구매 완료';
-					 btnClass = 'aside_button review';
-					 btn='평점 등록';
-					 action = 'toggle';
-					 stateColor = 'aside_mystate review';
-					 break;
-			   } */
+			   
+	
 
 			   html += '<div class="aside_mybuyer a'+data[i].iidx+'">';
 			   html += '	<span class="buyer_name a'+data[i].buyer+'">'+data[i].name+'</span>';
 			   html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span>';
-			   html += '    <button type="button" class="btn_" onclick=""> 상태 </button>';
+			   html += '    <button type="button" class="btn_buyerAction '+btn_buyerState+'">'+btn_buyerState+'</button>';
+			   html += '    <button type="button" class="btn_sellerAction '+btn_sellerMsg+'" onclick="btn_sellerAction('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerMsg+'</button>';
 			   html += '</div>';
+			   html += '    <button type="button" class="btn_sellerAction '+btn_sellerMsg+'" onclick="btn_sellerAction('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerMsg+'</button>';
+
+			   
+				if(state.equals("판매완료")){
+				html += '<form onsubmit="return false;">';
+				html += '   <div class="panel">';
+				html += '      <input class="score_s" type="number">';
+				html += '      <input class="insert_rvs" type="submit" value="평점 등록" onclick="review()">';
+				html += '      <input type="submit" class="purchase_del" onclick="order_del('+data[i].midx+','+data[i].iidx+')" value="글 삭제">';
+				html += '      <input type="hidden" class="midx" value="'+data[i].midx+'">';
+				html += '      <input type="hidden" class="iidx" value="'+data[i].iidx+'">';
+				html += '   </div>';
+				html += '</form>';
+				}
+
 			}
 			
 			$('#aside_mybuyerlist').html(html);
