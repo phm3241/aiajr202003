@@ -8,15 +8,17 @@ public class MyItemBuyer {
 	private String name;	  	// 구매자 이름 
 	private int rvb_avg;		// 구매자 평점
 	private int rvb_totalRow;	// 구매자 총 평점개수
-	private int ostate;			// 구매자 주문상태값 : 0 참여중, 1 거절, 3 null
-	private int pstate;			// 구매자 결제상태값 : 0 미수령, 1 수령, 3 null
+	private int ostate;			// 구매자 주문상태값 : 0 참여중, 1 거절, -1 null
+	private int pstate;			// 구매자 결제상태값 : 0 미수령, 1 수령, -1 null
+	private String pr;			// 구매자 결제QR : -1 null
 	
 	
 	public MyItemBuyer() {
 	}
 
 
-	public MyItemBuyer(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate) {
+	public MyItemBuyer(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate,
+			String pr) {
 		this.iidx = iidx;
 		this.buyer = buyer;
 		this.name = name;
@@ -24,6 +26,7 @@ public class MyItemBuyer {
 		this.rvb_totalRow = rvb_totalRow;
 		this.ostate = ostate;
 		this.pstate = pstate;
+		this.pr = pr;
 	}
 
 
@@ -97,11 +100,25 @@ public class MyItemBuyer {
 	}
 
 
+	public String getPr() {
+		return pr;
+	}
+
+
+	public void setPr(String pr) {
+		this.pr = pr;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Item_rvb_avg [iidx=" + iidx + ", buyer=" + buyer + ", name=" + name + ", rvb_avg=" + rvb_avg
-				+ ", rvb_totalRow=" + rvb_totalRow + ", ostate=" + ostate + ", pstate=" + pstate + "]";
+		return "MyItemBuyer [iidx=" + iidx + ", buyer=" + buyer + ", name=" + name + ", rvb_avg=" + rvb_avg
+				+ ", rvb_totalRow=" + rvb_totalRow + ", ostate=" + ostate + ", pstate=" + pstate + ", pr=" + pr + "]";
 	}
+
+
+	
+	
 	
 	
 	

@@ -212,6 +212,22 @@
                         <span class="rvb_avg">평균평점</span><span class="rvb_total">/총평점수</span>
                         <button type="button" class="btn_" onclick=""> 상태 </button>
                      </div>   
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
                      
                   </div> <!-- aside_mybuyerlist end -->
                

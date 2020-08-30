@@ -17,6 +17,7 @@ import com.wifi.order.service.ItemDelService;
 import com.wifi.order.service.ItemRegService;
 import com.wifi.order.service.ItemViewService;
 import com.wifi.order.service.ItemlistService;
+import com.wifi.order.service.MyBuyerDelService;
 import com.wifi.order.service.MyItemBuyerService;
 import com.wifi.order.service.MyItemService;
 import com.wifi.order.service.itemlistSortService;
@@ -38,14 +39,16 @@ public class ItemController {
 	ItemRegService regService;
 
 	@Autowired
-	ItemDelService delService;
+	ItemDelService delItemService;
 
 	@Autowired
-	MyItemService myitemService;
+	MyItemService myItemService;
 
 	@Autowired
 	MyItemBuyerService myBuyerService;
 	
+	@Autowired
+	MyBuyerDelService delBuyerService;
 	
 	
 
@@ -96,7 +99,7 @@ public class ItemController {
 	@DeleteMapping("/{iidx}")
 	public int delItem(@PathVariable("iidx") int iidx) {
 		
-		return delService.delItem(iidx); 
+		return delItemService.delItem(iidx); 
 	};
 	
 	
@@ -108,9 +111,9 @@ public class ItemController {
 	@GetMapping("/myitem/{midx}")
 	public List<MyItem> getMyItem(@PathVariable("midx") int midx){
 		
-		return myitemService.getMyItem(midx);
+		return myItemService.getMyItem(midx);
 		
-	}
+	};
 	
 	// 내 판매글 참여자리스트 
 	@GetMapping("/myitem/buyer/{iidx}")
@@ -118,7 +121,14 @@ public class ItemController {
 		
 		return myBuyerService.getMyItemBuyer(iidx);
 		
-	}
+	};
+	
+	// 나의 공구판매현황[모집중] - 참여자 거절하기
+	@DeleteMapping("/myitem/buyer/{iidx}/{buyer}")
+	public int delmyBuyer(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
+		
+		return delBuyerService.delmyBuyer(iidx, midx); 
+	};
 
 	
 

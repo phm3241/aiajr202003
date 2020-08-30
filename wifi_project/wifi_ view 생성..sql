@@ -2,9 +2,9 @@
 
 -- view 생성 : myitem
 create view `wifi`.`myitem` as
-SELECT i.midx as seller, i.iidx, i.title, i.count_m, i.count_w, i.receive, i.category, i.state as istate,
-      ifnull(o.oidx, -1) as oidx, ifnull(o.midx, -1) as buyer, ifnull(o.state, -1) as ostate, 
-	  ifnull(p.pidx, -1) as pidx, ifnull(p.state, -1) as pstate
+SELECT i.midx as seller, i.iidx, i.title, i.count_m, i.count_w, i.receive, DATEDIFF(receive, now()) as receive_check, i.category, i.state as istate, 
+      ifnull(o.midx, -1) as buyer, ifnull(o.oidx, -1) as oidx, ifnull(o.state, -1) as ostate, 
+	  ifnull(p.pidx, -1) as pidx, ifnull(p.state, -1) as pstate, ifnull(p.qr, -1) as qr
 from wifi.item i 
    left join wifi.order o on i.iidx=o.iidx
    left join wifi.purchase p on o.oidx=p.oidx;

@@ -301,7 +301,7 @@ function regSubmit(){
 	function myitem(midx) {
 
 		$.ajax({
-		   url: domain+'/myitem/'+midx,
+		   url: domain+'/itmes/myitem/'+midx,
 		   type: 'get',
 		   success: function(data){
 			  
@@ -317,7 +317,6 @@ function regSubmit(){
 				 
 				  
 				  // 상태라벨 - 모집중 : 기간중이고, 결제정보가 없으면 (구매자선정 전)
-				  // 필요버튼 - 거절버튼, 구매자선정 버튼
 				  if(data[i].receive_check >= 0 && data[i].pstate == -1){
 					  state = 0;
 					  stateMsg = '모집중';
@@ -327,7 +326,6 @@ function regSubmit(){
 					  action = '';
 
 				  // 상태라벨 - 모집완료 : 기간중이고, 결제정보가 있으면 (구매자선정 후)
-				  // 필요버튼 - 큐알발급버튼, 발급큐알보기버튼
 				  } else if(data[i].receive_check >= 0 && data[i].pstate != -1){
 					  state = 1;
 					  state = '모집완료';
@@ -338,7 +336,6 @@ function regSubmit(){
 				 
 					 
 				  // 상태라벨 - 판매완료 :  기간마감이고, 결제정보가 있으면 (미수령, 수령)
-				  // 필요버튼 - 구매자평점등록버튼, 글숨김버튼
 				  } else if(data[i].receive_check < 0 && data[i].pstate != -1){
 					  state = 2;
 					  stateMsg = '판매완료';
@@ -349,7 +346,6 @@ function regSubmit(){
 						
 
 				  // 상태라벨 - 판매실패 : 기간마감이고, 결제정보가 없으면 
-				  // 필요버튼 - 글숨김버튼
 				  } else if(data[i].receive_check < 0 && data[i].pstate == -1 ){
 					  state = 3;
 					  stateMsg = '판매실패';
@@ -369,11 +365,14 @@ function regSubmit(){
 				 html += '  	<div class="aside_mystatewrap">';
 				 html += '      	<span class="btn_regItem '+stateColor+'">'+state+'</span>';
 				 html += '      	<span class="alarm a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">alarmtest</span>';
+				 if(state==0){
+				 html += '  		<span class="aside_">현재참여자 : current_w('+data[i].iidx+')/ 구매정원 :'+data[i].count_m+'</span>';
+				 }
 				 html += '   	</div>';
+				
 				 html += '      <a href="/order/items/'+data[i].iidx+'" class="aside_item_title">'+data[i].iidx+':'+data[i].title+'</a> <br>';
 				 html += '      <button type="button" class="btn_mybuyer_view" onclick="mybuyer('+data[i].iidx+','+state+')"> ▼ </button>';
 				 html += '	</div>';
-
 				 html += '</div>';
 			  }
 			  
@@ -381,13 +380,15 @@ function regSubmit(){
 			  
 		   } // for end
 		}) // ajax end
-	 }; // myitem end
+	}; // myitem end
+
+
 
 
 
 	/* 내 판매글 참여자 리스트보기  */
 	/* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + ostate, pstate선택) 화면출력 */
-	 function mybuyer(iidx,state) {
+	function mybuyer(iidx,state) {
 
 		var iidx = 5;
 		
@@ -411,55 +412,168 @@ function regSubmit(){
 
 					// 판매글 상태 : 모집중 ㅡ>	거절버튼, 구매자선정 버튼
 				    case 0:
+						buyerState = '참여중';
+						btn_sellerActionName1 = '거절';
+						btn_sellerAction1 = '';
 
-				    break;
-				   
+						
+						break;
+						
 					// 판매글 상태 : 모집완료 ㅡ> 큐알발급버튼, 발급큐알보기버튼
-				    case 1:
-					   
-				    break;
+					case 1:
+						buyerState = '구매자';
+						if(data[i].qr == -1){
+							btn_sellerActionName1 = 'QR발급';
+							btn_sellerAction1 = 'createQR';
+						} 
+						btn_sellerActionName1 = 'QR보기';
+						btn_sellerAction1 = 'viewQR';
+				    	break;
 				   
 					// 판매글 상태 : 판매완료 ㅡ> 구매자평점등록버튼, 글숨김버튼
 				    case 2:
-					   
-				    break;
+						if(data[i].pstate == 0){
+							buyerState = '미수령';
+						}
+						buyerState = '수령';
+						btn_sellerActionName1 = '평점등록';
+						btn_sellerAction1 = 'review';
+				    	break;
 				   
 					// 판매글 상태 : 판매실패 ㅡ> 글숨김버튼
-				    case 3: 
+					case 3: 
+						buyerState = '';
+						btn_sellerActionName1 = '거절';
+						btn_sellerAction1 = 'reject';
 				   
-				    break;
+				    	break;
 
 				   
 			   }
 			   
-	
-
-			   html += '<div class="aside_mybuyer a'+data[i].iidx+'">';
-			   html += '	<span class="buyer_name a'+data[i].buyer+'">'+data[i].name+'</span>';
-			   html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span>';
-			   html += '    <button type="button" class="btn_buyerAction '+btn_buyerState+'">'+btn_buyerState+'</button>';
-			   html += '    <button type="button" class="btn_sellerAction '+btn_sellerMsg+'" onclick="btn_sellerAction('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerMsg+'</button>';
-			   html += '</div>';
-			   html += '    <button type="button" class="btn_sellerAction '+btn_sellerMsg+'" onclick="btn_sellerAction('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerMsg+'</button>';
-
 			   
-				if(state.equals("판매완료")){
-				html += '<form onsubmit="return false;">';
-				html += '   <div class="panel">';
-				html += '      <input class="score_s" type="number">';
-				html += '      <input class="insert_rvs" type="submit" value="평점 등록" onclick="review()">';
-				html += '      <input type="submit" class="purchase_del" onclick="order_del('+data[i].midx+','+data[i].iidx+')" value="글 삭제">';
-				html += '      <input type="hidden" class="midx" value="'+data[i].midx+'">';
-				html += '      <input type="hidden" class="iidx" value="'+data[i].iidx+'">';
-				html += '   </div>';
-				html += '</form>';
+			   // 참여자(또는 구매자) 이름. 평균평점. 총평점수 - 기본출력
+			   html += '<div class="aside_mybuyer iidx'+data[i].iidx+'">';
+			   //html += '    <span class="buyerState '+buyerState+'">'+buyerState+'</span>';
+			   html += '	<span class="buyer_name midx'+data[i].buyer+'">'+data[i].name+'</span>';
+			   html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span>';
+			   
+			   // 참여자 일때, 거절 또는 구매자 선정 버튼 출력
+			   if(state==0){
+				   html += '    <form id="select_buyerform" onsubmit="return false;">';
+				   html += '    	<input type="radio" name="select_buyer" class="btn_sellerAction select_buyer" val="'+data[i].buyer+'">선정</button>';
+				   html += '    	<input type="radio" name="select_buyer" class="btn_sellerAction select_reject" val="'+data[i].buyer+'">거절</button>';;
+				   html += '    	<span class="select_buyer_msg">*구매자 확정은 구매자를 모두 선정 한 후, 한번에 하실 수 있습니다. </span>';
+				   html += '    </form>';
+				   
+				   
+				} else if(state==1){
+					html += '    <button type="button" class="btn_sellerAction '+btn_sellerAction1+'" onclick="'+btn_sellerAction1+'('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerActionName1+'</button>';
+					
+					
+				} else if(state==2){
+					html += '<form onsubmit="return false;">';
+					html += '   <div class="panel">';
+					html += '      <input class="score_s" type="number">';
+					html += '      <input class="insert_rvb" type="submit" value="평점 등록" onclick="review()">';
+					html += '      <input type="submit" class="purchase_del" onclick="order_del('+data[i].midx+','+data[i].iidx+')" value="글숨김">';
+					html += '      <input type="hidden" class="midx" value="'+data[i].midx+'">';
+					html += '      <input type="hidden" class="iidx" value="'+data[i].iidx+'">';
+					html += '   </div>';
+					html += '</form>';
 				}
+				html += '    	<input type="submit" class="btn_sellerAction select_buyer_ok" onclick="select_buyer_ok('+data[i].iidx+','+data[i].buyer+')" value="구매자 선정 확인">';
+				html += '    	<input type="submit" class="btn_sellerAction select_reject_ok" onclick="select_reject_ok('+data[i].iidx+','+data[i].buyer+')" value="구매자 참여거절 확인">';
+				
+			   //html += '    <button type="button" class="btn_sellerAction '+btn_sellerMsg+'" onclick="btn_sellerAction('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerMsg+'</button>';
+				
+			   //html += '    <button type="button" class="btn_sellerAction '+btn_sellerMsg+'" onclick="btn_sellerAction('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerMsg+'</button>';
+			   html += '</div>';
+				
 
 			}
 			
 			$('#aside_mybuyerlist').html(html);
 			$("#aside_mybuyerlist").toggle();
+			myitem(midx);
 
 		   }
 		});
-	 };  // mybuyer end
+	};  // mybuyer end
+
+
+
+	/* 참여자 구매자 선정 */
+	function select_buyer(iidx, buyer){
+		
+		if($(this).hasClass("select_buyer_y")){
+			$(this).removeClass("select_buyer_y");
+		}else{
+			$(this).addClass("select_buyer_y");
+		}
+		
+		
+
+	}
+
+	/* 참여자 구매자 선정 ㅡ> 확정 확인. 큐알생성 */
+	function select_buyer_ok(){
+		
+		var buyerArr = [];
+
+		if($(".select_buyer").hasClass("select_buyer_y")){
+			buyerArr.push($(".select_buyer").val)  
+		}
+
+
+
+		function value_check() {
+			var select_buyer_count = $$(".select_buyer").length;
+	 
+			for (var i=0; i<check_count; i++) {
+				if (document.getElementsByName("fruit")[i].checked == true) {
+					alert(document.getElementsByName("fruit")[i].value);
+				}
+			}
+		}
+
+
+
+
+		
+
+		$.ajax({
+			url : domain+'/items/myitem/buyer/'+iidx+'/'+ buyerArr,
+			type : 'post',
+			success : function(data){
+				alert('d.');
+
+				// 배열 초기화
+				buyerArr = [];
+			}
+
+
+		})
+
+	}
+
+
+	/* 참여자 거절 */ 
+	function select_reject(iidx, buyer){
+
+		if(confirm('선택하신 참여자의 참여를 거절하시겠습니까?')){
+			$.ajax({
+				url : domain+'/items/myitem/buyer/'+iidx+'/'+ buyer,
+				type : 'delete',
+				success : function(data){
+					alert('data : '+data+', 선택하신 참여자'+buyer+'가 참여거절 처리 되었습니다.');
+					
+
+				}
+
+
+			})
+		}
+
+
+	}

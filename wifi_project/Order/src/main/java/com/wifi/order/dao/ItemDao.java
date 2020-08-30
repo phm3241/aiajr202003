@@ -48,6 +48,9 @@ public interface ItemDao {
 	// 내 판매글 참여자리스트
 	List<MyItemBuyer> getMyItemBuyer(int iidx);
 	
+	// 나의 공구판매현황[모집중] - 참여자 거절하기
+	int delmyBuyer(int iidx, int midx);
+	
 	// 
 	
 	

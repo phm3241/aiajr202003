@@ -112,28 +112,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 내 공구 판매현황 관련 =========================================================== -->
 
-	<!-- 나의 공구판매현황 -->
+	<!-- 나의 공구판매현황 - 판매글 리스트 : midx 받아서 ㅡ> 판매글 목록 (상태라벨, 제목) 화면출력 -->
 	<select id="getMyItem" resultType="com.wifi.order.model.MyItem"> 
-		select * from wifi.myitem where seller=#{midx} group by iidx;
+		select * from wifi.myitem where seller=#{midx} group by iidx
 	</select> 
 	
-	-- 내 판매글 리스트 보기 : midx 받아서 ㅡ> 판매글 목록 (상태라벨, 제목) 화면출력
  
-
 	
-	<!-- 내 판매글의 참여자리스트 -->
+	<!-- 나의 공구판매현황 - 참여자리스트 -->
 	<select id="getMyItemBuyer" resultType="com.wifi.order.model.MyItemBuyer">
-		select * from wifi.myitem_buyer where iidx=#{iidx}; 	
+		select * from wifi.myitem_buyer where iidx=#{iidx} and ostate != 1	
 	</select>
 	
 
 	
-	
-	
 	<!-- 나의 공구판매현황[모집중] - 참여자 거절하기 -->
-	<!-- <update id=""> update from wifi.order set state=1 where
-		iidx=#{param1} and midx=#{param2}
-	</update> -->
+	<update id="delmyBuyer">
+	 	update wifi.order set state=1 where iidx=#{param1} and midx=#{param2}
+	</update>
+	
+	
 	
 	<!-- ◆ 구매정원을 한번에 선택해서 넘기는데 어떻게 처리하지? c태그로 midx를 넣어준다?  -->
 	<!-- 나의 공구판매현황[모집중] : 구매자 선택하기 -->
