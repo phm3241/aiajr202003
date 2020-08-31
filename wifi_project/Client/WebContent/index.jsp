@@ -118,27 +118,6 @@
          <!-- itemlist 공구 추천글 리스트 -->
          <div id="itemlist_area">
             <div id="itemlist_big_area">
-
-               <!-- <form action="joinCheck" onsubmit="return false">
-               
-	               <div class="item_card_big">
-	                  <img class="item_img_big" src="복숭아.jpg">
-	                  <div class="item_info">
-	                     <div class="item_info_div">
-	                        <h3 class="item_title">
-	                           <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-	                        </h3>
-	                        <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-	                        <span class="item_price">5000원</span> <span
-	                           class="item_limitDate">당일마감</span>
-	                     </div>
-	                     <div class="item_button_div">
-	                        <input type="submit" class="item_Waiting_button" value="참여신청" onclick="joinCheck();">
-	                     </div>
-	                  </div>
-	               </div>
-               </form>
-               -->
                
                
             </div>  <!-- itemlist_big_area   end-->
@@ -148,18 +127,6 @@
             <!-- itemlist 공구 일반글 리스트 -->
             <div id="itemlist_small_area">
             
-               <!-- 
-               <div class="item_card">
-                  <img class="photo_main" src="수박.jpg">
-                  <div class="item_info">
-                     <h3 class="title">
-                        <a href="#">오늘! 사과 3개씩 나눠사실 분</a>
-                     </h3>
-                     <span class="seller_name">홍길동</span> <span class="seller_rating">★★★★<span>☆</span></span><br>
-                     <span class="item_price">5000원</span> <span
-                        class="item_limitDate">당일마감</span>
-                  </div>
-               </div> -->
     
             </div>  <!-- itemlist_small_area   end -->
             

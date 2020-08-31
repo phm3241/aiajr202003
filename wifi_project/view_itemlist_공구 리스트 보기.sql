@@ -1,6 +1,9 @@
 -- [공구 리스트 ]
 select * from `wifi`.`itemlist`;
 
+-- 공구리스트 : 출력시, 숨김처리 안되있고, 오늘기준 마감일 안지난 글만 리스트 출력
+select * from `wifi`.`itemlist` where istate != -1 and receive_check >= 0 ;
+
 -- view 생성 : itemlist
 create view `wifi`.`itemlist` as
 select i.iidx, i.title, i.price, i.count_m, i.count_w, i.regdate, i.receive, DATEDIFF(receive, now()) as receive_check, 

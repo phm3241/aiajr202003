@@ -9,14 +9,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 공구 리스트. 정렬 관련 =========================================================== -->
 
 	<!-- 공구 리스트 - 최신순정렬 : 아이템*판매자의 평점 조인 (평균평점. 총평점수). -->
+	<!-- 출력시, 숨김처리 안되있고, 오늘기준 마감일 안지난 글만 리스트 출력 -->
 	<select id="getItemlist" resultType="com.wifi.order.model.Itemlist">
-		select * from wifi.itemlist
+		select * from wifi.itemlist where istate != -1 and receive_check >= 0 
 	</select>
 
 
 	<!-- 공구 리스트 - 평점순정렬 : 아이템*판매자의 평점 조인 (평균평점. 총평점수). -->
+	<!-- 출력시, 숨김처리 안되있고, 오늘기준 마감일 안지난 글만 리스트 출력 -->
 	<select id="getItemlistSort" resultType="com.wifi.order.model.Itemlist">
-		select * from wifi.itemlist order by rvs_avg desc;
+		select * from wifi.itemlist where istate != -1 and receive_check >= 0 order by rvs_avg desc
 	</select>
 
 
@@ -95,8 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 나의 공구판매현황 - 판매글 리스트 : midx 받아서 ㅡ> 판매글 목록 (상태라벨, 제목) 화면출력 -->
 	<select id="getMyItem" resultType="com.wifi.order.model.MyItemlist">
-		select * from wifi.myitemlist where seller=#{midx} group by iidx having istate
-		!=-1
+		select * from wifi.myitemlist where seller=#{midx} group by iidx having istate !=-1 
 	</select>
 
 
@@ -132,6 +133,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update wifi.item set state=-1 where iidx=#{iidx}
 	</update>
 
+	<!-- QR보기 -->
+	<select id="getQR" resultType="String">
+		SELECT qr FROM wifi.mybuyerlist where iidx=#{param1} and buyer=#{param2}
+	</select>
 
 
 	<!-- ◆ 구매정원을 한번에 선택해서 넘기는데 어떻게 처리하지? c태그로 midx를 넣어준다? -->

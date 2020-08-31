@@ -25,6 +25,7 @@ import com.wifi.order.service.MyBuyerReviewService;
 import com.wifi.order.service.MyItemBuyerService;
 import com.wifi.order.service.MyItemHideService;
 import com.wifi.order.service.MyItemService;
+import com.wifi.order.service.QRService;
 import com.wifi.order.service.itemlistSortService;
 
 @RestController
@@ -66,6 +67,10 @@ public class ItemController {
 	@Autowired
 	MyBuyerCntService cntBuyerService;
 
+	@Autowired
+	QRService getQRService;
+	
+	
 	@Autowired
 	MyBuyerReviewService rvBuyerService;
 	
@@ -165,6 +170,15 @@ public class ItemController {
 		
 		System.out.println("참여자 거절하기 controller");
 		return delBuyerService.delBuyer(iidx, midx); 
+	};
+	
+	
+	// 나의 공구판매현황[모집완료] - QR보기
+	@GetMapping("/qr/{iidx}/{buyer}")
+	public String getQR(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
+		
+		System.out.println("QR보기 controller");
+		return getQRService.getQR(iidx, midx); 
 	};
 	
 	

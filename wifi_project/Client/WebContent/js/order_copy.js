@@ -23,54 +23,85 @@ function itemlist(){
 		success: function(data){
 			
 			var html = '';
-			//var path='C:\Users\BIT02-20\Documents\GitHub\aiajr202003\wifi_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Order\img';
+			var html2 = '';
 				
 			for(var i=0; i<data.length; i++){
+				
+				var state = '';
+
+				// 모집중
+				//if(data[i].pstate==-1){
+				//	state = '';
 
 				
-				// 추천 공구글
-				// if(data[i].state == 1) {
-				// 	html += '<button class="item_card_big">';
-				// 	html += '	<input type="hidden" value="'+data[i].iidx+'">';
-				// 	html += '	<img class="item_img_big" src="'+data[i].photo+'">';
-				// 	html += '	<div class="item_info">';
-				// 	html += '		<h3 class="item_title">'+data[i].title+'</h3>';
-				// 	html += '			<span class="sell er_name">'+data[i].midx+'</span>';
-				// 	//html += '			<span class="seller_rating">'+data[i].score_s+'<span></span></span><br>';
-				// 	html += '			<span class="item_price">'+data[i].price+'</span> ';
-				// 	html += '			<span class="item_limitDate">'+data[i].receive+'</span>';
-				// 	html += '	</div>';
-				// 	html += '</button>';
-
-
-				// 일반 공구글
-				//} else{
-
-					html += '<button class="item_card" onclick="itemView('+data[i].iidx+')">';
-					//html += '	<input type="hidden" value="'+data[i].iidx+'">';
-					html += '	<img class="item_img" src="/order/upload/'+data[i].photo+'">';
-					html += '	<div class="item_info">';
-					html += '		<h3 class="item_title">'+data[i].title+'</h3>';
-					html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
-					html += '			<span class="seller_rating">판매자 평균평점'+data[i].rvs_avg+'<span></span></span><br>';
-					html += '			<span class="seller_rating">판매자 총평점개수'+data[i].rvs_totalRow+'<span></span></span><br>';
-					html += '			<span class="item_price">가격 : '+data[i].price+'</span> ';
-					html += '			<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
-					html += '	</div>';
-					html += '</button>';
+				// 모집완료
+				//} else if(data[i].pstate != -1){
+				//	state='';
 				//}
+
+
+				switch(data[i].istate){
+
+					// 추천 공구리스트
+					case 1:
+
+						html += '<button class="item_card_big" onclick="itemView('+data[i].iidx+')">';
+						//html += '	<input type="hidden" value="'+data[i].iidx+'">';
+						html += '	<img class="item_img" src="/order/upload/'+data[i].photo+'">';
+						html += '	<div class="item_info">';
+						html += '		<div>istate : '+data[i].istate+'</div>';
+						html += '		<div>pstate : '+data[i].pstate+'</div>';
+						html += '		<h3 class="item_title">'+data[i].iidx+': '+data[i].title+'</h3>';
+						html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
+						html += '			<span class="seller_rating">판매자 평균평점'+data[i].rvs_avg+'<span></span></span><br>';
+						html += '			<span class="seller_rating">판매자 총평점개수'+data[i].rvs_totalRow+'<span></span></span><br>';
+						html += '			<span class="seller_rating">조회수'+data[i].view_count+'<span></span></span><br>';
+						html += '			<span class="item_price">가격 : '+data[i].price+'</span> ';
+						html += '			<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
+						html += '	</div>';
+						html += '</button>';
+
+					break;
+						
+						
+						
+						
+					// 일반 공구리스트
+					case 0:
+
+						html2 += '<button class="item_card" onclick="itemView('+data[i].iidx+')">';
+						//html += '	<input type="hidden" value="'+data[i].iidx+'">';
+						html2 += '	<img class="item_img" src="/order/upload/'+data[i].photo+'">';
+						html2 += '	<div class="item_info">';
+						html2 += '		<div>istate : '+data[i].istate+'</div>';
+						html2 += '		<div>pstate : '+data[i].pstate+'</div>';
+						html2 += '		<h3 class="item_title">'+data[i].iidx+': '+data[i].title+'</h3>';
+						html2 += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
+						html2 += '			<span class="seller_rating">판매자 평균평점'+data[i].rvs_avg+'<span></span></span><br>';
+						html2 += '			<span class="seller_rating">판매자 총평점개수'+data[i].rvs_totalRow+'<span></span></span><br>';
+						html2 += '			<span class="seller_rating">조회수'+data[i].view_count+'<span></span></span><br>';
+						html2 += '			<span class="item_price">가격 : '+data[i].price+'</span> ';
+						html2 += '			<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
+						html2 += '	</div>';
+						html2 += '</button>';
+
+
+					break;
+
+
+				} // switch end
+				
 
 			} // for end
 
 				// 추천공구글일 때 표시되는 위치
-				// if(data[i].state == 1){
-				// 	$('#itemlist_big_area').html(html);
-				// }
-				
-				// 일반공구글일 때 표시되는 위치
 				$('#itemlist_big_area').html(html);
-		}
 
+				// 일반공구글일 때 표시되는 위치
+				$('#itemlist_small_area').html(html2);
+
+
+		} // success end
 
 	});
 
@@ -423,7 +454,7 @@ function mybuyer(iidx,state) {
 						stateColor = '';
 						if(data[i].qr==0){
 							btn_sellerActionName1 = 'QR발급';
-							btn_sellerAction1 = 'createQR';
+							btn_sellerAction1 = 'insertQR';
 						} else {
 							btn_sellerActionName1 = 'QR보기';
 							btn_sellerAction1 = 'viewQR';
@@ -589,8 +620,8 @@ function cntBuyer(iidx){
 		url : domain+'/items/mybuyerCnt/'+iidx,
 		type : 'GET',
 		success : function(data){
-			alert('이 판매글의 현재 참여자수 : '+data);
-			currentBuyer = data;
+			//alert('이 판매글의 현재 참여자수 : '+data);
+			//currentBuyer = data;
 
 		}
 
@@ -617,6 +648,25 @@ function delBuyer(iidx, buyer){
 	}
 
 
+}
+
+
+/* 나의 공구판매현황[모집완료] - 구매자 QR발급 */
+function insertQR(iidx, buyer){
+}
+	
+	
+/* 나의 공구판매현황[모집완료] - 구매자 QR보기 */
+function viewQR(iidx, buyer){
+	
+	$.ajax({
+		url : domain+'/items/qr/'+iidx+'/'+buyer,
+		type : 'GET',
+		success : function(data){
+			alert('발급된 qr코드 : '+data);
+		}
+
+	})
 }
 
 

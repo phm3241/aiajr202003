@@ -58,6 +58,9 @@ public interface ItemDao {
 	// 나의 공구판매현황[판매완료, 판매실패] - 내 판매글 숨김
 	int hideMyItem(int iidx);
 	
+	// QR보기
+	String getQR(int iidx, int midx);
+	
 	// 
 	
 	
