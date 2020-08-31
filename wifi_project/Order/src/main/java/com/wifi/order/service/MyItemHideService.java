@@ -1,33 +1,27 @@
 package com.wifi.order.service;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.wifi.order.dao.ItemDao;
-import com.wifi.order.model.MyItemlist;
+import com.wifi.order.model.Item_rvb;
+
 
 @Service
-public class MyItemService {
+public class MyItemHideService {
 
 	private ItemDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
-
 	
-	public List<MyItemlist> getMyItem(int midx) {
+	public int hideMyItem(int iidx) {
 		
 		dao = template.getMapper(ItemDao.class);
-		System.out.println("내 판매글 리스트  service");
+		System.out.println("내 판매글 숨김 service");
 		
-		return dao.getMyItem(midx);
+		return dao.hideMyItem(iidx);
 	}
-	
-	
 
-	
-	
-	
 }

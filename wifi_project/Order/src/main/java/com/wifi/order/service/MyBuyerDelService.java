@@ -14,11 +14,14 @@ public class MyBuyerDelService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int delmyBuyer(int iidx, int midx) {
+	public int delBuyer(int iidx, int midx) {
 		
+		dao = template.getMapper(ItemDao.class);
+		System.out.println("참여자 거절하기  service");
 		
-		return dao.delmyBuyer(iidx, midx);
-	};
+		return dao.delBuyer(iidx, midx);
+	}
+
 
 
 }

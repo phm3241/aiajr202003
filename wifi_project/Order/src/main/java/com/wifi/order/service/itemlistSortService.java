@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
-import com.wifi.order.model.ItemJoinRvs;
+import com.wifi.order.model.Itemlist;
 
 @Service
 public class itemlistSortService {
@@ -18,7 +18,7 @@ public class itemlistSortService {
 	private SqlSessionTemplate template;
 
 	
-	public List<ItemJoinRvs> getItemlistSort() {
+	public List<Itemlist> getItemlistSort() {
 		
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("공구 리스트 평점순정렬  service");

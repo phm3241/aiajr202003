@@ -13,15 +13,13 @@ public class Item_rvb {
 	}
 
 
-	public Item_rvb(int irbidx, int score_b, int midx, int iidx) {
-		super();
+	public Item_rvb(int irbidx, int score_b, int midx, int iidx) {		
 		this.irbidx = irbidx;
 		this.score_b = score_b;
 		this.midx = midx;
 		this.iidx = iidx;
 	}
-
-
+	
 	public int getIrbidx() {
 		return irbidx;
 	}

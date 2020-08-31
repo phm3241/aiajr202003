@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
 import com.wifi.order.model.Item;
-import com.wifi.order.model.ItemJoinRvs;
+import com.wifi.order.model.Itemlist;
 
 @Service
 public class ItemViewService {
@@ -17,7 +17,7 @@ public class ItemViewService {
 	private SqlSessionTemplate template;
 	
 	
-	public ItemJoinRvs viewItem(int iidx) {
+	public Itemlist viewItem(int iidx) {
 		
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("공구 상세보기 service :" + iidx);

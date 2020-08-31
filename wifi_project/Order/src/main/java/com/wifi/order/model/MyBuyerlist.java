@@ -1,7 +1,7 @@
 package com.wifi.order.model;
 
 // 공구 구매자에 대한 평점정보 : 화면출력용
-public class MyItemBuyer {
+public class MyBuyerlist {
 	
 	private int iidx;			// 판매글 번호
 	private int buyer;		  	// 구매자 번호 
@@ -10,15 +10,15 @@ public class MyItemBuyer {
 	private int rvb_totalRow;	// 구매자 총 평점개수
 	private int ostate;			// 구매자 주문상태값 : 0 참여중, 1 거절, -1 null
 	private int pstate;			// 구매자 결제상태값 : 0 미수령, 1 수령, -1 null
-	private String pr;			// 구매자 결제QR : -1 null
+	private String qr;			// 구매자 결제QR : -1 null
 	
 	
-	public MyItemBuyer() {
+	public MyBuyerlist() {
 	}
 
 
-	public MyItemBuyer(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate,
-			String pr) {
+	public MyBuyerlist(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate,
+			String qr) {
 		this.iidx = iidx;
 		this.buyer = buyer;
 		this.name = name;
@@ -26,7 +26,7 @@ public class MyItemBuyer {
 		this.rvb_totalRow = rvb_totalRow;
 		this.ostate = ostate;
 		this.pstate = pstate;
-		this.pr = pr;
+		this.qr = qr;
 	}
 
 
@@ -100,20 +100,20 @@ public class MyItemBuyer {
 	}
 
 
-	public String getPr() {
-		return pr;
+	public String getQr() {
+		return qr;
 	}
 
 
-	public void setPr(String pr) {
-		this.pr = pr;
+	public void setQr(String qr) {
+		this.qr = qr;
 	}
 
 
 	@Override
 	public String toString() {
 		return "MyItemBuyer [iidx=" + iidx + ", buyer=" + buyer + ", name=" + name + ", rvb_avg=" + rvb_avg
-				+ ", rvb_totalRow=" + rvb_totalRow + ", ostate=" + ostate + ", pstate=" + pstate + ", pr=" + pr + "]";
+				+ ", rvb_totalRow=" + rvb_totalRow + ", ostate=" + ostate + ", pstate=" + pstate + ", qr=" + qr + "]";
 	}
 
 

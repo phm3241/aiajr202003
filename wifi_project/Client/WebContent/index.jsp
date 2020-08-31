@@ -115,7 +115,7 @@
          
          
          
-         
+         <!-- itemlist 공구 추천글 리스트 -->
          <div id="itemlist_area">
             <div id="itemlist_big_area">
 
@@ -145,7 +145,7 @@
             
             
             
-            
+            <!-- itemlist 공구 일반글 리스트 -->
             <div id="itemlist_small_area">
             
                <!-- 
@@ -170,6 +170,7 @@
 
 
 
+      <!-- aside 공구현황 -->
       <div class="aside_area">
          <div class="aside_title_area">
             <div class="aside_myinfo">
@@ -188,96 +189,12 @@
             
          </div>
 
-         <!-- 내 판매글 구매자 리스트 : 테스트 -->
+         <!-- 내 판매글 구매자 리스트 -->
          <div id="aside_mylist_area" class="aside_mylist">
-
-            <div id="aside_mycard" class="aside_mycard">
-                  
-                  <!-- 내 판매글 1 -->
-                  <div class="aside_myitem">
-                     <div class="aside_mystatewrap">
-                        <span class="btn_regItem">상태라벨</span>
-                        <span id="a'+data[i].iidx+'" onclick="cancleAlarm()">alarm</span><br>
-                     </div>
-                        <a href="" class="aside_item_title" id="iidx">공구제목</a>
-                        <button type="button" class="btn_mybuyer_view" onclick="mybuyer(5)"> ▼ </button>
-                  </div>  <!-- aside_myitem  end -->
-
-                  
-                  <!-- 내 판매글 1 의 참여자 또는 구매자 -->
-                  <div id="aside_mybuyerlist" class="aside_mybuyerlist">
-                     <hr>
-                     <div class="aside_mybuyer">
-                        <span class="buyer_name">구매자 이름</span>
-                        <span class="rvb_avg">평균평점</span><span class="rvb_total">/총평점수</span>
-                        <button type="button" class="btn_" onclick=""> 상태 </button>
-                     </div>   
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-                     
-                  </div> <!-- aside_mybuyerlist end -->
-               
+            <div id="aside_mycard" class="aside_mylist">
+            
             </div>  <!-- aside_mycard  end -->
-         
-         
          </div>  <!-- aside_mylist_area  end -->
-
-
-
-
-
-
-<!-- 
-         
-         html += '<div class="aside_mycard a'+data[i].iidx+'">';
-            html += '   <div class="aside_mystatewrap">';
-            html += '      <h4 class="'+stateColor+'">'+state+'</h4>';
-            html += '      <div id="a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].midx+','+data[i].iidx+')">test</div>';
-            html += '   </div>';
-            html += '      <input type="button" class="'+btnClass+'" onclick="'+action+'('+data[i].midx+','+data[i].iidx+')" value="'+btn+'"> <br>';
-            html += '      <a href="'+data[i].iidx+'" class="aside_item_title" id="iidx">'+data[i].iidx+':'+data[i].title+'</a> <br>';
-            if(data[i].pstate == 1){
-               html += '<form onsubmit="return false;">';
-               html += '   <div class="panel">';
-               html += '      <input class="score_s" type="number">';
-               html += '      <input class="insert_rvs" type="submit" value="평점 등록" onclick="review()">';
-               html += '      <input type="submit" class="purchase_del" onclick="order_del('+data[i].midx+','+data[i].iidx+')" value="글 삭제">';
-               html += '      <input type="hidden" class="midx" value="'+data[i].midx+'">';
-               html += '      <input type="hidden" class="iidx" value="'+data[i].iidx+'">';
-               html += '   </div>';
-               html += '</form>';
-            }
-            html += '</div>';
-
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
 
 
       </div>

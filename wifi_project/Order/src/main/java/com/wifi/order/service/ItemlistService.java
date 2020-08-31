@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
 import com.wifi.order.model.Item;
-import com.wifi.order.model.ItemJoinRvs;
+import com.wifi.order.model.Itemlist;
 
 @Service
 public class ItemlistService {
@@ -19,7 +19,7 @@ public class ItemlistService {
 	private SqlSessionTemplate template;
 
 	
-	public List<ItemJoinRvs> getItemlist() {
+	public List<Itemlist> getItemlist() {
 
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("공구 리스트 최신순정렬  service");

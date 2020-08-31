@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.wifi.order.model.Item;
-import com.wifi.order.model.ItemJoinRvs;
-import com.wifi.order.model.MyItemBuyer;
-import com.wifi.order.model.MyItem;
+import com.wifi.order.model.Itemlist;
+import com.wifi.order.model.Item_rvb;
+import com.wifi.order.model.MyBuyerlist;
+import com.wifi.order.model.MyItemlist;
 
 public interface ItemDao {
 
@@ -14,13 +15,13 @@ public interface ItemDao {
 //	공구 리스트 관련----------------------------------
 	
 	// 공구 리스트 - 최신순 정렬 (기본정렬)
-	List<ItemJoinRvs> getItemlist();
+	List<Itemlist> getItemlist();
 	
 	// 공구 리스트 - 평점순 정렬
-	List<ItemJoinRvs> getItemlistSort();
+	List<Itemlist> getItemlistSort();
 	
 	// 공구 상세보기
-	ItemJoinRvs viewItem(int iidx);
+	Itemlist viewItem(int iidx);
 
 	
 	
@@ -43,13 +44,19 @@ public interface ItemDao {
 //	내 공구 판매현황 관련------------------------------
 	
 	// 내 판매글 
-	List<MyItem> getMyItem(int midx);
+	List<MyItemlist> getMyItem(int midx);
 	
 	// 내 판매글 참여자리스트
-	List<MyItemBuyer> getMyItemBuyer(int iidx);
+	List<MyBuyerlist> getMyItemBuyer(int iidx);
 	
 	// 나의 공구판매현황[모집중] - 참여자 거절하기
-	int delmyBuyer(int iidx, int midx);
+	int delBuyer(int iidx, int midx);
+
+	// 나의 공구판매현황[판매완료] - 구매자 평점등록
+	int reviewBuyer(Item_rvb rvb);
+
+	// 나의 공구판매현황[판매완료, 판매실패] - 내 판매글 숨김
+	int hideMyItem(int iidx);
 	
 	// 
 	
