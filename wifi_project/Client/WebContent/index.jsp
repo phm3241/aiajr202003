@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,9 @@
 
 
 
+<link rel="stylesheet" href="aside.css" type="text/css">
 <link rel="stylesheet" href="buy.css" type="text/css">
+<link rel="stylesheet" href="slide.css" type="text/css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <style>
@@ -26,19 +29,37 @@
 <body>
    <div id="container">
 
-      <div id="nav">
+
+      <%@include file="/include/aside.jsp"%>
+      <!-- <div id="nav">
+
          <br><br><br><br>
          <a href="#">home</a> <br><br>
          <a href="#">logout</a> <br><br> 
          <a href="#">icon</a>  <br><br>
          <a href="#">icon</a> 
-      </div>
+      </div> -->
 
       <div id="main_content_area">
-         <div class="title_area">
-            <h1 class="main_title">W 1 F 1</h1>
-            <h1 class="sub_title"> 같 이 ( 사 는 ) 가 치 </h1>
+         <div class="header">
+            <div class="title_area">
+               <h1 class="main_title">W 1 F 1</h1>
+               <h1 class="sub_title"> 같 이 ( 사 는 ) 가 치 </h1>
+               <!-- 상단고정 navbar -->
+               <div id="navbar">
+                  <a class="active" href="javascript:void(0)">Home</a>
+                  <a href="javascript:void(0)">News</a>
+                  <a href="javascript:void(0)">Contact</a>
+               </div>
+            </div>
+            
          </div>
+
+         
+         
+
+
+
          
          <div id="search_area">
          	검색하기<label for="gsearch">Search</label>
@@ -119,7 +140,50 @@
          </div> <!-- itemView   end -->
          	
             
-	        
+         
+         
+         <div class="slideshow-container">
+
+            <div class="mySlides fade">
+              <div class="numbertext">1 / 3</div>
+              <img src="사과.jpg" style="width:100%">
+              <div class="text">Caption Text</div>
+            </div>
+            
+            <div class="mySlides fade">
+              <div class="numbertext">2 / 3</div>
+              <img src="복숭아.jpg" style="width:100%">
+              <div class="text">Caption Two</div>
+            </div>
+            
+            <div class="mySlides fade">
+              <div class="numbertext">3 / 3</div>
+              <img src="바나나.jpg" style="width:100%">
+              <div class="text">Caption Three</div>
+            </div>
+            
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            
+            </div>
+            <br>
+            
+            <div style="text-align:center">
+              <span class="dot" onclick="currentSlide(1)"></span> 
+              <span class="dot" onclick="currentSlide(2)"></span> 
+              <span class="dot" onclick="currentSlide(3)"></span> 
+            </div>
+
+
+
+
+
+
+
+
+
+
+
                   
          
          
@@ -146,35 +210,7 @@
 
 
 
-      <!-- aside 공구현황 -->
-      <div class="aside_area">
-         <div class="aside_title_area">
-            <div class="aside_myinfo">
-               <h4>홍*동</h4>
-               <h4>구매자 평점 ★★★★☆ (13점/3명)</h4>
-               <h4>판매자 평점 ★★★★☆ (13점/3명)</h4>
-            </div>
-            <div class="aside_tabs">
-            	<div class="aside_tab"><input type="button" value="구 매 현 황"><h4 id="alarm_b"></h4></div>
-            	<div class="aside_tab"><input type="button" value="판 매 현 황"><div id="alarm_s"></div></div>
-            </div>  
-         </div>
-         
-
-         <div id="aside_myOderlist" class="aside_myOderlist">
-            
-         </div>
-
-         <!-- 내 판매글 구매자 리스트 -->
-         <div id="aside_mylist_area" class="aside_mylist">
-            <div id="aside_mycard" class="aside_mylist">
-            
-            </div>  <!-- aside_mycard  end -->
-         </div>  <!-- aside_mylist_area  end -->
-
-
-      </div>
-      <!-- aside_area end -->
+      
 
    </div>
    <!-- container end -->
@@ -182,4 +218,5 @@
 </html>
 
 <script text="text/javascript" src="js/order_copy.js"></script>
+<script text="text/javascript" src="js/slide.js"></script>
 
