@@ -7,19 +7,20 @@ import org.springframework.stereotype.Service;
 import com.wifi.order.dao.ItemDao;
 
 @Service
-public class MyBuyerCntService {
+public class MyBuyerRejectService {
 	
 	private ItemDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
-
-	public int cntBuyer(int iidx) {
-		
+	
+	
+	public int rejectBuyer(int iidx, int midx) {
+	
 		dao = template.getMapper(ItemDao.class);
-		System.out.println("내 판매글 - 현재 참여자수  service");
+		System.out.println("참여자 거절 service");
 		
-		return dao.cntBuyer(iidx);
+		return dao.rejectBuyer(iidx, midx);
 	}
 
 }

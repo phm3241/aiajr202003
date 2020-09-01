@@ -49,8 +49,14 @@ public interface ItemDao {
 	// 내 판매글 참여자리스트
 	List<MyBuyerlist> getMyItemBuyer(int iidx);
 	
+	// 나의 공구판매현황[모집중] - 현재 참여자수 
+	int cntBuyer(int iidx);
+	
+	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
+	int selectBuyer(int iidx,  List<Integer> buyer);
+	
 	// 나의 공구판매현황[모집중] - 참여자 거절하기
-	int delBuyer(int iidx, int midx);
+	int rejectBuyer(int iidx, int midx);
 
 	// 나의 공구판매현황[판매완료] - 구매자 평점등록
 	int reviewBuyer(Item_rvb rvb);
@@ -60,6 +66,11 @@ public interface ItemDao {
 	
 	// QR보기
 	String getQR(int iidx, int midx);
+	
+
+
+	
+
 	
 	// 
 	

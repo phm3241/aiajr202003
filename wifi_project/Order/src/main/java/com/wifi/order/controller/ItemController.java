@@ -1,5 +1,6 @@
 package com.wifi.order.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.model.Itemlist;
 import com.wifi.order.model.ItemRegRequest;
@@ -20,8 +23,9 @@ import com.wifi.order.service.ItemRegService;
 import com.wifi.order.service.ItemViewService;
 import com.wifi.order.service.ItemlistService;
 import com.wifi.order.service.MyBuyerCntService;
-import com.wifi.order.service.MyBuyerDelService;
+import com.wifi.order.service.MyBuyerRejectService;
 import com.wifi.order.service.MyBuyerReviewService;
+import com.wifi.order.service.MyBuyerSelectService;
 import com.wifi.order.service.MyItemBuyerService;
 import com.wifi.order.service.MyItemHideService;
 import com.wifi.order.service.MyItemService;
@@ -60,12 +64,16 @@ public class ItemController {
 
 	@Autowired
 	MyItemBuyerService myBuyerService;
-	
-	@Autowired
-	MyBuyerDelService delBuyerService;
 
 	@Autowired
 	MyBuyerCntService cntBuyerService;
+	
+	@Autowired
+	MyBuyerSelectService selectBuyerService;
+	
+
+	@Autowired
+	MyBuyerRejectService rejectBuyerService;
 
 	@Autowired
 	QRService getQRService;
@@ -76,6 +84,10 @@ public class ItemController {
 	
 	@Autowired
 	MyItemHideService hideService;
+	
+	
+	
+	
 	
 	
 	
@@ -122,6 +134,12 @@ public class ItemController {
 	
 	
 	// 공구글 수정
+//	@PostMapping("/{iidx}")
+//	public int editItem(@PathVariable("iidx") int iidx) {
+//		
+//		System.out.println("내 판매글 수정 controller");
+//		return editItemService.editItem(iidx); 
+//	};
 	
 	
 	// 공구글 삭제
@@ -164,13 +182,52 @@ public class ItemController {
 	};
 	
 	
-	// 나의 공구판매현황[모집중] - 참여자 거절하기
-	@DeleteMapping("/mybuyer/{iidx}/{buyer}")
-	public int delBuyer(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
+	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
+	@PostMapping("/mybuyer/{iidx}")
+	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
+	//public int selectBuyer(@RequestParam(value="iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
+	//public int selectBuyer(@RequestParam(value="iidx") int iidx) {
+	//public int selectBuyer(@RequestBody ArrayList<Integer> buyerArr, @PathVariable("iidx") int iidx ) {
+	public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") Integer[] buyerArr) {
 		
-		System.out.println("참여자 거절하기 controller");
-		return delBuyerService.delBuyer(iidx, midx); 
+		//String[] buyer = request.getParameterValues("buyer");
+
+		//String[] buyer = request.getParameterValues("buyer[]");
+		
+		//@RequestParam("iidx") int iidx, @RequestParam("mybuyer[]")  buyer 
+		System.out.println("참여자 구매자로 선정 controller");
+		System.out.println("iidx 확인 :" +iidx);
+		System.out.println("buyer 배열확인 : " + buyerArr.toString());
+		for(int i=0; i<buyerArr.length; i++) {
+			System.out.println(buyerArr[i]);
+		}
+//		for(int i=0; i<buyer.size(); i++) {
+//			System.out.println(buyer.get(i));
+//		}
+		
+		return 0; 
+		//return selectBuyerService.selectBuyer(iidx, buyer); 
 	};
+	
+	
+	
+	// 나의 공구판매현황[모집중] - 참여자 거절하기
+	@PutMapping("/mybuyer/{iidx}/{buyer}")
+	public int rejectBuyer(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
+		
+		System.out.println("참여자 거절 controller");
+		return rejectBuyerService.rejectBuyer(iidx, midx); 
+	};
+	
+	
+	// 나의 공구판매현황[모집완료] - QR생성
+//	@GetMapping("/qr/{iidx}/{buyer}")
+//	public String insertQR(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
+//		
+//		System.out.println("QR생성 controller");
+//		return insesrtQRService.insertQR(iidx, midx); 
+//	};
+	
 	
 	
 	// 나의 공구판매현황[모집완료] - QR보기
@@ -183,7 +240,7 @@ public class ItemController {
 	
 	
 	// 나의 공구판매현황[판매완료] - 구매자 평점등록하기
-	@PostMapping("/mybuyer/review")
+	@PostMapping("/review")
 	public int reviewBuyer(Item_rvb rvb) {
 		
 		System.out.println("구매자 평점등록 controller");
@@ -192,7 +249,7 @@ public class ItemController {
 	
 	
 	// 나의 공구판매현황[판매완료, 판매실패] - 내 판매글 숨김
-	@PutMapping("/myitem/hide/{iidx}")
+	@PutMapping("/hide/{iidx}")
 	public int hideMyItem(@PathVariable("iidx") int iidx) {
 		
 		System.out.println("내 판매글 숨김 controller");

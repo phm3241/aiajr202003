@@ -14,6 +14,8 @@
 
 
 <link rel="stylesheet" href="buy.css" type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 <style>
    /* .panel{
       display: none;
@@ -42,6 +44,13 @@
          	검색하기<label for="gsearch">Search</label>
   				<input type="search" id="gsearch" name="gsearch">
          </div>
+
+               <p><strong>Checkbox</strong></p>
+					<div class="btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-primary">
+							<input type="checkbox"> Checkbox
+						</label>
+					</div>
 
          <button type="button" class="btn_search_category" onclick="">과일</button>
          <button type="button" class="btn_search_category" onclick="">육류</button>

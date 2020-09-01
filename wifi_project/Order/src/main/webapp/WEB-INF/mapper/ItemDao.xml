@@ -111,12 +111,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 내 판매글 현재 참여자 수 -->
 	<select id="cntBuyer" resultType="int">
-		select count(*) from
-		wifi.mybuyerlist where iidx=#{iidx} and ostate != 1;
+		select count(*) from wifi.mybuyerlist where iidx=#{iidx} and ostate != 1;
 	</select>
 
+
+	<!-- 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기 -->
+	<update id="selectBuyer">
+		update wifi.purchase set state=0 where iidx=#{param1} and midx in
+		<foreach collection="list" item="buyerArr" open="(" close=")" separator=",">
+ 			#{buyerArr}
+		</foreach>
+	</update>
+
+
 	<!-- 나의 공구판매현황[모집중] - 참여자 거절하기 -->
-	<update id="delBuyer">
+	<update id="rejectBuyer">
 		update wifi.order set state=1 where iidx=#{param1} and midx=#{param2}
 	</update>
 
