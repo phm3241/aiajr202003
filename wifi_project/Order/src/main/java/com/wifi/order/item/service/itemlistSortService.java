@@ -1,4 +1,4 @@
-package com.wifi.order.service;
+package com.wifi.order.item.service;
 
 import java.util.List;
 
@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
-import com.wifi.order.model.Item;
 import com.wifi.order.model.Itemlist;
 
 @Service
-public class ItemlistService {
+public class itemlistSortService {
 
 	private ItemDao dao;
 
@@ -19,12 +18,12 @@ public class ItemlistService {
 	private SqlSessionTemplate template;
 
 	
-	public List<Itemlist> getItemlist() {
-
+	public List<Itemlist> getItemlistSort() {
+		
 		dao = template.getMapper(ItemDao.class);
-		System.out.println("공구 리스트 최신순정렬  service");
+		System.out.println("공구 리스트 평점순정렬  service");
 
-		return dao.getItemlist();
-	};
+		return dao.getItemlistSort();
+	}
 
-};
+}

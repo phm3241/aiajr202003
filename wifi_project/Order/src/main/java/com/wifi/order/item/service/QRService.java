@@ -1,4 +1,4 @@
-package com.wifi.order.service;
+package com.wifi.order.item.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 import com.wifi.order.dao.ItemDao;
 
 @Service
-public class MyBuyerCntService {
+public class QRService {
 	
 	private ItemDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int cntBuyer(int iidx) {
+	public String getQR(int iidx, int midx) {
 		
 		dao = template.getMapper(ItemDao.class);
-		System.out.println("내 판매글 - 현재 참여자수  service");
+		System.out.println("QR보기  service");
 		
-		return dao.cntBuyer(iidx);
+		return dao.getQR(iidx, midx);
 	}
 
 }

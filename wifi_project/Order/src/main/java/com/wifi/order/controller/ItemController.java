@@ -1,6 +1,5 @@
 package com.wifi.order.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,28 +8,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.model.Itemlist;
+import com.wifi.order.item.service.ItemDelService;
+import com.wifi.order.item.service.ItemRegService;
+import com.wifi.order.item.service.ItemViewService;
+import com.wifi.order.item.service.ItemlistService;
+import com.wifi.order.item.service.MyBuyerCntService;
+import com.wifi.order.item.service.MyBuyerRejectService;
+import com.wifi.order.item.service.MyBuyerReviewService;
+import com.wifi.order.item.service.MyBuyerSelectService;
+import com.wifi.order.item.service.MyItemBuyerService;
+import com.wifi.order.item.service.MyItemHideService;
+import com.wifi.order.item.service.MyItemService;
+import com.wifi.order.item.service.QRService;
+import com.wifi.order.item.service.itemlistSortService;
 import com.wifi.order.model.ItemRegRequest;
 import com.wifi.order.model.Item_rvb;
 import com.wifi.order.model.MyBuyerlist;
 import com.wifi.order.model.MyItemlist;
-import com.wifi.order.service.ItemDelService;
-import com.wifi.order.service.ItemRegService;
-import com.wifi.order.service.ItemViewService;
-import com.wifi.order.service.ItemlistService;
-import com.wifi.order.service.MyBuyerCntService;
-import com.wifi.order.service.MyBuyerRejectService;
-import com.wifi.order.service.MyBuyerReviewService;
-import com.wifi.order.service.MyBuyerSelectService;
-import com.wifi.order.service.MyItemBuyerService;
-import com.wifi.order.service.MyItemHideService;
-import com.wifi.order.service.MyItemService;
-import com.wifi.order.service.QRService;
-import com.wifi.order.service.itemlistSortService;
 
 @RestController
 @RequestMapping("/items")
@@ -188,7 +186,8 @@ public class ItemController {
 	//public int selectBuyer(@RequestParam(value="iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
 	//public int selectBuyer(@RequestParam(value="iidx") int iidx) {
 	//public int selectBuyer(@RequestBody ArrayList<Integer> buyerArr, @PathVariable("iidx") int iidx ) {
-	public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") Integer[] buyerArr) {
+	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") Integer[] buyerArr) {
+		public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") List<String> buyerArr) {
 		
 		//String[] buyer = request.getParameterValues("buyer");
 
@@ -198,12 +197,12 @@ public class ItemController {
 		System.out.println("참여자 구매자로 선정 controller");
 		System.out.println("iidx 확인 :" +iidx);
 		System.out.println("buyer 배열확인 : " + buyerArr.toString());
-		for(int i=0; i<buyerArr.length; i++) {
-			System.out.println(buyerArr[i]);
-		}
-//		for(int i=0; i<buyer.size(); i++) {
-//			System.out.println(buyer.get(i));
+//		for(int i=0; i<buyerArr.length; i++) {
+//			System.out.println(buyerArr[i]);
 //		}
+		for(int i=0; i<buyerArr.size(); i++) {
+			System.out.println(buyerArr.get(i));
+		}
 		
 		return 0; 
 		//return selectBuyerService.selectBuyer(iidx, buyer); 

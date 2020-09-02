@@ -1,4 +1,4 @@
-package com.wifi.order.service;
+package com.wifi.order.item.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;

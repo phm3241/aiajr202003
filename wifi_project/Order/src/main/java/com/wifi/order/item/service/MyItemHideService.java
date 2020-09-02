@@ -1,25 +1,27 @@
-package com.wifi.order.service;
+package com.wifi.order.item.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
+import com.wifi.order.model.Item_rvb;
+
 
 @Service
-public class QRService {
-	
+public class MyItemHideService {
+
 	private ItemDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
-
-	public String getQR(int iidx, int midx) {
+	
+	public int hideMyItem(int iidx) {
 		
 		dao = template.getMapper(ItemDao.class);
-		System.out.println("QR보기  service");
+		System.out.println("내 판매글 숨김 service");
 		
-		return dao.getQR(iidx, midx);
+		return dao.hideMyItem(iidx);
 	}
 
 }

@@ -4,6 +4,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wifi.order.dao.OrderDao">
 	
+	
+	<!-- 내 구매글 -->
+	<select id="getMyOrder" resultType="com.wifi.order.model.Mylist">
+		select * from wifi.myitemlist where buyer=#{midx};
+	</select>
+	
+	<!-- 공구 참여신청 -->
+	<insert id="regOrder">
+		insert into wifi.order (midx, iidx) values (#{param1},#{param2})
+	</insert>
+	
+	<!-- 공구 참여신청 전 - 참여자 중복확인   -->
+	<select id="checkOrderOverlap" resultType="int">
+		select count(*) from wifi.myitemlist where buyer=#{param1} and iidx=#{param2}
+	</select>
+	
+	<!-- 공구 참여신청 전 - 잔여인원 확인  -->
+	<select id="checkItemRemain" resultType="int">
+		select count_w - count(buyer) from wifi.myitemlist where iidx = #{iidx}
+	</select>
 
+
+
+	
+	
+	
+	
+	
 
 </mapper>

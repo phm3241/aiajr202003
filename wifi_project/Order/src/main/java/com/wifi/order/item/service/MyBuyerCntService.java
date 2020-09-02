@@ -1,28 +1,25 @@
-package com.wifi.order.service;
-
-import java.util.List;
+package com.wifi.order.item.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
-import com.wifi.order.model.MyBuyerlist;
 
 @Service
-public class MyItemBuyerService {
-
+public class MyBuyerCntService {
+	
 	private ItemDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
-	
-	public List<MyBuyerlist> getMyItemBuyer(int iidx) {
+
+	public int cntBuyer(int iidx) {
 		
 		dao = template.getMapper(ItemDao.class);
-		System.out.println("내 판매글 - 참여자리스트  service");
+		System.out.println("내 판매글 - 현재 참여자수  service");
 		
-		return dao.getMyItemBuyer(iidx);
+		return dao.cntBuyer(iidx);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.wifi.order.service;
+package com.wifi.order.item.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +7,20 @@ import org.springframework.stereotype.Service;
 import com.wifi.order.dao.ItemDao;
 
 @Service
-public class ItemDelService {
+public class MyBuyerRejectService {
 	
-	private ItemDao dao; 
+	private ItemDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
 	
 	
-	public int delItem(int iidx) {
-		
+	public int rejectBuyer(int iidx, int midx) {
+	
 		dao = template.getMapper(ItemDao.class);
+		System.out.println("참여자 거절 service");
 		
-		return dao.delItem(iidx);
-	};
+		return dao.rejectBuyer(iidx, midx);
+	}
 
-};
+}

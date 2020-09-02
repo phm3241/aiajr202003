@@ -7,20 +7,20 @@ public class Order {
 
 	private int oidx;				// 주문번호 -PK
 	private int state;				// 주문상태 : 0 참여중(기본값), 1 거절 - 판매자의 선택에 따라 변경됨. 
-	private Timestamp orderdate; 	// 주문날짜
 	private int midx;				// 주문한 회원번호 -FK
 	private int iidx;				// 게시물 번호 -FK
+	private Timestamp orderdate; 	// 주문날짜
 
 	
 	public Order() {
 	}
 
-	public Order(int oidx, int state, Timestamp orderdate, int midx, int iidx) {
+	public Order(int oidx, int state, int midx, int iidx, Timestamp orderdate) {
 		this.oidx = oidx;
 		this.state = state;
-		this.orderdate = orderdate;
 		this.midx = midx;
 		this.iidx = iidx;
+		this.orderdate = orderdate;
 	}
 
 	public int getOidx() {

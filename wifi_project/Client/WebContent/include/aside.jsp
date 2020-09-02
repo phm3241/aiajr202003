@@ -10,8 +10,8 @@
           <h4>판매자 평점 ★★★★☆ (13점/3명)</h4>
        </div>
        <div class="aside_tabs">
-           <div class="aside_tab"><input type="button" value="구 매 현 황"><h4 id="alarm_b"></h4></div>
-           <div class="aside_tab"><input type="button" value="판 매 현 황"><div id="alarm_s"></div></div>
+           <div class="aside_tab"><input type="button" class="btn_myOderlist" value="구 매 현 황"><h4 id="alarm_b"></h4></div>
+           <div class="aside_tab"><input type="button" class="btn_myItemlist" value="판 매 현 황"><div id="alarm_s"></div></div>
        </div>  
     </div>
     
@@ -28,5 +28,5 @@
     </div>  <!-- aside_mylist_area  end -->
 
 
- </div>
- <!-- aside_area end -->
+</div>
+<!-- aside_area end -->
