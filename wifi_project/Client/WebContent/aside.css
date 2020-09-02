@@ -12,22 +12,18 @@
 	background-color: ghostwhite;
 }
 
-.aside_area {
-	width: 25%;
+
+
+#aside_area {
+	width: 20%; 
 	height: 1000px;
-	float: left;
-	/* margin-top: 20px;
+	float: left; 
+	margin-top: 20px;
     margin-right: 20px;
-    margin-bottom: 20px; */
-	/* border-radius: 30px; */
-	background-color: lavender;
-/* 	width: 25%;
-	height: 1000px;
-	float: left;
-	border-radius: 20px;
-	background-color: rgb(140, 83, 148);
+    margin-bottom: 20px; 
+	background-color: lightpink;
 	text-align: center;
-	font-size: 1.2em; */
+	font-size: 1.2em;
 }
 
 /* aside ----------------------------------- */
@@ -38,6 +34,15 @@
 	border-radius: 30px;
 	background-color: lavender;
 } */
+
+
+/* .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  } */
 
 .aside_title_area {
 	width: 100%;

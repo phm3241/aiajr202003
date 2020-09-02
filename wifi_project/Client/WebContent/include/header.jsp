@@ -3,7 +3,7 @@
 
 <!-- header -->
 <div class="header">
-            
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>       
     <!-- 타이틀 영역 -->
     <div class="title_area">
        <h1 class="main_title">W 1 F 1</h1>

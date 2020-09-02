@@ -2,30 +2,43 @@
    pageEncoding="UTF-8"%>
 
 <!-- aside 공구현황 -->
-<div class="aside_area">
-    <div class="aside_title_area">
-       <div class="aside_myinfo">
-          <h4>홍*동</h4>
-          <h4>구매자 평점 ★★★★☆ (13점/3명)</h4>
-          <h4>판매자 평점 ★★★★☆ (13점/3명)</h4>
-       </div>
-       <div class="aside_tabs">
-           <div class="aside_tab"><input type="button" class="btn_myOderlist" value="구 매 현 황"><h4 id="alarm_b"></h4></div>
-           <div class="aside_tab"><input type="button" class="btn_myItemlist" value="판 매 현 황"><div id="alarm_s"></div></div>
-       </div>  
-    </div>
+<div id="aside_area">
+   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+   <div class="aside_title_area">
+      <div class="aside_myinfo">
+         <h4>홍*동</h4>
+         <h4>구매자 평점 ★★★★☆ (13점/3명)</h4>
+         <h4>판매자 평점 ★★★★☆ (13점/3명)</h4>
+      </div>
+   </div> 
+
+
+   <!-- 탭버튼 : 구매현황. 판매현황 -->
+   <div class="aside_tabs">
+      <div class="aside_tab"><button type="button" class="btn_myOderlist">구 매 현 황<h4 id="alarm_b"></h4></button></div>
+      <div class="aside_tab"><button type="button" class="btn_myItemlist">판 매 현 황<h4 id="alarm_s"></h4></button></div>
+   </div>
     
-
-    <div id="aside_myOderlist" class="aside_myOderlist">
+   
+    
+   <!-- 탭버튼 내용 영역-->
+   <div id="aside_mylist" class="aside_mylist">
        
-    </div>
 
-    <!-- 내 판매글 구매자 리스트 -->
-    <div id="aside_mylist_area" class="aside_mylist">
-       <div id="aside_mycard" class="aside_mylist">
-       
-       </div>  <!-- aside_mycard  end -->
-    </div>  <!-- aside_mylist_area  end -->
+      <!-- 내 구매현황 -->
+      <div id="aside_myOrderlist" class="aside_myOrderlist">
+
+      </div>  
+
+
+      <!-- 내 판매현황 -->
+      <div id="aside_myItemlist" class="aside_myItemlist">
+
+      </div>  
+
+
+
+   </div> <!-- aside_mylist end -->
 
 
 </div>

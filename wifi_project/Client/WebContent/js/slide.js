@@ -39,3 +39,16 @@ function myFunction() {
     navbar.classList.remove("sticky");
   }
 }
+
+
+
+/* aside 열리고 닫히고 : content 밀리면서 */
+// function openNav() {
+//   document.getElementById("aside_area").style.width = "250px";
+//   document.getElementById("main_content_area").style.marginLeft = "250px";
+// }
+
+// function closeNav() {
+//   document.getElementById("aside_area").style.width = "0";
+//   document.getElementById("main_content_area").style.marginLeft= "0";
+// }

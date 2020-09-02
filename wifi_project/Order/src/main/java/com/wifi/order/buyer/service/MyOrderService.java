@@ -1,6 +1,5 @@
 package com.wifi.order.buyer.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,18 +32,24 @@ public class MyOrderService {
 			
 			if(ostate == 0 && pstate == -1) {
 				list.get(i).setLabel("참여중");
+				continue;
 				
 			} else if(ostate == 1 && pstate == -1) {
 				list.get(i).setLabel("다음기회에...");
+				continue;
 				
 			} else if(ostate == 0 && pstate == 0) {
 				list.get(i).setLabel("구매자");
+				continue;
 				
 			} else if(ostate == 0 && pstate == 1) {
 				list.get(i).setLabel("구매완료");
+				continue;
 			}
 			
+			
 		}
+		
 		
 		return list;
 	}

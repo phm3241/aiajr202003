@@ -7,14 +7,25 @@ var login_midx = 1;
 
 /***** seller ********************************************************************************************/
 
+
+
+/* 내 구매현황 탭 클릭 */
+$('.btn_myItemlist').click(function(){
+    $('.aside_myOrderlist').css('display','none');
+    $('.aside_myItemlist').css('display','block');
+    myitem(login_midx);
+
+
+});
+
+
+
 /* 내 판매글 리스트보기  */
 /* midx 받아서 ㅡ> 판매글 목록(상태라벨, 제목) 화면출력 */
-function myitem(midx) {
-
-	
+function myitem(login_midx) {
 
 	$.ajax({
-		url: domain+'/items/myitem/'+midx,
+		url: domain+'/items/myitem/'+login_midx,
 		type: 'GET',
 		success: function(data){
 			
@@ -61,10 +72,10 @@ function myitem(midx) {
 				}	
 				
 
-				html += '<div class="aside_myitem idx'+data[i].iidx+'">';
+				html += '<div class="aside_mycard iidx'+data[i].iidx+'">';
 				html += '		<div class="aside_mystatewrap">';
 				html += '    	  <span class="btn_regItem '+stateColor+'">'+stateMsg+'</span>';
-				html += '    	  <span class="alarm a'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].seller+')">alarmtest</span>';
+				html += '    	  <span class="alarm sa'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].seller+')">alarmtest</span>';
 				if(state==0){
 				html += '  	  <span class="aside_">현재참여자 : '+currentBuyer+' / 구매정원 :'+data[i].count_m+'</span>';
 				}
@@ -78,7 +89,7 @@ function myitem(midx) {
 
 			}
 			
-			$('#aside_mycard').html(html);
+			$('#aside_myItemlist').html(html);
 			
 			
 		} // for end

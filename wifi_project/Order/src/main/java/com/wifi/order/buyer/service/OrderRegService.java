@@ -7,7 +7,7 @@ import com.wifi.order.dao.OrderDao;
 
 //공구 참여신청
 @Service
-public class RegOrderService {
+public class OrderRegService {
 
 	private OrderDao dao;
 	

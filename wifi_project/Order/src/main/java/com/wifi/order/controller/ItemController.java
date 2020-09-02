@@ -154,8 +154,8 @@ public class ItemController {
 //	내 공구 판매현황 관련----------------------------------
 	
 	// 내 판매글 
-	@GetMapping("/myitem/{midx}")
-	public List<MyItemlist> getMyItem(@PathVariable("midx") int midx){
+	@GetMapping("/myitem/{login_midx}")
+	public List<MyItemlist> getMyItem(@PathVariable("login_midx") int midx){
 		
 		System.out.println("내 판매글 리스트 controller");
 		return myItemService.getMyItem(midx);

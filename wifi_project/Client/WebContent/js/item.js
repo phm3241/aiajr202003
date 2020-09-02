@@ -6,7 +6,7 @@ var domain = "http://localhost:8080/order";
 
  $(document).ready(function(){
 	itemlist();
-	myitem(login_midx);
+	//myitem(login_midx);
 
  });
 
