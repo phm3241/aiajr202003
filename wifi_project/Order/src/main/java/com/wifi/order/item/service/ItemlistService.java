@@ -18,13 +18,26 @@ public class ItemlistService {
 	@Autowired
 	private SqlSessionTemplate template;
 
+
+	// 추천 공구 리스트 : 최신순 정렬
+	public List<Itemlist> getRecomItemlist() {
+
+		dao = template.getMapper(ItemDao.class);
+		System.out.println("추천 공구 리스트 최신순정렬  service");
+
+		return dao.getRecomItemlist();
+	};
 	
+	
+	// 일반 공구 리스트 : 최신순 정렬
 	public List<Itemlist> getItemlist() {
 
 		dao = template.getMapper(ItemDao.class);
-		System.out.println("공구 리스트 최신순정렬  service");
+		System.out.println("일반 공구 리스트 최신순정렬  service");
 
 		return dao.getItemlist();
-	};
+	}
+
+
 
 };

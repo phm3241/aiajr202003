@@ -27,18 +27,18 @@ function showSlides(n) {
 
 
 /* 스크롤 내리면 로고는 없어지고, 상단 navbar 고정 */
-window.onscroll = function() {myFunction()};
+// window.onscroll = function() {myFunction()};
 
-var navbar = document.getElementById("navbar");
-var sticky = navbar.offsetTop;
+// var navbar = document.getElementById("navbar");
+// var sticky = navbar.offsetTop;
 
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
-}
+// function myFunction() {
+//   if (window.pageYOffset >= sticky) {
+//     navbar.classList.add("sticky")
+//   } else {
+//     navbar.classList.remove("sticky");
+//   }
+// }
 
 
 

@@ -8,6 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+<!-- 데이터를 정렬/필터/색인할 수 있게 도와주는 오픈소스 Javascript Utility Library -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>  
+
+
 <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
 
 
@@ -52,8 +57,8 @@
 
 
          
-         <button type="button" class="btn_sort sort_reg"  onclick="itemlist()">최신순정렬</button>
-         <button type="button" class="btn_sort sort_rvs" onclick="itemlist_sort()">평점순정렬</button>
+         <button type="button" class="btn_sort sort_reg"  onclick="allItemlist()">최신순정렬</button>
+         <button type="button" class="btn_sort sort_rvs" onclick="allItemlist_sortRvs()">평점순정렬</button>
          
          <button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
          

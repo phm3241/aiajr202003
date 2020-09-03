@@ -93,12 +93,21 @@ public class ItemController {
 
 //	공구 리스트 관련---------------------------------- 
 	
-	// 공구 리스트 : 최신순 정렬
+	// 추천 공구 리스트 : 최신순 정렬
+	@GetMapping("/recomItem")
+	public List<Itemlist> getRecomItemlist(){
+		
+		return itemlistService.getRecomItemlist();
+	}
+	
+	
+	// 일반 공구 리스트 : 최신순 정렬
 	@GetMapping
 	public List<Itemlist> getItemlist(){
 		
 		return itemlistService.getItemlist();
 	}
+
 	
 	
 	// 공구 리스트 : 평점순 정렬

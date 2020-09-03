@@ -14,7 +14,10 @@ public interface ItemDao {
 	
 //	공구 리스트 관련----------------------------------
 	
-	// 공구 리스트 - 최신순 정렬 (기본정렬)
+	// 추천 공구 리스트 : 최신순 정렬 (기본정렬)
+	List<Itemlist> getRecomItemlist();
+	
+	// 일반 공구 리스트 : 최신순 정렬 (기본정렬)
 	List<Itemlist> getItemlist();
 	
 	// 공구 리스트 - 평점순 정렬
@@ -66,6 +69,8 @@ public interface ItemDao {
 	
 	// QR보기
 	String getQR(int iidx, int midx);
+
+	
 	
 
 

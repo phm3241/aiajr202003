@@ -71,7 +71,7 @@ function myOrder(login_midx){
                 
                 // 참여중, 다음기회에.. ㅡ> 참여취소(글삭제) 버튼 활성화
                 if(state ==0 || state ==1 ){
-                    html += '  	  <button type="button" class="btn_buyerAction '+btn_buyerAction+'" onclick="cancleOrder('+data[i].oidx+','+state+')">'+btn_buyerActionName+'</button>';
+                    html += '  	  <button type="button" class="btn_buyerAction cancleOrder" onclick="cancleOrder('+data[i].oidx+','+state+')">'+btn_buyerActionName+'</button>';
                 
                 // 구매자 ㅡ> QR보기 버튼 활성화
                 } else if(state==2){
