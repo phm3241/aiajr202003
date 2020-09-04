@@ -8,11 +8,72 @@ var domain = "http://localhost:8080/order";
 var login_midx = 1;
 var recomItems = [];    // 추천 공구 리스트 담아두는 배열
 var items = [];			// 일반 공구 리스트 담아두는 배열
+var sortRecomItems = []; 
+var sortItems = []; 
 
 
 
  $(document).ready(function(){
-	allItemlist()
+	allItemlist();
+
+	/* 검색기능 */
+	$("#myInput").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function() {
+		  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	  });
+
+
+
+	/* 나의 공구구매현황[구매자] - 평점등록  */
+    /* 별 표시  */
+    /* 1. Visualizing things on Hover - See next part for action on click */
+    $('#stars li').mouseover(function(){
+        var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+    
+        // Now highlight all the stars that's not after the current hovered star
+        $(this).parent().children('li.star').each(function(e){
+        if (e < onStar) {
+            $(this).addClass('hover');
+        }
+        else {
+            $(this).removeClass('hover');
+        }
+        });
+        
+    
+    }).mouseout(function(){
+        $(this).parent().children('li.star').each(function(e){
+            $(this).removeClass('hover');
+        });
+    });
+    
+
+
+    /* 나의 공구구매현황[구매자] - 평점등록  */
+    /* 별 표시 - 평점계산  */
+    /* 2. Action to perform on click */
+    $('#stars li').click(function(){
+
+        var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+        var stars = $(this).parent().children('li.star');
+
+        for (i = 0; i < stars.length; i++) {
+            $(stars[i]).removeClass('selected');
+        }
+
+        for (i = 0; i < onStar; i++) {
+            $(stars[i]).addClass('selected');
+        }
+
+        // JUST RESPONSE (Not needed)
+        var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+        alert('ratingValue : '+ratingValue);
+
+        $(this).parent().eq(2).data('value',ratingValue);
+
+    });
 
  });
 
@@ -34,6 +95,9 @@ function recomItemlist(){
 		url: domain+'/items/recomItem',
 		type: 'GET',
 		success: function(data){
+
+			// 배열 새로 비우고 담아야한다.. 안그러면 정렬하고 돌아오면 배열요소 추가로 담겨 평점정렬할 때 요소 2배로 나온다..
+			recomItems=[];
 			
 			// 추천 공구 리스트 ㅡ> 배열에 담기
 			for (i in data) {
@@ -43,8 +107,7 @@ function recomItemlist(){
 			// recomItems = JSON.stringify(data);
 			// alert('recomItems : '+recomItems);
 
-			// 출력되어있는 추천 공구리스트 지우고 ㅡ> 다시 출력
-			$('#itemlist_big_area').html('');
+			
 			itemlist_print(data);
 
 		} // success end
@@ -67,6 +130,9 @@ function itemlist(){
 		type: 'GET',
 		success: function(data){
 
+			// 배열 새로 비우고 담아야한다.. 안그러면 정렬하고 돌아오면 배열요소 추가로 담겨 평점정렬할 때 요소 2배로 나온다..
+			items=[]; 
+
 			// 일반 공구 리스트 ㅡ> 배열에 담기
 			for (i in data) {
 				items.push(data[i]);
@@ -74,9 +140,7 @@ function itemlist(){
 			
 			// items = JSON.stringify(data);
 			// alert('items : '+items);
-
-			// 출력되어있는 일반 공구리스트 지우고 ㅡ> 다시 출력
-			$('#itemlist_small_area').html('');
+			
 			itemlist_print(data);
 
 		} // success end
@@ -90,31 +154,40 @@ function itemlist(){
 /* 공구글 출력기능 */
 function itemlist_print(data){
 
-
-
-	var istate = data[0].istate; 
+	var check = data[0].istate; 
 
 	var html = '';
 	var cardType = '';
 	var selectDiv = '';
 
 
-	switch(istate){
+	switch(check){
 
 		// 일반공구글
 		case 0: 
 			cardType = 'item_card';
 			selectDiv = '#itemlist_small_area';
-			break;
-			
 
+			// 출력되어있는 일반 공구리스트 지우고 ㅡ> 다시 출력
+			$('#itemlist_small_area').html(' ');
+		break;
+			
+			
 		// 추천공구글
 		case 1:
 			cardType = 'item_card_big';
 			selectDiv = '#itemlist_big_area';
-			break;
+			
+			// 출력되어있는 추천 공구리스트 지우고 ㅡ> 다시 출력
+			$('#itemlist_big_area').html(' ');
+		break;
+
 	};
 
+
+	$('#itemlist_area').css('display','block');
+	$('#itemView').css('display','none');
+    $('#regItemForm_page').css('display','none');
 
 	for(var i=0; i<data.length; i++){
 		
@@ -152,6 +225,7 @@ function itemlist_print(data){
 		// 표시되는 위치
 		$(selectDiv).html(html);
 
+
 }; // itemlist_print(data) end
 
 
@@ -167,16 +241,9 @@ function allItemlist_sortRvs(){
 	$('.sort_rvs').css('background-color', 'teal');
 	$('.sort_reg').css('background-color', 'aquamarine');
 
-	// 출력되어있는 공구리스트 지우기
-	$('#itemlist_big_area').html('');
-	$('#itemlist_small_area').html('');
-
 	// 평점순 정렬기능 호출
 	sortRvs(recomItems);
 	sortRvs(items);
-
-	// 공구 리스트 다시 출력
-	itemlist_print(arr);
 
 };
 
@@ -185,12 +252,12 @@ function allItemlist_sortRvs(){
 /* 평점순 정렬기능 */
 function sortRvs(arr){
 
-	//alert('arr : '+arr);
-	//alert('arrType : '+typeof(arr));
-
 	arr.sort(function (a, b) { 
 		return b.rvs_avg - a.rvs_avg;  
 	});
+
+	// 공구 리스트 다시 출력
+	itemlist_print(arr);
 	
 };
 
@@ -202,9 +269,12 @@ function sortRvs(arr){
 
 /* 공구등록 폼  */
 function regItemForm(){
-   //$("#regItemForm_page").css("display","block");
-   $("#regItemForm").hide();
-   $("#regItemForm").toggle();
+	
+	$('#itemlist_area').css('display','none');
+	$('#itemView').css('display','none');
+    $('#regItemForm_page').css('display','block');
+    //$("#regItemForm").hide();
+    //$("#regItemForm").toggle();
    
 };
 
@@ -251,13 +321,13 @@ function regSubmit(){
 			itemView(iidx);
 			
 			// $('#itemView').html(html);
-			itemlist();
+			// allItemlist();
 
 		},
 
 		Error: function(error){
 			alert('공구등록 실패');
-			itemlist();
+			allItemlist();
 		}
 		
 	});
@@ -270,10 +340,16 @@ function regSubmit(){
 /* 공구글 상세보기 */
 function itemView(iidx, login_midx) {
 
+
+
 	$.ajax({
 		url: domain+'/items/'+iidx,
 		type: 'GET',
 		success: function(data){
+
+			$('#itemlist_area').css('display','none');
+			$('#regItemForm_page').css('display','none');
+			$('#itemView').css('display','block');
 			
 			var html = '';
 				
@@ -331,7 +407,7 @@ function delItem(iidx){
 			success: function(data){
 				alert('공구삭제 성공');
 				alert(data);
-				itemlist();
+				allItemlist();
 				myitem(midx);
 				
 			}

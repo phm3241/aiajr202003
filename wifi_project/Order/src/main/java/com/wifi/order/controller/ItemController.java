@@ -193,25 +193,23 @@ public class ItemController {
 	@PostMapping("/mybuyer/{iidx}")
 	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
 	//public int selectBuyer(@RequestParam(value="iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
-	//public int selectBuyer(@RequestParam(value="iidx") int iidx) {
+	public int selectBuyer(@RequestParam(value="iidx") int iidx, HttpServletRequest request) {
 	//public int selectBuyer(@RequestBody ArrayList<Integer> buyerArr, @PathVariable("iidx") int iidx ) {
-	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") Integer[] buyerArr) {
-		public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") List<String> buyerArr) {
-		
-		//String[] buyer = request.getParameterValues("buyer");
+	// public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") List<String> buyerArr) {
+	
+		String[] buyerArr = request.getParameterValues("buyers");
 
 		//String[] buyer = request.getParameterValues("buyer[]");
-		
-		//@RequestParam("iidx") int iidx, @RequestParam("mybuyer[]")  buyer 
+	
 		System.out.println("참여자 구매자로 선정 controller");
 		System.out.println("iidx 확인 :" +iidx);
 		System.out.println("buyer 배열확인 : " + buyerArr.toString());
-//		for(int i=0; i<buyerArr.length; i++) {
-//			System.out.println(buyerArr[i]);
-//		}
-		for(int i=0; i<buyerArr.size(); i++) {
-			System.out.println(buyerArr.get(i));
+		for(int i=0; i<buyerArr.length; i++) {
+			System.out.println(buyerArr[i]);
 		}
+//		for(int i=0; i<buyerArr.size(); i++) {
+//			System.out.println(buyerArr.get(i));
+//		}
 		
 		return 0; 
 		//return selectBuyerService.selectBuyer(iidx, buyer); 

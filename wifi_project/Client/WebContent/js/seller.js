@@ -3,6 +3,8 @@
 var domain = "http://localhost:8080/order";
 
 var login_midx = 1;
+var currentBuyer ='';
+var buyerArr = [];
 
 
 /***** seller ********************************************************************************************/
@@ -19,6 +21,22 @@ $('.btn_myItemlist').click(function(){
 });
 
 
+/* ing 나의 공구판매현황[모집중] -현재 참여자수 */
+function cntBuyer(iidx){
+
+	$.ajax({
+		url : domain+'/items/mybuyerCnt/'+iidx,
+		type : 'GET',
+		success : function(data){
+			alert(typeof(data));
+			alert(iidx+'번 글의 현재 참여자수 : '+data);
+
+		}
+
+
+	})
+};
+
 
 /* 내 판매글 리스트보기  */
 /* midx 받아서 ㅡ> 판매글 목록(상태라벨, 제목) 화면출력 */
@@ -34,7 +52,6 @@ function myitem(login_midx) {
 				var state= '';
 				var stateMsg= '';
 				var stateColor= '';
-				var currentBuyer='';
 				
 
 				// item이 숨김처리 되있을 때, 출력안함
@@ -47,7 +64,8 @@ function myitem(login_midx) {
 					state = 0;
 					stateMsg = '모집중';
 					stateColor = 'aside_mystate join_ing';
-					currentBuyer = cntBuyer(data[i].iidx);
+					//currentBuyer = cntBuyer(data[i].iidx);
+					//alert('currentBuyer :' +currentBuyer);
 
 
 				// 상태라벨 - 모집완료 : 기간중이고, 결제정보가 있으면 (구매자선정 후)
@@ -77,7 +95,7 @@ function myitem(login_midx) {
 				html += '    	  <span class="btn_regItem '+stateColor+'">'+stateMsg+'</span>';
 				html += '    	  <span class="alarm sa'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].seller+')">alarmtest</span>';
 				if(state==0){
-				html += '  	  <span class="aside_">현재참여자 : '+currentBuyer+' / 구매정원 :'+data[i].count_m+'</span>';
+				html += '  	  <span class="aside_">현재참여자 : '+cntBuyer(data[i].iidx)+' / 구매정원 :'+data[i].count_m+'</span>';
 				}
 				html += '  	</div>';
 				html += '  	  <button type="button" class="aside_item_title" onclick="itemView('+data[i].iidx+')">'+data[i].iidx+'. '+data[i].title+'</button> <br>';
@@ -241,21 +259,6 @@ function mybuyer_toggle(iidx){
 }
 
 
-/* ing 나의 공구판매현황[모집중] -현재 참여자수 */
-function cntBuyer(iidx){
-
-	$.ajax({
-		url : domain+'/items/mybuyerCnt/'+iidx,
-		type : 'GET',
-		success : function(data){
-			alert(iidx+'번 글의 현재 참여자수 : '+data);
-			//currentBuyer = data;
-
-		}
-
-
-	})
-};
 
 
 
@@ -279,8 +282,6 @@ function selectBuyer(iidx, buyer){
 /* ing 나의 공구판매현황[모집중] - 참여자 구매자 선정 ㅡ> 확정 확인 */
 function selectBuyer_ok(iidx, count_m){
 
-	var buyerArr = [];
-
 	alert('체크된 갯수 : '+$('input:checkbox[name="select_buyer"]:checked').length);
 
 	//체크된 개수 >  구매정원 : 다시 선택
@@ -302,6 +303,10 @@ function selectBuyer_ok(iidx, count_m){
 
 		
 		alert('배열에 담긴 체크된 구매자 확인 : '+ buyerArr);
+		alert(typeof(buyerArr));
+		var buyers = [];
+		buyers.push(buyerArr);
+		alert(buyers);
 
 
 	};
@@ -316,11 +321,10 @@ function selectBuyer_ok(iidx, count_m){
 		type : 'POST',
 		traditional : true,
 		//data : JSON.stringify(buyerData),
-		data : { 'buyerArr' : buyerArr },
-		dataType: 'json',
+		data : { 'buyers' : buyers },
+		//data : JSON.parse(buyerArr),
+		//data : buyerArr,
 		contentType: "application/json",
-		//processData: false, // File 전송시 필수
-		//contentType: false, // multipart/form-data
 		success : function(data){
 			alert('선정한 구매자 등록 : ' + data);
 
@@ -358,7 +362,7 @@ function rejectBuyer(iidx, buyer){
 }
 
 
-/* 나의 공구판매현황[모집완료] - 구매자 QR발급 */
+/* ing 나의 공구판매현황[모집완료] - 구매자 QR발급 */
 function insertQR(iidx, buyer){
 }
 	
@@ -418,7 +422,7 @@ function itemHide(iidx){
 		type : 'PUT',
 		success : function(data){
 			myitem(midx);
-			itemlist();
+			allItemlist();
 
 		}
 

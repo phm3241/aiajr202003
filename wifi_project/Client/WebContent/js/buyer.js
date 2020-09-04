@@ -16,6 +16,10 @@ $('.btn_myOderlist').click(function(){
     myOrder(login_midx);
 
 
+
+ 
+
+
 });
 
 
@@ -79,10 +83,19 @@ function myOrder(login_midx){
                 
                 // 구매완료 ㅡ> 평점등록 버튼 활성화
                 } else if(state==3){
-                    html += '  	  <button type="button" class="btn_buyerAction reviewSeller" onclick="reviewForm_toggle()">평점등록</button>';
-                    html += '         <form class="reviewForm" onsubmit="return false;">';
-					html += '           <input class="score_s_'+data[i].seller+'" type="number">';
-					html += '           <input class="insert_rvs_'+data[i].seller+'" type="submit" value="평점 등록" onclick="reviewSeller('+data[i].iidx+','+data[i].seller+')" >';
+                    html += '  	  <button type="button" class="btn_buyerAction reviewSeller" onclick="reviewForm_toggle('+data[i].iidx+')">평점등록</button>';
+                    html += '         <form class="reviewForm_'+data[i].iidx+'" onsubmit="return false;">';
+                    //html += '           <input class="score_s_'+data[i].seller+'" type="number">';
+                    html += '           <div class="rating-stars text-center">';
+                    html += '               <ul id="stars" class="score_s_'+data[i].seller+'">';
+                    html += '                   <li class="star" data-value="1"><i class="fa fa-star fa-fw"></i></li>';
+                    html += '                   <li class="star" data-value="2"><i class="fa fa-star fa-fw"></i></li>';
+                    html += '                   <li class="star" data-value="3"><i class="fa fa-star fa-fw"></i></li>';
+                    html += '                   <li class="star" data-value="4"><i class="fa fa-star fa-fw"></i></li>';
+                    html += '                   <li class="star" data-value="5"><i class="fa fa-star fa-fw"></i></li>';
+                    html += '               </ul>';
+                    html += '           </div>';
+					html += '           <input class="insert_rvs_'+data[i].seller+'" type="submit" value="평점 등록" onclick="reviewSeller('+data[i].iidx+','+data[i].seller+','+$(".rating-stars").val()+')" >';
 					html += '         </form>';
 					html += '     <button type="button" class="btn_buyerAction hideOrder" onclick="hideOrder('+data[i].oidx+')">글숨김</button>';
 					html += '     <button type="button" class="btn_buyerAction delOrder" onclick="delOrder('+data[i].oidx+','+data[i].pidx+')">글삭제</button>';
@@ -90,8 +103,7 @@ function myOrder(login_midx){
                 }
 
                 html += '</div>';
-                
-                
+
 			} // for end
             
             
@@ -107,8 +119,8 @@ function myOrder(login_midx){
 };
 
 /* 평점등록 폼 토글 */
-function reviewForm_toggle(){
-    $(".reviewForm").toggle();
+function reviewForm_toggle(iidx){
+    $(".reviewForm_"+iidx).toggle();
 }
 
 
@@ -193,13 +205,16 @@ function cancleOrder(oidx, state){
 
 
 
-/* 나의 공구구매현황[구매자] - 평점등록 */
-function reviewSeller(iidx, seller){
+
+
+
+
+function reviewSeller(iidx, seller, score_s){
     
     if(confirm('평점등록 후 수정이 불가합니다. 등록하시겠습니까?')){
 
-		var score_s = $(".score_s_"+seller).val();
-		alert("score_s : "+score_s);
+		//var score_s = $(".score_s_"+seller).val();
+		//alert("score_s : "+score_s);
 
 		var regRvFormData = new FormData();
 		regRvFormData.append('score_s',score_s);
@@ -277,6 +292,7 @@ function delOrder(oidx, pidx){
 		});
 	};	
 };
+
 
 
 
