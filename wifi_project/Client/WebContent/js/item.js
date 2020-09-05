@@ -165,6 +165,7 @@ function itemlist_print(data){
 
 		// 일반공구글
 		case 0: 
+			swiperType = 'swiper-none';
 			cardType = 'item_card';
 			selectDiv = '#itemlist_small_area';
 
@@ -175,11 +176,15 @@ function itemlist_print(data){
 			
 		// 추천공구글
 		case 1:
+			swiperType = 'swiper-slide';
 			cardType = 'item_card_big';
-			selectDiv = '#itemlist_big_area';
+			selectDiv = '.swiper-wrapper';
+			//selectDiv = '#itemlist_big_area';
+			
 			
 			// 출력되어있는 추천 공구리스트 지우고 ㅡ> 다시 출력
-			$('#itemlist_big_area').html(' ');
+			//$('#itemlist_big_area').html(' ');
+			$('.swiper-wrapper').html(' ');
 		break;
 
 	};
@@ -204,21 +209,23 @@ function itemlist_print(data){
 		//}
 
 
-		html += '<button class="'+cardType+'" onclick="itemView('+data[i].iidx+','+login_midx+')">';
-		//html += '	<input type="hidden" value="'+data[i].iidx+'">';
-		html += '	<img class="item_img" src="/order/upload/'+data[i].photo+'">';
-		html += '	<div class="item_info">';
-		html += '		<div>istate : '+data[i].istate+'</div>';
-		html += '		<div>pstate : '+data[i].pstate+'</div>';
-		html += '		<h3 class="item_title">'+data[i].iidx+': '+data[i].title+'</h3>';
-		html += '			<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
-		html += '			<span class="seller_rating">판매자 평균평점'+data[i].rvs_avg+'<span></span></span><br>';
-		html += '			<span class="seller_rating">판매자 총평점개수'+data[i].rvs_totalRow+'<span></span></span><br>';
-		html += '			<span class="seller_rating">조회수'+data[i].view_count+'<span></span></span><br>';
-		html += '			<span class="item_price">가격 : '+data[i].price+'</span> ';
-		html += '			<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
-		html += '	</div>';
-		html += '</button>';
+		html += '<div class="'+swiperType+'">';
+		html += '	<button class="'+cardType+'" onclick="itemView('+data[i].iidx+','+login_midx+')">';
+		//html += '		<input type="hidden" value="'+data[i].iidx+'">';
+		html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
+		html += '		<div class="item_info">';
+		html += '			<div>istate : '+data[i].istate+'</div>';
+		html += '			<div>pstate : '+data[i].pstate+'</div>';
+		html += '			<h3 class="item_title">'+data[i].iidx+': '+data[i].title+'</h3>';
+		html += '				<span class="seller_name">판매자 : '+data[i].midx+'</span><br>';
+		html += '				<span class="seller_rating">판매자 평균평점'+data[i].rvs_avg+'<span></span></span><br>';
+		html += '				<span class="seller_rating">판매자 총평점개수'+data[i].rvs_totalRow+'<span></span></span><br>';
+		html += '				<span class="seller_rating">조회수'+data[i].view_count+'<span></span></span><br>';
+		html += '				<span class="item_price">가격 : '+data[i].price+'</span> ';
+		html += '				<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
+		html += '		</div>';
+		html += '	</button>';
+		html += '</div>';
 
 	} // for end
 

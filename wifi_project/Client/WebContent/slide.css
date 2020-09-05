@@ -1,41 +1,30 @@
  
 
 /* 슬라이드 */
-.main {
-  font-family:Arial;
-  width:500px;
-  display:block;
-  margin:0 auto;
-}
-h3 {
-    background: #fff;
-    color: #3498db;
-    font-size: 36px;
-    line-height: 100px;
-    margin: 10px;
-    padding: 2%;
-    position: relative;
-    text-align: center;
-}
-.action{
-  display:block;
-  margin:100px auto;
-  width:100%;
-  text-align:center;
-}
-.action a {
-  display:inline-block;
-  padding:5px 10px; 
-  background:#f30;
-  color:#fff;
-  text-decoration:none;
-}
-.action a:hover{
-  background:#000;
+.swiper-container {
+  width: 100%;
+  height: 100%;
 }
 
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
 
-
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
 
 
 

@@ -5,22 +5,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> <!-- 날짜포멧 -->
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>   <!-- 데이터를 정렬/필터/색인할 수 있게 도와주는 오픈소스 Javascript Utility Library -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  <!-- 평점등록 시 별 마우스오버 계속 반응  -->
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> <!-- 평점등록 시 별모양 나타내는  -->
 <link rel="stylesheet" href="aside.css" type="text/css">
 <link rel="stylesheet" href="buy.css" type="text/css">
 <link rel="stylesheet" href="slide.css" type="text/css">
+<link rel="stylesheet" href="css/swiper.css" type="text/css">
+<link rel="stylesheet" href="css/swiper.min.css" type="text/css">
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> <!-- 평점등록 시 별모양 나타내는  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  <!-- 평점등록 시 별 마우스오버 계속 반응  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> <!-- 날짜포멧 -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>   <!-- 데이터를 정렬/필터/색인할 수 있게 도와주는 오픈소스 Javascript Utility Library -->
+
+<script src="js/swiper.min.js"></script>
+<link rel="stylesheet" href="package/swiper-bundle.min.css">   
+
+
+
+
+
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -30,11 +38,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 
+<!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
 
-<script text="text/javascript" src="js/item.js"></script>
-<script text="text/javascript" src="js/seller.js"></script>
-<script text="text/javascript" src="js/buyer.js"></script>
-<script text="text/javascript" src="js/slide.js"></script>
+
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script> -->
+<!-- <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
+
+
+
+
 
 
 <style>
@@ -79,15 +95,29 @@
          <button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
          
           
-         <!-- 추천공구 리스트  영역   -->
-          <!-- 슬라이드 테스트  -->
 
 
 
-
-
-
-
+         <!-- Swiper -->
+         <!-- <div class="swiper-container">
+            <div class="swiper-wrapper">
+               <div class="swiper-slide">Slide 1</div>
+               <div class="swiper-slide">Slide 2</div>
+               <div class="swiper-slide">Slide 3</div>
+               <div class="swiper-slide">Slide 4</div>
+               <div class="swiper-slide">Slide 5</div>
+               <div class="swiper-slide">Slide 6</div>
+               <div class="swiper-slide">Slide 7</div>
+               <div class="swiper-slide">Slide 8</div>
+               <div class="swiper-slide">Slide 9</div>
+               <div class="swiper-slide">Slide 10</div>
+            </div> -->
+            <!-- Add Pagination -->
+            <!-- <div class="swiper-pagination"></div> -->
+            <!-- Add Arrows -->
+            <!-- <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+         </div> -->
 
 
 
@@ -99,25 +129,32 @@
          <div id="itemView" class="itemView">
          </div> 
          	
-         
-         
- 
 
-
-                  
-         
          
          
          <!-- 공구 리스트 영역 -->
          <div id="itemlist_area">
 
+            <!-- 추천공구 리스트  영역  : 슬라이드  -->
+            <!-- Swiper -->
+            <div class="swiper-container">
+               <div class="swiper-wrapper">
+
+               </div>
+               <!-- 페이징 -->
+               <div class="swiper-pagination"></div>
+               <!-- 네비게이션 -->
+               <div class="swiper-button-next"></div>
+               <div class="swiper-button-prev"></div>
+            </div>
+
             <!-- itemlist 공구 추천글 리스트 -->
-            <div id="itemlist_big_area">
-            </div>  <!-- itemlist_big_area   end-->
+            <!-- <div id="itemlist_big_area">
+            </div> -->  
             
             <!-- itemlist 공구 일반글 리스트 -->
             <div id="itemlist_small_area">
-            </div>  <!-- itemlist_small_area   end -->
+            </div>  
             
          </div>  <!-- itemlist_area  end -->
       
@@ -128,11 +165,56 @@
 
 
 
+
+
       
 
    </div>
    <!-- container end -->
+
+
+
+
+     <!-- Swiper JS -->
+  <script src="package/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      slidesPerGroup: 3,
+      loop: true,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+
+   <!-- Swiper JS -->
+  <!-- <script text="text/javascript" src="package/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
+ -->
+ 
+
+
+
+
+ <script text="text/javascript" src="js/item.js"></script>
+ <script text="text/javascript" src="js/seller.js"></script>
+ <script text="text/javascript" src="js/buyer.js"></script>
+ <script text="text/javascript" src="js/slide.js"></script>
+ <script src="js/swiper.js"></script>   
+
+
    
+</body>  
 
 
 </html>
