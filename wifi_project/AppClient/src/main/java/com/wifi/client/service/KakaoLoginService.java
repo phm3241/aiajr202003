@@ -39,11 +39,13 @@ public class KakaoLoginService {
 	            StringBuilder sb = new StringBuilder();
 	            sb.append("grant_type=authorization_code");
 	            sb.append("&client_id=f5e0701c39876968f090e686afa45c4a");
-	            sb.append("&redirect_uri=http://localhost:8001/login");
+	            sb.append("&redirect_uri=http://localhost:8081/login");
 	            sb.append("&code=" + authorize_code);
 	            bw.write(sb.toString());
 	            bw.flush();
 	            
+	            System.out.println("sb.toString() : " + sb.toString());
+
 	            //    결과 코드가 200이라면 성공
 	            int responseCode = conn.getResponseCode();
 	            System.out.println("responseCode : " + responseCode);
@@ -104,7 +106,7 @@ public class KakaoLoginService {
 	        while ((line = br.readLine()) != null) {
 	            result += line;
 	        }
-	        System.out.println("response body : " + result);
+	        System.out.println("response body result : " + result);
 	        
 	        JsonParser parser = new JsonParser();
 	        JsonElement element = parser.parse(result);
@@ -115,8 +117,9 @@ public class KakaoLoginService {
 	        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 	        String email = kakao_account.getAsJsonObject().get("email").getAsString();
 	        
-	        userInfo.put("nickname", nickname);
-	        userInfo.put("email", email);
+	        userInfo.put("id", email);
+	        userInfo.put("name", nickname);
+	        userInfo.put("access_Token", access_Token);
 	        
 	    } catch (IOException e) {
 	        e.printStackTrace();
@@ -148,7 +151,6 @@ public class KakaoLoginService {
 	        }
 	        System.out.println(result);
 	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
 	}
