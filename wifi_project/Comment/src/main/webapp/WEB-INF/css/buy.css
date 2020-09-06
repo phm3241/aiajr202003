@@ -1,0 +1,289 @@
+@charset "UTF-8";
+
+
+
+/* nav ----------------------------------- */
+
+
+/* 링크 표시 */
+/* #nav>a:link {
+	color: white;
+	text-decoration: none;
+} */
+
+/* 방문한 링크 */
+/* #nav>a:visited {
+	color: pink;
+} */
+
+/* 마우스가 올라갔을때 */
+/* #nav>a:hover {
+	color: red;
+	background-color: yellow;
+} */
+
+
+
+
+
+
+/* main_content -------------------------- */
+#main_content_area {
+	width: 75%;
+	/* height: 1000px; */
+	float: right;
+	/* margin-top: 20px;
+    margin-left: 20px; */
+	margin-bottom: 20px;
+	/* background-color: ghostwhite; */
+}
+
+.title_area {
+	width: 100%;
+	height: 160px;
+	float: left;
+	/* background-color:teal; */
+	text-align: center;
+	/* padding-top: 20px; */
+	line-height: 160px;
+}
+
+.main_title {
+	font-weight: bold;
+	font-size: 2em;
+	display: inline;
+}
+
+.sub_title {
+	font-weight: lighter;
+	display: inline;
+	margin-left: 30px;
+}
+
+
+/* 검색아이콘. 기능 */
+.search {
+	width: 130px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: white;
+	background-image: url('searchicon.png');
+	background-position: 10px 10px; 
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 40px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+  }
+  
+  .search:focus {
+	width: 250px;
+  }
+
+
+
+/* 버튼 : 검색. 글등록버튼 -------------------------- */
+.btn_regItem {
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: lightgoldenrodyellow;
+	border: none;
+	cursor: pointer;
+	display: block;
+}
+
+.regItemForm>input, .regItemForm>select  {
+	display: block;
+}
+
+
+/* 버튼 : 카테고리검색  */
+.btn_search_category {
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: lightgoldenrodyellow;
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+}
+
+/* 버튼 : 카테고리검색  */
+.btn_sort {
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: aquamarine;
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#itemlist_area {
+	width: 100%;
+	height: 900px;
+	/* background-color: cornflowerblue;  */
+}
+
+#itemlist_big_area, #itemlist_small_area {
+	text-align: center;
+}
+
+/* #itemlist_big_area{
+	width: 100%;
+	height: 400px;
+	background-color: blue;
+}
+
+#itemlist_small_area{
+	width: 100%;
+	height: 400px;
+	background-color: antiquewhite;
+} */
+
+.item_card_big {
+	width: 400px;
+	height: 430px;
+	margin: 10px;
+	margin-bottom: 30px;
+	border: 1px solid #dddddd;
+	border-radius: 10px;
+	background-color: white;
+	/* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1); */
+	display: inline-block;
+}
+
+.item_card {
+	width: 240px;
+	height: 330px;
+	margin: 5px;
+	border: 1px solid #dddddd;
+	border-radius: 10px;
+	display: inline-block;
+	background-color: white;
+}
+
+.item_card_big:hover {
+	margin: 5px;
+	border-radius: 10px;
+	box-shadow: 7px 7px 15px rgba(55, 84, 170, 0.15), -7px -7px 20px
+		rgba(255, 255, 255, 1), inset 0px 0px 4px rgba(255, 255, 255, 0.2),
+		inset 7px 7px 15px rgba(55, 84, 170, 0), inset -7px -7px 20px
+		rgba(255, 255, 255, 0), 0px 0px 4px rgba(255, 255, 255, 0);
+	transition: all 0.3s;
+}
+
+.item_card:hover {
+	margin: 5px;
+	border-radius: 10px;
+	box-shadow: 7px 7px 15px rgba(55, 84, 170, 0.15), -7px -7px 20px
+		rgba(255, 255, 255, 1), inset 0px 0px 4px rgba(255, 255, 255, 0.2),
+		inset 7px 7px 15px rgba(55, 84, 170, 0), inset -7px -7px 20px
+		rgba(255, 255, 255, 0), 0px 0px 4px rgba(255, 255, 255, 0);
+	transition: all 0.3s;
+}
+
+.item_img_big {
+	width: 400px;
+	height: 300px;
+	border-radius: 10px;
+}
+
+.item_img {
+	width: 240px;
+	height: 180px;
+	border-radius: 10px;
+}
+
+.item_info {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.item_info_div {
+	width: 250px;
+	float: left;
+	display: inline;
+	text-align: left;
+	/* vertical-align: middle; */
+}
+
+/* 링크 표시 */
+.item_info a:link {
+	color: black;
+	text-decoration: none;
+}
+
+/* 방문한 링크 */
+.item_info a:visited {
+	color: black;
+}
+
+/* 마우스가 올라갔을때 */
+.item_info a:hover {
+	color: white;
+	background-color: rgb(140, 83, 148);
+}
+
+.item_Waiting_button {
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: lightgoldenrodyellow;
+	border: none;
+	cursor: pointer;
+	display: inline;
+	float: right;
+}
+
+
+/* ????  */
+@media ( max-width : 360px ) {
+	#container {
+		width: 360px;
+	}
+	/* nav ----------------------------------- */
+	#nav {
+		width: 20%;
+		height: 1000px;
+		float: left;
+		border-radius: 20px;
+		/* background-color: rgb(255, 215, 83); */
+		/* background-color: rgb(84, 223, 107); */
+		background-color: rgb(140, 83, 148);
+	}
+
+	/* main_content -------------------------- */
+	#main_content_area {
+		width: 80%;
+		height: 1000px;
+		float: left;
+		/* margin-top: 20px;
+    margin-left: 20px; */
+		margin-bottom: 20px;
+		background-color: ghostwhite;
+	}
+	.title_area {
+		width: 100%;
+		height: 100px;
+		float: left;
+		/* background-color:teal; */
+	}
+	.aside_area {
+		display: none;
+	}
+
+}

@@ -28,11 +28,11 @@ public class MemberCheckService {
 		int result = dao.checkMember(checkId);
 		
 		if(result==1) {
-			Member member = dao.getMember(checkId);
-			session.setAttribute("loginInfo", member);
-			session.setAttribute("loginMidx", member.getMidx());
-			System.out.println("회원. 세션저장값 확인 loginInfo : "+session.getAttribute("loginInfo"));
-			System.out.println("회원. 세션저장값 확인 loginMidx : "+session.getAttribute("loginMidx"));
+//			Member member = dao.getMember(checkId);
+//			session.setAttribute("loginInfo", member);
+//			session.setAttribute("loginMidx", member.getMidx());
+//			System.out.println("회원. 세션저장값 확인 loginInfo : "+session.getAttribute("loginInfo"));
+//			System.out.println("회원. 세션저장값 확인 loginMidx : "+session.getAttribute("loginMidx"));
 			view = "main";
 			
 		} else {

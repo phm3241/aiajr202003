@@ -19,7 +19,7 @@
 	
 	<script>
 	
-		var domain = "http://localhost:8081/";
+		var domain = "http://localhost:8081";
 		
 		
 		function regMemberSubmit(){
@@ -42,7 +42,7 @@
 					if(data ==1){
 						alert("회원가입 완료");
 						//location.href = "http://localhost8081/main";
-						location.href = "main.jsp";
+						location.href = "WEB-INF/views/main.jsp";
 						
 					} else {
 						alert("회원가입 실패");

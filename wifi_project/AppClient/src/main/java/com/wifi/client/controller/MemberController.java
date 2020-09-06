@@ -2,6 +2,7 @@ package com.wifi.client.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class MemberController {
 	
 	/* 회원여부 체크 */
 	@Autowired
-	MemberCheckService memberCheckService;
+	MemberCheckService checkMemberService;
 	
 	/* 회원가입 */
 	@Autowired
@@ -44,9 +45,10 @@ public class MemberController {
 	
 	/* 로그인 - 로그인하고 코드 받기 ㅡ> 코드로 엑세스토큰 받기 ㅡ> 액세스토큰으로 사용자정보받기 ㅡ> 사용자정보 세션에 저장 ㅡ> 로그인 완료처리 */
     @RequestMapping("/login")
-	public void login(@RequestParam("code") String code, HttpSession session) {
+	public String login(@RequestParam("code") String code, HttpSession session) {
     	
-    	// 
+    	String view ="index";
+    	
 	    String access_Token = kakao.getAccessToken(code);
 	    System.out.println("controller access_token : " + access_Token);
 	    
@@ -57,10 +59,12 @@ public class MemberController {
 	    if (userInfo.get("id") != null) {
 	    	
 	    	String checkId = (String) userInfo.get("id");
-
 	        session.setAttribute("userInfo", userInfo);
-	        memberCheck(checkId);
+	        view = memberCheck(checkId);
+	        
 	    } 
+	    
+	    return view;
 	    
 	}
     
@@ -86,10 +90,11 @@ public class MemberController {
 	@RequestMapping("/loginCheck")
 	private String memberCheck(String checkId) {
 		
-		System.out.println("memberCheck controller");
+		System.out.println("MemberCheck controller");
 		System.out.println("checkId : "+checkId);
-		
-		return memberCheckService.checkMember(checkId);
+
+		// 회원여부 체크 ㅡ> 회원이면 main으로, 회원이 아니면 regMemberForm으로
+		return checkMemberService.checkMember(checkId);
 		
 	}
 	
@@ -97,12 +102,12 @@ public class MemberController {
 	/* 회원가입 */
 	@RequestMapping("/members")
 	@ResponseBody
-	private int regMember(Member memberReq) {
+	private int regMember(HttpServletRequest req, Member memberReq) {
 		
 		System.out.println("regMember controller");
 		System.out.println("매개변수 확인 memberReq : "+memberReq.toString());
 		
-		return regService.regMember(memberReq);
+		return regService.regMember(req, memberReq);
 		
 	}
     

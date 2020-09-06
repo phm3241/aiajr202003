@@ -34,7 +34,7 @@ public class Member {
 	}
 
 
-
+	
 	public int getMidx() {
 		return midx;
 	}
@@ -113,7 +113,7 @@ public class Member {
 				+ ", type=" + type + "]";
 	}
 
-	
+
 	
 	
 	

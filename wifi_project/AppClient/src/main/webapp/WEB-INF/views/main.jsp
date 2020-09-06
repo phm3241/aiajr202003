@@ -8,11 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 
-<link rel="stylesheet" href="aside.css" type="text/css">
-<link rel="stylesheet" href="buy.css" type="text/css">
-<link rel="stylesheet" href="slide.css" type="text/css">
-<link rel="stylesheet" href="css/swiper.css" type="text/css">
-<link rel="stylesheet" href="css/swiper.min.css" type="text/css">
+<link rel="stylesheet" href="../css/aside.css" type="text/css">
+<link rel="stylesheet" href="../css/buy.css" type="text/css">
+<link rel="stylesheet" href="../css/slide.css" type="text/css">
+<link rel="stylesheet" href="../css/swiper.css" type="text/css">
+<link rel="stylesheet" href="../css/swiper.min.css" type="text/css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> <!-- 평점등록 시 별모양 나타내는  -->
@@ -66,7 +66,7 @@
    <div id="container">
 
       <!-- aside 공구현황 -->
-      <%@include file="/include/aside.jsp"%>
+      <%@include file="../include/aside.jsp"%>
 
 
       <!-- <div id="nav">
@@ -84,7 +84,7 @@
       <div id="main_content_area">
 
          <!-- header : 타이틀. 검색기능 -->
-         <%@include file="/include/header.jsp"%>
+         <%@include file="../include/header.jsp"%>
 
          
          
@@ -122,7 +122,7 @@
 
 
          <!-- 공구 등록 폼 -->
-         <%@include file="/include/regItemForm.jsp"%>
+         <%@include file="../include/regItemForm.jsp"%>
          
          
          <!-- itemView 공구글 상세보기 영역 -->
@@ -176,7 +176,7 @@
 
 
      <!-- Swiper JS -->
-  <script src="package/swiper-bundle.min.js"></script>
+  <script src="../package/swiper-bundle.min.js"></script>
 
   <!-- Initialize Swiper -->
   <script>
@@ -206,11 +206,11 @@
 
 
 
- <script text="text/javascript" src="js/item.js"></script>
- <script text="text/javascript" src="js/seller.js"></script>
- <script text="text/javascript" src="js/buyer.js"></script>
- <script text="text/javascript" src="js/slide.js"></script>
- <script src="js/swiper.js"></script>   
+ <script text="text/javascript" src="../js/item.js"></script>
+ <script text="text/javascript" src="../js/seller.js"></script>
+ <script text="text/javascript" src="../js/buyer.js"></script>
+ <script text="text/javascript" src="../js/slide.js"></script>
+ <script src="../js/swiper.js"></script>   
 
 
    
