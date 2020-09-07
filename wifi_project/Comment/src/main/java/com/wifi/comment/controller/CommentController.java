@@ -1,11 +1,7 @@
 package com.wifi.comment.controller;
 
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,13 +9,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.wifi.comment.model.Comment;
 import com.wifi.comment.service.CommentDelService;
 import com.wifi.comment.service.CommentEditService;
 import com.wifi.comment.service.CommentListService;
 import com.wifi.comment.service.CommentRegService;
-import com.wifi.comment.service.CommentViewService;
 
 @RestController
 @RequestMapping("/comments")
@@ -33,10 +27,6 @@ public class CommentController {
 	@Autowired
 	private CommentRegService regService;
 	
-	/* 댓글 수정 - 원본가져오기*/
-	@Autowired
-	private CommentViewService getViewService;
-	
 	/* 댓글 수정 */
 	@Autowired
 	private CommentEditService editService;
@@ -48,16 +38,13 @@ public class CommentController {
 	
 	
 	
-	
-	
-	
 	/* 댓글 리스트 */
 	@GetMapping("/{iidx}")
 	public List<Comment> getComment(@PathVariable("iidx") int iidx){
 		
 		System.out.println("댓글리스트 controller");
 		return listService.getComment(iidx);
-	}
+	};
 	
 	/* 댓글 등록 */
 	@PostMapping
@@ -66,16 +53,7 @@ public class CommentController {
 		System.out.println("댓글등록 controller");
 		return regService.regComment(commentReq);
 		
-	}
-	
-	
-	/* 댓글 수정 - 원본가져오기*/
-//	@GetMapping("/{cidx}")
-//	public int getViewComment(@PathVariable("cidx") int cidx){
-//		
-//		return getViewService.getViewComment(cidx);
-//		
-//	}
+	};
 	
 	
 	/* 댓글 수정*/
@@ -84,8 +62,7 @@ public class CommentController {
 		
 		System.out.println("댓글수정 controller");
 		return editService.editComment(cidx, content);
-		
-	}
+	};
 	
 	/* 댓글 삭제 */
 	@PutMapping("/{cidx}")
@@ -94,18 +71,5 @@ public class CommentController {
 		System.out.println("댓글삭제 controller");
 		return delService.delComment(cidx);
 		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-}
+	};
+};

@@ -8,9 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 
-<link rel="stylesheet" href="aside.css" type="text/css">
-<link rel="stylesheet" href="buy.css" type="text/css">
-<link rel="stylesheet" href="slide.css" type="text/css">
+<link rel="stylesheet" href="css/aside.css" type="text/css">
+<link rel="stylesheet" href="css/buy.css" type="text/css">
+<link rel="stylesheet" href="css/slide.css" type="text/css">
 <link rel="stylesheet" href="css/swiper.css" type="text/css">
 <link rel="stylesheet" href="css/swiper.min.css" type="text/css">
 
@@ -66,7 +66,7 @@
    <div id="container">
 
       <!-- aside 공구현황 -->
-      <%@include file="/include/aside.jsp"%>
+      <%@include file="include/aside.jsp"%>
 
 
       <!-- <div id="nav">
@@ -84,7 +84,7 @@
       <div id="main_content_area">
 
          <!-- header : 타이틀. 검색기능 -->
-         <%@include file="/include/header.jsp"%>
+         <%@include file="include/header.jsp"%>
 
          
          
@@ -122,7 +122,7 @@
 
 
          <!-- 공구 등록 폼 -->
-         <%@include file="/include/regItemForm.jsp"%>
+         <%@include file="include/regItemForm.jsp"%>
          
          
          <!-- itemView 공구글 상세보기 영역 -->
@@ -176,7 +176,7 @@
 
 
      <!-- Swiper JS -->
-  <script src="package/swiper-bundle.min.js"></script>
+  <!-- <script src="/package/swiper-bundle.min.js"></script> -->
 
   <!-- Initialize Swiper -->
   <script>

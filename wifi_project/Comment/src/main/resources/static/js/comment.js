@@ -60,7 +60,6 @@ function getComment(iidx) {
 					html +='						<div class="comment_text comment_text_'+data[i].cidx+'">'+data[i].content+'</div>';
 					html +='						<div class="comment_footer">';
 					html +='							<div class="comment_info">';
-					html +='								<input type="hidden" class="cidx" value="'+data[i].cidx+'">';
 					html +='								<span class="comment_mname">'+data[i].midx+'</span>';
 					html +='								<span class="comment_date">'+data[i].regdate+'</span>';
 					html +='							</div>';
