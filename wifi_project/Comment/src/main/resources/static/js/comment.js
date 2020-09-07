@@ -1,59 +1,39 @@
-// (function(){
-//   'use strict';
-  
-//   angular
-//     .module('commentsApp', [])
-//     .controller('CommentsController', CommentsController);
-  
-//   // Inject $scope dependency.
-//   CommentsController.$inject = ['$scope'];
-  
-//   // Declare CommentsController.
-//   function CommentsController($scope) {
-//     var vm = this;
-    
-//     // Current comment.
-//     vm.comment = {};
-
-//     // Array where comments will be.
-//     vm.comments = [];
-
-//     // Fires when form is submited.
-//     vm.addComment = function() {
-//       // Fixed img.
-//       vm.comment.avatarSrc = 'http://lorempixel.com/200/200/people/';
-
-//       // Add current date to the comment.
-//       vm.comment.date = Date.now();
-
-//       vm.comments.push( vm.comment );
-//       vm.comment = {};
-
-//       // Reset clases of the form after submit.
-//       $scope.form.$setPristine();
-//     }
-
-//     // Fires when the comment change the anonymous state.
-//     vm.anonymousChanged = function(){
-//       if(vm.comment.anonymous)
-//         vm.comment.author = "";
-//     }
-//   }
-
-// })();
-
-
-
-
-
 var loginMidx = 2;
 var iidx=5;
 var domain = 'http://localhost:8082/comments';
 
 $(document).ready(function() {
-	getComment(iidx);
+	getComment(iidx); 
+
+
+	
+
 
 });
+
+
+/* 댓글 등록시, 글자수 제한 */
+$(document).on('keyup', '.comment_content', function(e){
+	var text = $(this).val();
+	if(getBytes(text) >250){
+		alert("250자 이상 입력할수 없습니다.");
+		$(this).val("");
+		$(this).val(byteTxt);
+	} else {
+		$('.textCounter').text(getBytes(text));  
+	};
+});
+ 
+function getBytes(str){
+    var cnt = 0;
+    for(var i =0; i<str.length; i++) {
+		cnt += (str.charCodeAt(i) >128) ? 2: 1;
+	};
+    return cnt;
+};
+
+
+
 
 /* 댓글 리스트 */
 function getComment(iidx) {
@@ -69,25 +49,25 @@ function getComment(iidx) {
 
 				// 본인 댓글이면, 수정.삭제 버튼 활성화
 				var html = '';
+				var content='';
 
-				
-				
 				for(var i=0; i<data.length; i++){
-					
-					html +='				<div class="comment_card_'+data[i].cidx+'">';
+
+					html +='				<div class="comment_card comment_card_'+data[i].cidx+'">';
+					html +='				<input type="hidden" class="iidx_'+data[i].cidx+'" value="'+data[i].iidx+'">';
 					html +='					<div class="comment_imgWrap"><img src="/img/사과.jpg"></div>';
 					html +='					<div class="comment_box">';
-					html +='						<div class="comment_text_'+data[i].cidx+'">'+data[i].content+'</div>';
+					html +='						<div class="comment_text comment_text_'+data[i].cidx+'">'+data[i].content+'</div>';
 					html +='						<div class="comment_footer">';
 					html +='							<div class="comment_info">';
 					html +='								<input type="hidden" class="cidx" value="'+data[i].cidx+'">';
 					html +='								<span class="comment_mname">'+data[i].midx+'</span>';
 					html +='								<span class="comment_date">'+data[i].regdate+'</span>';
 					html +='							</div>';
-					html +='							<div class="comment_actions_'+data[i].cidx+'">';
+					html +='							<div class="comment_actions comment_actions_'+data[i].cidx+'">';
 					
 					if(data[i].midx == loginMidx){
-						html +='								<button type="button" class="btn_editComment" onclick="editCommentForm('+data[i].cidx+','+data[i].content+')">수정</button>';
+						html +='								<button type="button" class="btn_editComment" onclick="editCommentForm('+data[i].cidx+')">수정</button>';
 						html +='								<button type="button" class="btn_delComment" onclick="delCommant('+data[i].cidx+')">삭제</button>';
 					}
 
@@ -100,7 +80,8 @@ function getComment(iidx) {
 
 				}
 
-				$('.commentlistWrap').html(html);
+				$('.commentlist').html(html);
+				regCommentForm(iidx);
 
 			} else {
 				alert('댓글 리스트 실패');
@@ -122,7 +103,8 @@ function regCommentForm(iidx){
 	html +='				</div>';
 	html +='				<form class="comment_form" name="comment_form" onsubmit="return false;">';
 	html +='					<div class="formRow">';
-	html +='						<textarea class="comment_content" placeholder="Add comment..." required></textarea>';
+	html +='						<textarea class="comment_content" name="comment_content" cols="50" rows="5" placeholder="Add comment..." required></textarea>';
+	html +='						<span style="color:#aaa;" class="textCounter">0</span>&nbsp;<span>/ 250자</span>';
 	html +='					</div>';
 	html +='					<div class="formRow">';
 	html +='						<h4 class="comment_mname">'+loginMidx+'</h4>';
@@ -133,26 +115,37 @@ function regCommentForm(iidx){
 	html +='					</div>';
 	html +='				</form>';
 
+	$('.comment_formWrap').html(html);
 }
+
+
+
+
+
 
 
 /* 댓글 등록 */
 function regComment(iidx) {
 
 	alert('댓글등록 시작 iidx : '+iidx);
+	//var text =$("#comment_content");
 
 	var regFormData = new FormData();
-	regFormData.append('content', $('.comment_content').val());
+	//regFormData.append('content', $('textarea[name=comment_content]').html());
+	regFormData.append('content', $(".comment_content").val());
 	regFormData.append('midx', loginMidx);
 	regFormData.append('iidx', iidx);
 
 	alert('regFormData : '+regFormData);
-	alert('regFormData.content : '+regFormData.content);
+	alert('regFormData.content : '+$(".comment_content").val());
+	//alert('regFormData.content : '+text.val());
 
 
 	$.ajax({
 		url : domain,
 		type : 'POST',
+		processData: false, // File 전송시 필수
+		contentType: false, // multipart/form-data
 		data : regFormData,
 		success : function(data) {
 			if (data == 1) {
@@ -170,23 +163,31 @@ function regComment(iidx) {
 
 
 /* 댓글 수정 폼 */
-function editCommentForm(cidx, content) {
+function editCommentForm(cidx) {
+
+	alert('댓글수정 시작 cidx : '+cidx);
 	
 	var html = '';
 	var html2 = '';
+	var content = $('.comment_text_'+cidx).text();
+	alert('댓글수정 시작 content : '+content);
 
-	html +='						<textarea class="comment_content" placeholder="'+content+'" required></textarea>';
-	$('.comment_text_'+cidx).html(html);
 
-	html2 +='						<button type="button" onclick="editComment('+cidx+','+content+')">수정</button>';
-	$('.comment_actions_'+cidx).html(html2);
+	html +='						<textarea class="comment_content_'+cidx+'" required>'+content+'</textarea>';
+	$(".comment_text_"+cidx).html(html);
+
+	html2 +='						<button type="button" onclick="editComment('+cidx+')">수정</button>';
+	$(".comment_actions_"+cidx).html(html2);
+
 };
 
 
 
 
 /* 댓글 수정 */
-function editComment(cidx, content) {
+function editComment(cidx) {
+
+	var content = $('.comment_content_'+cidx).val();
 
 	if (confirm('댓글을 수정하시겠습니까?')) {
 
@@ -233,5 +234,3 @@ function delCommant(cidx) {
 		});
 	};
 };
-
-

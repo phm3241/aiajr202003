@@ -195,6 +195,12 @@ body{
 .comment_card .comment_mname{ }
 .comment_card .comment_date{ }
 
+.comment_content {
+  width: 80px;
+  resize: none;
+  
+}
+
 .comment_card .comment_date:before{
   content: "|";
   margin: 0 10px;
