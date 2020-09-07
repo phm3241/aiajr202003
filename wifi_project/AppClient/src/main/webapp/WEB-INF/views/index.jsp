@@ -17,7 +17,7 @@
 		<!-- 로그인으로 이동 -->
 	    <c:if test="${userId eq null}">
 	        <a href="https://kauth.kakao.com/oauth/authorize?client_id=f5e0701c39876968f090e686afa45c4a&redirect_uri=http://localhost:8081/login&response_type=code">
-	        <img src="kakaoLogin.png">
+	        <img src="/img/kakaoLogin.png">
 	    </a>
 	    </c:if>
 	    

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wifi.comment.model.Comment;
@@ -18,9 +19,10 @@ import com.wifi.comment.service.CommentDelService;
 import com.wifi.comment.service.CommentEditService;
 import com.wifi.comment.service.CommentListService;
 import com.wifi.comment.service.CommentRegService;
+import com.wifi.comment.service.CommentViewService;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/comments")
 public class CommentController {
 	
 	/* 댓글 리스트 */
@@ -30,6 +32,10 @@ public class CommentController {
 	/* 댓글 등록 */
 	@Autowired
 	private CommentRegService regService;
+	
+	/* 댓글 수정 - 원본가져오기*/
+	@Autowired
+	private CommentViewService getViewService;
 	
 	/* 댓글 수정 */
 	@Autowired
@@ -46,28 +52,38 @@ public class CommentController {
 	
 	
 	/* 댓글 리스트 */
-	@GetMapping
-	public List<Comment> getComment(){
+	@GetMapping("/{iidx}")
+	public List<Comment> getComment(@PathVariable("iidx") int iidx){
 		
-		return listService.getComment();
+		System.out.println("댓글리스트 controller");
+		return listService.getComment(iidx);
 	}
 	
 	/* 댓글 등록 */
 	@PostMapping
 	public int regComment(Comment commentReq){
 		
+		System.out.println("댓글등록 controller");
 		return regService.regComment(commentReq);
 		
 	}
 	
+	
+	/* 댓글 수정 - 원본가져오기*/
+//	@GetMapping("/{cidx}")
+//	public int getViewComment(@PathVariable("cidx") int cidx){
+//		
+//		return getViewService.getViewComment(cidx);
+//		
+//	}
+	
+	
 	/* 댓글 수정*/
 	@PutMapping
-	public int editComment(HttpSession session, Comment commentReq){
+	public int editComment(@RequestParam("cidx") int cidx, @RequestParam("content") String content){
 		
-		int midx = (int) session.getAttribute("loginMidx");
-		commentReq.setMidx(midx);
-		
-		return editService.editComment(midx, commentReq);
+		System.out.println("댓글수정 controller");
+		return editService.editComment(cidx, content);
 		
 	}
 	
@@ -75,7 +91,7 @@ public class CommentController {
 	@PutMapping("/{cidx}")
 	public int delComment(@PathVariable("cidx") int cidx){
 		
-		
+		System.out.println("댓글삭제 controller");
 		return delService.delComment(cidx);
 		
 	}

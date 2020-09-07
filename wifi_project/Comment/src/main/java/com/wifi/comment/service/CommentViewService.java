@@ -5,21 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.wifi.comment.dao.CommentDao;
 
-/* 댓글 삭제 */
+/* 댓글 수정 - 원본가져오기*/
 @Service
-public class CommentDelService {
+public class CommentViewService {
 	
-	private CommentDao dao;
+private CommentDao dao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
-	
-	public int delComment(int cidx) {
+
+	public int getViewComment(int cidx) {
 		
 		dao = template.getMapper(CommentDao.class);
-		System.out.println("댓글 삭제 service");
+		System.out.println("댓글 수정 원본가져오기 service");
 		
-		return dao.delComment(cidx);
+		return dao.getViewComment(cidx);
 	}
+	
+	
 
 }

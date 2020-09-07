@@ -224,6 +224,12 @@ function itemlist_print(data){
 		html += '				<span class="item_price">가격 : '+data[i].price+'</span> ';
 		html += '				<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
 		html += '		</div>';
+		html += '		';
+		html += '		<div class="comments_area">';
+		html += '			getComment('+data[i].iidx+')';
+		html += '			<div class="comment_formWrap">regCommentForm('+data[i].iidx+')<div>';
+		html += '		</div>';
+		html += '		';
 		html += '	</button>';
 		html += '</div>';
 

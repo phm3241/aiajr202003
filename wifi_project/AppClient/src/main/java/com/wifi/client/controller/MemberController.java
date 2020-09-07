@@ -45,7 +45,7 @@ public class MemberController {
 	
 	/* 로그인 - 로그인하고 코드 받기 ㅡ> 코드로 엑세스토큰 받기 ㅡ> 액세스토큰으로 사용자정보받기 ㅡ> 사용자정보 세션에 저장 ㅡ> 로그인 완료처리 */
     @RequestMapping("/login")
-	public String login(@RequestParam("code") String code, HttpSession session) {
+	public String login(@RequestParam("code") String code, HttpSession session, HttpServletRequest req) {
     	
     	String view ="index";
     	
@@ -60,7 +60,7 @@ public class MemberController {
 	    	
 	    	String checkId = (String) userInfo.get("id");
 	        session.setAttribute("userInfo", userInfo);
-	        view = memberCheck(checkId);
+	        view = memberCheck(req, checkId);
 	        
 	    } 
 	    
@@ -88,13 +88,13 @@ public class MemberController {
 	
 	/* 회원여부 체크 */
 	@RequestMapping("/loginCheck")
-	private String memberCheck(String checkId) {
+	private String memberCheck(HttpServletRequest req, String checkId) {
 		
 		System.out.println("MemberCheck controller");
 		System.out.println("checkId : "+checkId);
 
 		// 회원여부 체크 ㅡ> 회원이면 main으로, 회원이 아니면 regMemberForm으로
-		return checkMemberService.checkMember(checkId);
+		return checkMemberService.checkMember(req, checkId);
 		
 	}
 	
