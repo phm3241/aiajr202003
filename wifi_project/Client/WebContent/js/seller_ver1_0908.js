@@ -2,7 +2,7 @@
 //var domain = "http://localhost:8080/order/";
 var domain = "http://localhost:8080/order";
 
-var loginMidx = 1;
+var login_midx = 1;
 
 
 
@@ -14,7 +14,7 @@ var loginMidx = 1;
 $('.btn_myItemlist').click(function(){
     $('.aside_myOrderlist').css('display','none');
     $('.aside_myItemlist').css('display','block');
-    myitem(loginMidx);
+    myitem(login_midx);
 
 
 });
@@ -23,46 +23,63 @@ $('.btn_myItemlist').click(function(){
 
 /* 내 판매글 리스트보기  */
 /* midx 받아서 ㅡ> 판매글 목록(상태라벨, 제목) 화면출력 */
-function myitem(loginMidx) {
+function myitem(login_midx) {
 
 	$.ajax({
-		url: domain+'/items/myitem/'+loginMidx,
+		url: domain+'/items/myitem/'+login_midx,
 		type: 'GET',
 		success: function(data){
 			
 			var html = '';
 			for(var i=0; i<data.length; i++){
 				var state= '';
+				var stateMsg= '';
 				var stateColor= '';
+				var buyerNum = '';
 				
+
+				// item이 숨김처리 되있을 때, 출력안함
+				if(data[i].istate == -1){
+					continue;
+
 				
-				if(data[i].label=="모집중"){
+				// 상태라벨 - 모집중 : 기간중이고, 결제정보가 없으면 (구매자선정 전)
+				} else if(data[i].receive_check >= 0 && data[i].pstate == -1){
 					state = 0;
+					stateMsg = '모집중';
 					stateColor = 'aside_mystate join_ing';
+					buyerNum = cntBuyer(data[i].iidx);
+					alert('판매글 리스트 - buyerNum : '+buyerNum);
 
 
-				} else if(data[i].label=="모집완료"){
+				// 상태라벨 - 모집완료 : 기간중이고, 결제정보가 있으면 (구매자선정 후)
+				} else if(data[i].receive_check >= 0 && data[i].pstate != -1){
 					state = 1;
+					stateMsg = '모집완료';
 					stateColor = 'aside_mystate join_com';
 				
 					
-				} else if(data[i].label=="판매완료"){
+				// 상태라벨 - 판매완료 :  기간마감이고, 결제정보가 있으면 (미수령, 수령)
+				} else if(data[i].receive_check < 0 && data[i].pstate != -1){
 					state = 2;
+					stateMsg = '판매완료';
 					stateColor = 'aside_mystate sell_com';
 					
 
-				} else if(data[i].label=="판매실패"){
+				// 상태라벨 - 판매실패 : 기간마감이고, 결제정보가 없으면 
+				} else if(data[i].receive_check < 0 && data[i].pstate == -1 ){
 					state = 3;
+					stateMsg = '판매실패';
 					stateColor = 'aside_mystate sell_fail';
 				}	
 				
 
 				html += '<div class="aside_mycard iidx'+data[i].iidx+'">';
 				html += '		<div class="aside_mystatewrap">';
-				html += '    	  <span class="btn_regItem '+stateColor+'">'+data[i].label+'</span>';
+				html += '    	  <span class="btn_regItem '+stateColor+'">'+stateMsg+'</span>';
 				html += '    	  <span class="alarm sa'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].seller+')">alarmtest</span>';
 				if(state==0){
-				html += '  	  	  <span class="aside_'+data[i].iidx+'">현재참여자 : '+data[i].cntBuyer+'명 / 구매정원 :'+data[i].count_m+'명</span>';
+				html += '  	  <span>현재참여자 : </span><span class="aside_'+data[i].iidx+'">'+buyerNum+'</span><span> / 구매정원 :'+data[i].count_m+'</span>';
 				}
 				html += '  	</div>';
 				html += '  	  <button type="button" class="aside_item_title" onclick="itemView('+data[i].iidx+')">'+data[i].iidx+'. '+data[i].title+'</button> <br>';
@@ -70,7 +87,6 @@ function myitem(loginMidx) {
 				html += '  	  <div class="aside_mybuyer_list_'+data[i].iidx+'" style="display: block;"></div>';
 				html += '</div>';
 
-				// 해당 판매글의 참여자 리스트 
 				mybuyer(data[i].iidx, state, data[i].count_m);
 
 			}
@@ -86,8 +102,6 @@ function myitem(loginMidx) {
 
 
 
-var autoReject=[];  // 판매실패일 때, 자동 거절처리되는 참여자배열
-
 
 /* 내 판매글 참여자 리스트보기  */
 /* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + ostate, pstate선택) 화면출력 */
@@ -98,16 +112,13 @@ function mybuyer(iidx, state, count_m) {
 		type: 'GET',
 		success: function(data){
 			
-			var buyerState = '';
-			var btn_sellerActionName1 = '';
-			var btn_sellerAction1 = '';
-			var stateColor= '';
-			
 
 			var html = '';
-
-			
 			for(var i=0; i<data.length; i++){
+				var buyerState = '';
+				var btn_sellerActionName1 = '';
+				var btn_sellerAction1 = '';
+				var stateColor= '';
 				
 				
 				switch(state){
@@ -166,7 +177,7 @@ function mybuyer(iidx, state, count_m) {
 					html += '<div class="aside_mybuyer iidx'+data[i].iidx+'">';
 					html += '    <span class="buyerState '+stateColor+'">'+buyerState+'</span>';
 					html += '	<span class="buyer_name midx'+data[i].buyer+'">'+data[i].name+'</span>';
-					html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span><br>';
+					html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span>';
 				
 				// 모집중 일때, 참여자 거절 또는 구매자 선정 버튼 출력
 				if(state==0){
@@ -186,12 +197,6 @@ function mybuyer(iidx, state, count_m) {
 					html += '      <input class="score_b_'+data[i].buyer+'" type="number">';
 					html += '      <input class="insert_rvb_'+data[i].buyer+'" type="submit" value="평점 등록" onclick="reviewBuyer('+data[i].iidx+','+data[i].buyer+')" >';
 					html += '</form>';
-				
-
-				// 판매실패 일때, 글숨김 버튼 출력
-				} else if(state==3){
-					autoReject.push(data[i].buyer);
-
 				}
 				
 			} //for end
@@ -200,7 +205,7 @@ function mybuyer(iidx, state, count_m) {
 			// 모집중 일때, 거절 또는 구매자선정 최종확인 버튼 출력
 			if(state==0){
 				html += '    	<span class="select_buyer_msg">*구매자 확정은 구매자를 모두 선정 한 후, 한번에 하실 수 있습니다. </span>';
-				html += '    	<input type="button" class="btn_sellerAction select_buyer_ok" onclick="selectBuyer('+iidx+','+count_m+')" value="구매자 선정 확인">';
+				html += '    	<input type="button" class="btn_sellerAction select_buyer_ok" onclick="selectBuyer_ok('+iidx+','+count_m+')" value="구매자 선정 확인">';
 				html += '    	<input type="button" class="btn_sellerAction delitem" onclick="delItem('+iidx+')" value="글삭제">';
 				//html += '    </form>';
 			}
@@ -217,15 +222,11 @@ function mybuyer(iidx, state, count_m) {
 				html += '       <span class="select_buyer_msg">*판매실패로 참여자는 모두 참여거절처리되었습니다. </span>';
 				html += '       <input type="button" class="item_hide" onclick="itemHide('+iidx+')" value="글숨김">';
 				html += '    	<input type="submit" class="btn_sellerAction delitem" onclick="delItem('+iidx+')" value="글삭제">';
-					
-					alert('메서드 보내기전 확인 autoReject :'+autoReject);
-					autoRejectBuyer(iidx, [autoReject] );
+
 			}
-			
+
 
 			html += '</div>';
-
-
 			$(".aside_mybuyer_list_"+iidx).html(html);
 			$(".aside_mybuyer_list_"+iidx).hide();
 			
@@ -249,86 +250,104 @@ function mybuyer_toggle(iidx){
 /***** 상태별 기능 ***************************************************************************************************/
 
 
-var buyerArr = [];
-var rejectArr = [];
+/* 나의 공구판매현황[모집중] -현재 참여자수 */
+function cntBuyer(iidx){
+
+	var buyerNum = 0;
+
+	$.ajax({
+		url : domain+'/items/mybuyerCnt/'+iidx,
+		type : 'GET',
+		//async: false, // 동기식으로 전황? 
+		success : function(data){
+			alert(typeof(data));
+			alert(iidx+'번 글의 현재 참여자수 : '+data);
+			$(".aside_"+iidx).text(data);
+
+			buyerNum = data;
+		}
+	});
+
+	alert('fn cntBuyer - buyerNum :' +buyerNum);
+	return buyerNum;
+
+};
 
 
-/* ing 나의 공구판매현황[모집중] - 참여자 구매자 선정. 체크 */
-function selectBuyer(iidx, count_m){
+
+/* ing 나의 공구판매현황[모집중] - 참여자 구매자 선정 ㅡ> 확정 확인 */
+function selectBuyer_ok(iidx, count_m){
+
+	var buyerArr = [];
+	var rejectArr = [];
 
 	alert('체크된 갯수 : '+$('input:checkbox[name="select_buyer"]:checked').length);
 
-	// 체크된 개수 !=  구매정원 ㅡ> 다시 선택
+	//체크된 개수 >  구매정원 : 다시 선택
 	if($('input:checkbox[name="select_buyer"]:checked').length > count_m){
+
 		alert('구매정원보다 체크된 구매자 수가 많습니다. 구매정원 확인 후 다시 선택해주세요.');
 
 	} else if($('input:checkbox[name="select_buyer"]:checked').length < count_m){
+
 		alert('구매정원보다 체크된 구매자 수가 적습니다. 구매정원 확인 후 다시 선택해주세요.');
 
-
-	// 	체크된 개수 = 구매정원 ㅡ> 확정. 자동거절 처리
 	} else {
 		
-		// 체크된 값 가져오기 ㅡ> 구매자 확정처리
+		// 체크된 값 가져오기
 		$('input[name="select_buyer"]:checked').each(function(i) { 
 	
 			buyerArr.push($(this).val()); 
 		});
 
-			alert('배열에 담긴 선정된 구매자 확인 : '+ buyerArr);
-			selectBuyer_ok(iidx, buyerArr);
-
+		// 체크되지 않은 값 가져오기
+		$('input[name="select_buyer"]:not(:checked)').each(function(i) { 
+	
+			rejectArr.push($(this).val()); 
+		});
 
 		
-		// 체크되지 않은 값 가져오기 ㅡ> 자동 거절처리
-		if($('input[name="select_buyer"]:not(:checked)').length != 0){
-			
-			$('input[name="select_buyer"]:not(:checked)').each(function(i) { 
-				rejectArr.push($(this).val()); 
-			
-			});
+		alert('배열에 담긴 선정된 구매자 확인 : '+ buyerArr);
+		alert('배열에 담긴 거절한 참여자 확인 : '+ rejectArr);
+		//alert(typeof(buyerArr));
 
-			alert('배열에 담긴 거절한 참여자 확인 : '+ rejectArr);
-			autoRejectBuyer(iidx, rejectArr);
-		};
+
 	};
-};
 
-
-
-
-/* ing 나의 공구판매현황[모집중] - 참여자 구매자 선정 ㅡ> 확정 처리 */
-function selectBuyer_ok(iidx, buyerArr){
 	
 	// var selecFormData = new FormData();
 	// selecFormData.append('')
 
 	var selectData = {
-		iidx : iidx,
-		buyerArr : buyerArr,
+		'iidx' : iidx,
+		'buyerArr' : buyerArr,
+		'rejectArr' : rejectArr
 	};
 
 	alert('selectData.buyerArr : '+selectData.buyerArr);
 
+
+
 	$.ajax({
 		url : domain+'/items/mybuyer',
 		type : 'POST',
-		//traditional : true,
+		traditional : true,
 		//processData: false, // File 전송시 필수
 		//contentType: false, // multipart/form-data
 		contentType: "application/json",
-		//contentType :   "application/x-www-form-urlencoded",
-		//dataType: "json",
-		//data : selectData,
+		dataType: "json",
 		data : JSON.stringify(selectData),
-
+		//data : JSON.stringify(buyerData),
+		//data : JSON.parse(buyerArr),
 		
 		success : function(data){
 			alert('선정한 구매자 등록 : ' + data);
 
 			// 배열 초기화
 			buyerArr = [];
+			rejectArr = [];
 			alert('buyerArr 배열 초기화 확인 : '+buyerArr);
+			alert('rejectArr 배열 초기화 확인 : '+rejectArr);
 		},
 		error:function(jqXHR, textStatus, errorThrown){
             alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -353,39 +372,13 @@ function rejectBuyer(iidx, buyer){
 				$(".aside_mybuyer_list_"+iidx).show();
 
 			}
+
+
 		})
 	}
-};
 
 
-
-/* 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리 */
-/* 구매자 선정하면 나머지 선택하지 않은 참여자, 판매실패하면 참여자 자동 거절처리 */ 
-function autoRejectBuyer(iidx, buyer){
-
-	alert('참여자 자동 거절처리');
-	alert(iidx+'번 글. 매개변수 buyer배열확인 : '+buyer);
-
-	var rejectData = { buyer : buyer };
-
-	$.ajax({
-		url : domain+'/items/mybuyer/'+iidx,
-		type : 'POST',
-		data : JSON.stringify(rejectData),
-		contentType: "application/json",
-		//contentType :   "application/x-www-form-urlencoded",
-		//dataType: "json",
-		success : function(data){
-			alert('data : '+data+', 선택하신 참여자'+buyer+'가 참여거절 처리 되었습니다.');
-			myitem(midx);
-			$(".aside_mybuyer_list_"+iidx).show();
-			autoReject=[]; 	// 배열초기화
-			alert('autoReject 배열 초기화 확인 : '+autoReject);
-
-		}
-	});
-
-};
+}
 
 
 /* ing 나의 공구판매현황[모집완료] - 구매자 QR발급 */

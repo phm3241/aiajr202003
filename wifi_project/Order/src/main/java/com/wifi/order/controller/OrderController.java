@@ -17,7 +17,7 @@ import com.wifi.order.buyer.service.OrderHideService;
 import com.wifi.order.buyer.service.OrderRegService;
 import com.wifi.order.buyer.service.SellerReviewService;
 import com.wifi.order.model.Item_rvs;
-import com.wifi.order.model.Mylist;
+import com.wifi.order.model.MyItemDTO;
 
 @RestController
 @RequestMapping("/orders")
@@ -52,13 +52,13 @@ public class OrderController {
 	
 	// 내 구매글 
 	@GetMapping("/{login_midx}")
-	public List<Mylist> getMyOrder(HttpSession session, @PathVariable("login_midx") int midx){
+	public List<MyItemDTO> getMyOrder(HttpSession session, @PathVariable("login_midx") int midx){
 		
 		//int midx = (int) session.getAttribute("midx");
 		System.out.println("내 구매글 controller");
 		return myOrderService.getMyOrder(midx);
 		
-	}
+	};
 	
 	
 	// 공구 참여신청
@@ -78,7 +78,7 @@ public class OrderController {
 		
 		System.out.println("참여신청 취소 controller");
 		return cancleService.cancleOrder(oidx);
-	}
+	};
 	
 	
 	// 나의 공구구매현황[구매자] - 판매자 평점등록

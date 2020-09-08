@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.wifi.order.model.Itemlist;
+import com.wifi.order.model.ItemDTO;
+import com.google.gson.JsonObject;
 import com.wifi.order.item.service.ItemDelService;
 import com.wifi.order.item.service.ItemRegService;
 import com.wifi.order.item.service.ItemViewService;
@@ -24,11 +26,10 @@ import com.wifi.order.item.service.MyItemBuyerService;
 import com.wifi.order.item.service.MyItemHideService;
 import com.wifi.order.item.service.MyItemService;
 import com.wifi.order.item.service.QRService;
-import com.wifi.order.item.service.itemlistSortService;
 import com.wifi.order.model.ItemRegRequest;
 import com.wifi.order.model.Item_rvb;
-import com.wifi.order.model.MyBuyerlist;
-import com.wifi.order.model.MyItemlist;
+import com.wifi.order.model.MyBuyerDTO;
+import com.wifi.order.model.MyItemDTO;
 
 @RestController
 @RequestMapping("/items")
@@ -39,14 +40,12 @@ public class ItemController {
 	@Autowired
 	ItemlistService itemlistService;
 
-	@Autowired
-	itemlistSortService itemlistSortService;
 
 	@Autowired
 	ItemViewService viewService;
 	
 
-//	공구 등록. 수정. 삭제 관련----------------------------------
+//	공구 등록. 수정. 삭제 관련----------------------------
 
 	@Autowired
 	ItemRegService regService;
@@ -95,7 +94,7 @@ public class ItemController {
 	
 	// 추천 공구 리스트 : 최신순 정렬
 	@GetMapping("/recomItem")
-	public List<Itemlist> getRecomItemlist(){
+	public List<ItemDTO> getRecomItemlist(){
 		
 		return itemlistService.getRecomItemlist();
 	}
@@ -103,24 +102,16 @@ public class ItemController {
 	
 	// 일반 공구 리스트 : 최신순 정렬
 	@GetMapping
-	public List<Itemlist> getItemlist(){
+	public List<ItemDTO> getItemlist(){
 		
 		return itemlistService.getItemlist();
 	}
 
 	
 	
-	// 공구 리스트 : 평점순 정렬
-	@GetMapping("/sort")
-	public List<Itemlist> getItemlistSort(){
-		
-		return itemlistSortService.getItemlistSort();
-	}
-
-	
 	// 공구 상세보기
 	@GetMapping("/{iidx}")
-	public Itemlist viewItem(@PathVariable("iidx") int iidx) {
+	public ItemDTO viewItem(@PathVariable("iidx") int iidx) {
 		
 		return viewService.viewItem(iidx);
 	};
@@ -164,7 +155,7 @@ public class ItemController {
 	
 	// 내 판매글 
 	@GetMapping("/myitem/{login_midx}")
-	public List<MyItemlist> getMyItem(@PathVariable("login_midx") int midx){
+	public List<MyItemDTO> getMyItem(@PathVariable("login_midx") int midx){
 		
 		System.out.println("내 판매글 리스트 controller");
 		return myItemService.getMyItem(midx);
@@ -173,7 +164,7 @@ public class ItemController {
 	
 	// 내 판매글 참여자리스트 
 	@GetMapping("/mybuyer/{iidx}")
-	public List<MyBuyerlist> getMyItemBuyer(@PathVariable("iidx") int iidx){
+	public List<MyBuyerDTO> getMyItemBuyer(@PathVariable("iidx") int iidx){
 		
 		System.out.println("내 판매글 - 참여자리스트 controller");
 		return myBuyerService.getMyItemBuyer(iidx);
@@ -181,40 +172,47 @@ public class ItemController {
 	};
 	
 	// 나의 공구판매현황[모집중] - 현재 참여자수 
-	@GetMapping("/mybuyerCnt/{iidx}")
-	public int cntBuyer(@PathVariable("iidx") int iidx) {
-		
-		System.out.println("내 판매글 - 현재 참여자수 controller");
-		return cntBuyerService.cntBuyer(iidx);
-	};
+//	@GetMapping("/mybuyerCnt/{iidx}")
+//	public int cntBuyer(@PathVariable("iidx") int iidx) {
+//		
+//		System.out.println("내 판매글 - 현재 참여자수 controller");
+//		return cntBuyerService.cntBuyer(iidx);
+//	};
 	
 	
 	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
-	@PostMapping("/mybuyer/{iidx}")
 	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
 	//public int selectBuyer(@RequestParam(value="iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
 	//public int selectBuyer(@RequestParam(value="iidx") int iidx, HttpServletRequest request) {
 	//public int selectBuyer(@RequestBody ArrayList<Integer> buyerArr, @PathVariable("iidx") int iidx ) {
 	// public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") List<String> buyerArr) {
-	public int selectBuyer(@RequestParam(value="iidx") int iidx, 
-					@RequestParam(value="buyerArr[]") List<Integer> buyer, @RequestParam(value="rejectArr[]") List<Integer> reject) {
+//	public int selectBuyer(@RequestParam(value="iidx") int iidx, 
+//					@RequestParam(value="buyerArr[]") List<Integer> buyer, @RequestParam(value="rejectArr[]", required =false, defaultValue="false") List<Integer> reject) {
+//	public int selectBuyer(@RequestParam(value="iidx") String iidx, 
+//			@RequestParam(value="buyerArr[]") List<Integer> buyerArr, @RequestParam(value="rejectArr[]", required =false) List<Integer> rejectArr) {
 	
-		//String[] buyerArr = request.getParameterValues("buyers");
-		//String[] buyer = request.getParameterValues("buyer[]");
-	
+	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
+	public int selectBuyer(@RequestBody JsonObject buyerArr) {
+
+	//@PostMapping("/mybuyer")  // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이 null...
+	//public int selectBuyer(HttpServletRequest request) {
+			
+		//String[] buyerArr = request.getParameterValues("buyerArr[]");
+		//String[] rejectArr = request.getParameterValues("rejectArr[]");
+		
 		System.out.println("참여자 구매자로 선정 controller");
-		System.out.println("iidx 확인 :" +iidx);
-		System.out.println("buyer 배열확인 : " + buyer.toString());
-		System.out.println("reject 배열확인 : " + reject.toString());
+		//System.out.println("iidx 확인 :" +iidx);
+		System.out.println("buyer 배열확인 : " + buyerArr);
+		System.out.println("buyer 배열확인 toString : " + buyerArr.toString());
 //		for(int i=0; i<buyerArr.length; i++) {
 //			System.out.println(buyerArr[i]);
 //		}
-		for(int i=0; i<buyer.size(); i++) {
-			System.out.println(buyer.get(i));
-		}
-		for(int i=0; i<reject.size(); i++) {
-			System.out.println(reject.get(i));
-		}
+//		for(int i=0; i<buyerArr.size(); i++) {
+//			System.out.println(buyerArr.get(i));
+//		}
+//		for(int i=0; i<buyerArr.size(); i++) {
+//			System.out.println(buyerArr.get(i));
+//		}
 		
 		return 0; 
 		//return selectBuyerService.selectBuyer(iidx, buyer); 
@@ -228,6 +226,27 @@ public class ItemController {
 		
 		System.out.println("참여자 거절 controller");
 		return rejectBuyerService.rejectBuyer(iidx, midx); 
+	};
+	
+	
+	
+	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  
+	// 구매자 선정하면 나머지 선택하지 않은 참여자, 판매실패하면 참여자 자동 거절처리
+	@PostMapping("/mybuyer/{iidx}")
+//	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyer[]") String[] buyer) {
+//	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody List<Integer> buyer) {
+	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody JsonObject buyer) {
+		
+		System.out.println("참여자 자동거절 controller");
+		int size = buyer.size();
+		System.out.println("buyer"+buyer.toString()+", buyer.size(): "+size);
+		
+		
+		
+//		for(int i=0; i<buyer.length; i++) {
+//			System.out.println(buyer[i]);
+//		};
+		return 0; 
 	};
 	
 	

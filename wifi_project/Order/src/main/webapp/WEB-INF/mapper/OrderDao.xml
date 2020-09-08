@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 내 공구 구매현황 관련 =========================================================== -->
 	
 	<!-- 내 구매글 -->
-	<select id="getMyOrder" resultType="com.wifi.order.model.Mylist">
+	<select id="getMyOrder" resultType="com.wifi.order.model.MyItemDTO">
 		select * from wifi.myitemlist where buyer=#{midx} and ostate !=-2
 	</select>
 	

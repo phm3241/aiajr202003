@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.wifi.order.model.Item;
-import com.wifi.order.model.Itemlist;
+import com.wifi.order.model.ItemDTO;
 import com.wifi.order.model.Item_rvb;
-import com.wifi.order.model.MyBuyerlist;
-import com.wifi.order.model.MyItemlist;
+import com.wifi.order.model.MyBuyerDTO;
+import com.wifi.order.model.MyItemDTO;
 
 public interface ItemDao {
 
@@ -15,16 +15,13 @@ public interface ItemDao {
 //	공구 리스트 관련----------------------------------
 	
 	// 추천 공구 리스트 : 최신순 정렬 (기본정렬)
-	List<Itemlist> getRecomItemlist();
+	List<ItemDTO> getRecomItemlist();
 	
 	// 일반 공구 리스트 : 최신순 정렬 (기본정렬)
-	List<Itemlist> getItemlist();
-	
-	// 공구 리스트 - 평점순 정렬
-	List<Itemlist> getItemlistSort();
+	List<ItemDTO> getItemlist();
 	
 	// 공구 상세보기
-	Itemlist viewItem(int iidx);
+	ItemDTO viewItem(int iidx);
 
 	
 	
@@ -47,10 +44,10 @@ public interface ItemDao {
 //	내 공구 판매현황 관련------------------------------
 	
 	// 내 판매글 
-	List<MyItemlist> getMyItem(int midx);
+	List<MyItemDTO> getMyItem(int midx);
 	
 	// 내 판매글 참여자리스트
-	List<MyBuyerlist> getMyItemBuyer(int iidx);
+	List<MyBuyerDTO> getMyItemBuyer(int iidx);
 	
 	// 나의 공구판매현황[모집중] - 현재 참여자수 
 	int cntBuyer(int iidx);

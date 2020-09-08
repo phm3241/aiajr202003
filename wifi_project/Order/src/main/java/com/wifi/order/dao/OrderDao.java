@@ -1,14 +1,13 @@
 package com.wifi.order.dao;
 
 import java.util.List;
-
 import com.wifi.order.model.Item_rvs;
-import com.wifi.order.model.Mylist;
+import com.wifi.order.model.MyItemDTO;
 
 public interface OrderDao {
 	
 	// 내 구매글 
-	List<Mylist> getMyOrder(int midx);
+	List<MyItemDTO> getMyOrder(int midx);
 	
 	
 	// 공구 참여신청

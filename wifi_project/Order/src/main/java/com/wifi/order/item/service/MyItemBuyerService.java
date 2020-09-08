@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wifi.order.dao.ItemDao;
-import com.wifi.order.model.MyBuyerlist;
+import com.wifi.order.model.MyBuyerDTO;
 
 @Service
 public class MyItemBuyerService {
@@ -17,7 +17,7 @@ public class MyItemBuyerService {
 	@Autowired
 	private SqlSessionTemplate template;
 	
-	public List<MyBuyerlist> getMyItemBuyer(int iidx) {
+	public List<MyBuyerDTO> getMyItemBuyer(int iidx) {
 		
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("내 판매글 - 참여자리스트  service");

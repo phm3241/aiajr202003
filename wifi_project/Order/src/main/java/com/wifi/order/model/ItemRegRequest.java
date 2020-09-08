@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// 공구글 정보 : view에서 db로 등록할 때 
+// 공구글 정보 : view에서 db로 등록할 때 DTO
 public class ItemRegRequest {
 	
 	// private int iidx;				// 게시물 번호 -PK

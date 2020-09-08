@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 // 공구글 정보
-public class Itemlist {
+public class ItemDTO {
 	
 	private int iidx;				// 게시물 번호 -PK
 	private String title;			// 게시글 제목
@@ -29,11 +29,11 @@ public class Itemlist {
 	private int rvs_totalRow;		// 작성자 총평점개수 -Item_rvs table join
 	
 	
-	public Itemlist() {
+	public ItemDTO() {
 	}
 
 
-	public Itemlist(int iidx, String title, int price, int count_m, int count_w, Timestamp regdate, Timestamp receive,
+	public ItemDTO(int iidx, String title, int price, int count_m, int count_w, Timestamp regdate, Timestamp receive,
 			int receive_check, String addr, String location, String content, String photo, int istate, int view_count,
 			int category, int midx, float rvs_avg, int rvs_totalRow) {
 		this.iidx = iidx;

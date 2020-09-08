@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 추천 공구 리스트 - 최신순정렬 : 아이템*판매자의 평점 조인 (평균평점. 총평점수). -->
 	<!-- 출력시, 숨김처리 안되있고, 오늘기준 마감일 안지난 글만 리스트 출력 -->
-	<select id="getRecomItemlist" resultType="com.wifi.order.model.Itemlist">
+	<select id="getRecomItemlist" resultType="com.wifi.order.model.ItemDTO">
 		select * from wifi.itemlist 
 		where istate = 1 and receive_check >= 0 order by regdate desc
 	</select>
@@ -19,29 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 일반 공구 리스트 - 최신순정렬 : 아이템*판매자의 평점 조인 (평균평점. 총평점수). -->
 	<!-- 출력시, 숨김처리 안되있고, 오늘기준 마감일 안지난 글만 리스트 출력 -->
-	<select id="getItemlist" resultType="com.wifi.order.model.Itemlist">
+	<select id="getItemlist" resultType="com.wifi.order.model.ItemDTO">
 		select * from wifi.itemlist 
 		where istate = 0 and receive_check >= 0 order by regdate desc 
 	</select>
 
 
-	<!-- 공구 리스트 - 평점순정렬 : 아이템*판매자의 평점 조인 (평균평점. 총평점수). -->
-	<!-- 출력시, 숨김처리 안되있고, 오늘기준 마감일 안지난 글만 리스트 출력 -->
-	<select id="getItemlistSort" resultType="com.wifi.order.model.Itemlist">
-		select * from wifi.itemlist 
-		where istate != -1 and receive_check >= 0 order by rvs_avg desc
-	</select>
-
-
-
-	<!-- 공구 리스트 : 선택판매자 평점평균, 총갯수표시 -->
-	<!-- <select id="" resultType="map"> select midx, avg(score_s) as 평점평균, 
-		count(*) as 총평점수 from wifi.item_rvs group by midx having midx=#{midx} </select> -->
-
-
-
 	<!-- 공구 상세보기 -->
-	<select id="viewItem" resultType="com.wifi.order.model.Itemlist">
+	<select id="viewItem" resultType="com.wifi.order.model.ItemDTO">
 		select * from wifi.itemlist where iidx=#{iidx};
 	</select>
 
@@ -107,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 내 공구 판매현황 관련 =========================================================== -->
 
 	<!-- 나의 공구판매현황 - 판매글 리스트 : midx 받아서 ㅡ> 판매글 목록 (상태라벨, 제목) 화면출력 -->
-	<select id="getMyItem" resultType="com.wifi.order.model.MyItemlist">
+	<select id="getMyItem" resultType="com.wifi.order.model.MyItemDTO">
 		select * from wifi.myitemlist where seller=#{midx} group by iidx having istate !=-1 
 	</select>
 
@@ -115,12 +100,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 나의 공구판매현황 - 참여자리스트 -->
 	<select id="getMyItemBuyer"
-		resultType="com.wifi.order.model.MyBuyerlist">
+		resultType="com.wifi.order.model.MyBuyerDTO">
 		select * from wifi.mybuyerlist where iidx=#{iidx} and
 		ostate != 1
 	</select>
 
-	<!-- 내 판매글 현재 참여자 수 -->
+	<!-- 나의 공구판매현황[모집중] - 내 판매글 현재 참여자 수 -->
 	<select id="cntBuyer" resultType="int">
 		select count(*) from wifi.mybuyerlist where iidx=#{iidx} and ostate != 1;
 	</select>

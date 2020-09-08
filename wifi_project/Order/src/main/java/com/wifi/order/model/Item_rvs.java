@@ -1,6 +1,6 @@
 package com.wifi.order.model;
 
-// 공구 판매자에 대한 평점정보
+// 공구 판매자에 대한 평점정보 : VO
 public class Item_rvs {
 	
 	private int irsidx;		// 공구판매자 평점번호 -PK

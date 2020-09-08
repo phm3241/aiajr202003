@@ -1,7 +1,7 @@
 package com.wifi.order.model;
 
-// 공구 구매자에 대한 평점정보 : 화면출력용
-public class MyBuyerlist {
+// 공구 구매자에 대한 평점정보 : 판매자의 내판매글 참여자보기 - 화면출력용 DTO
+public class MyBuyerDTO {
 	
 	private int iidx;			// 판매글 번호
 	private int buyer;		  	// 구매자 번호 
@@ -13,11 +13,11 @@ public class MyBuyerlist {
 	private String qr;			// 구매자 결제QR : -1 null
 	
 	
-	public MyBuyerlist() {
+	public MyBuyerDTO() {
 	}
 
 
-	public MyBuyerlist(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate,
+	public MyBuyerDTO(int iidx, int buyer, String name, int rvb_avg, int rvb_totalRow, int ostate, int pstate,
 			String qr) {
 		this.iidx = iidx;
 		this.buyer = buyer;

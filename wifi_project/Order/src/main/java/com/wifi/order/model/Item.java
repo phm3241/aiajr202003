@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// 공구글 정보
+// 공구글 정보 : VO
 public class Item {
 	
 	private int iidx;				// 게시물 번호 -PK

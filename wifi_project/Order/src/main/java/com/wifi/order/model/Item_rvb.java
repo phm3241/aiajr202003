@@ -1,6 +1,6 @@
 package com.wifi.order.model;
 
-// 공구 구매자에 대한 평점정보 : db저장용
+// 공구 구매자에 대한 평점정보 : VO
 public class Item_rvb {
 	
 	private int irbidx;		// 공구구매자 평점번호 -PK
