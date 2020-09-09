@@ -4,11 +4,12 @@ var domain = "http://localhost:8080/order";
 
 /***** item : 공구 리스트 출력. 정렬. 등록. 삭제  ******************************************************************/
 
-var login_midx = 1;
+var loginMidx = 1;
 var recomItems = [];    // 추천 공구 리스트 담아두는 배열
 var items = [];			// 일반 공구 리스트 담아두는 배열
 var sortRecomItems = []; 
 var sortItems = []; 
+
 
 
 
@@ -164,7 +165,7 @@ function itemlist_print(data){
 
 		// 일반공구글
 		case 0: 
-			swiperType = 'swiper-none';
+			swiperType = 0;
 			cardType = 'item_card';
 			selectDiv = '#itemlist_small_area';
 
@@ -175,7 +176,7 @@ function itemlist_print(data){
 			
 		// 추천공구글
 		case 1:
-			swiperType = 'swiper-slide';
+			swiperType = 1;
 			cardType = 'item_card_big';
 			selectDiv = '.swiper-wrapper';
 			//selectDiv = '#itemlist_big_area';
@@ -188,28 +189,19 @@ function itemlist_print(data){
 
 	};
 
-
+	
 	$('#itemlist_area').css('display','block');
-	$('#itemView').css('display','none');
-    $('#regItemForm_page').css('display','none');
-
+	$('#itemRegForm_area').css('display','none');
+	$('#itemView_area').css('display','none');
+	
+	
 	for(var i=0; i<data.length; i++){
-		
-		var state = '';
 
-		// 모집중
-		//if(data[i].pstate==-1){
-		//	state = '';
+		if(swiperType==1){
+			html += '<div class="swiper-slide">';
+		};
 
-		
-		// 모집완료
-		//} else if(data[i].pstate != -1){
-		//	state='';
-		//}
-
-
-		html += '<div class="'+swiperType+'">';
-		html += '	<button class="'+cardType+'" onclick="itemView('+data[i].iidx+','+login_midx+')">';
+		html += '	<button class="'+cardType+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 		//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 		html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 		html += '		<div class="item_info">';
@@ -224,9 +216,13 @@ function itemlist_print(data){
 		html += '				<span class="item_limitDate">수령일 : '+data[i].receive+'</span>';
 		html += '		</div>';
 		html += '	</button>';
-		html += '</div>';
-
+		
+		if(swiperType==1){
+			html += '</div>';
+		};
+		
 	} // for end
+		
 
 		// 표시되는 위치
 		$(selectDiv).html(html);
@@ -277,10 +273,8 @@ function sortRvs(arr){
 function regItemForm(){
 	
 	$('#itemlist_area').css('display','none');
-	$('#itemView').css('display','none');
-    $('#regItemForm_page').css('display','block');
-    //$("#regItemForm").hide();
-    //$("#regItemForm").toggle();
+	$('#itemView_area').css('display','none');
+    $('#itemRegForm_area').css('display','block');
    
 };
 
@@ -344,9 +338,8 @@ function regSubmit(){
 
 
 /* 공구글 상세보기 */
-function itemView(iidx, login_midx) {
-
-
+function itemView(iidx, loginMidx) {
+	
 
 	$.ajax({
 		url: domain+'/items/'+iidx,
@@ -354,11 +347,15 @@ function itemView(iidx, login_midx) {
 		success: function(data){
 
 			$('#itemlist_area').css('display','none');
-			$('#regItemForm_page').css('display','none');
-			$('#itemView').css('display','block');
+			$('#itemRegForm_area').css('display','none');
+			$('#itemView_area').css('display','block');
 			
 			var html = '';
 				
+			html += '<div class="w3-container" class="ItemView" style="margin-top:65px;" >';
+			html += '	<h2 class="w3-xlarge text-purple"><b>Item View</b></h2>';
+			html += '	<hr style="width:50px;border:5px solid purple;"  class="w3-round">';
+			html += '</div>';
 			html += '<div class="itemView_table">';
 			html += '	<table border="1">';
 			html += '		<tr><td>iidx</td><td>'+data.iidx+'</td></tr>';
@@ -377,15 +374,15 @@ function itemView(iidx, login_midx) {
 			html += '		<tr><td>좌표</td><td>'+data.location+'</td></tr>';
 			html += '		<tr><td>본문</td><td>'+data.content+'</td></tr>';
 			html += '		<tr><td clospan="2">';
-			html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()">'; 
+			html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="allItemlist()">'; 
 
 			// 만약에 로그인한 사람이 작성자가 아니면, 참여신청버튼 활성화
-			if(login_midx != data.midx){
-				html += '			<input type="button" class="btn_join" value="참여신청" onclick="regOrder('+login_midx+','+data.iidx+')">';
+			if(loginMidx != data.midx){
+				html += '			<input type="button" class="btn_join" value="참여신청" onclick="regOrder('+loginMidx+','+data.iidx+')">';
 			}
 
 			// 만약에 로그인한 사람이 작성자와 같으면, 글수정. 글삭제 활성화
-			if(login_midx == data.midx){
+			if(loginMidx == data.midx){
 				html += '			<input type="button" class="btn_itmelist" value="글수정" onclick="editItem('+data.iidx+')">'; 
 				html += '			<input type="button" class="btn_itmelist" value="글삭제" onclick="delItem('+data.iidx+')">'; 
 			}
@@ -393,7 +390,7 @@ function itemView(iidx, login_midx) {
 			html += '	</table>';
 			html += '</div">';
 			
-			$('#itemView').html(html);
+			$('#itemView_area').html(html);
 			
 		}
 

@@ -2,7 +2,7 @@
 //var domain = "http://localhost:8080/order/";
 var domain = "http://localhost:8080/order";
 
-var login_midx = 1;
+var loginMidx = 1;
 
 
 /***** buyer ********************************************************************************************/
@@ -13,7 +13,9 @@ $('.btn_myOderlist').click(function(){
 
     $('.aside_myItemlist').css('display','none');
     $('.aside_myOrderlist').css('display','block');
-    myOrder(login_midx);
+    $('.btn_myItemlist').css('background-color','purple');
+    $('.btn_myOderlist').css('background-color','rgb(87, 2, 87)');
+    myOrder(loginMidx);
 
 
 
@@ -24,10 +26,10 @@ $('.btn_myOderlist').click(function(){
 
 
 /* 내 구매현황 출력*/
-function myOrder(login_midx){
+function myOrder(loginMidx){
 
     $.ajax({
-        url : domain+'/orders/'+login_midx,
+        url : domain+'/orders/'+loginMidx,
         type : 'GET',
         success: function(data){
             
@@ -45,45 +47,48 @@ function myOrder(login_midx){
 
 				} else if(data[i].label=="참여중"){
 					state = 0;
-                    stateColor = 'aside_mystate join_com';
-                    btn_buyerActionName = '참여취소';
+                    stateColor = 'aside_mystate join';
+                    btn_buyerActionName = 'cancel';
 				
 				} else if(data[i].label=="다음기회에..."){
 					state = 1;
-                    stateColor = 'aside_mystate join_ing';
-                    btn_buyerActionName = '글삭제';
+                    stateColor = 'aside_mystate next';
+                    btn_buyerActionName = 'X';
                 
                     
 				} else if(data[i].label=="구매자"){
 					state = 2;
-                    stateColor = 'aside_mystate sell_com';
+                    stateColor = 'aside_mystate buyer';
                     
 					
 				} else if(data[i].label=="구매완료"){
 					state = 3;
-                    stateColor = 'aside_mystate sell_fail';
+                    stateColor = 'aside_mystate review';
                     btn_buyerAction = '$(".reviewForm").toggle()';
 				}	
 				
 
 				html += '<div class="aside_mycard iidx'+data[i].iidx+'">';
-				html += '	<div class="aside_mystatewrap">';
-				html += '    	  <span class="btn_regItem '+stateColor+'">'+data[i].label+'</span>';
-				html += '    	  <span class="alarm ba'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].buyer+')">alarmtest</span>';
-				html += '  	</div>';
-                html += '  	  <button type="button" class="aside_item_title" onclick="itemView('+data[i].iidx+')">'+data[i].iidx+'. '+data[i].title+'</button>';
+				html += '	<div class="aside_mystatewrap aside_state '+stateColor+'"></div>';
+                html += '   <span>'+data[i].label+'</span><span class="alarm ba'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].buyer+')">a</span>';
                 
-                // 참여중, 다음기회에.. ㅡ> 참여취소(글삭제) 버튼 활성화
-                if(state ==0 || state ==1 ){
-                    html += '  	  <button type="button" class="btn_buyerAction cancleOrder" onclick="cancleOrder('+data[i].oidx+','+state+')">'+btn_buyerActionName+'</button>';
+                if(state==1 || state==3){
+                html += '     <button type="button" class="delOrder" onclick="delOrder('+data[i].oidx+','+data[i].pidx+')">X</button>';
+                }
                 
-                // 구매자 ㅡ> QR보기 버튼 활성화
+                html += '  	<button type="button" class="aside_item_title" onclick="itemView('+data[i].iidx+','+loginMidx+')">'+data[i].iidx+'. '+data[i].title+'</button>';
+                
+                // 참여중 ㅡ> 참여취소 버튼 활성화
+                if(state ==0 ){
+                    html += '  	  <button type="button" class="btn_buyerAction cancleOrder" onclick="cancleOrder('+data[i].oidx+','+state+')">cancel</button>';
+                
+                    // 구매자 ㅡ> QR보기 버튼 활성화
                 } else if(state==2){
-                    html += '  	  <button type="button" class="btn_buyerAction viewQR" onclick="viewQR('+data[i].iidx+','+data[i].buyer+')">QR보기</button>';
-                
-                // 구매완료 ㅡ> 평점등록 버튼 활성화
+                    html += '  	  <button type="button" class="btn_buyerAction viewQR" onclick="viewQR('+data[i].iidx+','+data[i].buyer+')">QRcode</button>';
+                    
+                    // 구매완료 ㅡ> 평점등록 버튼 활성화
                 } else if(state==3){
-                    html += '  	  <button type="button" class="btn_buyerAction reviewSeller" onclick="reviewForm_toggle('+data[i].iidx+')">평점등록</button>';
+                    html += '  	  <button type="button" class="btn_buyerAction reviewSeller" onclick="reviewForm_toggle('+data[i].iidx+')">review</button>';
                     html += '         <form class="reviewForm_'+data[i].iidx+'" onsubmit="return false;">';
                     //html += '           <input class="score_s_'+data[i].seller+'" type="number">';
                     html += '           <div class="rating-stars text-center">';
@@ -95,13 +100,13 @@ function myOrder(login_midx){
                     html += '                   <li class="star" data-value="5"><i class="fa fa-star fa-fw"></i></li>';
                     html += '               </ul>';
                     html += '           </div>';
-					html += '           <input class="insert_rvs_'+data[i].seller+'" type="submit" value="평점 등록" onclick="reviewSeller('+data[i].iidx+','+data[i].seller+','+$(".rating-stars").val()+')" >';
+					html += '           <input class="insert_rvs_'+data[i].seller+'" type="submit" value="ok" onclick="reviewSeller('+data[i].iidx+','+data[i].seller+','+$(".rating-stars").val()+')" >';
 					html += '         </form>';
-					html += '     <button type="button" class="btn_buyerAction hideOrder" onclick="hideOrder('+data[i].oidx+')">글숨김</button>';
-					html += '     <button type="button" class="btn_buyerAction delOrder" onclick="delOrder('+data[i].oidx+','+data[i].pidx+')">글삭제</button>';
+					//html += '     <button type="button" class="btn_buyerAction hideOrder" onclick="hideOrder('+data[i].oidx+')">hide</button>';
+					
                     
                 }
-
+                
                 html += '</div>';
 
 			} // for end
@@ -126,14 +131,14 @@ function reviewForm_toggle(iidx){
 
 
 /* 참여신청 */
-function regOrder(login_midx, iidx){
+function regOrder(loginMidx, iidx){
 
     $.ajax({
-        url : domain+'/orders/'+login_midx+'/'+iidx,
+        url : domain+'/orders/'+loginMidx+'/'+iidx,
         type : 'POST',
         success : function(data){
 
-            if(result==-1){
+            if(data==-1){
                 data('이미 신청하신 내역이 있습니다.');
             }else if(data==-2){
                 alert('신청하신 공구의 참여인원이 마감되어, 참여신청이 불가합니다. ');
@@ -141,12 +146,12 @@ function regOrder(login_midx, iidx){
                 alert('참여신청이 완료되었습니다.');
             }
 
-            myOrder(login_midx);
+            myOrder(loginMidx);
         },
         Error : function(e){
             alert('참여신청 에러발생');
 
-            myOrder(login_midx);
+            myOrder(loginMidx);
         }
 
     });
@@ -194,7 +199,7 @@ function cancleOrder(oidx, state){
                     alert(msg3);
                 }
                 
-                myOrder(login_midx);
+                myOrder(loginMidx);
 
             }
         }); 
@@ -262,7 +267,7 @@ function hideOrder(oidx){
                     alert('글이 숨김처리 되지 않았습니다. 다시 시도해주세요.');
                 }
 
-                myOrder(login_midx);
+                myOrder(loginMidx);
 			}
 		});
 	};	
@@ -286,7 +291,7 @@ function delOrder(oidx, pidx){
                     alert('글이 정상적으로 삭제처리 되지 않았습니다. 다시 시도해주세요.');
                 }
 
-                myOrder(login_midx);
+                myOrder(loginMidx);
 
 			}
 		});

@@ -14,6 +14,8 @@ var loginMidx = 1;
 $('.btn_myItemlist').click(function(){
     $('.aside_myOrderlist').css('display','none');
     $('.aside_myItemlist').css('display','block');
+    $('.btn_myItemlist').css('background-color','rgb(87, 2, 87)');
+    $('.btn_myOderlist').css('background-color','purple');
     myitem(loginMidx);
 
 
