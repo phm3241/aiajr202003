@@ -12,15 +12,34 @@
 <link rel="stylesheet" href="css/view.css" type="text/css">
 <link rel="stylesheet" href="css/aside.css" type="text/css">
 <link rel="stylesheet" href="css/buy.css" type="text/css">
-<link rel="stylesheet" href="css/swiper0.css" type="text/css">
+<link rel="stylesheet" href="css/slide.css" type="text/css">
+<link rel="stylesheet" href="css/swiper.css" type="text/css">
 <link rel="stylesheet" href="css/swiper.min.css" type="text/css">
-<link rel="stylesheet" href="package/swiper-bundle.min.css">  
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> <!-- 평점등록 시 별모양 나타내는  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  <!-- 평점등록 시 별 마우스오버 계속 반응  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> <!-- 날짜포멧 -->
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>   <!-- 데이터를 정렬/필터/색인할 수 있게 도와주는 오픈소스 Javascript Utility Library -->
+
+<script src="js/swiper.min.js"></script>
+<link rel="stylesheet" href="package/swiper-bundle.min.css">  
+
+<!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+/* .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1} */
+</style>
 
 
 
@@ -66,7 +85,8 @@
     <%@include file="include/regItemForm.jsp"%>
     
     <!-- itemView 공구글 상세보기 영역 -->
-    <div id="itemView_area" class="itemView_area"></div> 
+    <div id="itemView_area" class="itemView_area">
+    </div> 
 
 
     <!-- 공구 리스트 영역 -->
@@ -82,26 +102,28 @@
       
         <!-- 추천공구 리스트  영역  : 슬라이드  -->
         <!-- Swiper -->
-        <section class="ag-slide-block">
-          <div class="swiper-container">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
 
           </div>
-        </section>
-      </div>
+          <!-- 페이징 -->
+          <div class="swiper-pagination"></div>
+          <!-- 네비게이션 -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
 
+      </div>
 
 
       <!-- Item area-->
       <div class="w3-container" id="item" style="margin-top:75px;" >
-        <h2 class="w3-xlarge text-purple"><b>item</b></h2>
-        <hr style="width:50px; border:5px solid purple; " class="w3-round">
-        
-        <!-- itemlist 공구 일반글 리스트 -->
-        <div id="itemlist_small_area"></div> 
+      <h2 class="w3-xlarge text-purple"><b>item</b></h2>
+      <hr style="width:50px; border:5px solid purple; " class="w3-round">
+      
+      <!-- itemlist 공구 일반글 리스트 -->
+      <div id="itemlist_small_area">
       </div>  
-
-
-    </div> /<!-- itemlist_area end -->
 
 
 
@@ -119,19 +141,45 @@
 
 
 
-  
 
-  
 
-</body>
-  <script src="js/swiper.min.js"></script>
-  <script src="js/swiper.js"></script> 
+
+  <script>
+  // Script to open and close sidebar
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+  }
+  
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+  }
+
+
+  // Initialize Swiper 
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    slidesPerGroup: 3,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
+  </script>
   <script text="text/javascript" src="js/item.js"></script>
   <script text="text/javascript" src="js/seller.js"></script>
   <script text="text/javascript" src="js/buyer.js"></script>
   <script text="text/javascript" src="js/slide.js"></script>
-    
-    
+  <script src="js/swiper.js"></script> 
 
-
+</body>
 </html>

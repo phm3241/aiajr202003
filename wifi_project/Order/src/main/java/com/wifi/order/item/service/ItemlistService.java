@@ -25,7 +25,9 @@ public class ItemlistService {
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("추천 공구 리스트 최신순정렬  service");
 
+		
 		return dao.getRecomItemlist();
+		
 	};
 	
 	

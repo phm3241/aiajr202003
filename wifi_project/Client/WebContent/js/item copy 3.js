@@ -108,7 +108,7 @@ function recomItemlist(){
 			// alert('recomItems : '+recomItems);
 
 			
-			recomItemlist_print(data);
+			itemlist_print(data);
 
 		} // success end
 
@@ -151,137 +151,44 @@ function itemlist(){
 
 
 
-/* 추천공구글 출력기능 */
-function recomItemlist_print(data){
-
-	var html = '';
-			
-	// 출력되어있는 추천 공구리스트 지우고 ㅡ> 다시 출력
-	$('.swiper-container').html(' ');
-
-	$('#itemlist_area').css('display','block');
-	$('#itemRegForm_area').css('display','none');
-	$('#itemView_area').css('display','none');
-
-
-		html += '<ul class="swiper-wrapper ag-slide_list">';
-	
-		
-	for(var i=0; i<data.length; i++){
-		
-		html += '	<li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="'+i+'">';
-		html += '		<button type="button"  class="item_card_big" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
-		html += '			<img src="/order/upload/'+data[i].photo+'" class="ag-slide_img" alt="">';
-		
-		html += '			<div class="ag-slide_info clearfix">';
-		
-		html += '				<div class="ag-slide-info_descr">';
-		html += '					<small class="ag-slide-info_category">category</small>';
-		html += '					<h6 class="ag-slide-info_title">'+data[i].iidx+': '+data[i].title+'</h6>';
-		html += '					<h6 class="ag-slide-info_title">price : '+data[i].price+'</h6>';
-		html += '					<h6 class="ag-slide-info_title">D-day : '+data[i].receive+'</h6>';
-		html += '					<h6 class="ag-slide-info_title">location : '+data[i].location+'</h6>';
-		html += '					<span class="ag-slide-info_route">';
-		html += '						<span class="seller_name">'+data[i].midx+'.'+data[i].name+' | 평균 ★ '+data[i].rvs_avg+'(총 '+data[i].rvs_totalRow+'건)</span><br>';
-		html += '					</span>';
-		html += '				</div>';
-		
-		html += '				<div class="ag-slide-info_rate">';
-		html += '					<b class="ag-slide-info_strong">'+data[i].view_count+'</b>';
-		html += '					<span class="ag-slide-info_comments">view</span>';
-		html += '				</div>';
-		
-		html += '			</div>';
-
-		html += '		</button>';
-		html += '	</li>';
-		
-
-	} // for end
-	
-		html += '</ul>';
-		
-
-		// 표시되는 위치
-		$('.swiper-container').html(html);
-
-
-
-		//★ swiper 기능을 이 안에 두니까 에러가 해결되었다 ㅠㅠㅠㅠㅠ
-		(function ($) {
-			$(function () {
-		  
-			var agSwiper = $('.swiper-container');
-		  
-			if (agSwiper.length > 0) {
-		  
-			  var sliderView = 1;
-			  var ww = $(window).width();
-			  if (ww >= 1700) sliderView = 7;
-			  if (ww <= 1700) sliderView = 7;
-			  if (ww <= 1560) sliderView = 6;
-			  if (ww <= 1400) sliderView = 5;
-			  if (ww <= 1060) sliderView = 4;
-			  if (ww <= 800) sliderView = 3;
-			  if (ww <= 560) sliderView = 2;
-			  if (ww <= 400) sliderView = 1;
-		  
-			  var swiper = new Swiper('.swiper-container', {
-				slidesPerView: sliderView,
-				spaceBetween: 0,
-				loop: true,
-				loopedSlides: 16,
-				speed: 700,
-				autoplay: true,
-				autoplayDisableOnInteraction: true,
-				centeredSlides: true
-			  });
-		  
-			  $(window).resize(function () {
-				var ww = $(window).width();
-				if (ww >= 1700) swiper.params.slidesPerView = 7;
-				if (ww <= 1700) swiper.params.slidesPerView = 7;
-				if (ww <= 1560) swiper.params.slidesPerView = 6;
-				if (ww <= 1400) swiper.params.slidesPerView = 5;
-				if (ww <= 1060) swiper.params.slidesPerView = 4;
-				if (ww <= 800) swiper.params.slidesPerView = 3;
-				if (ww <= 560) swiper.params.slidesPerView = 2;
-				if (ww <= 400) swiper.params.slidesPerView = 1;
-			  });
-		  
-			  $(window).trigger('resize');
-		  
-			  var mySwiper = document.querySelector('.swiper-container').swiper;
-		  
-			  agSwiper.mouseenter(function () {
-				mySwiper.autoplay.stop();
-				console.log('slider stopped');
-			  });
-		  
-			  agSwiper.mouseleave(function () {
-				mySwiper.autoplay.start();
-				console.log('slider started again');
-			  });
-			}
-		  
-			});
-		  })(jQuery);
-	
-
-
-}; // recomItemlist_print(data) end
-
-
-
-
-/* 일반공구글 출력기능 */
+/* 공구글 출력기능 */
 function itemlist_print(data){
 
+	var check = data[0].istate; 
 
 	var html = '';
+	var cardType = '';
+	var selectDiv = '';
 
-	// 출력되어있는 일반 공구리스트 지우고 ㅡ> 다시 출력
-	$('#itemlist_small_area').html(' ');
+
+	switch(check){
+
+		// 일반공구글
+		case 0: 
+			swiperType = 0;
+			cardType = 'item_card';
+			selectDiv = '#itemlist_small_area';
+
+			// 출력되어있는 일반 공구리스트 지우고 ㅡ> 다시 출력
+			$('#itemlist_small_area').html(' ');
+		break;
+			
+			
+		// 추천공구글
+		case 1:
+			swiperType = 1;
+			cardType = 'item_card_big';
+			selectDiv = '.swiper-wrapper';
+			//selectDiv = '#itemlist_big_area';
+			
+			
+			// 출력되어있는 추천 공구리스트 지우고 ㅡ> 다시 출력
+			//$('#itemlist_big_area').html(' ');
+			$('.swiper-wrapper').html(' ');
+		break;
+
+	};
+
 	
 	$('#itemlist_area').css('display','block');
 	$('#itemRegForm_area').css('display','none');
@@ -290,8 +197,11 @@ function itemlist_print(data){
 	
 	for(var i=0; i<data.length; i++){
 
+		if(swiperType==1){
+			html += '<div class="swiper-slide">';
+		};
 
-		html += '	<button type="button" class="item_card" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
+		html += '	<button class="'+cardType+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 		//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 		html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 		html += '		<div class="item_info">';
@@ -302,26 +212,22 @@ function itemlist_print(data){
 		html += '				<h4 class="seller_rating">view '+data[i].view_count+'</h4>';
 		html += '				<h4 class="item_price">price : '+data[i].price+'</h4> ';
 		html += '				<h4 class="item_limitDate">D-day : '+data[i].receive+'</h4>';
-		html += '				<h4 class="item_location">location : '+data[i].location+'</h4>';
+		html += '				<h4 class="item_location">D-day : '+data[i].location+'</h4>';
 		html += '		</div>';
 		html += '	</button>';
 		
+		if(swiperType==1){
+			html += '</div>';
+		};
 		
 	} // for end
 		
 
 		// 표시되는 위치
-		$("#itemlist_small_area").html(html);
-
-
-	
-		
+		$(selectDiv).html(html);
 
 
 }; // itemlist_print(data) end
-
-
-
 
 
 
@@ -336,12 +242,9 @@ function allItemlist_sortRvs(){
 	$('.sort_rvs').css('background-color', 'teal');
 	$('.sort_reg').css('background-color', 'aquamarine');
 
-	// 평점순 정렬기능 호출 ㅡ> 공구 리스트 다시 출력
+	// 평점순 정렬기능 호출
 	sortRvs(recomItems);
-	recomItemlist_print(recomItems);
-
 	sortRvs(items);
-	itemlist_print(arr);
 
 };
 
@@ -349,10 +252,18 @@ function allItemlist_sortRvs(){
 
 /* 평점순 정렬기능 */
 function sortRvs(arr){
+
 	arr.sort(function (a, b) { 
 		return b.rvs_avg - a.rvs_avg;  
 	});
+
+	// 공구 리스트 다시 출력
+	itemlist_print(arr);
+	
 };
+
+
+
 
 
 

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// 공구글 정보
+// 공구글 정보 DTO
 public class ItemDTO {
 	
 	private int iidx;				// 게시물 번호 -PK
@@ -25,17 +25,20 @@ public class ItemDTO {
 	private int view_count;			// 조회수
 	private int category;			// 판매물품 카테고리 : 0 과일, 1 육류, 2 해산물, 3 채소, 4 생필품, 5 음료, 6 전체
 	private int midx;				// 작성자(회원번호) - FK
+	private String name;				// 작성자 닉네임
 	private float rvs_avg;			// 작성자 평균평점 -Item_rvs table join
 	private int rvs_totalRow;		// 작성자 총평점개수 -Item_rvs table join
+	
 	
 	
 	public ItemDTO() {
 	}
 
 
+
 	public ItemDTO(int iidx, String title, int price, int count_m, int count_w, Timestamp regdate, Timestamp receive,
 			int receive_check, String addr, String location, String content, String photo, int istate, int view_count,
-			int category, int midx, float rvs_avg, int rvs_totalRow) {
+			int category, int midx, String name, float rvs_avg, int rvs_totalRow) {
 		this.iidx = iidx;
 		this.title = title;
 		this.price = price;
@@ -52,9 +55,13 @@ public class ItemDTO {
 		this.view_count = view_count;
 		this.category = category;
 		this.midx = midx;
+		this.name = name;
 		this.rvs_avg = rvs_avg;
 		this.rvs_totalRow = rvs_totalRow;
 	}
+
+
+
 
 
 	public int getIidx() {
@@ -217,6 +224,16 @@ public class ItemDTO {
 	}
 
 
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	public float getRvs_avg() {
 		return rvs_avg;
 	}
@@ -239,12 +256,17 @@ public class ItemDTO {
 
 	@Override
 	public String toString() {
-		return "Itemlist [iidx=" + iidx + ", title=" + title + ", price=" + price + ", count_m=" + count_m
-				+ ", count_w=" + count_w + ", regdate=" + regdate + ", receive=" + receive + ", receive_check="
-				+ receive_check + ", addr=" + addr + ", location=" + location + ", content=" + content + ", photo="
-				+ photo + ", istate=" + istate + ", view_count=" + view_count + ", category=" + category + ", midx="
-				+ midx + ", rvs_avg=" + rvs_avg + ", rvs_totalRow=" + rvs_totalRow + "]";
+		return "ItemDTO [iidx=" + iidx + ", title=" + title + ", price=" + price + ", count_m=" + count_m + ", count_w="
+				+ count_w + ", regdate=" + regdate + ", receive=" + receive + ", receive_check=" + receive_check
+				+ ", addr=" + addr + ", location=" + location + ", content=" + content + ", photo=" + photo
+				+ ", istate=" + istate + ", view_count=" + view_count + ", category=" + category + ", midx=" + midx
+				+ ", name=" + name + ", rvs_avg=" + rvs_avg + ", rvs_totalRow=" + rvs_totalRow + "]";
 	}
+
+	
+	
+	
+	
 	
 	
 	

@@ -89,8 +89,8 @@ function myOrder(loginMidx){
                     // 구매완료 ㅡ> 평점등록 버튼 활성화
                 } else if(state==3){
                     html += '  	  <button type="button" class="btn_buyerAction reviewSeller" onclick="reviewForm_toggle('+data[i].iidx+')">review</button>';
-                    html += '         <form class="reviewForm_'+data[i].iidx+'" onsubmit="return false;">';
-                    //html += '           <input class="score_s_'+data[i].seller+'" type="number">';
+                    html += '         <form class="reviewForm_'+data[i].iidx+'" onsubmit="return false;" style="display:none">';
+                    html += '           <input class="score_s_'+data[i].seller+'" type="number">';
                     html += '           <div class="rating-stars text-center">';
                     html += '               <ul id="stars" class="score_s_'+data[i].seller+'">';
                     html += '                   <li class="star" data-value="1"><i class="fa fa-star fa-fw"></i></li>';
@@ -102,7 +102,7 @@ function myOrder(loginMidx){
                     html += '           </div>';
 					html += '           <input class="insert_rvs_'+data[i].seller+'" type="submit" value="ok" onclick="reviewSeller('+data[i].iidx+','+data[i].seller+','+$(".rating-stars").val()+')" >';
 					html += '         </form>';
-					//html += '     <button type="button" class="btn_buyerAction hideOrder" onclick="hideOrder('+data[i].oidx+')">hide</button>';
+					// html += '     <button type="button" class="btn_buyerAction hideOrder" onclick="hideOrder('+data[i].oidx+')">hide</button>';
 					
                     
                 }
