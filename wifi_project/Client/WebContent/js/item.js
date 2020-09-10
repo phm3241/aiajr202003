@@ -166,7 +166,7 @@ function recomItemlist_print(data){
 
 		html += '<ul class="swiper-wrapper ag-slide_list">';
 	
-		
+
 	for(var i=0; i<data.length; i++){
 		
 		html += '	<li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="'+i+'">';
@@ -177,10 +177,10 @@ function recomItemlist_print(data){
 		
 		html += '				<div class="ag-slide-info_descr">';
 		html += '					<small class="ag-slide-info_category">category</small>';
-		html += '					<h6 class="ag-slide-info_title">'+data[i].iidx+': '+data[i].title+'</h6>';
-		html += '					<h6 class="ag-slide-info_title">price : '+data[i].price+'</h6>';
-		html += '					<h6 class="ag-slide-info_title">D-day : '+data[i].receive+'</h6>';
-		html += '					<h6 class="ag-slide-info_title">location : '+data[i].location+'</h6>';
+		html += '					<h6 class="ag-slide-info_title"><b>'+data[i].iidx+': '+data[i].title+'</b></h6>';
+		html += '					<h5 class="ag-slide-info_title">price : '+data[i].price+'</h6>';
+		html += '					<h5 class="ag-slide-info_title">D-day : '+data[i].receive+'</h6>';
+		html += '					<h5 class="ag-slide-info_title">location : '+data[i].location+'</h6>';
 		html += '					<span class="ag-slide-info_route">';
 		html += '						<span class="seller_name">'+data[i].midx+'.'+data[i].name+' | 평균 ★ '+data[i].rvs_avg+'(총 '+data[i].rvs_totalRow+'건)</span><br>';
 		html += '					</span>';
@@ -215,7 +215,7 @@ function recomItemlist_print(data){
 		  
 			if (agSwiper.length > 0) {
 		  
-			  var sliderView = 1;
+			  var sliderView = 3;
 			  var ww = $(window).width();
 			  if (ww >= 1700) sliderView = 7;
 			  if (ww <= 1700) sliderView = 7;
@@ -228,10 +228,10 @@ function recomItemlist_print(data){
 		  
 			  var swiper = new Swiper('.swiper-container', {
 				slidesPerView: sliderView,
-				spaceBetween: 0,
+				spaceBetween: 50,
 				loop: true,
-				loopedSlides: 16,
-				speed: 700,
+				loopedSlides: 10,
+				speed: 450,
 				autoplay: true,
 				autoplayDisableOnInteraction: true,
 				centeredSlides: true
@@ -312,11 +312,6 @@ function itemlist_print(data){
 
 		// 표시되는 위치
 		$("#itemlist_small_area").html(html);
-
-
-	
-		
-
 
 }; // itemlist_print(data) end
 

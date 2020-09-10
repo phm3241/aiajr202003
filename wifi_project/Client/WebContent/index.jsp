@@ -83,11 +83,10 @@
         <!-- 추천공구 리스트  영역  : 슬라이드  -->
         <!-- Swiper -->
         <section class="ag-slide-block">
-          <div class="swiper-container">
-
-          </div>
+          <div class="swiper-container"></div>
         </section>
-      </div>
+
+      </div> <!-- Recommende end -->
 
 
 
@@ -101,7 +100,7 @@
       </div>  
 
 
-    </div> /<!-- itemlist_area end -->
+    </div> <!-- itemlist_area end -->
 
 
 

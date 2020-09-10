@@ -10,13 +10,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 300;
 }
+
 .ag-slide-block {
   background-color: #f7f3f2;
 
   overflow: hidden;
 }
 .ag-slide_item {
-  padding: 90px 0;
+  padding: 90px 30px;
+  display: inline-block;
 
   -webkit-transition: transform 0.5s;
   -moz-transition: transform 0.5s;
@@ -63,6 +65,8 @@ body {
 }
 .ag-slide-info_descr {
   float: left;
+  width: 250px;
+  margin-left: 20px;
 }
 .ag-slide-info_category {
   font-size: 8px;
@@ -70,20 +74,29 @@ body {
   color: #959494;
   padding-bottom: 5px;
 }
+
+
+.swiper-slide h6 {
+  font-size: 20px;
+  text-align: left;
+}
+
+.swiper-slide h5 {
+  font-size: 16px;
+  text-align: left;
+}
+
 .ag-slide-info_title {
+  text-align: left;
   line-height: 10px;
-  width: 150px;
   padding-bottom: 5px;
-
   font-weight: 800;
-  font-size: 10px;
   color: #262626;
-
   will-change: transform;
 }
 .ag-slide-info_route {
   display: block;
-  line-height: 10px;
+  line-height: 12px;
 
   font-size: 8px;
   color: #959494;
