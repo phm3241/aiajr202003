@@ -75,9 +75,6 @@
       <!-- Recommended item area-->
       <div class="w3-container" id="Recommended" style="margin-top:65px;" >
         <h2 class="w3-xlarge text-purple"><b>Recommended item</b></h2>
-          <button type="button" class="btn_sort sort_reg"  onclick="allItemlist()">Latest Sort</button>
-          <button type="button" class="btn_sort sort_rvs" onclick="allItemlist_sortRvs()">Rating Sort</button>
-          <button type="button" class="btn_regItem" onclick="regItemForm()">item +</button>
         <hr style="width:50px;border:5px solid purple;"  class="w3-round">
       
         <!-- 추천공구 리스트  영역  : 슬라이드  -->
@@ -93,6 +90,9 @@
       <!-- Item area-->
       <div class="w3-container" id="item" style="margin-top:75px;" >
         <h2 class="w3-xlarge text-purple"><b>item</b></h2>
+          <button type="button" class="btn_sort sort_reg"  onclick="allItemlist()">Latest Sort</button>
+          <button type="button" class="btn_sort sort_rvs" onclick="allItemlist_sortRvs()">Rating Sort</button>
+          <button type="button" class="btn_regItem" onclick="regItemForm()">item +</button>
         <hr style="width:50px; border:5px solid purple; " class="w3-round">
         
         <!-- itemlist 공구 일반글 리스트 -->

@@ -291,7 +291,7 @@ function itemlist_print(data){
 	for(var i=0; i<data.length; i++){
 
 
-		html += '	<button type="button" class="item_card" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
+		html += '	<button type="button" class="item_card '+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 		//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 		html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 		html += '		<div class="item_info">';
@@ -397,14 +397,10 @@ function regSubmit(){
 		success : function(iidx){
 			alert("공구등록완료");
 			alert("등록한 공구 iidx : " + iidx); 
-			//itemView(data.iidx);
-			//itemList();
-			//document.getElementById('regItemForm').reset();
-
+			document.getElementById('regItemForm').reset();
+			
 			itemView(iidx);
 			
-			// $('#itemView').html(html);
-			// allItemlist();
 
 		},
 
@@ -421,7 +417,7 @@ function regSubmit(){
 
 
 /* 공구글 상세보기 */
-function itemView(iidx, loginMidx) {
+function itemView(iidx) {
 	
 
 	$.ajax({

@@ -95,12 +95,12 @@
 	display: inline-block;
 }
 
-#Recommended h2 {
+#item h2 {
 	display: inline;
 
 }
 
-#Recommended button {
+#item button {
 	float: right;
 }
 
