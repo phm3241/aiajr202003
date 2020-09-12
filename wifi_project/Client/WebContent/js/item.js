@@ -15,7 +15,6 @@ var sortItems = [];
 
  $(document).ready(function(){
 	allItemlist();
-	filterSelection("category0");
 
 	/* 검색기능 */
 	$("#myInput").on("keyup", function() {
@@ -171,7 +170,7 @@ function recomItemlist_print(data){
 	for(var i=0; i<data.length; i++){
 		
 		html += '	<li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="'+i+'">';
-		html += '		<button type="button"  class="item_card_big" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
+		html += '		<button type="button"  class="item_card_big category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 		html += '			<img src="/order/upload/'+data[i].photo+'" class="ag-slide_img" alt="">';
 		
 		html += '			<div class="ag-slide_info clearfix">';
@@ -292,7 +291,7 @@ function itemlist_print(data){
 	for(var i=0; i<data.length; i++){
 
 
-		html += '	<button type="button" class="item_card  category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
+		html += '	<button type="button" class="item_card category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 		//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 		html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 		html += '		<div class="item_info">';
@@ -337,7 +336,7 @@ function allItemlist_sortRvs(){
 	recomItemlist_print(recomItems);
 
 	sortRvs(items);
-	itemlist_print(arr);
+	itemlist_print(items);
 
 };
 

@@ -69,8 +69,8 @@
 
 /* 카테고리 검색 : card 출력상태로 변경할 때 */
 .show {
-	display: block;
-  }
+	display: inline-block;
+}
 
 /* 카테고리 검색 : 클릭한 카테고리 버튼의 색 변경 */
 .active{

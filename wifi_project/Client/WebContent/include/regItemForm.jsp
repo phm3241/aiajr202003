@@ -38,12 +38,10 @@
                
             <label for="category">카테고리</label> 
                   <select id="category" name="category">
-                     <option value="6" selected>전체</option>
-                     <option value="1">1.과일</option>
-                     <option value="2">2.육류</option>
-                     <option value="3">3.채소</option>
-                     <option value="4">4.생필품</option>
-                     <option value="5">5.음료</option>
+                     <option value="0" selected>전체</option>
+                     <option value="1">1.과일/채소</option>
+                     <option value="2">2.육류/해산물</option>
+                     <option value="3">3.생필품/기타</option>
                   </select>
 
             <input type="radio" name="state" class="state" value="0" checked>일반공구로 등록하기

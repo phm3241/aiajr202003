@@ -25,7 +25,7 @@ public class ItemDTO {
 	private int view_count;			// 조회수
 	private int category;			// 판매물품 카테고리 : 0 과일, 1 육류, 2 해산물, 3 채소, 4 생필품, 5 음료, 6 전체
 	private int midx;				// 작성자(회원번호) - FK
-	private String name;				// 작성자 닉네임
+	private String name;			// 작성자 닉네임
 	private float rvs_avg;			// 작성자 평균평점 -Item_rvs table join
 	private int rvs_totalRow;		// 작성자 총평점개수 -Item_rvs table join
 	

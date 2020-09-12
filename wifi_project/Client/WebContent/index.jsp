@@ -53,7 +53,7 @@
           <button type="button" class="btn_search_category" onclick="filterSelection('category3')">생필품/기타</button>
           <button type="button" class="btn_search_category" onclick="filterSelection('category2')">육류/해산물</button>
           <button type="button" class="btn_search_category" onclick="filterSelection('category1')">과일/채소</button>
-          <button type="button" class="btn_search_category active" onclick="filterSelection('category0')">전체</button>
+          <button type="button" class="btn_search_category active" onclick="allItemlist()">전체</button>
         </div>
       </div>
     </div>

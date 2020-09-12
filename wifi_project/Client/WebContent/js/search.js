@@ -10,29 +10,41 @@ var loginMidx = 1;
 /* 카테고리 정렬 */
 function filterSelection(c) {
 
-  var recomItem; 
-  var item;
+  alert('카테고리 정렬 시작 c: ' + c);
 
-  recomItem = $(".item_card_big");
-  item = $(".item_card");
-  if (c != "category0");
-
-  for (var i = 0; i<recomItem.length; i++) {
+  // if(c == "category0"){
+    // $(".item_card_big").addClass("show");
+    // $(".item_card").addClass("show");
+  
+  // } else {
+  
     
-    if (recomItem[i].hasClass(c) == true) {
-        recomItem[i].addClass("show");
-    } else {
-        recomItem[i].removeClass("show");
-    }   
-  }
+    $(".item_card_big").css('display', 'none');
+    $(".item_card").css('display', 'none');
+    // $(".item_card_big").removeClass("show");
+    // $(".item_card").removeClass("show");
+    alert('카드들 display none 처리됨');
+    
+    
+    $('.'+c).addClass("show");
+    $('.'+c).css("display","inline-block");
+    alert('해당 카테고리에 show처리됨');
 
-  for (var i = 0; i<item.length; i++) {
-    if (item[i].hasClass(c) == true) {
-        item[i].addClass("show");
-    } else {
-        item[i].removeClass("show");
-    }   
-  }
+      // if ($(".item_card_big").hasClass(c) == true) {
+      //   alert('item_card_big hasClass 확인 : '+$(".item_card_big").hasClass(c));
+      //   $(this).addClass("show");
+      //   //$(".item_card_big").css('display', 'inline-block');
+
+      // }   
+      
+      // if ($(".item_card").hasClass(c) == true) {
+      //   alert('item_card hasClass 확인 : '+$(".item_card_big").hasClass(c));
+      //   $(this).addClass("show");
+
+      //   //$(".item_card").css('display', 'inline-block');
+      // }   
+
+
 
 };  // filterSelection(c) end
 
@@ -40,7 +52,7 @@ function filterSelection(c) {
 
 $('.btn_search_category').click(function(){
 
-    $(".active").removeClass();
+    $('.btn_search_category').removeClass("active");
     $(this).addClass("active");
 
 });
