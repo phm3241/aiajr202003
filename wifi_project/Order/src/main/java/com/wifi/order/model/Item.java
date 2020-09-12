@@ -22,7 +22,7 @@ public class Item {
 	private String photo;			// 첨부사진
 	private int state;				// 게시글 현황
 	private int view_count;			// 조회수
-	private int category;			// 판매물품 카테고리 : 0 과일, 1 육류, 2 해산물, 3 채소, 4 생필품, 5 음료, 6 전체
+	private int category;			// 판매물품 카테고리 : 0 전체,  1과일/채소, 2 육류/해산물, 3 생필품/기타
 	private int midx;				// 작성자(회원번호) - FK
 	
 	

@@ -9,10 +9,12 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
+<link rel="stylesheet" href="css/search.css" type="text/css">
+<link rel="stylesheet" href="css/item.css" type="text/css">
+
 <link rel="stylesheet" href="css/view.css" type="text/css">
 <link rel="stylesheet" href="css/aside.css" type="text/css">
-<link rel="stylesheet" href="css/buy.css" type="text/css">
-<link rel="stylesheet" href="css/swiper0.css" type="text/css">
+<link rel="stylesheet" href="css/swiper.css" type="text/css">
 <link rel="stylesheet" href="css/swiper.min.css" type="text/css">
 <link rel="stylesheet" href="package/swiper-bundle.min.css">  
 
@@ -48,11 +50,10 @@
           <input type="text" name="search" class="search" placeholder="Search.."><br>
         </div>
         <div class="CategorySearch">
-          <button type="button" class="btn_search_category" onclick="">과일</button>
-          <button type="button" class="btn_search_category" onclick="">육류</button>
-          <button type="button" class="btn_search_category" onclick="">채소</button>
-          <button type="button" class="btn_search_category" onclick="">생필품</button>
-          <button type="button" class="btn_search_category" onclick="">음료</button>
+          <button type="button" class="btn_search_category" onclick="filterSelection('category3')">생필품/기타</button>
+          <button type="button" class="btn_search_category" onclick="filterSelection('category2')">육류/해산물</button>
+          <button type="button" class="btn_search_category" onclick="filterSelection('category1')">과일/채소</button>
+          <button type="button" class="btn_search_category active" onclick="filterSelection('category0')">전체</button>
         </div>
       </div>
     </div>
@@ -65,8 +66,14 @@
     <!-- 공구 등록 폼 -->
     <%@include file="include/regItemForm.jsp"%>
     
+
+
+
     <!-- itemView 공구글 상세보기 영역 -->
     <div id="itemView_area" class="itemView_area"></div> 
+
+
+
 
 
     <!-- 공구 리스트 영역 -->
@@ -128,7 +135,8 @@
   <script text="text/javascript" src="js/item.js"></script>
   <script text="text/javascript" src="js/seller.js"></script>
   <script text="text/javascript" src="js/buyer.js"></script>
-  <script text="text/javascript" src="js/slide.js"></script>
+  <!-- <script text="text/javascript" src="js/slide.js"></script> -->
+  <script text="text/javascript" src="js/search.js"></script>
     
     
 

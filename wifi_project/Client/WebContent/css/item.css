@@ -56,6 +56,17 @@
 }
 
 
+#item h2 {
+	display: inline;
+
+}
+
+#item button {
+	float: right;
+}
+
+ 
+
 .item_card_big {
 	width: 360px;
 	height: 510px;
@@ -65,7 +76,8 @@
 	border-radius: 7px;
 	background-color: white;
 	/* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1); */
-	display: inline-block;
+	/* display: inline-block; */
+	display: none;
 }
 
 .item_card {
@@ -74,7 +86,8 @@
 	margin: 20px;
 	border: 1px solid #dddddd;
 	border-radius: 10px;
-	display: inline-block;
+	/* display: inline-block; */
+	display: none;
 	background-color: white;
 	float: left;
 }
@@ -140,6 +153,8 @@
 	color: white;
 	background-color: rgb(140, 83, 148);
 }
+
+
 
 
 

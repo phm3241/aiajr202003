@@ -15,6 +15,7 @@ var sortItems = [];
 
  $(document).ready(function(){
 	allItemlist();
+	filterSelection("category0");
 
 	/* 검색기능 */
 	$("#myInput").on("keyup", function() {
@@ -291,7 +292,7 @@ function itemlist_print(data){
 	for(var i=0; i<data.length; i++){
 
 
-		html += '	<button type="button" class="item_card '+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
+		html += '	<button type="button" class="item_card  category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 		//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 		html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 		html += '		<div class="item_info">';
