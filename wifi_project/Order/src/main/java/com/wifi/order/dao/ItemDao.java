@@ -53,10 +53,13 @@ public interface ItemDao {
 	int cntBuyer(int iidx);
 	
 	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
-	int selectBuyer(int iidx,  List<Integer> buyer);
+	int selectBuyer(int iidx,  Object[] buyer);
 	
 	// 나의 공구판매현황[모집중] - 참여자 거절하기
 	int rejectBuyer(int iidx, int midx);
+	
+	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  
+	int autoRejectBuyer(int iidx, Object[] buyer);
 
 	// 나의 공구판매현황[판매완료] - 구매자 평점등록
 	int reviewBuyer(Item_rvb rvb);
@@ -68,13 +71,9 @@ public interface ItemDao {
 	String getQR(int iidx, int midx);
 
 	
-	
-
 
 	
 
-	
-	// 
 	
 	
 	

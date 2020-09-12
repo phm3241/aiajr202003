@@ -1,5 +1,6 @@
 package com.wifi.order.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +63,15 @@ public class ItemController {
 	@Autowired
 	MyItemBuyerService myBuyerService;
 
-	@Autowired
-	MyBuyerCntService cntBuyerService;
 	
 	@Autowired
 	MyBuyerSelectService selectBuyerService;
 	
-
+	// 참여자 거절. 자동거절
 	@Autowired
 	MyBuyerRejectService rejectBuyerService;
-
+	
+	
 	@Autowired
 	QRService getQRService;
 	
@@ -171,14 +171,6 @@ public class ItemController {
 		
 	};
 	
-	// 나의 공구판매현황[모집중] - 현재 참여자수 
-//	@GetMapping("/mybuyerCnt/{iidx}")
-//	public int cntBuyer(@PathVariable("iidx") int iidx) {
-//		
-//		System.out.println("내 판매글 - 현재 참여자수 controller");
-//		return cntBuyerService.cntBuyer(iidx);
-//	};
-	
 	
 	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
 	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
@@ -190,32 +182,26 @@ public class ItemController {
 //					@RequestParam(value="buyerArr[]") List<Integer> buyer, @RequestParam(value="rejectArr[]", required =false, defaultValue="false") List<Integer> reject) {
 //	public int selectBuyer(@RequestParam(value="iidx") String iidx, 
 //			@RequestParam(value="buyerArr[]") List<Integer> buyerArr, @RequestParam(value="rejectArr[]", required =false) List<Integer> rejectArr) {
-	
-	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
-	public int selectBuyer(@RequestBody JsonObject buyerArr) {
-
+//	public int selectBuyer(@RequestBody JsonObject buyerArr) {
 	//@PostMapping("/mybuyer")  // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이 null...
 	//public int selectBuyer(HttpServletRequest request) {
+	@PutMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
+	public int selectBuyer(@RequestBody HashMap<String, Object> buyerArr) {
 			
 		//String[] buyerArr = request.getParameterValues("buyerArr[]");
 		//String[] rejectArr = request.getParameterValues("rejectArr[]");
 		
 		System.out.println("참여자 구매자로 선정 controller");
 		//System.out.println("iidx 확인 :" +iidx);
-		System.out.println("buyer 배열확인 : " + buyerArr);
-		System.out.println("buyer 배열확인 toString : " + buyerArr.toString());
-//		for(int i=0; i<buyerArr.length; i++) {
-//			System.out.println(buyerArr[i]);
-//		}
-//		for(int i=0; i<buyerArr.size(); i++) {
-//			System.out.println(buyerArr.get(i));
-//		}
-//		for(int i=0; i<buyerArr.size(); i++) {
-//			System.out.println(buyerArr.get(i));
-//		}
+		//System.out.println("buyer 배열확인 toString : " + buyerArr.toString());
+		System.out.println("buyer 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
+		System.out.println("buyer 배열확인 buyerArr.get(iidx) : " + buyerArr.get("iidx"));
 		
-		return 0; 
-		//return selectBuyerService.selectBuyer(iidx, buyer); 
+		int iidx = (int) buyerArr.get("iidx");
+		//int[] buyer = (int[]) buyerArr.get("buyerArr");
+		Object[] buyer = buyerArr.values().toArray();
+		
+		return selectBuyerService.selectBuyer(iidx, buyer); 
 	};
 	
 	
@@ -232,22 +218,23 @@ public class ItemController {
 	
 	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  
 	// 구매자 선정하면 나머지 선택하지 않은 참여자, 판매실패하면 참여자 자동 거절처리
-	@PostMapping("/mybuyer/{iidx}")
+	@PutMapping("/mybuyer/{iidx}")
 //	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyer[]") String[] buyer) {
 //	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody List<Integer> buyer) {
-	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody JsonObject buyer) {
+	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody HashMap<String, Object> buyerArr) {
 		
 		System.out.println("참여자 자동거절 controller");
-		int size = buyer.size();
-		System.out.println("buyer"+buyer.toString()+", buyer.size(): "+size);
 		
+		System.out.println("buyerArr 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
 		
+		//int[] buyer = (int[]) buyerArr.get("buyerArr");
+		Object[] buyer = buyerArr.values().toArray();   //컬렉션에서 제공되는 메서드 toArray는 Object[] 로 변환밖에 안도 
 		
-//		for(int i=0; i<buyer.length; i++) {
-//			System.out.println(buyer[i]);
-//		};
-		return 0; 
+
+		return rejectBuyerService.autoRejectBuyer(iidx, buyer); 
 	};
+	
+	
 	
 	
 	// 나의 공구판매현황[모집완료] - QR생성

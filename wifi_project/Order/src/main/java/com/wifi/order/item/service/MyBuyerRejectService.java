@@ -14,13 +14,22 @@ public class MyBuyerRejectService {
 	@Autowired
 	private SqlSessionTemplate template;
 	
-	
+	// 나의 공구판매현황[모집중] - 참여자 거절하기 (한명씩)
 	public int rejectBuyer(int iidx, int midx) {
 	
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("참여자 거절 service");
 		
 		return dao.rejectBuyer(iidx, midx);
+	}
+
+	
+	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  (배열로)
+	public int autoRejectBuyer(int iidx, Object[] buyer) {
+		
+		dao = template.getMapper(ItemDao.class);
+		
+		return dao.autoRejectBuyer(iidx, buyer);
 	}
 
 }

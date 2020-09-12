@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기 -->
 	<update id="selectBuyer">
 		update wifi.purchase set state=0 where iidx=#{param1} and midx in
-		<foreach collection="list" item="buyerArr" open="(" close=")" separator=",">
+		<foreach collection="array" item="buyerArr" open="(" close=")" separator=",">
  			#{buyerArr}
 		</foreach>
 	</update>
@@ -124,6 +124,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 나의 공구판매현황[모집중] - 참여자 거절하기 -->
 	<update id="rejectBuyer">
 		update wifi.order set state=1 where iidx=#{param1} and midx=#{param2}
+	</update>
+	
+	
+	<!-- 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절하기 -->
+	<update id="autoRejectBuyer">
+		update wifi.order set state=1 where iidx=#{param1} and midx in
+		<foreach collection="array" item="buyerArr" open="(" close=")" separator=",">
+ 			#{buyerArr}
+		</foreach>
 	</update>
 
 
