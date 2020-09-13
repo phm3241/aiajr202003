@@ -2,221 +2,115 @@
    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Main Page</title>
 
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500;700&display=swap" > <!-- 영문폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> <!-- 한글폰트 -->
 
-<link rel="stylesheet" href="/css/aside.css" type="text/css">
-<link rel="stylesheet" href="/css/buy.css" type="text/css">
-<link rel="stylesheet" href="/css/slide.css" type="text/css">
-<link rel="stylesheet" href="/css/swiper.css" type="text/css">
-<link rel="stylesheet" href="/css/swiper.min.css" type="text/css">
+  <link rel="stylesheet" href="css/item.css" type="text/css">
+  <link rel="stylesheet" href="css/search.css" type="text/css">
+  <link rel="stylesheet" href="css/aside.css" type="text/css">
+  <link rel="stylesheet" href="css/swiper.css" type="text/css">
+  <link rel="stylesheet" href="css/swiper.min.css" type="text/css"> <!-- swiper관련 -->
+  <link rel="stylesheet" href="package/swiper-bundle.min.css">  <!-- swiper관련 -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> <!-- 평점등록 시 별모양 나타내는  -->
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> <!-- 평점등록 시 별모양 나타내는  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  <!-- 평점등록 시 별 마우스오버 계속 반응  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> <!-- 날짜포멧 -->
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>   <!-- 데이터를 정렬/필터/색인할 수 있게 도와주는 오픈소스 Javascript Utility Library -->
-
-<script src="/js/swiper.min.js"></script>
-<link rel="stylesheet" href="package/swiper-bundle.min.css">   
-
-
-
-
-
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
-
-<!-- CSS only -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-<!-- JS, Popper.js, and jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-
-<!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
-
-
-
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script> -->
-<!-- <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
-
-
-
-
-
-
-<style>
-   /* .panel{
-      display: none;
-   } */
-</style>
-<title>Insert title here</title>
-</head>      
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  <!-- 평점등록 시 별 마우스오버 계속 반응  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> <!-- 날짜포멧 -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>   <!-- 데이터를 정렬/필터/색인할 수 있게 도와주는 오픈소스 Javascript Utility Library -->
+  
+</head>
 <body>
 
-   
-   <div id="container">
-
-      <!-- aside 공구현황 -->
-      <%@include file="include/aside.jsp"%>
+  <!-- aside 영역 : 프로필. 판매&구매현황 -->
+  <%@include file="include/aside.jsp"%>
 
 
-      <!-- <div id="nav">
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" style="margin-left:450px;margin-right:40px">
 
-         <br><br><br><br>
-         <a href="#">home</a> <br><br>
-         <a href="#">logout</a> <br><br> 
-         <a href="#">icon</a>  <br><br>
-         <a href="#">icon</a> 
-      </div> -->
+
+    <!-- header영역 : 타이틀. 검색 -->
+    <%@include file="include/header.jsp"%>
 
 
 
+    <!-- content영역 : 공구등록폼 / 공구상세보기/ 공구리스트(추천글.일반글) -->
+    
+      <!-- content영역-1 : 공구등록 폼 -->
+      <%@include file="include/regItemForm.jsp"%>
 
-      <div id="main_content_area">
+      <!-- content영역-2 : 공구상세보기  -->
+      <div id="itemView_area" class="itemView_area"></div> 
 
-         <!-- header : 타이틀. 검색기능 -->
-         <%@include file="include/header.jsp"%>
 
-         
-         
+      <!-- content영역-3 : 공구리스트(추천글.일반글) -->
+      <div id="itemlist_area">
 
-         <button type="button" class="btn_sort sort_reg"  onclick="allItemlist()">최신순정렬</button>
-         <button type="button" class="btn_sort sort_rvs" onclick="allItemlist_sortRvs()">평점순정렬</button>
-         
-         <button type="button" class="btn_regItem" onclick="regItemForm()">공구글 등록</button>
-         
+        <!-- 추천글 Recommended item area-->
+        <div class="w3-container" id="Recommended" style="margin-top:65px;" >
+
+          <!-- 추천글 - 타이틀 -->
+          <h2 class="w3-xlarge text-purple"><b>Recommended item</b></h2>
+          <hr style="width:50px;border:5px solid purple;"  class="w3-round">
+        
+          <!-- 추천글 리스트 Swiper  -->
+          <section class="ag-slide-block">
+            <div class="swiper-container"></div>
+          </section>
+
+        </div> <!-- Recommende end -->
+
+
+
+        <!-- 일반글 Item area-->
+        <div class="w3-container" id="item" style="margin-top:75px;" >
+
+          <!-- 일반글 - 타이틀. 등록버튼. 정렬버튼 -->
+          <h2 class="w3-xlarge text-purple"><b>item</b></h2>
+            <button type="button" class="btn_sort sort_reg"  onclick="allItemlist()">Latest Sort</button>
+            <button type="button" class="btn_sort sort_rvs" onclick="allItemlist_sortRvs()">Rating Sort</button>
+            <button type="button" class="btn_regItem" onclick="regItemForm()">item +</button>
+          <hr style="width:50px; border:5px solid purple; " class="w3-round">
           
+          <!-- 일반글 리스트 -->
+          <div id="itemlist_small_area"></div> 
+
+        </div>  <!-- Item area end -->
+
+
+      </div> <!-- itemlist_area end -->
 
 
 
-         <!-- Swiper -->
-         <!-- <div class="swiper-container">
-            <div class="swiper-wrapper">
-               <div class="swiper-slide">Slide 1</div>
-               <div class="swiper-slide">Slide 2</div>
-               <div class="swiper-slide">Slide 3</div>
-               <div class="swiper-slide">Slide 4</div>
-               <div class="swiper-slide">Slide 5</div>
-               <div class="swiper-slide">Slide 6</div>
-               <div class="swiper-slide">Slide 7</div>
-               <div class="swiper-slide">Slide 8</div>
-               <div class="swiper-slide">Slide 9</div>
-               <div class="swiper-slide">Slide 10</div>
-            </div> -->
-            <!-- Add Pagination -->
-            <!-- <div class="swiper-pagination"></div> -->
-            <!-- Add Arrows -->
-            <!-- <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-         </div> -->
-
-
-
-         <!-- 공구 등록 폼 -->
-         <%@include file="include/regItemForm.jsp"%>
-         
-         
-         <!-- itemView 공구글 상세보기 영역 -->
-         <div id="itemView" class="itemView">
-         </div> 
-         	
-
-         
-         
-         <!-- 공구 리스트 영역 -->
-         <div id="itemlist_area">
-
-            <!-- 추천공구 리스트  영역  : 슬라이드  -->
-            <!-- Swiper -->
-            <div class="swiper-container">
-               <div class="swiper-wrapper">
-
-               </div>
-               <!-- 페이징 -->
-               <div class="swiper-pagination"></div>
-               <!-- 네비게이션 -->
-               <div class="swiper-button-next"></div>
-               <div class="swiper-button-prev"></div>
-            </div>
-
-            <!-- itemlist 공구 추천글 리스트 -->
-            <!-- <div id="itemlist_big_area">
-            </div> -->  
-            
-            <!-- itemlist 공구 일반글 리스트 -->
-            <div id="itemlist_small_area">
-            </div>  
-            
-         </div>  <!-- itemlist_area  end -->
-      
-
-
-
-      </div>   <!-- main_content_area end -->
+  </div>  <!-- w3-main end -->
 
 
 
 
+  <!-- footer -->
+  <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+    <p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p>
+  </div>
 
-      
+  
 
-   </div>
-   <!-- container end -->
+  
 
-
-
-
-     <!-- Swiper JS -->
-  <!-- <script src="/package/swiper-bundle.min.js"></script> -->
-
-  <!-- Initialize Swiper -->
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      slidesPerGroup: 3,
-      loop: true,
-      loopFillGroupWithBlank: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-  </script>
-
-   <!-- Swiper JS -->
-  <!-- <script text="text/javascript" src="package/swiper-bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
- -->
- 
-
-
-
-
- <script text="text/javascript" src="/js/item.js"></script>
- <script text="text/javascript" src="/js/seller.js"></script>
- <script text="text/javascript" src="/js/buyer.js"></script>
- <script text="text/javascript" src="/js/slide.js"></script>
- <script src="/js/swiper.js"></script>   
-
-
-   
-</body>  
+</body>
+  <script src="js/swiper.min.js"></script>
+  <script src="js/swiper.js"></script> 
+  <script text="text/javascript" src="js/item.js"></script>   <!-- 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제 -->
+  <script text="text/javascript" src="js/seller.js"></script> <!-- aside 판매자 -->
+  <script text="text/javascript" src="js/buyer.js"></script>  <!-- aside 구매자 -->
+    
+    
 
 
 </html>
-
-

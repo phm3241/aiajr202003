@@ -2,8 +2,10 @@
    pageEncoding="UTF-8"%>
 
 
-
+   <!-- 공구등록 영역 -->
    <div class="w3-container" id="itemRegForm_area" style="margin-top:65px;" >
+
+      <!-- 타이틀 -->
       <h2 class="w3-xlarge text-purple"><b>Item RegForm</b></h2>
       <hr style="width:50px;border:5px solid purple;"  class="w3-round">
 
@@ -54,4 +56,6 @@
 
       </div>  <!-- regItemForm_page  end -->
 
-   </div>
+
+
+   </div>  <!-- itemRegForm_area  end -->

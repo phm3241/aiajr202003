@@ -2,42 +2,25 @@
    pageEncoding="UTF-8"%>
 
 <!-- header -->
-<div class="header">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>       
-    <!-- 타이틀 영역 -->
-    <div class="title_area">
-       <h1 class="main_title">W 1 F 1</h1>
-       <h1 class="sub_title"> 같 이 ( 사 는 ) 가 치 </h1>
+   <div class="w3-container" id="showcase" style="margin-top: 40px;">
+   
+      <!-- 타이틀 로고 -->
+      <div class="mainTitle">
+         <h1 class="w3-xxlarge" style="display: inline;"><b> W 1 F 1 같이 사는 가치</b></h1>
+      </div>
+
+      <!-- 검색영역 -->
+      <div id="search_area" >
+         <div class="inputSearch">
+            <input type="text" name="search" class="search" placeholder="Search.."><br>
+         </div>
+         <div class="CategorySearch">
+            <button type="button" class="btn_search_category" onclick="filterSelection('category3')">생필품/기타</button>
+            <button type="button" class="btn_search_category" onclick="filterSelection('category2')">육류/해산물</button>
+            <button type="button" class="btn_search_category" onclick="filterSelection('category1')">과일/채소</button>
+            <button type="button" class="btn_search_category active" onclick="allItemlist()">전체</button>
+         </div>
+      </div>
 
 
-       <!-- 상단고정 navbar -->
-       <!-- <div id="navbar">
-          <a class="active" href="javascript:void(0)">Home</a>
-          <a href="javascript:void(0)">News</a>
-          <a href="javascript:void(0)">Contact</a>
-       </div> -->
-
-    </div>
-
-    <!-- 검색영역 -->
-    <div id="search_area">
-         <!-- 검색 -->
-         <input type="text" name="search" class="search" placeholder="Search..">
-    
-
-          <!-- <p><strong>Checkbox</strong></p>
-          <div class="btn-group-toggle" data-toggle="buttons">
-             <label class="btn btn-primary">
-                <input type="checkbox"> Checkbox
-             </label>
-          </div> -->
-
-       <button type="button" class="btn_search_category" onclick="">과일</button>
-       <button type="button" class="btn_search_category" onclick="">육류</button>
-       <button type="button" class="btn_search_category" onclick="">채소</button>
-       <button type="button" class="btn_search_category" onclick="">생필품</button>
-       <button type="button" class="btn_search_category" onclick="">음료</button>
-    </div>
-
-
- </div> <!-- header end : title, nav, search -->
+   </div> <!-- header end -->

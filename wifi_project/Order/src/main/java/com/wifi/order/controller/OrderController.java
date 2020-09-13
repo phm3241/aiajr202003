@@ -27,7 +27,6 @@ public class OrderController {
 	@Autowired
 	MyOrderService myOrderService;
 	
-	
 	@Autowired
 	private OrderRegService regService;
 
@@ -51,8 +50,8 @@ public class OrderController {
 //	내 공구 구매현황 관련----------------------------------
 	
 	// 내 구매글 
-	@GetMapping("/{login_midx}")
-	public List<MyItemDTO> getMyOrder(HttpSession session, @PathVariable("login_midx") int midx){
+	@GetMapping("/{loginMidx}")
+	public List<MyItemDTO> getMyOrder(HttpSession session, @PathVariable("loginMidx") int midx){
 		
 		//int midx = (int) session.getAttribute("midx");
 		System.out.println("내 구매글 controller");
@@ -62,8 +61,8 @@ public class OrderController {
 	
 	
 	// 공구 참여신청
-	@PostMapping("/{login_midx}/{iidx}")
-	public int regOrder(HttpSession session, @PathVariable("login_midx") int midx, @PathVariable("iidx") int iidx) {
+	@PostMapping("/{loginMidx}/{iidx}")
+	public int regOrder(HttpSession session, @PathVariable("loginMidx") int midx, @PathVariable("iidx") int iidx) {
 		
 		//int midx = (int) session.getAttribute("midx");
 		System.out.println("공구 참여신청 controller");
@@ -71,6 +70,8 @@ public class OrderController {
 	};
 	
 	
+	
+//	현황별 기능 관련 ----------------------------------
 	
 	// 나의 공구구매현황[참여중][다음기회에..] - 참여취소 (글삭제)
 	@DeleteMapping("/{oidx}")

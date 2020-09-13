@@ -6,30 +6,7 @@
 }
 
 
-
-
-
 /* aside ----------------------------------- */
-/* .aside_area {
-	width: 20%;
-	height: 1000px;
-	float: right;
-	border-radius: 30px;
-	background-color: lavender;
-} */
-
-
-/* .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  } */
-
-
-
-
 
 #alarm_b {
 	font-size: 20px;
@@ -43,15 +20,6 @@
 	background-color: yellow;
 }
 
-/* button {
-	background: inherit;
-	border: none;
-	box-shadow: none;
-	border-radius: 0;
-	padding: 0;
-	overflow: visible;
-	cursor: pointer
-} */
 
 .alarm {
 	width: 20px;
@@ -67,6 +35,8 @@
 .aside_state, .aside_mycard {
 	min-height: 80px;
 }
+
+
 .aside_mycard {
 	width: 100%;
 	margin-bottom: 15px;

@@ -11,15 +11,8 @@
 <title>kakaoLogin</title>
 
 <link rel="stylesheet" href="/css/comment.css" type="text/css">
-<link rel="stylesheet" href="/css/aside.css" type="text/css">
-<link rel="stylesheet" href="/css/buy.css" type="text/css">
-<link rel="stylesheet" href="/css/slide.css" type="text/css">
-<link rel="stylesheet" href="/css/swiper.css" type="text/css">
-<link rel="stylesheet" href="/css/swiper.min.css" type="text/css">
-<link rel="stylesheet" href="/css/swiper.min.css" type="text/css">
-
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 </head>
 <body>
 

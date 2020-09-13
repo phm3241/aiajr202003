@@ -5,8 +5,12 @@ var domain = "http://localhost:8080/order";
 var loginMidx = 1;
 
 
-/***** buyer ********************************************************************************************/
+/***** buyer : aside 구매자 ************************************************************************/
+/***** - 내구매글 리스트 / 현황별 기능(참여신청, 참여취소, QR보기, 평점등록, 글숨김) **********/
 
+
+
+// 리스트 관련 --------------------------------------------------------------------------------------
 
 /* 내 구매현황 탭 클릭 */
 $('.btn_myOderlist').click(function(){
@@ -16,11 +20,6 @@ $('.btn_myOderlist').click(function(){
     $('.btn_myItemlist').css('background-color','purple');
     $('.btn_myOderlist').css('background-color','rgb(87, 2, 87)');
     myOrder(loginMidx);
-
-
-
- 
-
 
 });
 
@@ -123,180 +122,179 @@ function myOrder(loginMidx){
 
 };
 
-/* 평점등록 폼 토글 */
-function reviewForm_toggle(iidx){
-    $(".reviewForm_"+iidx).toggle();
-}
 
 
 
-/* 참여신청 */
-function regOrder(loginMidx, iidx){
 
-    $.ajax({
-        url : domain+'/orders/'+loginMidx+'/'+iidx,
-        type : 'POST',
-        success : function(data){
-
-            if(data==-1){
-                data('이미 신청하신 내역이 있습니다.');
-            }else if(data==-2){
-                alert('신청하신 공구의 참여인원이 마감되어, 참여신청이 불가합니다. ');
-            }else if(data==1){
-                alert('참여신청이 완료되었습니다.');
-            }
-
-            myOrder(loginMidx);
-        },
-        Error : function(e){
-            alert('참여신청 에러발생');
-
-            myOrder(loginMidx);
-        }
-
-    });
-
-};
+// 현황별 기능 관련 --------------------------------------------------------------------------------------
 
 
-
-/***** 상태별 기능 ***************************************************************************************************/
-
-/* 나의 공구구매현황[참여중][다음기회에..] - 참여취소 (글삭제) */
-function cancleOrder(oidx, state){
-
-    var msg1='';
-    var msg2='';
-    var msg3='';
-    
-    switch(state){
-        
-        case 0:
-            msg1 = "참여신청을 취소하시겠습니까?";
-            msg2 = "참여신청이 취소되었습니다.";
-            msg3 = '참여신청이 정상처리되지 않았습니다. 다시 시도해주세요.';
-        break;
-
-        case 1:
-            msg1 = "글을 삭제하시겠습니까?";
-            msg2 = "글이 정상적으로 삭제되었습니다.";
-            msg3 = '글이 정상 삭제처리되지 않았습니다. 다시 시도해주세요.';
-        break;
-    
-    };
-     
-    
-    if(confirm(msg1)){
+    /* 참여신청 */
+    function regOrder(loginMidx, iidx){
 
         $.ajax({
-            url : domain+'/orders/'+oidx,
-            type : 'DELETE',
+            url : domain+'/orders/'+loginMidx+'/'+iidx,
+            type : 'POST',
             success : function(data){
 
-                if(data==1){
-                    alert(msg2);
-                } else {
-                    alert(msg3);
+                if(data == -1){
+                    alert('이미 신청하신 내역이 있습니다.');
+                }else if(data == -2){
+                    alert('신청하신 공구의 참여인원이 마감되어, 참여신청이 불가합니다. ');
+                }else if(data == 1){
+                    alert('참여신청이 완료되었습니다.');
                 }
-                
-                myOrder(loginMidx);
 
+                myOrder(loginMidx);
+            },
+            Error : function(e){
+                alert('참여신청 에러발생');
+
+                myOrder(loginMidx);
             }
-        }); 
+
+        });
 
     };
 
-};
 
 
 
+    /* 나의 공구구매현황[참여중][다음기회에..] - 참여취소 (글삭제) */
+    function cancleOrder(oidx, state){
+
+        var msg1='';
+        var msg2='';
+        var msg3='';
+        
+        switch(state){
+            
+            case 0:
+                msg1 = "참여신청을 취소하시겠습니까?";
+                msg2 = "참여신청이 취소되었습니다.";
+                msg3 = '참여신청이 정상처리되지 않았습니다. 다시 시도해주세요.';
+            break;
+
+            case 1:
+                msg1 = "글을 삭제하시겠습니까?";
+                msg2 = "글이 정상적으로 삭제되었습니다.";
+                msg3 = '글이 정상 삭제처리되지 않았습니다. 다시 시도해주세요.';
+            break;
+        
+        };
+        
+        
+        if(confirm(msg1)){
+
+            $.ajax({
+                url : domain+'/orders/'+oidx,
+                type : 'DELETE',
+                success : function(data){
+
+                    if(data==1){
+                        alert(msg2);
+                    } else {
+                        alert(msg3);
+                    }
+                    
+                    myOrder(loginMidx);
+                }
+            }); 
+        };
+    };
 
 
 
-
-function reviewSeller(iidx, seller, score_s){
-    
-    if(confirm('평점등록 후 수정이 불가합니다. 등록하시겠습니까?')){
-
-		//var score_s = $(".score_s_"+seller).val();
-		//alert("score_s : "+score_s);
-
-		var regRvFormData = new FormData();
-		regRvFormData.append('score_s',score_s);
-		regRvFormData.append('midx',seller);
-		regRvFormData.append('iidx',iidx);
-		
-		
-		$.ajax({
-			url : domain+'/orders/',
-			type : 'POST',
-			processData: false, // File 전송시 필수
-			contentType: false, // multipart/form-data
-			data : regRvFormData,
-			success : function(data){
-
-				$(".score_s_"+seller).attr("disabled",true);
-                $(".insert_rvs_"+seller).css("display","none");
-                
-                alert(iidx+'번 글의 판매자 '+seller+'님의 평점 '+data+'건을 등록했습니다.')
-                
-			}
-
-		});
-
-	}	
-
-}
+    /* 평점등록 폼 토글 */
+    function reviewForm_toggle(iidx){
+        $(".reviewForm_"+iidx).toggle();
+    };
 
 
+    /* 나의 공구구매현황[구매완료] - 평점등록 */
+    function reviewSeller(iidx, seller, score_s){
+        
+        if(confirm('평점등록 후 수정이 불가합니다. 등록하시겠습니까?')){
 
+            //var score_s = $(".score_s_"+seller).val();
+            //alert("score_s : "+score_s);
 
-/* 나의 공구구매현황[구매완료] - 글숨김 */
-function hideOrder(oidx){
-    
-    if(confirm('글 숨김 처리 후 다시 해제할 수 없습니다. 글 숨김 하시겠습니까?')){
+            var regRvFormData = new FormData();
+            regRvFormData.append('score_s',score_s);
+            regRvFormData.append('midx',seller);
+            regRvFormData.append('iidx',iidx);
+            
+            
+            $.ajax({
+                url : domain+'/orders/',
+                type : 'POST',
+                processData: false, // File 전송시 필수
+                contentType: false, // multipart/form-data
+                data : regRvFormData,
+                success : function(data){
 
-		$.ajax({
-			url : domain+'/orders/'+oidx,
-			type : 'PUT',
-			success : function(data){
-
-                if(data==1){
-                    alert('글이 숨김처리 되었습니다.');
-                } else {
-                    alert('글이 숨김처리 되지 않았습니다. 다시 시도해주세요.');
+                    $(".score_s_"+seller).attr("disabled",true);
+                    $(".insert_rvs_"+seller).css("display","none");
+                    
+                    alert(iidx+'번 글의 판매자 '+seller+'님의 평점 '+data+'건을 등록했습니다.')
+                    
                 }
 
-                myOrder(loginMidx);
-			}
-		});
-	};	
-};
+            });
+
+        };	
+
+    };
 
 
 
-/* 나의 공구구매현황[구매완료] - 글삭제 */
-function delOrder(oidx, pidx){
-    
-    if(confirm('글을 삭제하시겠습니까?')){
 
-		$.ajax({
-			url : domain+'/orders/'+oidx +'/'+pidx,
-			type : 'DELETE',
-			success : function(data){
+    /* 나의 공구구매현황[구매완료] - 글숨김 */
+    function hideOrder(oidx){
+        
+        if(confirm('글 숨김 처리 후 다시 해제할 수 없습니다. 글 숨김 하시겠습니까?')){
 
-                if(data==2){
-                    alert('글이 삭제처리 되었습니다.');
-                } else {
-                    alert('글이 정상적으로 삭제처리 되지 않았습니다. 다시 시도해주세요.');
+            $.ajax({
+                url : domain+'/orders/'+oidx,
+                type : 'PUT',
+                success : function(data){
+
+                    if(data==1){
+                        alert('글이 숨김처리 되었습니다.');
+                    } else {
+                        alert('글이 숨김처리 되지 않았습니다. 다시 시도해주세요.');
+                    }
+
+                    myOrder(loginMidx);
                 }
+            });
+        };	
+    };
 
-                myOrder(loginMidx);
 
-			}
-		});
-	};	
-};
+
+    /* 나의 공구구매현황[구매완료] - 주문글삭제 */
+    function delOrder(oidx, pidx){
+        
+        if(confirm('글을 삭제하시겠습니까?')){
+
+            $.ajax({
+                url : domain+'/orders/'+oidx +'/'+pidx,
+                type : 'DELETE',
+                success : function(data){
+
+                    if(data==2){
+                        alert('글이 삭제처리 되었습니다.');
+                    } else {
+                        alert('글이 정상적으로 삭제처리 되지 않았습니다. 다시 시도해주세요.');
+                    }
+
+                    myOrder(loginMidx);
+
+                }
+            });
+        };	
+    };
 
 
 
