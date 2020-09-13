@@ -5,6 +5,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.wifi.order.dao.OrderDao">
 	
 	
+<!-- 내 프로필 관련 =========================================================== -->
+	
+	<!-- 내 판매자 평균평점 -->
+	<select id="getRvs" resultType="float">
+		SELECT  IFNULL(round(avg(score_s),1),0) as rvs FROM wifi.item_rvs where midx=#{midx};
+	</select>
+
+	<!-- 내 구매자 평균평점 -->
+	
+	<select id="getRvb" resultType="float">
+		SELECT  IFNULL(round(avg(score_b),1),0) as rvb FROM wifi.item_rvb where midx=#{midx};
+	</select>
+	
+	
+	
+<!-- 공구신청 관련 =========================================================== -->
+	
+	
 	<!-- 공구 참여신청 -->
 	<insert id="regOrder">
 		insert into wifi.order (midx, iidx) values (#{param1},#{param2})
@@ -22,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
-	<!-- 내 공구 구매현황 관련 =========================================================== -->
+<!-- 내 공구 구매현황 관련 =========================================================== -->
 	
 	<!-- 내 구매글 -->
 	<select id="getMyOrder" resultType="com.wifi.order.model.MyItemDTO">

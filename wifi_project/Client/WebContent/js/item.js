@@ -4,9 +4,9 @@ var domain = "http://localhost:8080/order";
 
 /***** item : 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제  *****************************/
 
-var loginInfo = sessionStorage.getItem("loginInfo");
-var loginMidx = sessionStorage.getItem("loginMidx");
-var loginName = sessionStorage.getItem("loginName");
+// var loginInfo = sessionStorage.getItem("loginInfo");
+// var loginMidx = sessionStorage.getItem("loginMidx");
+// var loginName = sessionStorage.getItem("loginName");
 var loginMidx = 1;
 
 
@@ -19,9 +19,9 @@ var sortItems = []; 		// 일반리스트 평점순 정렬 담아두는 배열
 
 
 $(document).ready(function(){
-
+	profile();  // 기능코드는 buyer.js에 작성
 	allItemlist();  // 전체 공구리스트 출력
-
+	
 
 	/* ing 검색기능 */
 	$("#myInput").on("keyup", function() {

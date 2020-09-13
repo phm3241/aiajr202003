@@ -6,10 +6,18 @@ import com.wifi.order.model.MyItemDTO;
 
 public interface OrderDao {
 	
-	// 내 구매글 
-	List<MyItemDTO> getMyOrder(int midx);
+// 내 프로필 관련 --------------------------------------------	
+	
+	// 내 판매자 평균평점 
+	float getRvs(int midx);
+	
+	// 내 판매자 평균평점 
+	float getRvb(int midx); 
+
 	
 	
+// 공구신청 관련 --------------------------------------------	
+
 	// 공구 참여신청
 	int regOrder(int midx, int iidx);
 
@@ -18,6 +26,14 @@ public interface OrderDao {
 	
 	// 공구 참여신청시 체크2 - 잔여인원 확인
 	int checkItemRemain(int iidx);
+	
+	
+	
+	
+// 내 공구 구매현황 관련 ----------------------------------------	
+	
+	// 내 구매글 
+	List<MyItemDTO> getMyOrder(int midx);
 
 	
 	// 나의 공구구매현황[참여중][다음기회에..] - 참여취소(글삭제)
@@ -40,8 +56,6 @@ public interface OrderDao {
 	// 결제글 삭제
 	int delPurchase(int pidx);
 
-	
-	
 	
 	
 	

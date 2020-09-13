@@ -1,5 +1,6 @@
 package com.wifi.order.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.buyer.service.MyOrderService;
+import com.wifi.order.buyer.service.MyProfileService;
 import com.wifi.order.buyer.service.OrderCancleService;
 import com.wifi.order.buyer.service.OrderDelService;
 import com.wifi.order.buyer.service.OrderHideService;
@@ -23,9 +25,11 @@ import com.wifi.order.model.MyItemDTO;
 @RequestMapping("/orders")
 public class OrderController {
 	
-	
 	@Autowired
-	MyOrderService myOrderService;
+	private MyProfileService profileService;
+
+	@Autowired
+	private MyOrderService myOrderService;
 	
 	@Autowired
 	private OrderRegService regService;
@@ -44,6 +48,18 @@ public class OrderController {
 	
 	
 	
+//	내 프로필 관련--------------------------------------
+	
+	@GetMapping
+	//public HashMap<String,String> getProfile(HttpSession session){
+	public float[] getProfile(HttpSession session){
+		
+		//int midx = (int)session.getAttribute("loginMidx");
+		int midx = 1;
+		
+		return profileService.getProfile(midx); 
+	}
+	
 	
 	
 	
@@ -51,6 +67,7 @@ public class OrderController {
 	
 	// 내 구매글 
 	@GetMapping("/{loginMidx}")
+	//public List<MyItemDTO> getMyOrder(HttpSession session, @PathVariable("loginMidx") int midx){
 	public List<MyItemDTO> getMyOrder(HttpSession session, @PathVariable("loginMidx") int midx){
 		
 		//int midx = (int) session.getAttribute("midx");

@@ -9,8 +9,15 @@ var loginMidx = 1;
 /***** seller : aside 판매자 ************************************************************************/
 /***** - 내판매글 리스트 / 참여자 리스트 / 현황별 기능(구매자선정,거절,자동거절,평점,글숨김) **********/
 
+// var loginInfo = sessionStorage.getItem("loginInfo");
+// var loginMidx = sessionStorage.getItem("loginMidx");
+// var loginName = sessionStorage.getItem("loginName");
+
+
 
 $(document).ready(function(){
+
+	
 
 	/* ing 나의 공구구매현황[구매자] - 평점등록  */
     /* 별 표시  */
