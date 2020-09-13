@@ -35,12 +35,12 @@ public class MyBuyerRejectService {
 //		return dao.autoRejectBuyer(iidx, buyer);
 //	}
 
-
-	public int autoRejectBuyer(HashMap<String, Object> buyerArr) {
+	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  (배열로)
+	public int autoRejectBuyer(HashMap<String, Object> rejectArr) {
 		
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("참여자 자동거절 service");
-		return dao.autoRejectBuyer(buyerArr);
+		return dao.autoRejectBuyer(rejectArr);
 		
 	}
 

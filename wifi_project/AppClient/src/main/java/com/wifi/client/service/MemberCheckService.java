@@ -38,8 +38,10 @@ public class MemberCheckService {
 			Member member = dao.getMember(checkId);
 			session.setAttribute("loginInfo", member);
 			session.setAttribute("loginMidx", member.getMidx());
+			session.setAttribute("loginName", member.getName());
 			System.out.println("회원. 세션저장값 확인 loginInfo : "+session.getAttribute("loginInfo"));
 			System.out.println("회원. 세션저장값 확인 loginMidx : "+session.getAttribute("loginMidx"));
+			System.out.println("회원. 세션저장값 확인 loginName : "+session.getAttribute("loginName"));
 			view = "main";
 
 		} else {

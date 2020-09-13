@@ -5,7 +5,7 @@ var domain = "http://localhost:8080/order";
 
 /***** item : 공구 리스트 출력. 정렬. 등록. 삭제  ******************************************************************/
 
-var login_midx = 1;
+var loginMidx = 1;
 var recomItems = [];    // 추천 공구 리스트 담아두는 배열
 var items = [];			// 일반 공구 리스트 담아두는 배열
 var sortRecomItems = []; 
@@ -210,7 +210,7 @@ function itemlist_print(data){
 
 
 		html += '<div class="'+swiperType+'">';
-		html += '	<button class="'+cardType+'" onclick="itemView('+data[i].iidx+','+login_midx+')">';
+		html += '	<button class="'+cardType+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 		//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 		html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 		html += '		<div class="item_info">';
@@ -351,7 +351,7 @@ function regSubmit(){
 
 
 /* 공구글 상세보기 */
-function itemView(iidx, login_midx) {
+function itemView(iidx, loginMidx) {
 
 
 
@@ -387,12 +387,12 @@ function itemView(iidx, login_midx) {
 			html += '			<input type="button" class="btn_itmelist" value="목록으로" onclick="itemlist()">'; 
 
 			// 만약에 로그인한 사람이 작성자가 아니면, 참여신청버튼 활성화
-			if(login_midx != data.midx){
-				html += '			<input type="button" class="btn_join" value="참여신청" onclick="regOrder('+login_midx+','+data.iidx+')">';
+			if(loginMidx != data.midx){
+				html += '			<input type="button" class="btn_join" value="참여신청" onclick="regOrder('+loginMidx+','+data.iidx+')">';
 			}
 
 			// 만약에 로그인한 사람이 작성자와 같으면, 글수정. 글삭제 활성화
-			if(login_midx == data.midx){
+			if(loginMidx == data.midx){
 				html += '			<input type="button" class="btn_itmelist" value="글수정" onclick="editItem('+data.iidx+')">'; 
 				html += '			<input type="button" class="btn_itmelist" value="글삭제" onclick="delItem('+data.iidx+')">'; 
 			}

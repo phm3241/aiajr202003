@@ -89,7 +89,7 @@ function myitem(loginMidx) {
 
 
 
-
+//var autoRejectArr=[];  // 판매실패일 때, 자동 거절처리되는 참여자배열ㅡ> 서버에서 처리하는 걸로 변경
 
 /* 내 판매글 참여자 리스트보기  */
 /* iidx 받아서 ㅡ> 구매자 목록(구매자 이름, 평균평점, 총평점개수 + ostate, pstate선택) 화면출력 */
@@ -104,7 +104,7 @@ function mybuyer(iidx, state, count_m) {
 			var btn_sellerActionName1 = '';
 			var btn_sellerAction1 = '';
 			var stateColor= '';
-			var autoRejectArr=[];  // 판매실패일 때, 자동 거절처리되는 참여자배열
+			
 			
 
 			var html = '';
@@ -153,7 +153,7 @@ function mybuyer(iidx, state, count_m) {
 					
 					// 판매글 상태 : 판매실패 ㅡ> 글숨김버튼
 					case 3: 
-						buyerState = '';
+						buyerState = '자동참여거절';
 						stateColor = '';
 						btn_sellerActionName1 = '거절';
 						btn_sellerAction1 = 'reject';
@@ -166,14 +166,12 @@ function mybuyer(iidx, state, count_m) {
 				// 참여자(또는 구매자) 이름. 평균평점. 총평점수 - 기본출력
 					html += '<hr>';
 					html += '<div class="aside_mybuyer iidx'+data[i].iidx+'">';
-					//html += '   <input type="hidden" class="oidx" value="'+data[i].oidx+'">';
-					html += '   <span class="buyerState '+stateColor+'">'+buyerState+'</span>';
+					html += '   <span class="buyerState '+stateColor+'">'+buyerState+' | </span>';
 					html += '	<span class="buyer_name midx'+data[i].buyer+'">'+data[i].name+'</span>';
 					html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span><br>';
 				
 				// 모집중 일때, 참여자 거절 또는 구매자 선정 버튼 출력
 				if(state==0){
-					//html += '    <form class="select_buyerform" onsubmit="return false;">';
 					html += '    	<input type="checkbox" name="select_buyer" class="btn_sellerAction select_buyer" value="'+data[i].oidx+'">선정</button>';
 					html += '    	<button type="button" name="select_reject" class="btn_sellerAction select_reject" onclick="rejectBuyer('+data[i].iidx+','+data[i].oidx+')">참여거절</button>';
 					
@@ -186,16 +184,18 @@ function mybuyer(iidx, state, count_m) {
 				// 판매완료 일때, 평점등록 버튼 출력 	
 				} else if(state==2){
 					html += '<form class="reviewForm" onsubmit="return false;">';
-					html += '      <input class="score_b_'+data[i].buyer+'" type="number">';
-					html += '      <input class="insert_rvb_'+data[i].buyer+'" type="submit" value="평점 등록" onclick="reviewBuyer('+data[i].iidx+','+data[i].buyer+')" >';
+					html += '      <input class="btn_sellerAction score_b_'+data[i].buyer+'" type="number">';
+					html += '      <input class="btn_sellerAction insert_rvb_'+data[i].buyer+'" type="submit" value="평점 등록" onclick="reviewBuyer('+data[i].iidx+','+data[i].buyer+')" >';
 					html += '</form>';
 				
 
-				// 판매실패 일때, 글숨김 버튼 출력
-				} else if(state==3){
-					autoRejectArr.push(data[i].buyer);   // 자동 거절처리되는 참여자배열
+				// 판매실패 이고, ostate가 0일때, 자동거절처리 위한 참여자배열에 저장
+				//} else if(state==3){
+				// } else if(state==3 && data[i].ostate==0){
+					// 서버에서 처리하는 걸로 변경
+					//autoRejectArr.push(data[i].oidx);   // 자동 거절처리되는 참여자배열
 
-				}
+				};
 				
 			} //for end
 		
@@ -217,12 +217,20 @@ function mybuyer(iidx, state, count_m) {
 			
 			// 판매실패 일때, 글숨김 버튼 출력
 			else if(state==3){
-				html += '       <span class="select_buyer_msg">*판매실패로 참여자는 모두 참여거절처리되었습니다. </span>';
+				html += '       <br><span class="select_buyer_msg">*판매실패로 참여자는 모두 참여거절처리되었습니다. </span>';
 				html += '       <input type="button" class="item_hide" onclick="itemHide('+iidx+')" value="글숨김">';
 				html += '    	<input type="submit" class="btn_sellerAction delitem" onclick="delItem('+iidx+')" value="글삭제">';
+				
+				// ★자바스크립트에서 빈배열 확인할때 어떻게 하는지 다시공부필요!
+				// alert('autoRejectArr != null :'+autoRejectArr != null);  //빈배열일 때도, true가 나옴... 
+				// alert('!autoRejectArr.length :'+!autoRejectArr.length);  //빈배열일 때도, true가 나옴... 
+
+				//if( !autoRejectArr.isEmpty() || autoRejectArr != null) {
+				// if( autoRejectArr.length > 0) {
+				// 	//alert('메서드 보내기전 확인 autoRejectArr :'+autoRejectArr);
+				// 	autoRejectBuyer(iidx, autoRejectArr);
 					
-					//alert('메서드 보내기전 확인 autoRejectArr :'+autoRejectArr);
-					autoRejectBuyer(iidx, autoRejectArr);
+				// }
 			}
 			
 
@@ -271,18 +279,6 @@ function selectBuyer(iidx, count_m){
 
 	// 	체크된 개수 = 구매정원 ㅡ> 확정. 자동거절 처리
 	} else {
-		
-		// 체크된 값 가져오기 ㅡ> 구매자 확정처리 기능호출
-		$('input[name="select_buyer"]:checked').each(function(i) { 
-	
-			buyerArr.push($(this).val()); 
-		});
-
-			alert('배열에 담긴 <선정>된 구매자 확인 : '+ buyerArr);
-			selectBuyer_ok(iidx, buyerArr);
-
-
-		
 		// 체크되지 않은 값 가져오기 ㅡ> 자동 거절처리 기능호출
 		if($('input[name="select_buyer"]:not(:checked)').length != 0){
 			
@@ -294,6 +290,17 @@ function selectBuyer(iidx, count_m){
 			alert('배열에 담긴 <거절>한 참여자 확인 : '+ rejectArr);
 			autoRejectBuyer(iidx, rejectArr);
 		};
+
+
+		// 체크된 값 가져오기 ㅡ> 구매자 확정처리 기능호출
+		$('input[name="select_buyer"]:checked').each(function(i) { 
+	
+			buyerArr.push($(this).val()); 
+		});
+
+			alert('배열에 담긴 <선정>된 구매자 확인 : '+ buyerArr);
+			selectBuyer_ok(iidx, buyerArr);
+		
 	};
 };
 
@@ -303,14 +310,15 @@ function selectBuyer(iidx, count_m){
 /* 나의 공구판매현황[모집중] - 참여자 구매자 선정 ㅡ> 확정 처리 */
 function selectBuyer_ok(iidx, oidxArr){
 	
-	var selectData = { buyerArr : oidxArr };
+	var selectData = { oidxArr : oidxArr };
+	alert('selectData.buyerArr : '+ selectData.oidxArr);
 
 	// var selectData = {
 	// 	iidx : iidx,
 	// 	buyerArr : buyerArr,
 	// };
 
-	alert('참여자 자동 <구매자>처리: '+iidx+'번 글. 매개변수 buyerArr배열확인 : '+buyerArr);
+	alert('참여자 자동 <구매자>처리: '+iidx+'번 글. 매개변수 oidxArr배열확인 : '+oidxArr);
 
 	$.ajax({
 		url : domain+'/items/mybuyer',
@@ -326,11 +334,16 @@ function selectBuyer_ok(iidx, oidxArr){
 
 		
 		success : function(data){
-			alert('선정한 구매자 등록 : ' + data);
 
-			// 배열 초기화
-			buyerArr = [];
-			alert('buyerArr 배열 초기화 확인 : '+buyerArr);
+			if(data ==0){
+				alert('data : '+data+', 선택하신 참여자'+oidxArr+'의 구매자 등록 처리가 실패했습니다. 다시 시도해주세요.');
+			} 
+
+			alert('선정한 구매자 등록 : ' + data);
+			buyerArr = [];   // 배열 초기화
+			myitem(loginMidx);
+			$(".aside_mybuyer_list_"+iidx).show();
+
 		},
 		error:function(jqXHR, textStatus, errorThrown){
             alert("구매자 확정 에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -350,9 +363,14 @@ function rejectBuyer(iidx,oidx){
 			url : domain+'/items/rejectBuyer/'+oidx,
 			type : 'PUT',
 			success : function(data){
-				alert('data : '+data+', 선택하신 참여자'+buyer+'가 참여거절 처리 되었습니다.');
-				myitem(midx);
-				$(".aside_mybuyer_list_"+iidx).show();
+				if(data != 1){
+					alert('data : '+data+', 선택하신 참여자의 참여거절 처리가 실패했습니다. 다시시도해주세요.');
+					myitem(loginMidx);
+					$(".aside_mybuyer_list_"+iidx).show();
+				}
+					alert('data : '+data+', 선택하신 참여자가 참여거절 처리 되었습니다.');
+					myitem(loginMidx);
+					$(".aside_mybuyer_list_"+iidx).show();
 
 			},
 			error:function(jqXHR, textStatus, errorThrown){
@@ -364,13 +382,15 @@ function rejectBuyer(iidx,oidx){
 
 
 
-/* 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리 */
-/* 구매자 선정하면 나머지 선택하지 않은 참여자, 판매실패하면 참여자 자동 거절처리 */ 
+/* 나의 공구판매현황[모집중] - 참여자 자동거절처리 */
+/* 구매자 선정하면 나머지 선택하지 않은 참여자 */ 
+/* 판매실패하면 참여자 자동 거절처리(이때의 처리는 서버에서) */ 
 function autoRejectBuyer(iidx,oidxArr){
 
-	alert('참여자 자동 <거절>처리: '+iidx+'번 글. 매개변수 buyerArr배열확인 : '+oidxArr);
+	alert('참여자 자동 <거절>처리: '+iidx+'번 글. 매개변수 oidxArr배열확인 : '+oidxArr);
 	
-	var rejectData = { rejectArr : oidxArr };
+	var rejectData = { oidxArr : oidxArr };
+	alert('rejectData.oidxArr : '+ rejectData.oidxArr);
 
 	$.ajax({
 		url : domain+'/items/rejectBuyer',
@@ -380,11 +400,12 @@ function autoRejectBuyer(iidx,oidxArr){
 		//contentType :   "application/x-www-form-urlencoded",
 		//dataType: "json",
 		success : function(data){
-			alert('data : '+data+', 선택하신 참여자'+oidxArr+'가 참여거절 처리 되었습니다.');
-			myitem(midx);
-			$(".aside_mybuyer_list_"+iidx).show();
-			autoReject=[]; 	// 배열초기화
-			//alert('autoReject 배열 초기화 확인 : '+autoReject);
+			if(data ==0){
+				alert('data : '+data+', 선택하신 참여자'+oidxArr+'가 <자동 참여거절> 처리 실패했습니다. 다시 시도해주세요.');
+			} 
+			alert('data : '+data+', 선택하신 참여자'+oidxArr+'가 <자동 참여거절> 처리 되었습니다.');
+			rejectArr=[];	// 배열초기화
+			myitem(loginMidx);
 
 		},
 		error:function(jqXHR, textStatus, errorThrown){
@@ -454,7 +475,7 @@ function itemHide(iidx){
 		url : domain +'/items/hide/'+iidx,
 		type : 'PUT',
 		success : function(data){
-			myitem(midx);
+			myitem(loginMidx);
 			allItemlist();
 
 		}

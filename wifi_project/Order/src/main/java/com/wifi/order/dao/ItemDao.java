@@ -44,7 +44,7 @@ public interface ItemDao {
 
 //	내 공구 판매현황 관련------------------------------
 	
-	// 나의 공구판매현황[모집중] - 현재 참여자수 
+	// 나의 공구판매현황[모집중] - 현재 참여자수  (서버에서 처리할떄)
 	int cntBuyer(int iidx);
 	
 	// 내 판매글 
@@ -53,16 +53,23 @@ public interface ItemDao {
 	// 내 판매글 참여자리스트
 	List<MyBuyerDTO> getMyItemBuyer(int iidx);
 	
-	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
+	
+	
+//	내 공구 판매현황 관련------------------------------
+	
+	// 나의 공구판매현황[모집중] - 참여자 '구매자로 선정'하기
 	// int selectBuyer(int iidx,  Object[] buyer);
 	int selectBuyer(HashMap<String, Object> buyerArr);
 	
-	// 나의 공구판매현황[모집중] - 참여자 거절하기
+	// 나의 공구판매현황[모집중] - 참여자 '거절'하기
 	int rejectBuyer(int oidx);
 	
-	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  
+	// 나의 공구판매현황[모집중] - 참여자 '자동거절'처리  
 	//int autoRejectBuyer(int iidx, Object[] buyer);
 	int autoRejectBuyer(HashMap<String, Object> rejectArr);
+
+	// 나의 공구판매현황[판매실패] - 참여자 '자동거절'처리  (서버에서 처리할떄)
+	int autoRejectBuyer1(int iidx);
 
 	// 나의 공구판매현황[판매완료] - 구매자 평점등록
 	int reviewBuyer(Item_rvb rvb);
@@ -73,6 +80,7 @@ public interface ItemDao {
 	// QR보기
 	String getQR(int oidx);
 	
+	// QR발급..
 
 	
 

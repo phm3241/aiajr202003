@@ -4,7 +4,10 @@ var domain = "http://localhost:8080/order";
 
 /***** item : 공구 리스트 출력. 정렬. 등록. 삭제  ******************************************************************/
 
-var loginMidx = 1;
+var loginInfo = sessionStorage.getItem("loginInfo");
+var loginMidx = sessionStorage.getItem("loginMidx");
+var loginName = sessionStorage.getItem("loginName");
+//var loginMidx = 1;
 var recomItems = [];    // 추천 공구 리스트 담아두는 배열
 var items = [];			// 일반 공구 리스트 담아두는 배열
 var sortRecomItems = []; 

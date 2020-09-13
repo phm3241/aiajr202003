@@ -1,7 +1,9 @@
 package com.wifi.order.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,45 +35,42 @@ import com.wifi.order.model.MyItemDTO;
 @RequestMapping("/items")
 public class ItemController {
 	
+	
 //	공구 리스트 관련---------------------------------- 
 	
 	@Autowired
 	ItemlistService itemlistService;
 
-
 	@Autowired
 	ItemViewService viewService;
-	
 
 //	공구 등록. 수정. 삭제 관련----------------------------
-
+	
 	@Autowired
 	ItemRegService regService;
 
 	@Autowired
 	ItemDelService delItemService;
-
 	
 //	내 공구 판매현황 관련----------------------------------
 	
-	@Autowired
+	@Autowired	//
 	MyItemService myItemService;
 
 	@Autowired
 	MyItemBuyerService myBuyerService;
 
 	
-	@Autowired
+//	판매현황별 기능 관련----------------------------------
+	
+	@Autowired	// 참여자 구매자로 선정하기
 	MyBuyerSelectService selectBuyerService;
 	
-	// 참여자 거절. 자동거절
-	@Autowired
+	@Autowired	// 참여자 거절. 자동거절
 	MyBuyerRejectService rejectBuyerService;
-	
 	
 	@Autowired
 	QRService getQRService;
-	
 	
 	@Autowired
 	MyBuyerReviewService rvBuyerService;
@@ -148,6 +147,7 @@ public class ItemController {
 	
 	
 	
+	
 //	내 공구 판매현황 관련----------------------------------
 	
 	// 내 판매글 
@@ -167,7 +167,12 @@ public class ItemController {
 		return myBuyerService.getMyItemBuyer(iidx);
 		
 	};
+
 	
+	
+	
+	
+//	판매현황별 기능 관련----------------------------------
 	
 	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
 	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
@@ -183,8 +188,8 @@ public class ItemController {
 	//@PostMapping("/mybuyer")  // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이 null...
 	//public int selectBuyer(HttpServletRequest request) {
 	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
-	public int selectBuyer(@RequestBody List<Integer> buyerArr) {
-	//public int selectBuyer(@RequestBody HashMap<String, Object> buyerArr) {
+	//public int selectBuyer(@RequestBody List<Integer> buyerArr) {
+	public int selectBuyer(@RequestBody HashMap<String, Object> map) {
 			
 		//String[] buyerArr = request.getParameterValues("buyerArr[]");
 		//String[] rejectArr = request.getParameterValues("rejectArr[]");
@@ -195,15 +200,32 @@ public class ItemController {
 		//System.out.println("buyer 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
 		//System.out.println("buyer 배열확인 buyerArr.get(iidx) : " + buyerArr.get("iidx"));
 		//System.out.println("buyer 배열확인 buyerArr.get(oidx) : " + buyerArr.get("oidx"));
-		System.out.println("buyerArr 배열확인 toString : " + buyerArr.toString());
+		System.out.println("map 배열확인 toString : " + map.toString());
 		//int[] buyer = (int[]) buyerArr.get("buyerArr");
 		//Object[] buyer = buyerArr.values().toArray();
 		
-//		int[] arr= new int[buyerArr.values().size()];
-//		toArray(arr);
+		int size = map.values().size();
+		//Object arr =map.get("oidxArr");
+		int[] oidxArr= new int[map.values().size()];
 		
+//		for(int i=0; i<size; i++) {
+//			int arr = Integer.parseInt(arr.toString());
+//		}
+//		oidxArr=map.get("oidxArr");
+		
+//		Iterator entries = map.entrySet().iterator();
+		
+//		while (entries.hasNext()) {
+//		    Map.Entry entry = (Map.Entry) entries.next();
+//		    //Integer key = (Integer)entry.getKey();
+//		    int value = (Integer)entry.getValue();
+//		    //System.out.println("Key = " + key + ", Value = " + value);
+//		    System.out.println("Value = " + value);
+//		    //oidxArr.push(value);
+//		}
+
 		//return selectBuyerService.selectBuyer(iidx, buyer); 
-//		return selectBuyerService.selectBuyer(buyerArr); 
+		//return selectBuyerService.selectBuyer(buyerArr); 
 		return 0;
 	};
 	
@@ -224,19 +246,19 @@ public class ItemController {
 	@PutMapping("/rejectBuyer")
 //	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyer[]") String[] buyer) {
 //	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody List<Integer> buyer) {
-	public int rejectBuyer(@RequestBody HashMap<String, Object> rejectArr) {
+	public int rejectBuyer(@RequestBody HashMap<String, Object> oidxArr) {
 		
 		System.out.println("참여자 자동거절 controller");
 		
-		System.out.println("rejectArr 배열확인buyerArr.get(rejectArr) : " + rejectArr.get("rejectArr"));
+		System.out.println("rejectArr 배열확인buyerArr.get(rejectArr) : " + oidxArr.get("oidxArr"));
 		
 		//int[] buyer = (int[]) buyerArr.get("buyerArr");
 		//Object[] buyer = buyerArr.values().toArray();   //컬렉션에서 제공되는 메서드 toArray는 Object[] 로 변환밖에 안도 
 		
-		System.out.println("rejectArr 배열확인 toString : " + rejectArr.toString());
+		System.out.println("rejectArr 배열확인 toString : " + oidxArr.toString());
 
 		//return rejectBuyerService.autoRejectBuyer(iidx, buyer); 
-		return rejectBuyerService.autoRejectBuyer(rejectArr); 
+		return rejectBuyerService.autoRejectBuyer(oidxArr); 
 	};
 	
 	

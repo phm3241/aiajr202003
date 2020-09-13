@@ -19,7 +19,14 @@ import com.wifi.client.service.MemberRegService;
 @Controller
 public class MemberController {
 	
-	/* 카카오로그인  */
+	@GetMapping
+	public String index() {
+		//return "Member RestFul API";
+		return "index";
+	}
+
+	
+	/* 카카오로그인 . 로그아웃 */
     @Autowired
     private KakaoLoginService kakao;
 	
@@ -32,11 +39,6 @@ public class MemberController {
 	MemberRegService regService;
 	
     
-	@GetMapping
-	public String index() {
-		//return "Member RestFul API";
-		return "index";
-	}
     
 	
 	
@@ -62,23 +64,24 @@ public class MemberController {
 	        session.setAttribute("userInfo", userInfo);
 	        view = memberCheck(req, checkId);
 	        
-	    } 
+	    };
 	    
 	    return view;
 	    
-	}
+	};
     
     
 	/* 로그인 할 때 세션에 넣어두었던 토큰을 꺼내서 로그아웃 메소드를 실행 */
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 	    kakao.kakaoLogout((String)session.getAttribute("access_Token"));
-	    session.removeAttribute("midx");
+	    session.removeAttribute("loginName");
+	    session.removeAttribute("loginMidx");
 	    session.removeAttribute("loginInfo");
 	    session.removeAttribute("access_Token");
 	    
 	    return "index";
-	}
+	};
 	
 	
 	
@@ -96,7 +99,7 @@ public class MemberController {
 		// 회원여부 체크 ㅡ> 회원이면 main으로, 회원이 아니면 regMemberForm으로
 		return checkMemberService.checkMember(req, checkId);
 		
-	}
+	};
 	
 	
 	/* 회원가입 */
@@ -109,7 +112,7 @@ public class MemberController {
 		
 		return regService.regMember(req, memberReq);
 		
-	}
+	};
     
 	
 	

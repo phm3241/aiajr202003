@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500;700&display=swap" > <!-- 영문폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet"> <!-- 한글폰트 -->
 
 <link rel="stylesheet" href="css/search.css" type="text/css">
 <link rel="stylesheet" href="css/item.css" type="text/css">
@@ -23,7 +24,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  <!-- 평점등록 시 별 마우스오버 계속 반응  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> <!-- 날짜포멧 -->
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>   <!-- 데이터를 정렬/필터/색인할 수 있게 도와주는 오픈소스 Javascript Utility Library -->
+<style>
 
+/* font-family: 'Sunflower', sans-serif; 영문폰트 */  
+/* font-family: 'Nanum Gothic', sans-serif; 한글폰트 */    
+
+</style>
 
 
 <body>
@@ -104,7 +110,7 @@
         
         <!-- itemlist 공구 일반글 리스트 -->
         <div id="itemlist_small_area"></div> 
-      </div>  
+      </div>  <!-- Item area end -->
 
 
     </div> <!-- itemlist_area end -->
@@ -135,7 +141,6 @@
   <script text="text/javascript" src="js/item.js"></script>
   <script text="text/javascript" src="js/seller.js"></script>
   <script text="text/javascript" src="js/buyer.js"></script>
-  <!-- <script text="text/javascript" src="js/slide.js"></script> -->
   <script text="text/javascript" src="js/search.js"></script>
     
     

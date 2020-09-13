@@ -10,7 +10,9 @@
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
          
 
-         <button type="button" class="btn_logout">Logout</button>
+         <button type="button" class="btn_logout" onclick="location.href='/logout'">Logout</button>
+
+
          <div class="profile">
             <div class="aside_myimg">
                <img src="img/사과.jpg">
