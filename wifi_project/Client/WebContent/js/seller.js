@@ -163,24 +163,24 @@ function mybuyer(iidx, state, count_m) {
 					
 				}
 				
-				
 				// 참여자(또는 구매자) 이름. 평균평점. 총평점수 - 기본출력
 					html += '<hr>';
 					html += '<div class="aside_mybuyer iidx'+data[i].iidx+'">';
-					html += '    <span class="buyerState '+stateColor+'">'+buyerState+'</span>';
+					//html += '   <input type="hidden" class="oidx" value="'+data[i].oidx+'">';
+					html += '   <span class="buyerState '+stateColor+'">'+buyerState+'</span>';
 					html += '	<span class="buyer_name midx'+data[i].buyer+'">'+data[i].name+'</span>';
 					html += '  	<span class="rvb_avg">별'+data[i].rvb_avg+'</span><span class="rvb_total">/'+data[i].rvb_totalRow+'</span><br>';
 				
 				// 모집중 일때, 참여자 거절 또는 구매자 선정 버튼 출력
 				if(state==0){
 					//html += '    <form class="select_buyerform" onsubmit="return false;">';
-					html += '    	<input type="checkbox" name="select_buyer" class="btn_sellerAction select_buyer" value="'+data[i].buyer+'">선정</button>';
-					html += '    	<button type="button" name="select_reject" class="btn_sellerAction select_reject" onclick="rejectBuyer('+data[i].iidx+','+data[i].buyer+')">참여거절</button>';
+					html += '    	<input type="checkbox" name="select_buyer" class="btn_sellerAction select_buyer" value="'+data[i].oidx+'">선정</button>';
+					html += '    	<button type="button" name="select_reject" class="btn_sellerAction select_reject" onclick="rejectBuyer('+data[i].iidx+','+data[i].oidx+')">참여거절</button>';
 					
 
 				// 모집완료 일때, QR 생성 또는 보기 버튼 출력   
 				} else if(state==1){
-					html += '    <button type="button" class="btn_sellerAction '+btn_sellerAction1+'" onclick="'+btn_sellerAction1+'('+data[i].iidx+','+data[i].buyer+')">'+btn_sellerActionName1+'</button>';
+					html += '    <button type="button" class="btn_sellerAction '+btn_sellerAction1+'" onclick="'+btn_sellerAction1+'('+data[i].oidx+')">'+btn_sellerActionName1+'</button>';
 					
 
 				// 판매완료 일때, 평점등록 버튼 출력 	
@@ -221,7 +221,7 @@ function mybuyer(iidx, state, count_m) {
 				html += '       <input type="button" class="item_hide" onclick="itemHide('+iidx+')" value="글숨김">';
 				html += '    	<input type="submit" class="btn_sellerAction delitem" onclick="delItem('+iidx+')" value="글삭제">';
 					
-					alert('메서드 보내기전 확인 autoRejectArr :'+autoRejectArr);
+					//alert('메서드 보내기전 확인 autoRejectArr :'+autoRejectArr);
 					autoRejectBuyer(iidx, autoRejectArr);
 			}
 			
@@ -256,7 +256,7 @@ var buyerArr = [];
 var rejectArr = [];
 
 
-/* ing 나의 공구판매현황[모집중] - 참여자 구매자 선정. 체크 */
+/* ing 나의 공구판매현황[모집중] - 참여자 ㅡ> (분기) 구매자 선정체크 또는 거절  */
 function selectBuyer(iidx, count_m){
 
 	alert('체크된 갯수 : '+$('input:checkbox[name="select_buyer"]:checked').length);
@@ -301,18 +301,20 @@ function selectBuyer(iidx, count_m){
 
 
 /* 나의 공구판매현황[모집중] - 참여자 구매자 선정 ㅡ> 확정 처리 */
-function selectBuyer_ok(iidx, buyerArr){
+function selectBuyer_ok(iidx, oidxArr){
 	
-	var selectData = {
-		iidx : iidx,
-		buyerArr : buyerArr,
-	};
+	var selectData = { buyerArr : oidxArr };
 
-	alert('selectData : '+selectData+' , selectData.buyerArr : '+selectData.buyerArr);
+	// var selectData = {
+	// 	iidx : iidx,
+	// 	buyerArr : buyerArr,
+	// };
+
+	alert('참여자 자동 <구매자>처리: '+iidx+'번 글. 매개변수 buyerArr배열확인 : '+buyerArr);
 
 	$.ajax({
 		url : domain+'/items/mybuyer',
-		type : 'PUT',
+		type : 'POST',
 		//traditional : true,
 		//processData: false, // File 전송시 필수
 		//contentType: false, // multipart/form-data
@@ -331,7 +333,7 @@ function selectBuyer_ok(iidx, buyerArr){
 			alert('buyerArr 배열 초기화 확인 : '+buyerArr);
 		},
 		error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            alert("구매자 확정 에러 발생~~ \n" + textStatus + " : " + errorThrown);
         }
 	});
 
@@ -341,17 +343,20 @@ function selectBuyer_ok(iidx, buyerArr){
 
 
 /* 나의 공구판매현황[모집중] - 참여자 거절하기 */ 
-function rejectBuyer(iidx, buyer){
+function rejectBuyer(iidx,oidx){
 
 	if(confirm('선택하신 참여자의 참여를 거절하시겠습니까?')){
 		$.ajax({
-			url : domain+'/items/mybuyer/'+iidx+'/'+ buyer,
+			url : domain+'/items/rejectBuyer/'+oidx,
 			type : 'PUT',
 			success : function(data){
 				alert('data : '+data+', 선택하신 참여자'+buyer+'가 참여거절 처리 되었습니다.');
 				myitem(midx);
 				$(".aside_mybuyer_list_"+iidx).show();
 
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
 			}
 		})
 	}
@@ -361,43 +366,45 @@ function rejectBuyer(iidx, buyer){
 
 /* 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리 */
 /* 구매자 선정하면 나머지 선택하지 않은 참여자, 판매실패하면 참여자 자동 거절처리 */ 
-function autoRejectBuyer(iidx, buyerArr){
+function autoRejectBuyer(iidx,oidxArr){
 
-	alert('참여자 자동 거절처리');
-	alert(iidx+'번 글. 매개변수 buyerArr배열확인 : '+buyerArr);
-
-	var rejectData = { buyerArr : buyerArr };
+	alert('참여자 자동 <거절>처리: '+iidx+'번 글. 매개변수 buyerArr배열확인 : '+oidxArr);
+	
+	var rejectData = { rejectArr : oidxArr };
 
 	$.ajax({
-		url : domain+'/items/mybuyer/'+iidx,
+		url : domain+'/items/rejectBuyer',
 		type : 'PUT',
 		data : JSON.stringify(rejectData),
 		contentType: "application/json",
 		//contentType :   "application/x-www-form-urlencoded",
 		//dataType: "json",
 		success : function(data){
-			alert('data : '+data+', 선택하신 참여자'+buyerArr+'가 참여거절 처리 되었습니다.');
+			alert('data : '+data+', 선택하신 참여자'+oidxArr+'가 참여거절 처리 되었습니다.');
 			myitem(midx);
 			$(".aside_mybuyer_list_"+iidx).show();
 			autoReject=[]; 	// 배열초기화
-			alert('autoReject 배열 초기화 확인 : '+autoReject);
+			//alert('autoReject 배열 초기화 확인 : '+autoReject);
 
-		}
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+            alert("자동거절처리 에러 발생~~ \n" + textStatus + " : " + errorThrown);
+        }
 	});
 
 };
 
 
 /* ing 나의 공구판매현황[모집완료] - 구매자 QR발급 */
-function insertQR(iidx, buyer){
+function insertQR(oidx){
 }
 	
 	
 /* 나의 공구판매현황[모집완료] - 구매자 QR보기 */
-function viewQR(iidx, buyer){
+function viewQR(oidx){
 	
 	$.ajax({
-		url : domain+'/items/qr/'+iidx+'/'+buyer,
+		url : domain+'/items/qr/'+oidx,
 		type : 'GET',
 		success : function(data){
 			alert('발급된 qr코드 : '+data);

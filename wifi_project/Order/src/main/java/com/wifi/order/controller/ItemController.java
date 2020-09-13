@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.model.ItemDTO;
-import com.google.gson.JsonObject;
 import com.wifi.order.item.service.ItemDelService;
 import com.wifi.order.item.service.ItemRegService;
 import com.wifi.order.item.service.ItemViewService;
 import com.wifi.order.item.service.ItemlistService;
-import com.wifi.order.item.service.MyBuyerCntService;
 import com.wifi.order.item.service.MyBuyerRejectService;
 import com.wifi.order.item.service.MyBuyerReviewService;
 import com.wifi.order.item.service.MyBuyerSelectService;
@@ -185,8 +182,9 @@ public class ItemController {
 //	public int selectBuyer(@RequestBody JsonObject buyerArr) {
 	//@PostMapping("/mybuyer")  // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이 null...
 	//public int selectBuyer(HttpServletRequest request) {
-	@PutMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
-	public int selectBuyer(@RequestBody HashMap<String, Object> buyerArr) {
+	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
+	public int selectBuyer(@RequestBody List<Integer> buyerArr) {
+	//public int selectBuyer(@RequestBody HashMap<String, Object> buyerArr) {
 			
 		//String[] buyerArr = request.getParameterValues("buyerArr[]");
 		//String[] rejectArr = request.getParameterValues("rejectArr[]");
@@ -194,44 +192,51 @@ public class ItemController {
 		System.out.println("참여자 구매자로 선정 controller");
 		//System.out.println("iidx 확인 :" +iidx);
 		//System.out.println("buyer 배열확인 toString : " + buyerArr.toString());
-		System.out.println("buyer 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
-		System.out.println("buyer 배열확인 buyerArr.get(iidx) : " + buyerArr.get("iidx"));
-		
-		int iidx = (int) buyerArr.get("iidx");
+		//System.out.println("buyer 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
+		//System.out.println("buyer 배열확인 buyerArr.get(iidx) : " + buyerArr.get("iidx"));
+		//System.out.println("buyer 배열확인 buyerArr.get(oidx) : " + buyerArr.get("oidx"));
+		System.out.println("buyerArr 배열확인 toString : " + buyerArr.toString());
 		//int[] buyer = (int[]) buyerArr.get("buyerArr");
-		Object[] buyer = buyerArr.values().toArray();
+		//Object[] buyer = buyerArr.values().toArray();
 		
-		return selectBuyerService.selectBuyer(iidx, buyer); 
+//		int[] arr= new int[buyerArr.values().size()];
+//		toArray(arr);
+		
+		//return selectBuyerService.selectBuyer(iidx, buyer); 
+//		return selectBuyerService.selectBuyer(buyerArr); 
+		return 0;
 	};
 	
 	
 	
 	// 나의 공구판매현황[모집중] - 참여자 거절하기
-	@PutMapping("/mybuyer/{iidx}/{buyer}")
-	public int rejectBuyer(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
+	@PutMapping("/rejectBuyer/{oidx}")
+	public int rejectBuyer(@PathVariable("oidx") int oidx) {
 		
 		System.out.println("참여자 거절 controller");
-		return rejectBuyerService.rejectBuyer(iidx, midx); 
+		return rejectBuyerService.rejectBuyer(oidx); 
 	};
 	
 	
 	
 	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  
 	// 구매자 선정하면 나머지 선택하지 않은 참여자, 판매실패하면 참여자 자동 거절처리
-	@PutMapping("/mybuyer/{iidx}")
+	@PutMapping("/rejectBuyer")
 //	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyer[]") String[] buyer) {
 //	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody List<Integer> buyer) {
-	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody HashMap<String, Object> buyerArr) {
+	public int rejectBuyer(@RequestBody HashMap<String, Object> rejectArr) {
 		
 		System.out.println("참여자 자동거절 controller");
 		
-		System.out.println("buyerArr 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
+		System.out.println("rejectArr 배열확인buyerArr.get(rejectArr) : " + rejectArr.get("rejectArr"));
 		
 		//int[] buyer = (int[]) buyerArr.get("buyerArr");
-		Object[] buyer = buyerArr.values().toArray();   //컬렉션에서 제공되는 메서드 toArray는 Object[] 로 변환밖에 안도 
+		//Object[] buyer = buyerArr.values().toArray();   //컬렉션에서 제공되는 메서드 toArray는 Object[] 로 변환밖에 안도 
 		
+		System.out.println("rejectArr 배열확인 toString : " + rejectArr.toString());
 
-		return rejectBuyerService.autoRejectBuyer(iidx, buyer); 
+		//return rejectBuyerService.autoRejectBuyer(iidx, buyer); 
+		return rejectBuyerService.autoRejectBuyer(rejectArr); 
 	};
 	
 	
@@ -248,11 +253,11 @@ public class ItemController {
 	
 	
 	// 나의 공구판매현황[모집완료] - QR보기
-	@GetMapping("/qr/{iidx}/{buyer}")
-	public String getQR(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
+	@GetMapping("/qr/{oidx}")
+	public String getQR(@PathVariable("oidx") int oidx) {
 		
 		System.out.println("QR보기 controller");
-		return getQRService.getQR(iidx, midx); 
+		return getQRService.getQR(oidx); 
 	};
 	
 	

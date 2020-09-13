@@ -1,5 +1,7 @@
 package com.wifi.order.item.service;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,21 +17,31 @@ public class MyBuyerRejectService {
 	private SqlSessionTemplate template;
 	
 	// 나의 공구판매현황[모집중] - 참여자 거절하기 (한명씩)
-	public int rejectBuyer(int iidx, int midx) {
+	public int rejectBuyer(int oidx) {
 	
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("참여자 거절 service");
 		
-		return dao.rejectBuyer(iidx, midx);
+		return dao.rejectBuyer(oidx);
 	}
 
 	
 	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  (배열로)
-	public int autoRejectBuyer(int iidx, Object[] buyer) {
+//	public int autoRejectBuyer(int iidx, Object[] buyer) {
+//		
+//		dao = template.getMapper(ItemDao.class);
+//		System.out.println("참여자 자동거절 service");
+//		
+//		return dao.autoRejectBuyer(iidx, buyer);
+//	}
+
+
+	public int autoRejectBuyer(HashMap<String, Object> buyerArr) {
 		
 		dao = template.getMapper(ItemDao.class);
+		System.out.println("참여자 자동거절 service");
+		return dao.autoRejectBuyer(buyerArr);
 		
-		return dao.autoRejectBuyer(iidx, buyer);
 	}
 
 }
