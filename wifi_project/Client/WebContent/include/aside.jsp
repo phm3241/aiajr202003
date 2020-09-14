@@ -2,54 +2,51 @@
    pageEncoding="UTF-8"%>
 
 <!-- aside 공구현황 -->
-<div id="aside_area">
+
+<!-- <div id="aside_area"> -->
 
    <!-- Sidebar/menu -->
-   <nav class="w3-sidebar base-purple w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:400px;font-weight:bold;" id="mySidebar"><br>
+   <nav id="mySidenav" class="sidenav w3-sidebar base-purple w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:400px;font-weight:bold;" ><br>
       
 
       <!-- 모바일상태일 때 aside x 버튼활성화 -->
-      <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px"> 
+      <!-- <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px"> 
          X 
-      </a>
-         
-
-
+      </a> -->
       <!-- 로그아웃 버튼 -->
       <button type="button" class="btn_logout" onclick="location.href='/logout'">Logout</button>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+         
 
-      <!-- 프로필 -->
-      <div class="profile">
-         <!-- <div class="aside_myimg">
-            <img src="img/사과.jpg">
+      <div class="asideContext">
+
+         <!-- 프로필 -->
+         <div class="profile">
+
          </div>
-         <div class="aside_myprofile">
-            <h3><b>Park Hye Mi</b></h3>
-            <h4 class="myrvs">Seller ★ 4 </h4> | <h4 class="myrvb"> Buyer ★ 4.2 </h4>
-         </div> -->
+         
+            
+
+
+         <!-- 탭버튼 내용 영역 : My Sale . My Order-->
+         <div class="aside_tabs">
+            <div class="aside_tab"><button type="button" class="btn_myItemlist btn_tab">My Sale <h4 id="alarm_s"></h4></button></div>
+            <div class="aside_tab"><button type="button" class="btn_myOderlist btn_tab">My Order<h4 id="alarm_b"></h4></button></div>
+         </div> 
+            
+
+         <!- 내 아이템리스트 영역 -->
+         <div class="aside_myitem">
+
+               <!-- 내 구매현황 -->
+               <div id="aside_myOrderlist" class="aside_myOrderlist"></div>  
+
+               <!-- 내 판매현황 -->
+               <div id="aside_myItemlist" class="aside_myItemlist"> </div>  
+         
+         </div> <!-- aside_mylist end -->
+      
       </div>
-      
-         
-
-
-      <!-- 탭버튼 내용 영역 : My Sale . My Order-->
-      <div class="aside_tabs">
-         <div class="aside_tab"><button type="button" class="btn_myItemlist btn_tab">My Sale <h4 id="alarm_s"></h4></button></div>
-         <div class="aside_tab"><button type="button" class="btn_myOderlist btn_tab">My Order<h4 id="alarm_b"></h4></button></div>
-      </div> 
-         
-
-      <!- 내 아이템리스트 영역 -->
-      <div class="aside_myitem">
-
-            <!-- 내 구매현황 -->
-            <div id="aside_myOrderlist" class="aside_myOrderlist"></div>  
-
-            <!-- 내 판매현황 -->
-            <div id="aside_myItemlist" class="aside_myItemlist"> </div>  
-      
-      </div> <!-- aside_mylist end -->
-
 
 
 
@@ -71,5 +68,5 @@
 
 
 
-</div>
+<!-- </div> -->
 <!-- aside_area end -->

@@ -1,4 +1,4 @@
-//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Buy_v1/";
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0914(2)";
 var domain = "http://localhost:8080/order";
 
 
@@ -188,6 +188,7 @@ $(document).ready(function(){
 	function recomItemlist_print(data){
 
 		var html = '';
+		var category = '';
 				
 		// 출력되어있는 추천 공구리스트 지우고 ㅡ> 다시 출력
 		$('.swiper-container').html(' ');
@@ -201,6 +202,24 @@ $(document).ready(function(){
 		
 
 		for(var i=0; i<data.length; i++){
+
+			switch(data[i].category){
+				case 0: 
+					category = '';
+					break;
+				
+				case 1: 
+					category = '과일/채소';
+					break;
+
+				case 2: 
+					category = '육류/해산물';
+					break;
+
+				case 3:
+					category = '생필품/기타';
+					break;
+			}
 			
 			html += '	<li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="'+i+'">';
 			html += '		<button type="button"  class="item_card_big category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
@@ -209,7 +228,7 @@ $(document).ready(function(){
 			html += '			<div class="ag-slide_info clearfix">';
 			
 			html += '				<div class="ag-slide-info_descr">';
-			html += '					<small class="ag-slide-info_category">category</small>';
+			html += '					<small class="ag-slide-info_category">'+category+'</small>';
 			html += '					<h6 class="ag-slide-info_title"><b>'+data[i].iidx+': '+data[i].title+'</b></h6>';
 			html += '					<h5 class="ag-slide-info_title">price : '+data[i].price+'</h6>';
 			html += '					<h5 class="ag-slide-info_title">D-day : '+data[i].receive+'</h6>';
@@ -250,18 +269,18 @@ $(document).ready(function(){
 			
 				var sliderView = 3;
 				var ww = $(window).width();
-				if (ww >= 1700) sliderView = 7;
-				if (ww <= 1700) sliderView = 7;
-				if (ww <= 1560) sliderView = 6;
-				if (ww <= 1400) sliderView = 5;
-				if (ww <= 1060) sliderView = 4;
+				if (ww >= 1700) sliderView = 3;
+				if (ww <= 1700) sliderView = 3;
+				if (ww <= 1560) sliderView = 3;
+				if (ww <= 1400) sliderView = 3;
+				if (ww <= 1060) sliderView = 3;
 				if (ww <= 800) sliderView = 3;
-				if (ww <= 560) sliderView = 2;
+				if (ww <= 560) sliderView = 3;
 				if (ww <= 400) sliderView = 1;
 			
 				var swiper = new Swiper('.swiper-container', {
 					slidesPerView: sliderView,
-					spaceBetween: 50,
+					spaceBetween: 100,
 					loop: true,
 					loopedSlides: 10,
 					speed: 450,
@@ -272,11 +291,11 @@ $(document).ready(function(){
 			
 				$(window).resize(function () {
 					var ww = $(window).width();
-					if (ww >= 1700) swiper.params.slidesPerView = 7;
-					if (ww <= 1700) swiper.params.slidesPerView = 7;
-					if (ww <= 1560) swiper.params.slidesPerView = 6;
-					if (ww <= 1400) swiper.params.slidesPerView = 5;
-					if (ww <= 1060) swiper.params.slidesPerView = 4;
+					if (ww >= 1700) swiper.params.slidesPerView = 3;
+					if (ww <= 1700) swiper.params.slidesPerView = 3;
+					if (ww <= 1560) swiper.params.slidesPerView = 3;
+					if (ww <= 1400) swiper.params.slidesPerView = 3;
+					if (ww <= 1060) swiper.params.slidesPerView = 3;
 					if (ww <= 800) swiper.params.slidesPerView = 3;
 					if (ww <= 560) swiper.params.slidesPerView = 2;
 					if (ww <= 400) swiper.params.slidesPerView = 1;
@@ -312,6 +331,7 @@ $(document).ready(function(){
 
 
 		var html = '';
+		var category = '';
 
 		// 출력되어있는 일반 공구리스트 지우고 ㅡ> 다시 출력
 		$('#itemlist_small_area').html(' ');
@@ -323,19 +343,36 @@ $(document).ready(function(){
 		
 		for(var i=0; i<data.length; i++){
 
+			switch(data[i].category){
+				case 0: 
+					category = '';
+					break;
+				
+				case 1: 
+					category = '과일/채소';
+					break;
+
+				case 2: 
+					category = '육류/해산물';
+					break;
+
+				case 3:
+					category = '생필품/기타';
+					break;
+			}
+
 
 			html += '	<button type="button" class="item_card category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 			//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 			html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 			html += '		<div class="item_info">';
-			//html += '			<div>istate : '+data[i].istate+'</div>';
-			//html += '			<div>pstate : '+data[i].pstate+'</div>';
-			html += '			<h3 class="item_title">'+data[i].iidx+': '+data[i].title+'</h3>';
-			html += '				<span class="seller_name">'+data[i].midx+'.'+data[i].name+' | 평균 ★ '+data[i].rvs_avg+'(총 '+data[i].rvs_totalRow+'건)</span><br>';
-			html += '				<h4 class="seller_rating">view '+data[i].view_count+'</h4>';
-			html += '				<h4 class="item_price">price : '+data[i].price+'</h4> ';
-			html += '				<h4 class="item_limitDate">D-day : '+data[i].receive+'</h4>';
-			html += '				<h4 class="item_location">location : '+data[i].location+'</h4>';
+			//html += '				<h2 class="item_category">'+category+'</h2>';
+			html += '				<h2 class="item_title"><b>'+data[i].iidx+': '+data[i].title+'</b></h2>';
+			//html += '				<h4 class="seller_rating">view '+data[i].view_count+'</h4>';
+			html += '				<h3 class="item_price">price : '+data[i].price+'</h4> ';
+			html += '				<h3 class="item_limitDate">D-day : '+data[i].receive+'</h4>';
+			html += '				<h3 class="item_location">location : '+data[i].location+'</h4>';
+			html += '				<h3 class="seller_name">'+data[i].midx+'.'+data[i].name+' | 평균 ★ '+data[i].rvs_avg+'(총 '+data[i].rvs_totalRow+'건)</h4>';
 			html += '		</div>';
 			html += '	</button>';
 			
@@ -499,9 +536,14 @@ $(document).ready(function(){
 				}
 				html += '		</td></tr>'; 
 				html += '	</table>';
-				html += '</div">';
+				html += '</div>';
 				
 				$('#itemView_area').html(html);
+				
+				//getComment(iidx);
+				$('.commentlist').html(html);
+				regCommentForm(iidx);
+
 				
 			}
 

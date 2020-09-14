@@ -1,16 +1,46 @@
-var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0914";
-//var domain = "http://localhost:8080/order";
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0914(2)";
+var domain = "http://localhost:8080/order";
 
-//var loginMidx = 1;
-
-
+var loginMidx = 1;
+var loginName = 'Park Hye Mi';
 
 /***** buyer : aside 구매자 ************************************************************************/
 /***** - 내구매글 리스트 / 현황별 기능(참여신청, 참여취소, QR보기, 평점등록, 글숨김) **********/
 
-var loginInfo = sessionStorage.getItem("loginInfo");
-var loginMidx = sessionStorage.getItem("loginMidx");
-var loginName = sessionStorage.getItem("loginName");
+// var loginInfo = sessionStorage.getItem("loginInfo");
+// var loginMidx = sessionStorage.getItem("loginMidx");
+// var loginName = sessionStorage.getItem("loginName");
+
+
+
+
+
+// 프로필 관련 --------------------------------------------------------------------------------------
+function profile() {
+    $.ajax({
+        url : domain+'/orders',
+        type : 'GET',
+        success : function(data){
+
+            var html='';
+            html +='<div class="aside_myimg">';
+            html +='    <img src="img/사과.jpg">';
+            html +='</div>';
+            html +='<div class="aside_myprofile">';
+            html +='    <h3><b>'+loginName+'</b></h3>';
+            //html +='    <h4 class="myrvs">Seller ★ '+data.rvs+' </h4> | <h4 class="myrvb"> Buyer ★ '+data.rvb+' </h4>';
+            html +='    <h4 class="myrvs">Seller ★ '+data[0]+' </h4> | <h4 class="myrvb"> Buyer ★ '+data[1]+' </h4>';
+            html +='</div>';
+            
+            $('.profile').html(html);
+        
+        }
+
+    });
+}
+
+
+
 
 
 // 리스트 관련 --------------------------------------------------------------------------------------
@@ -38,7 +68,9 @@ function myOrder(loginMidx){
             var html = '';
 			for(var i=0; i<data.length; i++){
 				var state= '';
+				var stateMsg= '';
 				var stateColor= '';
+				var currentBuyer='';
 				
 
 				// order가 숨김처리 되있을 때, 출력안함

@@ -104,13 +104,14 @@ public class MemberController {
 	
 	/* 회원가입 */
 	@RequestMapping("/members")
-	@ResponseBody
-	private int regMember(HttpServletRequest req, Member memberReq) {
+	private String regMember(HttpServletRequest req, Member memberReq) {
 		
 		System.out.println("regMember controller");
 		System.out.println("매개변수 확인 memberReq : "+memberReq.toString());
 		
-		return regService.regMember(req, memberReq);
+		regService.regMember(req, memberReq);
+		
+		return "main";
 		
 	};
     

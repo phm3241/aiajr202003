@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/item.css" type="text/css">
   <link rel="stylesheet" href="css/search.css" type="text/css">
   <link rel="stylesheet" href="css/aside.css" type="text/css">
+  <link rel="stylesheet" href="css/comment.css" type="text/css">
   <link rel="stylesheet" href="css/swiper.css" type="text/css">
   <link rel="stylesheet" href="css/swiper.min.css" type="text/css"> <!-- swiper관련 -->
   <link rel="stylesheet" href="package/swiper-bundle.min.css">  <!-- swiper관련 -->
@@ -43,11 +44,23 @@
 
     <!-- content영역 : 공구등록폼 / 공구상세보기/ 공구리스트(추천글.일반글) -->
     
+
       <!-- content영역-1 : 공구등록 폼 -->
       <%@include file="include/regItemForm.jsp"%>
 
+
       <!-- content영역-2 : 공구상세보기  -->
-      <div id="itemView_area" class="itemView_area"></div> 
+      <div id="itemView_area" class="itemView_area">
+        
+        <!-- 댓글 리스트 -->
+        <div class="commentlistWrap">
+          <h1>--- Comments ---</h1>
+          <div class="commentlist"></div> 
+          <div class="comment_formWrap"></div>  
+        </div> <!-- comments_area end -->
+
+      </div> <!-- itemView_area end -->
+
 
 
       <!-- content영역-3 : 공구리스트(추천글.일반글) -->
@@ -109,6 +122,7 @@
   <script text="text/javascript" src="js/item.js"></script>   <!-- 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제 -->
   <script text="text/javascript" src="js/seller.js"></script> <!-- aside 판매자 -->
   <script text="text/javascript" src="js/buyer.js"></script>  <!-- aside 구매자 -->
+  <script text="text/javascript" src="js/comment.js"></script>  <!-- aside 구매자 -->
     
     
 

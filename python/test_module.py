@@ -7,4 +7,4 @@ def get_circum(radius):
     return 2*PI*radius
 
 def get_cirarea(radius):
-    return PI*raius
+    return PI*radius

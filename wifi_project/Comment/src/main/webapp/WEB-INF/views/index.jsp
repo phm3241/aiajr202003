@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-<title>kakaoLogin</title>
+<title>Comment</title>
 
 <link rel="stylesheet" href="/css/comment.css" type="text/css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

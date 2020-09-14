@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/item.css" type="text/css">
   <link rel="stylesheet" href="css/search.css" type="text/css">
   <link rel="stylesheet" href="css/aside.css" type="text/css">
+  <!-- <link rel="stylesheet" href="css/comment.css" type="text/css"> -->
   <link rel="stylesheet" href="css/swiper.css" type="text/css">
   <link rel="stylesheet" href="css/swiper.min.css" type="text/css"> <!-- swiper관련 -->
   <link rel="stylesheet" href="package/swiper-bundle.min.css">  <!-- swiper관련 -->
@@ -33,7 +34,7 @@
 
 
   <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:450px;margin-right:40px">
+  <div id="main" class="w3-main" style="margin-left:450px;margin-right:40px">
 
 
     <!-- header영역 : 타이틀. 검색 -->
@@ -43,11 +44,23 @@
 
     <!-- content영역 : 공구등록폼 / 공구상세보기/ 공구리스트(추천글.일반글) -->
     
+
       <!-- content영역-1 : 공구등록 폼 -->
       <%@include file="include/regItemForm.jsp"%>
 
+
       <!-- content영역-2 : 공구상세보기  -->
-      <div id="itemView_area" class="itemView_area"></div> 
+      <div id="itemView_area" class="itemView_area">
+        
+        <!-- 댓글 리스트 -->
+        <div class="commentlistWrap">
+          <h1>--- Comments ---</h1>
+          <div class="commentlist"></div> 
+          <div class="comment_formWrap"></div>  
+        </div> <!-- comments_area end -->
+
+      </div> <!-- itemView_area end -->
+
 
 
       <!-- content영역-3 : 공구리스트(추천글.일반글) -->
@@ -57,9 +70,12 @@
         <div class="w3-container" id="Recommended" style="margin-top:65px;" >
 
           <!-- 추천글 - 타이틀 -->
-          <h2 class="w3-xlarge text-purple"><b>Recommended item</b></h2>
-          <hr style="width:50px;border:5px solid purple;"  class="w3-round">
-        
+          <div class="mainItemTitle">
+            <hr style="width:50px; border:5px solid purple; " class="w3-round line" >
+            <h2 class="w3-xxlarge text-purple"><b>Recommended</b></h2>
+            <hr style="width:50px;border:5px solid purple;"  class="w3-round line">
+          </div>
+
           <!-- 추천글 리스트 Swiper  -->
           <section class="ag-slide-block">
             <div class="swiper-container"></div>
@@ -73,11 +89,16 @@
         <div class="w3-container" id="item" style="margin-top:75px;" >
 
           <!-- 일반글 - 타이틀. 등록버튼. 정렬버튼 -->
-          <h2 class="w3-xlarge text-purple"><b>item</b></h2>
+          <div>
             <button type="button" class="btn_sort sort_reg"  onclick="allItemlist()">Latest Sort</button>
             <button type="button" class="btn_sort sort_rvs" onclick="allItemlist_sortRvs()">Rating Sort</button>
-            <button type="button" class="btn_regItem" onclick="regItemForm()">item +</button>
-          <hr style="width:50px; border:5px solid purple; " class="w3-round">
+            <button type="button" class="btn_basic" onclick="regItemForm()">item +</button>
+          </div>
+          <div class="mainItemTitle">
+            <hr style="width:50px; border:5px solid purple; " class="w3-round line" >
+            <h2 class="w3-xxlarge text-purple"><b>item</b></h2>
+            <hr style="width:50px; border:5px solid purple; " class="w3-round line" >
+          </div>
           
           <!-- 일반글 리스트 -->
           <div id="itemlist_small_area"></div> 
@@ -109,6 +130,7 @@
   <script text="text/javascript" src="js/item.js"></script>   <!-- 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제 -->
   <script text="text/javascript" src="js/seller.js"></script> <!-- aside 판매자 -->
   <script text="text/javascript" src="js/buyer.js"></script>  <!-- aside 구매자 -->
+  <!-- <script text="text/javascript" src="js/comment.js"></script>  댓글 -->
     
     
 

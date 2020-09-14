@@ -1,12 +1,17 @@
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Comment0914(2)";
+var domain = 'http://localhost:8080/comments';
+
+
+/***** comment : 댓글 리스트 / 등록 / 수정 / 삭제  *****************************/
+
 var loginMidx = 2;
+var loginName = 'loginName';
 var iidx=130;
-var domain = 'http://localhost:8082/comments';
 
-$(document).ready(function() {
-	getComment(iidx); 
+// var loginInfo = sessionStorage.getItem("loginInfo");
+// var loginMidx = sessionStorage.getItem("loginMidx");
+// var loginName = sessionStorage.getItem("loginName");
 
-
-});
 
 
 /* 댓글 등록시, 글자수 제한 */
@@ -103,7 +108,7 @@ function regCommentForm(iidx){
 	html +='						<span style="color:#aaa;" class="textCounter">0</span>&nbsp;<span>/ 250자</span>';
 	html +='					</div>';
 	html +='					<div class="formRow">';
-	html +='						<h4 class="comment_mname">'+loginMidx+'</h4>';
+	html +='						<h4 class="comment_mname">'+loginName+'</h4>';
 	html +='						<input type="hidden" class="comment_midx" value="2">';
 	html +='					</div>';
 	html +='					<div class="formRow">';
@@ -123,8 +128,8 @@ function regCommentForm(iidx){
 /* 댓글 등록 */
 function regComment(iidx) {
 
-	//alert('댓글등록 시작 iidx : '+iidx);
-	//var text =$("#comment_content");
+	// alert('댓글등록 시작 iidx : '+iidx);
+	// var text =$("#comment_content");
 
 	var regFormData = new FormData();
 	//regFormData.append('content', $('textarea[name=comment_content]').html());
@@ -161,12 +166,12 @@ function regComment(iidx) {
 /* 댓글 수정 폼 */
 function editCommentForm(cidx) {
 
-	//alert('댓글수정 시작 cidx : '+cidx);
+	// alert('댓글수정 시작 cidx : '+cidx);
 	
 	var html = '';
 	var html2 = '';
 	var content = $('.comment_text_'+cidx).text();
-	alert('댓글수정 시작 content : '+content);
+	// alert('댓글수정 시작 content : '+content);
 
 
 	html +='						<textarea class="comment_content_'+cidx+'" required>'+content+'</textarea>';

@@ -1,5 +1,4 @@
 //var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Buy_v1/";
-//var domain = "http://localhost:8080/order/";
 var domain = "http://localhost:8080/order";
 
 var loginMidx = 1;
@@ -17,27 +16,28 @@ var loginMidx = 1;
 
 $(document).ready(function(){
 
-	
-
-	/* ing 나의 공구구매현황[구매자] - 평점등록  */
+	    	/* ing 나의 공구구매현황[구매자] - 평점등록  */
     /* 별 표시  */
     /* 1. Visualizing things on Hover - See next part for action on click */
-    $('#stars li').mouseover(function(){
+    $('.stars li').mouseover(function(){
         var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
     
         // Now highlight all the stars that's not after the current hovered star
-        $(this).parent().children('li.star').each(function(e){
+        $(this).parent().children('.star').each(function(e){
         if (e < onStar) {
-            $(this).addClass('hover');
+            //$(this).addClass('hover');
+            $(this).css('color','#FFCC36');
         }
         else {
-            $(this).removeClass('hover');
+            //$(this).removeClass('hover');
+            $(this).css('color','#ccc');
         }
         });
     
     }).mouseout(function(){
-        $(this).parent().children('li.star').each(function(e){
-            $(this).removeClass('hover');
+        $(this).parent().children('.star').each(function(e){
+            //$(this).removeClass('hover');
+            $(this).css('color','#ccc');
         });
     });
     
@@ -46,17 +46,19 @@ $(document).ready(function(){
     /* ing 나의 공구구매현황[구매자] - 평점등록  */
     /* 별 표시 - 평점계산  */
     /* 2. Action to perform on click */
-    $('#stars li').click(function(){
+    $('.stars li').click(function(){
 
         var onStar = parseInt($(this).data('value'), 10); // The star currently selected
-        var stars = $(this).parent().children('li.star');
+        var stars = $(this).parent().children('.star');
 
         for (i = 0; i < stars.length; i++) {
-            $(stars[i]).removeClass('selected');
+            //$(stars[i]).removeClass('selected');
+            $(stars[i]).css('color','#ccc');
         }
 
         for (i = 0; i < onStar; i++) {
-            $(stars[i]).addClass('selected');
+            //$(stars[i]).addClass('selected');
+            $(stars[i]).css('color','#FF912C');
         }
 
         // JUST RESPONSE (Not needed)
@@ -66,6 +68,9 @@ $(document).ready(function(){
         $(this).parent().eq(2).data('value',ratingValue);
 
     });
+	
+
+
 
 });  // ready end
 
@@ -103,36 +108,36 @@ $(document).ready(function(){
 					
 					if(data[i].label=="모집중"){
 						state = 0;
-						stateColor = 'aside_mystate join_ing';
+						stateColor = 'aside_mystate joinIng';
 
 
 					} else if(data[i].label=="모집완료"){
 						state = 1;
-						stateColor = 'aside_mystate join_com';
+						stateColor = 'aside_mystate joinCom';
 					
 						
 					} else if(data[i].label=="판매완료"){
 						state = 2;
-						stateColor = 'aside_mystate sell_com';
+						stateColor = 'aside_mystate saleCom';
 						
 
 					} else if(data[i].label=="판매실패"){
 						state = 3;
-						stateColor = 'aside_mystate sell_fail';
+						stateColor = 'aside_mystate saleFail';
 					}	
 					
 
 					html += '<div class="aside_mycard iidx'+data[i].iidx+'">';
-					html += '		<div class="aside_mystatewrap">';
-					html += '    	  <span class="btn_regItem '+stateColor+'">'+data[i].label+'</span>';
-					html += '    	  <span class="alarm sa'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].seller+')">alarmtest</span>';
+					html += '	<div class="aside_mystatewrap aside_state '+stateColor+'"></div>';
+					html += '   <span>'+data[i].label+'</span><span class="alarm sa'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].buyer+')">a</span>';
+					
 					if(state==0){
 					html += '  	  	  <span class="aside_'+data[i].iidx+'">현재참여자 : '+data[i].cntBuyer+'명 / 구매정원 :'+data[i].count_m+'명</span>';
 					}
-					html += '  	</div>';
-					html += '  	  <button type="button" class="aside_item_title" onclick="itemView('+data[i].iidx+')">'+data[i].iidx+'. '+data[i].title+'</button> <br>';
-					html += '  	  <button type="button" class="btn_mybuyer_view" onclick="mybuyer_toggle('+data[i].iidx+')"> ▼ </button>';
-					html += '  	  <div class="aside_mybuyer_list_'+data[i].iidx+'" style="display: block;"></div>';
+					
+					html += '	<button type="button" class="aside_item_title" onclick="itemView('+data[i].iidx+','+loginMidx+')">'+data[i].iidx+'. '+data[i].title+'</button>';
+					html += '	<button type="button" class="btn_mybuyer_view" onclick="mybuyer_toggle('+data[i].iidx+')"> ▼ </button>';
+					html += '	<div class="aside_mybuyer_list_'+data[i].iidx+'" style="display: block;"></div>';
 					html += '</div>';
 
 					// 해당 판매글의 참여자 리스트 
@@ -162,8 +167,8 @@ $(document).ready(function(){
 			success: function(data){
 				
 				var buyerState = '';
-				var btn_sellerActionName1 = '';
-				var btn_sellerAction1 = '';
+				var btn_sellerActionName = '';
+				var btn_sellerAction = '';
 				var stateColor= '';
 				var html = '';
 				
@@ -175,8 +180,8 @@ $(document).ready(function(){
 						case 0:
 							buyerState = '참여중';
 							stateColor = '';
-							btn_sellerActionName1 = '거절';
-							btn_sellerAction1 = '';
+							btn_sellerActionName = '거절';
+							btn_sellerAction = '';
 							break;
 							
 						// 판매글 상태 : 모집완료 ㅡ> 큐알발급버튼, 발급큐알보기버튼
@@ -184,11 +189,11 @@ $(document).ready(function(){
 							buyerState = '구매자';
 							stateColor = '';
 							if(data[i].qr==0){
-								btn_sellerActionName1 = 'QR발급';
-								btn_sellerAction1 = 'insertQR';
+								btn_sellerActionName = 'QR발급';
+								btn_sellerAction = 'insertQR';
 							} else {
-								btn_sellerActionName1 = 'QR보기';
-								btn_sellerAction1 = 'viewQR';
+								btn_sellerActionName = 'QR보기';
+								btn_sellerAction = 'viewQR';
 							}
 							break;
 						
@@ -201,22 +206,22 @@ $(document).ready(function(){
 								buyerState = '수령';
 								stateColor = '';
 							}
-							btn_sellerActionName1 = '평점등록';
-							btn_sellerAction1 = 'review';
+							btn_sellerActionName = '평점등록';
+							btn_sellerAction = 'review';
 							break;
 						
 						// 판매글 상태 : 판매실패 ㅡ> 글숨김버튼
 						case 3: 
 							buyerState = '자동참여거절';
 							stateColor = '';
-							btn_sellerActionName1 = '거절';
-							btn_sellerAction1 = 'reject';
+							btn_sellerActionName = '거절';
+							btn_sellerAction = 'reject';
 							break;
 						
 					}
 					
 					// 참여자(또는 구매자) 이름. 평균평점. 총평점수 - 기본출력
-						html += '<hr>';
+						//html += '<hr>';
 						html += '<div class="aside_mybuyer iidx'+data[i].iidx+'">';
 						html += '   <span class="buyerState '+stateColor+'">'+buyerState+' | </span>';
 						html += '	<span class="buyer_name midx'+data[i].buyer+'">'+data[i].name+'</span>';
@@ -230,7 +235,7 @@ $(document).ready(function(){
 
 					// 모집완료 일때, QR 생성 또는 보기 버튼 출력   
 					} else if(state==1){
-						html += '    <button type="button" class="btn_sellerAction '+btn_sellerAction1+'" onclick="'+btn_sellerAction1+'('+data[i].oidx+')">'+btn_sellerActionName1+'</button>';
+						html += '    <button type="button" class="btn_sellerAction '+btn_sellerAction+'" onclick="'+btn_sellerAction+'('+data[i].oidx+')">'+btn_sellerActionName+'</button>';
 						
 
 					// 판매완료 일때, 평점등록 버튼 출력 	
@@ -362,15 +367,17 @@ $(document).ready(function(){
 	/* 나의 공구판매현황[모집중] - 참여자 구매자 선정 ㅡ> 확정 처리 */
 	function selectBuyer_ok(iidx, oidxArr){
 		
-		var selectData = { oidxArr : oidxArr };
-		alert('selectData.buyerArr : '+ selectData.oidxArr);
+		var selectData = { "oidxArr" : oidxArr };
+		//alert('selectData.buyerArr : '+ selectData.oidxArr);
 
 		// var selectData = {
 		// 	iidx : iidx,
 		// 	buyerArr : buyerArr,
 		// };
 
-		alert('참여자 자동 <구매자>처리: '+iidx+'번 글. 매개변수 oidxArr배열확인 : '+oidxArr);
+		alert('참여자 자동 <구매자>처리 ajax전: '+iidx+'번 글. 매개변수 oidxArr배열확인 : '+oidxArr);
+		
+		$.ajaxSettings.traditional = true;
 
 		$.ajax({
 			url : domain+'/items/mybuyer',
@@ -381,8 +388,8 @@ $(document).ready(function(){
 			contentType: "application/json",
 			//contentType :   "application/x-www-form-urlencoded",
 			//dataType: "json",
-			//data : selectData,
 			data : JSON.stringify(selectData),
+			//data : oidxArr,
 
 			
 			success : function(data){

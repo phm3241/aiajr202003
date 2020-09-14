@@ -1,20 +1,22 @@
-var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0914";
-//var domain = "http://localhost:8080/order";
-//var loginMidx = 1;
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0914(2)";
+var domain = "http://localhost:8080/order";
+
+var loginMidx = 1;
 
 
 
 /***** seller : aside 판매자 ************************************************************************/
 /***** - 내판매글 리스트 / 참여자 리스트 / 현황별 기능(구매자선정,거절,자동거절,평점,글숨김) **********/
 
-var loginInfo = sessionStorage.getItem("loginInfo");
-var loginMidx = sessionStorage.getItem("loginMidx");
-var loginName = sessionStorage.getItem("loginName");
-
+// var loginInfo = sessionStorage.getItem("loginInfo");
+// var loginMidx = sessionStorage.getItem("loginMidx");
+// var loginName = sessionStorage.getItem("loginName");
 
 
 
 $(document).ready(function(){
+
+	
 
 	/* ing 나의 공구구매현황[구매자] - 평점등록  */
     /* 별 표시  */
@@ -359,15 +361,17 @@ $(document).ready(function(){
 	/* 나의 공구판매현황[모집중] - 참여자 구매자 선정 ㅡ> 확정 처리 */
 	function selectBuyer_ok(iidx, oidxArr){
 		
-		var selectData = { oidxArr : oidxArr };
-		alert('selectData.buyerArr : '+ selectData.oidxArr);
+		var selectData = { "oidxArr" : oidxArr };
+		//alert('selectData.buyerArr : '+ selectData.oidxArr);
 
 		// var selectData = {
 		// 	iidx : iidx,
 		// 	buyerArr : buyerArr,
 		// };
 
-		alert('참여자 자동 <구매자>처리: '+iidx+'번 글. 매개변수 oidxArr배열확인 : '+oidxArr);
+		alert('참여자 자동 <구매자>처리 ajax전: '+iidx+'번 글. 매개변수 oidxArr배열확인 : '+oidxArr);
+		
+		$.ajaxSettings.traditional = true;
 
 		$.ajax({
 			url : domain+'/items/mybuyer',
@@ -378,8 +382,8 @@ $(document).ready(function(){
 			contentType: "application/json",
 			//contentType :   "application/x-www-form-urlencoded",
 			//dataType: "json",
-			//data : selectData,
 			data : JSON.stringify(selectData),
+			//data : oidxArr,
 
 			
 			success : function(data){

@@ -29,7 +29,7 @@ body {
 .ag-slide_img {
   display: block;
   width: 100%;
-  max-width: 317px;
+  max-width: 360px;
   margin: 0 auto;
 
   opacity: 0.5;
@@ -144,8 +144,8 @@ body {
   padding-top: 13px;
 }
 .ag-slide-block .swiper-slide {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
 
   z-index: 1;
 

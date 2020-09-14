@@ -6,7 +6,8 @@
    
       <!-- 타이틀 로고 -->
       <div class="mainTitle">
-         <h1 class="w3-xxlarge" style="display: inline;"><b> W 1 F 1 같이 사는 가치</b></h1>
+         <span class="btn_hamburger" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+         <h1 class="w3-xxlarge" style="display: inline;"><b> W 1 F 1</b> 같이 사는 가치</h1>
       </div>
 
       <!-- 검색영역 -->

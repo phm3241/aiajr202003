@@ -1,13 +1,12 @@
 package com.wifi.order.buyer.service;
 
-import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.wifi.order.dao.OrderDao;
 
+// 프로필영역
 @Service
 public class MyProfileService {
 	
@@ -29,7 +28,7 @@ public class MyProfileService {
 		//map.put("rvb", rvb);
 		
 		float[] arr = {rvs, rvb};
-		System.out.println("배열확인  : "+arr[0]+','+arr[1]);
+		System.out.println("프로필 내 평점 배열확인 . seller : "+arr[0]+",buyer : "+arr[1]);
 		
 		return arr;
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.wifi.order.model.ItemDTO;
 import com.wifi.order.item.service.ItemDelService;
@@ -187,12 +188,14 @@ public class ItemController {
 //	public int selectBuyer(@RequestBody JsonObject buyerArr) {
 	//@PostMapping("/mybuyer")  // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이 null...
 	//public int selectBuyer(HttpServletRequest request) {
-	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
 	//public int selectBuyer(@RequestBody List<Integer> buyerArr) {
-	public int selectBuyer(@RequestBody HashMap<String, Object> map) {
+	//public int selectBuyer(@RequestBody HashMap<String, Object> map) {
+
+	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
+	//public int selectBuyer(@RequestParam(value="oidxArr[]") String[] oidxArr) {
+	public int selectBuyer(@RequestBody HashMap<String, Object> oidxArr) {  
 			
-		//String[] buyerArr = request.getParameterValues("buyerArr[]");
-		//String[] rejectArr = request.getParameterValues("rejectArr[]");
+		//String[] oidxArr = request.getParameterValues("oidxArr");
 		
 		System.out.println("참여자 구매자로 선정 controller");
 		//System.out.println("iidx 확인 :" +iidx);
@@ -200,13 +203,23 @@ public class ItemController {
 		//System.out.println("buyer 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
 		//System.out.println("buyer 배열확인 buyerArr.get(iidx) : " + buyerArr.get("iidx"));
 		//System.out.println("buyer 배열확인 buyerArr.get(oidx) : " + buyerArr.get("oidx"));
-		System.out.println("map 배열확인 toString : " + map.toString());
+		//System.out.println("map 배열확인 toString : " + map.toString());
+		System.out.println("oidxArr 배열확인 toString : " + oidxArr.toString());  // {oidx=[ , ]} 이렇게나옴
 		//int[] buyer = (int[]) buyerArr.get("buyerArr");
 		//Object[] buyer = buyerArr.values().toArray();
 		
-		int size = map.values().size();
-		//Object arr =map.get("oidxArr");
-		int[] oidxArr= new int[map.values().size()];
+		//System.out.println("oidxArr[0] : "+oidxArr[0]);
+		//System.out.println("oidxArr[1] : "+oidxArr[1]);
+
+		System.out.println("oidxArr.size() : "+oidxArr.size()); //1dl 나온다..
+		System.out.println("oidxArr.get(0) : "+oidxArr.get(0));  //null이 나온다..
+		
+		//hashmap 값받아오는 방법공부필요..
+		
+		
+//		int size = map.values().size();
+//		//Object arr =map.get("oidxArr");
+//		int[] oidxArr= new int[map.values().size()];
 		
 //		for(int i=0; i<size; i++) {
 //			int arr = Integer.parseInt(arr.toString());

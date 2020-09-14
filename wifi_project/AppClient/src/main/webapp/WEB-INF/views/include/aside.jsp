@@ -20,13 +20,7 @@
 
       <!-- 프로필 -->
       <div class="profile">
-         <div class="aside_myimg">
-            <img src="img/사과.jpg">
-         </div>
-         <div class="aside_myprofile">
-            <h3><b>Park Hye Mi</b></h3>
-            <h4 class="myrvs">Seller ★ 4 </h4> | <h4 class="myrvb"> Buyer ★ 4.2 </h4>
-         </div>
+
       </div>
       
          
