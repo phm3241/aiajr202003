@@ -82,7 +82,6 @@ function getComment(iidx) {
 				}
 
 				$('.commentlist').html(html);
-				regCommentForm(iidx);
 
 			} else {
 				alert('댓글 리스트 실패');
@@ -97,26 +96,27 @@ function getComment(iidx) {
 /* 댓글 등록 폼 */
 function regCommentForm(iidx){
 
-	var html = '';
+	var chtml = '';
 
-	html +='				<div class="comment_imgWrap">';
-	html +='					<img src="http://lorempixel.com/200/200/people">';
-	html +='				</div>';
-	html +='				<form class="comment_form" name="comment_form" onsubmit="return false;">';
-	html +='					<div class="formRow">';
-	html +='						<textarea class="comment_content" name="comment_content" cols="50" rows="5" placeholder="Add comment..." required></textarea>';
-	html +='						<span style="color:#aaa;" class="textCounter">0</span>&nbsp;<span>/ 250자</span>';
-	html +='					</div>';
-	html +='					<div class="formRow">';
-	html +='						<h4 class="comment_mname">'+loginName+'</h4>';
-	html +='						<input type="hidden" class="comment_midx" value="2">';
-	html +='					</div>';
-	html +='					<div class="formRow">';
-	html +='						<input type="submit" value="Add Comment" class="btn_regComment" onclick="regComment('+iidx+')">';
-	html +='					</div>';
-	html +='				</form>';
+	chtml +='				<div class="comment_imgWrap">';
+	chtml +='					<img src="http://lorempixel.com/200/200/people">';
+	chtml +='				</div>';
+	chtml +='				<form id="comment_form" name="comment_form" onsubmit="return false;">';
+	chtml +='					<div class="formRow">';
+	chtml +='						<textarea class="comment_content" name="comment_content" cols="50" rows="5" placeholder="Add comment..." required></textarea>';
+	chtml +='						<span style="color:#aaa;" class="textCounter">0</span>&nbsp;<span>/ 250자</span>';
+	chtml +='					</div>';
+	chtml +='					<div class="formRow">';
+	chtml +='						<h4 class="comment_mname">'+loginName+'</h4>';
+	chtml +='						<input type="hidden" class="comment_midx" value="2">';
+	chtml +='					</div>';
+	chtml +='					<div class="formRow">';
+	chtml +='						<input type="submit" value="Add Comment" class="btn_regComment" onclick="regComment('+iidx+')">';
+	chtml +='					</div>';
+	chtml +='				</form>';
 
-	$('.comment_formWrap').html(html);
+	$('.comment_formWrap').html(chtml);
+
 }
 
 
@@ -152,6 +152,7 @@ function regComment(iidx) {
 			if (data == 1) {
 				alert('댓글 등록 성공');
 				getComment(iidx);
+				document.getElementById('comment_form').reset();
 			} else {
 				alert('댓글 등록 실패');
 			}

@@ -340,7 +340,9 @@ $(document).ready(function(){
 		$('#itemRegForm_area').css('display','none');
 		$('#itemView_area').css('display','none');
 		
-		
+		html += '<div class="itemlist_buttons">';
+
+
 		for(var i=0; i<data.length; i++){
 
 			switch(data[i].category){
@@ -362,12 +364,13 @@ $(document).ready(function(){
 			}
 
 
+			
 			html += '	<button type="button" class="item_card category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 			//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 			html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 			html += '		<div class="item_info">';
 			//html += '				<h2 class="item_category">'+category+'</h2>';
-			html += '				<h2 class="item_title"><b>'+data[i].iidx+': '+data[i].title+'</b></h2>';
+			html += '				<h2 ><b class="item_title">'+data[i].iidx+': '+data[i].title+'</b></h2>';
 			//html += '				<h4 class="seller_rating">view '+data[i].view_count+'</h4>';
 			html += '				<h3 class="item_price">price : '+data[i].price+'</h4> ';
 			html += '				<h3 class="item_limitDate">D-day : '+data[i].receive+'</h4>';
@@ -378,6 +381,8 @@ $(document).ready(function(){
 			
 			
 		} // for end
+			
+			html += '</div>';
 			
 
 			// 표시되는 위치
@@ -423,12 +428,51 @@ $(document).ready(function(){
 
 	/* 공구등록 폼  */
 	function regItemForm(){
-		
+
+		$('#regItemForm_page').html('  ');
 		$('#itemlist_area').css('display','none');
 		$('#itemView_area').css('display','none');
 		$('#itemRegForm_area').css('display','block');
+
+		var html='';
+
+		html +='<form id="regItemForm" onsubmit="return false;" >';
+		html +='	<label for="title">제목</label>';
+		html +='	<input type="text"  id="title" name=title required>';
+		html +='	<label for="price">가격</label> ';
+		html +='	<input type="number"  id="price" name="price" required>원';
+		html +='	<label for="count_m">모집인원</label>  ';
+		html +='	<input type="number" id="count_m" name="count_m" required>명';
+		html +='	<label for="receive">물품수령일시</label>';
+		html +='	<input type="datetime-local"  id="receive" name="receive" required>';
+		html +='	<label for="addr">판매처</label>';
+		html +='	<input type="text" id="addr" name="addr">';
+		html +='	<label for="location">좌표</label>';
+		html +='	<input type="text" id="location" name="location">';
+		html +='	<label for="content">본문</label> ';
+		html +='	<textarea id="content"  name="content" rows="10" cols="30"></textarea>';
+		html +='	<label for="photo">첨부사진</label>';
+		html +='	<input type="file" id="photo" name="photo">';
+		html +='	<label for="category">카테고리</label> ';
+		html +='		<select id="category" name="category">';
+		html +='			<option value="0" selected>전체</option>';
+		html +='			<option value="1">1.과일/채소</option>';
+		html +='			<option value="2">2.육류/해산물</option>';
+		html +='			<option value="3">3.생필품/기타</option>';
+		html +='		</select>';
+		html +='	<input type="radio" name="state" class="state" value="0" checked>일반공구로 등록하기';
+		html +='	<input type="radio" name="state" class="state" value="1">추천공구로 등록하기';
+		html +='	<label for="regItem_midx">작성자</label>';
+		html +='	<input type="text" value="2" id="midx" name="midx" disabled>';
+		html +='	<input type="submit" value="공구등록" onclick="regSubmit();">';
+		html +='</form>';
 	
-	};
+
+		$('#regItemForm_page').html(html);
+
+	};   // regItemForm end
+
+
 
 
 	/* 공구등록 */
@@ -494,6 +538,7 @@ $(document).ready(function(){
 			type: 'GET',
 			success: function(data){
 
+				$('#itemView_context').html(' ');
 				$('#itemlist_area').css('display','none');
 				$('#itemRegForm_area').css('display','none');
 				$('#itemView_area').css('display','block');
@@ -538,10 +583,12 @@ $(document).ready(function(){
 				html += '	</table>';
 				html += '</div>';
 				
-				$('#itemView_area').html(html);
+				$('#itemView_context').html(html);
 				
+				// 해당글의 댓글 리스트 호출 및 출력
 				//getComment(iidx);
-				$('.commentlist').html(html);
+
+				// 댓글등록 폼 출력
 				regCommentForm(iidx);
 
 				

@@ -41,6 +41,11 @@ public class ItemRegService {
 		// 공구 등록후 등록한 공구글의 iidx
 		int iidx = 0;
 		
+		// 공구 등록한 midx 
+		int midx = itemRequest.getMidx();
+		
+		
+		
 		try {
 			
 		// 사진 파일 받아오기 
@@ -90,15 +95,21 @@ public class ItemRegService {
 		// 공구등록 성공이면, iidx 반환하기
 		if(result==1) {
 			
-			Map<String, Object> map = new HashMap<String, Object>();
-			String title = itemRequest.getTitle();
-			int midx = itemRequest.getMidx();
 			
-			System.out.println("title : "+title + ", midx: "+midx);
-			map.put("title",title);
-			map.put("midx",midx);
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			String title = itemRequest.getTitle();
+//			int midx = itemRequest.getMidx();
+//			
+//			System.out.println("title : "+title + ", midx: "+midx);
+//			map.put("title",title);
+//			map.put("midx",midx);
+//			
+//			iidx = dao.regItemIidx(map);
 			
-			iidx = dao.regItemIidx(map);
+			// 제목이 중복될 수 있으므로 midx의 최근등록글로 iidx 반환하도록 sql 수정 ㅡ> 따라서 매개변수는 midx만 필요
+			iidx = dao.regItemIidx(midx);
+			
+			System.out.println("공구등록서비스 ㅡ> 등록하고 iidx반환 : "+iidx);
 			
 
 		} else {

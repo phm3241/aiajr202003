@@ -32,7 +32,8 @@ public interface ItemDao {
 	int regItem(Item item);
 	
 	// 공구 등록 후 iidx 반환
-	int regItemIidx(Map map);
+	// int regItemIidx(Map map);
+	int regItemIidx(int midx);
 	
 	// 조회수 +1
 	int viewCountUp(int iidx);

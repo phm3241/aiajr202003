@@ -4,6 +4,50 @@
 	margin : 0;
 	padding : 0;
 	font-family: 'Nanum Gothic', sans-serif;   
+
+
+}
+
+/* button{
+	background: inherit ; 
+	border:none; box-shadow:none; 
+	border-radius:0; 
+	padding:0; 
+	overflow:visible; 
+	cursor:pointer
+}ㄴ */
+
+::-webkit-scrollbar {
+	width: 6px;
+  }
+::-webkit-scrollbar-track {
+	background-color: transparent;
+  }
+::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background-color: rgb(87, 2, 87);
+  }
+::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+  }
+
+
+.btn_buyerAction, .btn_sellerAction, .btn_mybuyer_view {
+	width: 70px;
+	height: 30px;
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-bottom:10px;
+	border-radius: 7px!important;
+	background-color: purple!important;
+	color : lightgoldenrodyellow!important;
+	border: none!important;
+	cursor: pointer!important;
+	display: inline-block!important;
+	float: right!important;
+	font-size: 0.9em!important;
+	
 }
 
 .btn_hamburger {
@@ -11,14 +55,27 @@
 	margin-right: 100px;
 }
 
+.btn_logout {
+	width: 110px;
+	height: 30px;
+	background-color: rgb(87, 2, 87);
+	border-radius: 30px;
+	color : rgb(199, 126, 235);
+	border: none;
+	cursor: pointer;
+	display: inline; 
+	font-weight: lighter;
+	float: left;
+}
 
 .closebtn {
 	/* left: 0%; */ 
-	margin-left: 330px; 
+	margin-left: 200px; 
 	color: rgb(199, 126, 235);
 	size: 20px;
 	text-decoration: none;
-	display: inline-block;
+	display: inline;
+	float: rignt;
 }
 
 .sidenav {
@@ -28,17 +85,17 @@
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #111;
+	background-color: purple;
 	overflow-x: hidden;
 	transition: 0.5s;
 	padding-top: 60px;
 }
   
   
-#main {
+/* #main {
 	transition: margin-left .5s;
 	padding: 16px;
-}
+} */
   
   @media screen and (max-height: 450px) {
 	.sidenav {padding-top: 15px;}
@@ -46,18 +103,7 @@
 
 
 
-.btn_logout {
-	width: 110px;
-	height: 30px;
-	background-color: rgb(87, 2, 87);
-	border-radius: 30px;
-	color : white;
-	border: none;
-	cursor: pointer;
-	display: inline; 
-	font-weight: lighter;
-	/* display : block; */
-}
+
 
 .profile {
 	width: 100%;
@@ -102,6 +148,7 @@
 	top: 50%; 
 	margin-top: 20px;
 	font-size: 0.9em;
+	color : white;
 }
 
 .aside_myprofile h4 {
@@ -170,24 +217,10 @@
 
 .aside_mystatewrap {
 	display: inline-block;
+	font-weight: lighter;
 }
 
-.btn_buyerAction .btn_sellerAction .btn_mybuyer_view {
-	width: 70px;
-	height: 30px;
-	margin-top: 5px;
-	margin-right: 10px;
-	margin-bottom:10px;
-	border-radius: 7px!important;
-	background-color: purple!important;
-	color : lightgoldenrodyellow!important;
-	border: none!important;
-	cursor: pointer!important;
-	display: inline-block!important;
-	float: right!important;
-	font-size: 0.9em!important;
-	
-}
+
 
 
 .delOrder {
@@ -238,6 +271,7 @@
 
 .aside_state, .aside_mycard {
 	min-height: 80px;
+	font-weight: lighter;
 }
 
 
