@@ -6,6 +6,7 @@
 	float: right;
 	/* background-color: teal; */
 	display: inline-block;
+	text-align: right;
 
 }
 
@@ -41,16 +42,16 @@
 	-webkit-transition: width 0.4s ease-in-out;
 	transition: width 0.4s ease-in-out;
 	float: right;
-  }
+}
   
-  .search:focus {
+.search:focus {
 	width: 350px;
-  }
+}
 
 /* 버튼 : 카테고리검색  */
 .btn_search_category {
-	width: 120px;
-	height: 30px;
+	width: 100px;
+	height: 40px;
 	border-radius: 10px;
 	background-color: lightgoldenrodyellow;
 	color : purple;

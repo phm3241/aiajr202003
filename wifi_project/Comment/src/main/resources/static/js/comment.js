@@ -1,6 +1,14 @@
 var loginMidx = 2;
 var iidx=130;
-var domain = 'http://localhost:8082/comments';
+var domain = 'http://localhost:8080/comments';
+//var domain = 'http://ec2-13-209-70-0.ap-northeast-2.compute.amazonaws.com:8080/comments';  //이걸로 배포
+//var domain = 'http://ec2-13-209-70-0.ap-northeast-2.compute.amazonaws.com:8080/Comment0916';
+
+//var loginInfo = sessionStorage.getItem("loginInfo");
+//var loginMidx = sessionStorage.getItem("loginMidx");
+//var loginName = sessionStorage.getItem("loginName");
+
+
 
 $(document).ready(function() {
 	getComment(iidx); 

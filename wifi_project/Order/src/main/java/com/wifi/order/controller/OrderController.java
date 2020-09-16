@@ -1,6 +1,5 @@
 package com.wifi.order.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

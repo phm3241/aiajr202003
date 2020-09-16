@@ -17,9 +17,11 @@ import com.wifi.client.service.MemberRegService;
 
 
 @Controller
+@RequestMapping("/")
 public class MemberController {
 	
 	@GetMapping
+	@RequestMapping("/index")
 	public String index() {
 		//return "Member RestFul API";
 		return "index";

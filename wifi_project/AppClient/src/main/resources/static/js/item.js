@@ -1,13 +1,14 @@
-//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0914(2)";
-var domain = "http://localhost:8080/order";
+//var domain = "ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/order/items";
+var domain = "ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080";
+//var domain = "http://localhost:8080/order";
 
 
 /***** item : 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제  *****************************/
 
-// var loginInfo = sessionStorage.getItem("loginInfo");
-// var loginMidx = sessionStorage.getItem("loginMidx");
-// var loginName = sessionStorage.getItem("loginName");
-var loginMidx = 1;
+var loginInfo = sessionStorage.getItem("loginInfo");
+var loginMidx = sessionStorage.getItem("loginMidx");
+var loginName = sessionStorage.getItem("loginName");
+// var loginMidx = 1;
 
 
 var recomItems = [];    	// 추천리스트 담아두는 배열
@@ -188,6 +189,7 @@ $(document).ready(function(){
 	function recomItemlist_print(data){
 
 		var html = '';
+		var category = '';
 				
 		// 출력되어있는 추천 공구리스트 지우고 ㅡ> 다시 출력
 		$('.swiper-container').html(' ');
@@ -201,6 +203,24 @@ $(document).ready(function(){
 		
 
 		for(var i=0; i<data.length; i++){
+
+			switch(data[i].category){
+				case 0: 
+					category = '';
+					break;
+				
+				case 1: 
+					category = '과일/채소';
+					break;
+
+				case 2: 
+					category = '육류/해산물';
+					break;
+
+				case 3:
+					category = '생필품/기타';
+					break;
+			}
 			
 			html += '	<li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="'+i+'">';
 			html += '		<button type="button"  class="item_card_big category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
@@ -209,7 +229,7 @@ $(document).ready(function(){
 			html += '			<div class="ag-slide_info clearfix">';
 			
 			html += '				<div class="ag-slide-info_descr">';
-			html += '					<small class="ag-slide-info_category">category</small>';
+			html += '					<small class="ag-slide-info_category">'+category+'</small>';
 			html += '					<h6 class="ag-slide-info_title"><b>'+data[i].iidx+': '+data[i].title+'</b></h6>';
 			html += '					<h5 class="ag-slide-info_title">price : '+data[i].price+'</h6>';
 			html += '					<h5 class="ag-slide-info_title">D-day : '+data[i].receive+'</h6>';
@@ -250,18 +270,18 @@ $(document).ready(function(){
 			
 				var sliderView = 3;
 				var ww = $(window).width();
-				if (ww >= 1700) sliderView = 7;
-				if (ww <= 1700) sliderView = 7;
-				if (ww <= 1560) sliderView = 6;
-				if (ww <= 1400) sliderView = 5;
-				if (ww <= 1060) sliderView = 4;
+				if (ww >= 1700) sliderView = 3;
+				if (ww <= 1700) sliderView = 3;
+				if (ww <= 1560) sliderView = 3;
+				if (ww <= 1400) sliderView = 3;
+				if (ww <= 1060) sliderView = 3;
 				if (ww <= 800) sliderView = 3;
-				if (ww <= 560) sliderView = 2;
+				if (ww <= 560) sliderView = 3;
 				if (ww <= 400) sliderView = 1;
 			
 				var swiper = new Swiper('.swiper-container', {
 					slidesPerView: sliderView,
-					spaceBetween: 50,
+					spaceBetween: 100,
 					loop: true,
 					loopedSlides: 10,
 					speed: 450,
@@ -272,11 +292,11 @@ $(document).ready(function(){
 			
 				$(window).resize(function () {
 					var ww = $(window).width();
-					if (ww >= 1700) swiper.params.slidesPerView = 7;
-					if (ww <= 1700) swiper.params.slidesPerView = 7;
-					if (ww <= 1560) swiper.params.slidesPerView = 6;
-					if (ww <= 1400) swiper.params.slidesPerView = 5;
-					if (ww <= 1060) swiper.params.slidesPerView = 4;
+					if (ww >= 1700) swiper.params.slidesPerView = 3;
+					if (ww <= 1700) swiper.params.slidesPerView = 3;
+					if (ww <= 1560) swiper.params.slidesPerView = 3;
+					if (ww <= 1400) swiper.params.slidesPerView = 3;
+					if (ww <= 1060) swiper.params.slidesPerView = 3;
 					if (ww <= 800) swiper.params.slidesPerView = 3;
 					if (ww <= 560) swiper.params.slidesPerView = 2;
 					if (ww <= 400) swiper.params.slidesPerView = 1;
@@ -312,6 +332,7 @@ $(document).ready(function(){
 
 
 		var html = '';
+		var category = '';
 
 		// 출력되어있는 일반 공구리스트 지우고 ㅡ> 다시 출력
 		$('#itemlist_small_area').html(' ');
@@ -320,27 +341,49 @@ $(document).ready(function(){
 		$('#itemRegForm_area').css('display','none');
 		$('#itemView_area').css('display','none');
 		
-		
+		html += '<div class="itemlist_buttons">';
+
+
 		for(var i=0; i<data.length; i++){
 
+			switch(data[i].category){
+				case 0: 
+					category = '';
+					break;
+				
+				case 1: 
+					category = '과일/채소';
+					break;
 
+				case 2: 
+					category = '육류/해산물';
+					break;
+
+				case 3:
+					category = '생필품/기타';
+					break;
+			}
+
+
+			
 			html += '	<button type="button" class="item_card category'+data[i].category+'" onclick="itemView('+data[i].iidx+','+loginMidx+')">';
 			//html += '		<input type="hidden" value="'+data[i].iidx+'">';
 			html += '		<img class="item_img" src="/order/upload/'+data[i].photo+'">';
 			html += '		<div class="item_info">';
-			//html += '			<div>istate : '+data[i].istate+'</div>';
-			//html += '			<div>pstate : '+data[i].pstate+'</div>';
-			html += '			<h3 class="item_title">'+data[i].iidx+': '+data[i].title+'</h3>';
-			html += '				<span class="seller_name">'+data[i].midx+'.'+data[i].name+' | 평균 ★ '+data[i].rvs_avg+'(총 '+data[i].rvs_totalRow+'건)</span><br>';
-			html += '				<h4 class="seller_rating">view '+data[i].view_count+'</h4>';
-			html += '				<h4 class="item_price">price : '+data[i].price+'</h4> ';
-			html += '				<h4 class="item_limitDate">D-day : '+data[i].receive+'</h4>';
-			html += '				<h4 class="item_location">location : '+data[i].location+'</h4>';
+			//html += '				<h2 class="item_category">'+category+'</h2>';
+			html += '				<h2 ><b class="item_title">'+data[i].iidx+': '+data[i].title+'</b></h2>';
+			//html += '				<h4 class="seller_rating">view '+data[i].view_count+'</h4>';
+			html += '				<h3 class="item_price">price : '+data[i].price+'</h4> ';
+			html += '				<h3 class="item_limitDate">D-day : '+data[i].receive+'</h4>';
+			html += '				<h3 class="item_location">location : '+data[i].location+'</h4>';
+			html += '				<h3 class="seller_name">'+data[i].midx+'.'+data[i].name+' | 평균 ★ '+data[i].rvs_avg+'(총 '+data[i].rvs_totalRow+'건)</h4>';
 			html += '		</div>';
 			html += '	</button>';
 			
 			
 		} // for end
+			
+			html += '</div>';
 			
 
 			// 표시되는 위치
@@ -386,12 +429,51 @@ $(document).ready(function(){
 
 	/* 공구등록 폼  */
 	function regItemForm(){
-		
+
+		$('#regItemForm_page').html('  ');
 		$('#itemlist_area').css('display','none');
 		$('#itemView_area').css('display','none');
 		$('#itemRegForm_area').css('display','block');
+
+		var html='';
+
+		html +='<form id="regItemForm" onsubmit="return false;" >';
+		html +='	<label for="title">제목</label>';
+		html +='	<input type="text"  id="title" name=title required>';
+		html +='	<label for="price">가격</label> ';
+		html +='	<input type="number"  id="price" name="price" required>원';
+		html +='	<label for="count_m">모집인원</label>  ';
+		html +='	<input type="number" id="count_m" name="count_m" required>명';
+		html +='	<label for="receive">물품수령일시</label>';
+		html +='	<input type="datetime-local"  id="receive" name="receive" required>';
+		html +='	<label for="addr">판매처</label>';
+		html +='	<input type="text" id="addr" name="addr">';
+		html +='	<label for="location">좌표</label>';
+		html +='	<input type="text" id="location" name="location">';
+		html +='	<label for="content">본문</label> ';
+		html +='	<textarea id="content"  name="content" rows="10" cols="30"></textarea>';
+		html +='	<label for="photo">첨부사진</label>';
+		html +='	<input type="file" id="photo" name="photo">';
+		html +='	<label for="category">카테고리</label> ';
+		html +='		<select id="category" name="category">';
+		html +='			<option value="0" selected>전체</option>';
+		html +='			<option value="1">1.과일/채소</option>';
+		html +='			<option value="2">2.육류/해산물</option>';
+		html +='			<option value="3">3.생필품/기타</option>';
+		html +='		</select>';
+		html +='	<input type="radio" name="state" class="state" value="0" checked>일반공구로 등록하기';
+		html +='	<input type="radio" name="state" class="state" value="1">추천공구로 등록하기';
+		html +='	<label for="regItem_midx">작성자</label>';
+		html +='	<input type="text" value="2" id="midx" name="midx" disabled>';
+		html +='	<input type="submit" value="공구등록" onclick="regSubmit();">';
+		html +='</form>';
 	
-	};
+
+		$('#regItemForm_page').html(html);
+
+	};   // regItemForm end
+
+
 
 
 	/* 공구등록 */
@@ -457,6 +539,7 @@ $(document).ready(function(){
 			type: 'GET',
 			success: function(data){
 
+				$('#itemView_context').html(' ');
 				$('#itemlist_area').css('display','none');
 				$('#itemRegForm_area').css('display','none');
 				$('#itemView_area').css('display','block');
@@ -501,10 +584,12 @@ $(document).ready(function(){
 				html += '	</table>';
 				html += '</div>';
 				
-				$('#itemView_area').html(html);
+				$('#itemView_context').html(html);
 				
+				// 해당글의 댓글 리스트 호출 및 출력
 				getComment(iidx);
-				$('.commentlist').html(html);
+
+				// 댓글등록 폼 출력
 				regCommentForm(iidx);
 
 				

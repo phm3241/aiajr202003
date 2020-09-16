@@ -180,12 +180,13 @@ public class ItemController {
 	//public int selectBuyer(@RequestParam(value="iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
 	//public int selectBuyer(@RequestParam(value="iidx") int iidx, HttpServletRequest request) {
 	//public int selectBuyer(@RequestBody ArrayList<Integer> buyerArr, @PathVariable("iidx") int iidx ) {
-	// public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") List<String> buyerArr) {
-//	public int selectBuyer(@RequestParam(value="iidx") int iidx, 
-//					@RequestParam(value="buyerArr[]") List<Integer> buyer, @RequestParam(value="rejectArr[]", required =false, defaultValue="false") List<Integer> reject) {
-//	public int selectBuyer(@RequestParam(value="iidx") String iidx, 
-//			@RequestParam(value="buyerArr[]") List<Integer> buyerArr, @RequestParam(value="rejectArr[]", required =false) List<Integer> rejectArr) {
-//	public int selectBuyer(@RequestBody JsonObject buyerArr) {
+	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") List<String> buyerArr) {
+	//public int selectBuyer(@RequestParam(value="iidx") int iidx, 
+	//					@RequestParam(value="buyerArr[]") List<Integer> buyer, @RequestParam(value="rejectArr[]", required =false, defaultValue="false") List<Integer> reject) {
+	//public int selectBuyer(@RequestParam(value="iidx") String iidx, 
+	//			@RequestParam(value="buyerArr[]") List<Integer> buyerArr, @RequestParam(value="rejectArr[]", required =false) List<Integer> rejectArr) {
+	//public int selectBuyer(@RequestBody JsonObject buyerArr) {
+	
 	//@PostMapping("/mybuyer")  // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이 null...
 	//public int selectBuyer(HttpServletRequest request) {
 	//public int selectBuyer(@RequestBody List<Integer> buyerArr) {
@@ -204,15 +205,16 @@ public class ItemController {
 		//System.out.println("buyer 배열확인 buyerArr.get(iidx) : " + buyerArr.get("iidx"));
 		//System.out.println("buyer 배열확인 buyerArr.get(oidx) : " + buyerArr.get("oidx"));
 		//System.out.println("map 배열확인 toString : " + map.toString());
-		System.out.println("oidxArr 배열확인 toString : " + oidxArr.toString());  // {oidx=[ , ]} 이렇게나옴
+		System.out.println("oidxArr 배열확인 toString : " + oidxArr.toString());  // {oidxArr=[41, 42]}
 		//int[] buyer = (int[]) buyerArr.get("buyerArr");
 		//Object[] buyer = buyerArr.values().toArray();
 		
 		//System.out.println("oidxArr[0] : "+oidxArr[0]);
 		//System.out.println("oidxArr[1] : "+oidxArr[1]);
 
-		System.out.println("oidxArr.size() : "+oidxArr.size()); //1dl 나온다..
+		System.out.println("oidxArr.size() : "+oidxArr.size()); //1이 나온다..
 		System.out.println("oidxArr.get(0) : "+oidxArr.get(0));  //null이 나온다..
+//		System.out.println("Integer.parseInt(arr.toString() : "+Integer.parseInt(oidxArr.toString()));  //
 		
 		//hashmap 값받아오는 방법공부필요..
 		

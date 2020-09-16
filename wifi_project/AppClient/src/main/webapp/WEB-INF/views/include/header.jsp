@@ -6,11 +6,12 @@
    
       <!-- 타이틀 로고 -->
       <div class="mainTitle">
-         <h1 class="w3-xxlarge" style="display: inline;"><b> W 1 F 1 같이 사는 가치</b></h1>
+         <span class="btn_hamburger" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+         <h1 class="w3-xxlarge" style="display: inline;"><b> W 1 F 1</b> 같이 사는 가치</h1>
       </div>
 
       <!-- 검색영역 -->
-      <div id="search_area" >
+      <!-- <div id="search_area" >
          <div class="inputSearch">
             <input type="text" name="search" class="search" placeholder="Search.."><br>
          </div>
@@ -20,7 +21,7 @@
             <button type="button" class="btn_search_category" onclick="filterSelection('category1')">과일/채소</button>
             <button type="button" class="btn_search_category active" onclick="allItemlist()">전체</button>
          </div>
-      </div>
+      </div> -->
 
 
    </div> <!-- header end -->

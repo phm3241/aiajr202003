@@ -1,17 +1,33 @@
-//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0914(2)";
-var domain = "http://localhost:8080/order";
+var domain = "ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080";
+//var domain = "http://localhost:8080/order";
 
-var loginMidx = 1;
-var loginName = 'Park Hye Mi';
+//var loginMidx = 1;
+//var loginName = 'Park Hye Mi';
 
 /***** buyer : aside 구매자 ************************************************************************/
 /***** - 내구매글 리스트 / 현황별 기능(참여신청, 참여취소, QR보기, 평점등록, 글숨김) **********/
 
-// var loginInfo = sessionStorage.getItem("loginInfo");
-// var loginMidx = sessionStorage.getItem("loginMidx");
-// var loginName = sessionStorage.getItem("loginName");
+var loginInfo = sessionStorage.getItem("loginInfo");
+var loginMidx = sessionStorage.getItem("loginMidx");
+var loginName = sessionStorage.getItem("loginName");
 
 
+
+// aside 영역 관련 -----------------------------------------------------------------------------------
+
+function openNav() {
+    $("#mySidenav").css("width","400px");
+    $("#main").css("margin-left","450px");
+    $("#main").css("margin-right","100px");
+    $('.asideContext').css('display','inline-block');
+}
+  
+function closeNav() {
+    $("#mySidenav").css("width","0px");
+    $("#main").css("margin-left","200px");
+    $("#main").css("margin-right","200px");
+    $('.asideContext').css('display','none');
+}
 
 
 
@@ -68,9 +84,7 @@ function myOrder(loginMidx){
             var html = '';
 			for(var i=0; i<data.length; i++){
 				var state= '';
-				var stateMsg= '';
 				var stateColor= '';
-				var currentBuyer='';
 				
 
 				// order가 숨김처리 되있을 때, 출력안함
@@ -124,7 +138,7 @@ function myOrder(loginMidx){
                     html += '         <form class="reviewForm_'+data[i].iidx+'" onsubmit="return false;" style="display:none">';
                     html += '           <input class="score_s_'+data[i].seller+'" type="number">';
                     html += '           <div class="rating-stars text-center">';
-                    html += '               <ul id="stars" class="score_s_'+data[i].seller+'">';
+                    html += '               <ul class="stars" class="score_s_'+data[i].seller+'">';
                     html += '                   <li class="star" data-value="1"><i class="fa fa-star fa-fw"></i></li>';
                     html += '                   <li class="star" data-value="2"><i class="fa fa-star fa-fw"></i></li>';
                     html += '                   <li class="star" data-value="3"><i class="fa fa-star fa-fw"></i></li>';
@@ -152,6 +166,9 @@ function myOrder(loginMidx){
 		} // success end
 
     })
+
+
+
 
 };
 
