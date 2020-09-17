@@ -1,5 +1,5 @@
-//var domain = "ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/order/items";
-var domain = "ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080";
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0917";
+var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0916";
 //var domain = "http://localhost:8080/order";
 
 

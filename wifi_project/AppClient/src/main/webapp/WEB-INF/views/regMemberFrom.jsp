@@ -38,21 +38,13 @@
 				contentType: false, // multipart/form-data
 				data : regFormData,
 				success : function(data){
-
-					if(data ==1){
 						alert("회원가입 완료");
-						//location.href = "http://localhost8081/main";
-						location.href = "WEB-INF/views/main.jsp";
-						
-					} else {
-						alert("회원가입 실패");
-						history.go(-1);
-					}
-
+						location.href = "/";
+						//location.href = "main";
 				},
-
 				Error: function(error){
-					alert('회원가입 정상처리 에러');
+					alert("회원가입 실패");
+					history.go(-1);
 				}
 				
 			});

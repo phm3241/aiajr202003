@@ -1,5 +1,5 @@
-var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0916";
-//var domain = "http://localhost:8080/order";
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0916";
+var domain = "http://localhost:8080/order";
 
 
 /***** item : 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제  *****************************/

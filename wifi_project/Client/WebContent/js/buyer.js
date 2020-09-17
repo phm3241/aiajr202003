@@ -1,5 +1,5 @@
-var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0916";
-//var domain = "http://localhost:8080/order";
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/Order0916";
+var domain = "http://localhost:8080/order";
 
 var loginMidx = 1;
 var loginName = 'Park Hye Mi';

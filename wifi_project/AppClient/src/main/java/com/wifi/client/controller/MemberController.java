@@ -21,7 +21,7 @@ import com.wifi.client.service.MemberRegService;
 public class MemberController {
 	
 	@GetMapping
-	@RequestMapping("/index")
+	@RequestMapping("index")
 	public String index() {
 		//return "Member RestFul API";
 		return "index";
@@ -93,7 +93,7 @@ public class MemberController {
 	
 	/* 회원여부 체크 */
 	@RequestMapping("/loginCheck")
-	private String memberCheck(HttpServletRequest req, String checkId) {
+	public String memberCheck(HttpServletRequest req, String checkId) {
 		
 		System.out.println("MemberCheck controller");
 		System.out.println("checkId : "+checkId);
@@ -106,7 +106,7 @@ public class MemberController {
 	
 	/* 회원가입 */
 	@RequestMapping("/members")
-	private String regMember(HttpServletRequest req, Member memberReq) {
+	public String regMember(HttpServletRequest req, Member memberReq) {
 		
 		System.out.println("regMember controller");
 		System.out.println("매개변수 확인 memberReq : "+memberReq.toString());
@@ -116,6 +116,12 @@ public class MemberController {
 		return "main";
 		
 	};
+	
+	
+//	@RequestMapping("/main")
+//	private String getMain() {
+//		return "main";
+//	}
     
 	
 	
