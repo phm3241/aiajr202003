@@ -196,7 +196,6 @@ public class ItemController {
 	//public int selectBuyer(@RequestParam(value="oidxArr[]") String[] oidxArr) {
 	public int selectBuyer(@RequestBody HashMap<String, Object> oidxArr) {  
 			
-		//String[] oidxArr = request.getParameterValues("oidxArr");
 		
 		System.out.println("참여자 구매자로 선정 controller");
 		//System.out.println("iidx 확인 :" +iidx);
