@@ -764,7 +764,7 @@ $(document).ready(function(){
 				html +='		<h2 style="margin-top: 20px; padding-left: 20px;">'+data.title;
 				html +='		</h2>';
 				html +='		<h4>';
-				html +='			<span class="element" style="color: #8c5394; font-weight: bold; ">'+data.name+' 평균 : '+data.rvs_avg+' 점 / 총 평점 : '+data.rvs_totlaRow+'</span>';
+				html +='			<span class="element" style="color: #8c5394; font-weight: bold; ">'+data.name+' 평균 : '+data.rvs_avg+' 점 / 총 평점 : '+data.rvs_totalRow+'</span>';
 				//html +='			<span class="element">평균 : '+data.rvs_avg+' 점 / 총 평점 : '+data.rvs_totlaRow+' </span>';
 				html +='			<span class="element" style="color: grey;">조회수 : '+data.view_count+'</span>';
 				html +='		</h4>';
