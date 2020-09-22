@@ -17,14 +17,14 @@ var stateToggleNav = 1;
 
 function toggleNav() {
 
-	if(stateToggleNav == 1){
-		openNav();
-		stateToggleNav = 0;
-	}
-	else {
-		closeNav();
-		stateToggleNav = 1;
-	}
+   if(stateToggleNav == 1){
+      openNav();
+      stateToggleNav = 0;
+   }
+   else {
+      closeNav();
+      stateToggleNav = 1;
+   }
 }
 
 function openNav() {
@@ -55,7 +55,7 @@ function closeNav() {
 /* 내 구매현황 탭 클릭 */
 $('.btn_myOderlist').click(function(){
 
-	selectedMyOrder();
+   selectedMyOrder();
 
 });
 
@@ -79,59 +79,76 @@ function myOrder(loginMidx){
         success: function(data){
             
             var html = '';
-			for(var i=0; i<data.length; i++){
-				var state= '';
-				var stateColor= '';
-				
+         for(var i=0; i<data.length; i++){
+            var state= '';
+            var stateColor= '';
+            var label= '';
+                var alarm= '';
 
-				// order가 숨김처리 되있을 때, 출력안함
-				if(data[i].ostate == -2){
-					continue;
+            // order가 숨김처리 되있을 때, 출력안함
+            if(data[i].ostate == -2){
+               continue;
 
-				} else if(data[i].label=="참여중"){
-					state = 0;
+            } else if(data[i].label=="참여중"){
+               state = 0;
                     stateColor = 'aside_mystate join';
                     btn_buyerActionName = 'cancel';
-				
-				} else if(data[i].label=="다음기회에..."){
-					state = 1;
+                    label = '참여중';
+            
+                } else if(data[i].label=="참여중1"){
+               state = 0;
+                    stateColor = 'aside_mystate join';
+                    btn_buyerActionName = 'cancel';
+                    label = '참여중';
+                    alarm = 'alarm';
+            
+            } else if(data[i].label=="다음기회에..."){
+               state = 1;
                     stateColor = 'aside_mystate next';
                     btn_buyerActionName = 'X';
-                
+                    label = '다음기회에...';
                     
-				} else if(data[i].label=="구매자"){
-					state = 2;
+            } else if(data[i].label=="다음기회에...1"){
+               state = 1;
+                    stateColor = 'aside_mystate next';
+                    btn_buyerActionName = 'X';
+                    label = '다음기회에...';
+                    alarm = 'alarm';
+                    
+            } else if(data[i].label=="구매자"){
+               state = 2;
                     stateColor = 'aside_mystate buyer';
-                    
-					
-				} else if(data[i].label=="구매완료"){
-					state = 3;
+                    label = '구매자';
+               
+            } else if(data[i].label=="구매완료"){
+               state = 3;
                     stateColor = 'aside_mystate review';
                     btn_buyerAction = '$(".reviewForm").toggle()';
-				}	
-				
+                    label = '구매완료';
 
-				html += '<div class="aside_mycard iidx'+data[i].iidx+'">';
-				html += '	<div class="aside_mystatewrap aside_state '+stateColor+'"></div>';
-                html += '   <span>'+data[i].label+'</span><span class="alarm ba'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].buyer+')">a</span>';
+            }
+
+            html += '<div class="aside_mycard iidx'+data[i].iidx+'">';
+            html += '   <div class="aside_mystatewrap aside_state '+stateColor+'"></div>';
+                html += '   <span>'+label+'</span><span id="'+data[i].iidx+'" class="'+alarm+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].buyer+', buyer)"></span>';
                 
-                if(state==1 || state==3){
+                if(state==3){
                 html += '     <button type="button" class="delOrder" onclick="delOrder('+data[i].oidx+','+data[i].pidx+')">X</button>';
                 }
                 
-                html += '  	<button type="button" class="aside_item_title" onclick="showDetails('+data[i].iidx+','+loginMidx+')">'+data[i].iidx+'. '+data[i].title+'</button>';
+                html += '     <button type="button" class="aside_item_title" onclick="showDetails('+data[i].iidx+','+loginMidx+')">'+data[i].iidx+'. '+data[i].title+'</button>';
                 
-                // 참여중 ㅡ> 참여취소 버튼 활성화
-                if(state ==0 ){
-                    html += '  	  <button type="button" class="btn_buyerAction cancleOrder" onclick="cancleOrder('+data[i].oidx+','+state+')">cancel</button>';
+                // 참여중, 다음기회에 ㅡ> 참여취소 버튼 활성화(order 테이블 행삭제)
+                if(state ==0 || state==1  ){
+                    html += '       <button type="button" class="btn_buyerAction cancleOrder" onclick="cancleOrder('+data[i].oidx+','+state+')">cancel</button>';
                 
                     // 구매자 ㅡ> QR보기 버튼 활성화
                 } else if(state==2){                    
-                    html += '  	  <button type="button" class="btnStyleQR" onclick="viewQR('+data[i].oidx+')">QRcode</button>';
+                    html += '       <button type="button" class="btnStyleQR" onclick="viewQR('+data[i].oidx+')">QRcode</button>';
                     
                     // 구매완료 ㅡ> 평점등록 버튼 활성화
                 } else if(state==3){
-                    html += '  	  <button type="button" class="btn_buyerAction reviewSeller" onclick="reviewForm_toggle('+data[i].iidx+')">review</button>';
+                    html += '       <button type="button" class="btn_buyerAction reviewSeller" onclick="reviewForm_toggle('+data[i].iidx+')">review</button>';
                     html += '         <form class="reviewForm_'+data[i].iidx+'" onsubmit="return false;" style="display:none">';
                     html += '           <input class="score_s_'+data[i].seller+'" type="number">';
                     html += '           <div class="rating-stars text-center">';
@@ -143,24 +160,24 @@ function myOrder(loginMidx){
                     html += '                   <li class="star" data-value="5"><i class="fa fa-star fa-fw"></i></li>';
                     html += '               </ul>';
                     html += '           </div>';
-					html += '           <input class="insert_rvs_'+data[i].seller+'" type="submit" value="ok" onclick="reviewSeller('+data[i].iidx+','+data[i].seller+','+$(".rating-stars").val()+')" >';
-					html += '         </form>';
-					// html += '     <button type="button" class="btn_buyerAction hideOrder" onclick="hideOrder('+data[i].oidx+')">hide</button>';
-					
+               html += '           <input class="insert_rvs_'+data[i].seller+'" type="submit" value="ok" onclick="reviewSeller('+data[i].iidx+','+data[i].seller+','+$(".rating-stars").val()+')" >';
+               html += '         </form>';
+               // html += '     <button type="button" class="btn_buyerAction hideOrder" onclick="hideOrder('+data[i].oidx+')">hide</button>';
+               
                     
                 }
                 
                 html += '</div>';
 
-			} // for end
+         } // for end
             
             
-			$('#aside_myOrderlist').html(html);
+         $('#aside_myOrderlist').html(html);
             $(".reviewForm").hide();
             
-			
-			
-		} // success end
+         
+         
+      } // success end
 
     })
 
@@ -289,7 +306,7 @@ function myOrder(loginMidx){
 
             });
 
-        };	
+        };   
 
     };
 
@@ -315,7 +332,7 @@ function myOrder(loginMidx){
                     myOrder(loginMidx);
                 }
             });
-        };	
+        };   
     };
 
 
@@ -340,9 +357,5 @@ function myOrder(loginMidx){
 
                 }
             });
-        };	
+        };   
     };
-
-
-
-

@@ -1,5 +1,5 @@
-//var domain = "http://localhost:8080/order";
-var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/order_socket";
+var domain = "http://localhost:8080/order";
+//var domain = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/order_socket";
 var loginInfo = document.getElementById("loginInfo");
 var loginMidx = parseInt(document.getElementById("loginMidx").value);
 var loginName = document.getElementById("loginName").value;

@@ -166,15 +166,15 @@
   
 
 </body>
-  <script src="js/swiper.min.js"></script>
+   <script src="js/swiper.min.js"></script>
   <script src="js/swiper.js"></script>
   <script src="js/_define.js"></script>
-  <script src="js/map.js"></script>  <!-- aside 구매자 -->
-  
-  <script text="text/javascript" src="js/comment.js"></script>  <!-- 댓글 -->
-  <script text="text/javascript" src="js/seller.js"></script> <!-- aside 판매자 -->
-  <script text="text/javascript" src="js/buyer.js"></script>  <!-- aside 구매자 -->
-  <script text="text/javascript" src="js/item.js"></script>   <!-- 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제 -->
+  <script src="js/map.js"></script>     <!-- aside 구매자 -->
+  <script src="js/alarm.js"></script>   <!-- webSocket -->
+  <script src="js/comment.js"></script>   <!-- 댓글 -->
+  <script src="js/seller.js"></script>   <!-- aside 판매자 -->
+  <script src="js/buyer.js"></script>   <!-- aside 구매자 -->
+  <script src="js/item.js"></script>   <!-- 공구 검색 / 리스트 출력 / 정렬 / 등록 / 삭제 -->
   <script src="./js/jquery.qrcode.js"></script>
   <script src="./js/qrcode.js"></script>
     

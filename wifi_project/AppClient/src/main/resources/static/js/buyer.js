@@ -118,14 +118,14 @@ function myOrder(loginMidx){
 				html += '	<div class="aside_mystatewrap aside_state '+stateColor+'"></div>';
                 html += '   <span>'+data[i].label+'</span><span class="alarm ba'+data[i].iidx+'" onclick="cancleAlarm('+data[i].iidx+','+data[i].buyer+')">a</span>';
                 
-                if(state==1 || state==3){
+                if(state==3){
                 html += '     <button type="button" class="delOrder" onclick="delOrder('+data[i].oidx+','+data[i].pidx+')">X</button>';
                 }
                 
                 html += '  	<button type="button" class="aside_item_title" onclick="itemView('+data[i].iidx+','+loginMidx+')">'+data[i].iidx+'. '+data[i].title+'</button>';
                 
-                // 참여중 ㅡ> 참여취소 버튼 활성화
-                if(state ==0 ){
+                // 참여중 , 다음기회에 ㅡ> 참여취소 버튼 활성화 (주문글 삭제)
+                if(state ==0 ||  state==1){
                     html += '  	  <button type="button" class="btn_buyerAction cancleOrder" onclick="cancleOrder('+data[i].oidx+','+state+')">cancel</button>';
                 
                     // 구매자 ㅡ> QR보기 버튼 활성화

@@ -1,16 +1,6 @@
 package com.wifi.order.dao;
 
-import java.util.List;
-
-import com.wifi.order.model.Alarm;
-
 public interface AlarmDao {
-
-	// 내가 등록한 공구글 가져오기
-	List<Alarm> getMyItem(int midx);
-	
-	// 내가 등록한 공구글 가져오기
-	List<Alarm> getMyOrder(int midx);
 	
 	// 판매현황쪽 알람 끄기 : 상태값 0으로 변경
 	int cancleSellerAlarm(int midx, int iidx);
@@ -30,6 +20,17 @@ public interface AlarmDao {
 	// 구매현황쪽 알람 행생성
 	void deleteBuyerAlarm(int midx, int iidx);
 	
-	// 구매현황쪽 알람의 상태값 반환
-	int getState(int midx, int iidx);
+	// 판매현황 쪽 알림 상태값 가져오기
+	int getItemState(int midx, int iidx);
+	
+	// 구매현황 쪽 알림 상태값 가져오기
+	int getOrderState(int midx, int iidx);
+	
+	// 참여자 선정시 해당 참여테이블 상태값 1로 바꾸기
+	void changeBuyerAlarm(int midx, int iidx);
+	
+	// 판매자 테이블 상태값 1로 바꾸기
+	void changeSellerAlarm(int midx, int iidx);
+
+	void cancleSellerConfirmAlarm(int midx, int iidx);
 }

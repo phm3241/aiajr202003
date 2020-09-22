@@ -1,13 +1,8 @@
-document.write("<script src='js/_define.js'></script>");
-
 //var domain = "";
 
 //var loginInfo = sessionStorage.getItem("loginInfo");
 //var loginMidx = sessionStorage.getItem("loginMidx");
 //var loginName = sessionStorage.getItem("loginName");
-
-// websocket을 지정한 URL로 연결
-var sock = new SockJS(domain+"echo");
 
 // websocket 서버에서 신호를 보내면 자동으로 실행된다.
 sock.onmessage = getAlarm;

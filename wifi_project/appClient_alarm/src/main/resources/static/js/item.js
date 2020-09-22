@@ -21,17 +21,18 @@ var pageNum = 1;
 var location_y=0.0;
 var location_x=0.0;
 
+// 초기 접속 websocket session 생성
+sock.onopen = function(){
+	console.log("socket session open");
+	sock.send(JSON.stringify({senderMidx: loginMidx, receiverMidx: -1, iidx: 0}));
+}
+
 $(document).ready(function(){
-	//alert(loginName);
+
+	console.log('아이템시작');
 	var openPay;
 	profile();  // 기능코드는 buyer.js에 작성
 	allItemlist();  // 전체 공구리스트 출력
-	
-	// 초기 접속 websocket session 생성
-	sock.onopen = function(){
-		console.log("socket session open");
-		sock.send(JSON.stringify({senderMidx: loginMidx, receiverMidx: -1, iidx: 0}));
-	}
 
 	/* ing 검색기능 */
 	$("#myInput").on("keyup", function() {

@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wifi.order.alarm.service.AlarmService;
 import com.wifi.order.dao.OrderDao;
 
 //공구 참여신청
@@ -11,6 +12,8 @@ import com.wifi.order.dao.OrderDao;
 public class OrderRegService {
 
 	private OrderDao dao;
+	@Autowired
+	private AlarmService alarmService;
 	
 	@Autowired
 	private SqlSessionTemplate template;
@@ -51,6 +54,8 @@ public class OrderRegService {
 				break;
 		};
 		
+		// 가람 수정 0921: 참여신청 시 alarm_b 테이블에 행추가
+		alarmService.insertAlarm(midx, iidx, "buyer");
 		
 		return result;
 	};

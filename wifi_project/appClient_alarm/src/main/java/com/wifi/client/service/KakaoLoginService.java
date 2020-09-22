@@ -22,16 +22,19 @@ public class KakaoLoginService {
 	
 	
 	// 카카오 REST API 키
-	private final static String CLIENT_ID = "f5e0701c39876968f090e686afa45c4a";
+	/*
+	 * private final static String CLIENT_ID = "f5e0701c39876968f090e686afa45c4a";
+	 */
+	private final static String CLIENT_ID = "9c67456b95fffe65ed319d1deae094af";
 
 	/* 도메인 경로 변경시 수정이 용이하게 변수로 선언한다 */
 	// 로그인 리다이렉트 uri
-	// private final static String REDIRECT_URI_LOGIN = "http://localhost:8081/login";
-	private final static String REDIRECT_URI_LOGIN = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/client/login";
+	private final static String REDIRECT_URI_LOGIN = "http://localhost:8081/login";
+	//private final static String REDIRECT_URI_LOGIN = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/client/login";
 
 	// 로그아웃 리다이렉트 uri
-	// private final static String REDIRECT_URI_LOGOUT = "http://localhost:8081/logout";
-	private final static String REDIRECT_URI_LOGOUT = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/client/logout";
+	private final static String REDIRECT_URI_LOGOUT = "http://localhost:8081/logout";
+	//private final static String REDIRECT_URI_LOGOUT = "http://ec2-54-180-98-41.ap-northeast-2.compute.amazonaws.com:8080/client/logout";
 
 	/* 로그인 성공 후 받은 코드 ㅡ> 다시 요청 ㅡ> access_Token 얻기 */
 	public String getAccessToken(String authorize_code) {

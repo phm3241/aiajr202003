@@ -20,7 +20,7 @@ public class AlarmService {
 		dao = template.getMapper(AlarmDao.class);
 		
 		if(type.equals("seller")) {
-			dao.cancleSellerAlarm(midx, iidx);
+			dao.cancleSellerConfirmAlarm(midx, iidx);
 		} else {
 			dao.cancleBuyerAlarm(midx, iidx);
 		}
@@ -46,5 +46,12 @@ public class AlarmService {
 		}
 		
 	}
-	
+
+	public void changeBuyerAlarm(int midx, int iidx) {
+		dao = template.getMapper(AlarmDao.class);
+		
+		dao.changeBuyerAlarm(midx, iidx);
+		
+	}
+
 }

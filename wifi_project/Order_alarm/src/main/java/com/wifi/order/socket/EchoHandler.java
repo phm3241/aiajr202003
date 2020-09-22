@@ -5,12 +5,14 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
+import com.wifi.order.alarm.service.AlarmService;
 import com.wifi.order.model.Messenger;
 
 public class EchoHandler extends TextWebSocketHandler {
@@ -19,7 +21,10 @@ public class EchoHandler extends TextWebSocketHandler {
 
 	private Map<WebSocketSession, Integer> sessionCheck = new HashMap<WebSocketSession, Integer>();
 	private Map<Integer, WebSocketSession> sessionMap = new HashMap<Integer, WebSocketSession>();
-
+	
+	@Autowired
+	private AlarmService alarmService;
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
@@ -37,6 +42,8 @@ public class EchoHandler extends TextWebSocketHandler {
 		int senderMidx = messenger.getSenderMidx();	// 액션을 발생시킨 사람
 		int receiverMidx = messenger.getReceiverMidx();	// 알림을 받아야 할 사람
 		int iidx = messenger.getIidx();	// 게시글
+		String label = messenger.getLabel(); // 라벨
+		
 		
 		// 알림 받는 사람 -1 : 액션을 발생시키는 사람의 초기 접속 -> session에 추가
 		if(receiverMidx == -1) {
@@ -53,14 +60,17 @@ public class EchoHandler extends TextWebSocketHandler {
 			
 			
 			// 전달 메시지
-			Messenger result = new Messenger(senderMidx, receiverMidx, iidx);
+			Messenger result = new Messenger(senderMidx, receiverMidx, iidx, label);
 			TextMessage sendMsg = new TextMessage(gson.toJson(result));
 			
 			// 상대방에게 메시지 전달
 			// 상대방이 접속되어 있으면 전달 : 받는 사람의 session값을 키로 찾았을 경우 null 이면 미접속 상태
 			if(sessionCheck.get(ws) != null) {
 				ws.sendMessage(sendMsg);
+				
 			}
+			// alarm state를 1로 변경
+			alarmService.changeBuyerAlarm(receiverMidx, iidx);
 		}
 	}
 
