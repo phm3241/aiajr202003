@@ -14,12 +14,12 @@ public class QRService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public String getQR(int oidx) {
+	public String getQR(int midx, int iidx) {
 		
 		dao = template.getMapper(ItemDao.class);
 		System.out.println("QR보기  service");
 		
-		return dao.getQR(oidx);
+		return dao.getQR(midx,iidx);
 	}
 
 }

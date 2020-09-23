@@ -61,12 +61,10 @@ public class OrderController {
 
 //	내 프로필 관련--------------------------------------
 
-	@GetMapping
+	@GetMapping("/profile/{loginMidx}")
 	// public HashMap<String,String> getProfile(HttpSession session){
-	public float[] getProfile(HttpSession session) {
+	public float[] getProfile(@PathVariable("loginMidx") int midx) {
 
-		// int midx = (int)session.getAttribute("loginMidx");
-		int midx = 1;
 
 		return profileService.getProfile(midx);
 	}

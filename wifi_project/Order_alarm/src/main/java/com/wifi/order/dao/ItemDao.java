@@ -75,7 +75,7 @@ public interface ItemDao {
 	int hideMyItem(int iidx);
 
 	// QR보기
-	String getQR(int oidx);
+	String getQR(int midx, int iidx);
 
 	// QR발급..
 

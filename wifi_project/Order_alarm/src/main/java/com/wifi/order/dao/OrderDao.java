@@ -61,6 +61,9 @@ public interface OrderDao {
 	int delPurchase(int pidx);
 
 	
+	int getOidx(int midx, int iidx);
+
+	
 	
 	
 

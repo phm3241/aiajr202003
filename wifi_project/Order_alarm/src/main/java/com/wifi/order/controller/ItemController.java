@@ -163,84 +163,13 @@ public class ItemController {
 //	판매현황별 기능 관련----------------------------------
 
 	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
-	// public int selectBuyer(@PathVariable("iidx") int iidx,
-	// @RequestParam(value="buyerArr[]") List<Integer> buyer) {
-	// public int selectBuyer(@RequestParam(value="iidx") int iidx,
-	// @RequestParam(value="buyerArr[]") List<Integer> buyer) {
-	// public int selectBuyer(@RequestParam(value="iidx") int iidx,
-	// HttpServletRequest request) {
-	// public int selectBuyer(@RequestBody ArrayList<Integer> buyerArr,
-	// @PathVariable("iidx") int iidx ) {
-	// public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value =
-	// "buyerArr[]") List<String> buyerArr) {
-	// public int selectBuyer(@RequestParam(value="iidx") int iidx,
-	// @RequestParam(value="buyerArr[]") List<Integer> buyer,
-	// @RequestParam(value="rejectArr[]", required =false, defaultValue="false")
-	// List<Integer> reject) {
-	// public int selectBuyer(@RequestParam(value="iidx") String iidx,
-	// @RequestParam(value="buyerArr[]") List<Integer> buyerArr,
-	// @RequestParam(value="rejectArr[]", required =false) List<Integer> rejectArr)
-	// {
-	// public int selectBuyer(@RequestBody JsonObject buyerArr) {
-
-	// @PostMapping("/mybuyer") // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이
-	// null...
-	// public int selectBuyer(HttpServletRequest request) {
-	// public int selectBuyer(@RequestBody List<Integer> buyerArr) {
-	// public int selectBuyer(@RequestBody HashMap<String, Object> map) {
-
 	@PostMapping("/mybuyer") // @RequestParam으로 받으면 controller 실행도 안된다..
-	// public int selectBuyer(@RequestParam(value="oidxArr[]") String[] oidxArr) {
 	public int selectBuyer(@RequestBody HashMap<String, Object> oidxArr) {
 
-		// String[] oidxArr = request.getParameterValues("oidxArr");
-
 		System.out.println("참여자 구매자로 선정 controller");
-		// System.out.println("iidx 확인 :" +iidx);
-		// System.out.println("buyer 배열확인 toString : " + buyerArr.toString());
-		// System.out.println("buyer 배열확인buyerArr.get(buyerArr) : " +
-		// buyerArr.get("buyerArr"));
-		// System.out.println("buyer 배열확인 buyerArr.get(iidx) : " +
-		// buyerArr.get("iidx"));
-		// System.out.println("buyer 배열확인 buyerArr.get(oidx) : " +
-		// buyerArr.get("oidx"));
-		// System.out.println("map 배열확인 toString : " + map.toString());
 		System.out.println("oidxArr 배열확인 toString : " + oidxArr.toString()); // {oidxArr=[41, 42]}
-		// int[] buyer = (int[]) buyerArr.get("buyerArr");
-		// Object[] buyer = buyerArr.values().toArray();
-
-		// System.out.println("oidxArr[0] : "+oidxArr[0]);
-		// System.out.println("oidxArr[1] : "+oidxArr[1]);
-
 		System.out.println("oidxArr.size() : " + oidxArr.size()); // 1이 나온다..
-		//System.out.println("oidxArr.get(0) : " + oidxArr.get(0)); // null이 나온다..
-//		System.out.println("Integer.parseInt(arr.toString() : "+Integer.parseInt(oidxArr.toString()));  //
 
-		// hashmap 값받아오는 방법공부필요..
-
-//		int size = map.values().size();
-//		//Object arr =map.get("oidxArr");
-//		int[] oidxArr= new int[map.values().size()];
-
-//		for(int i=0; i<size; i++) {
-//			int arr = Integer.parseInt(arr.toString());
-//		}
-//		oidxArr=map.get("oidxArr");
-
-//		Iterator entries = map.entrySet().iterator();
-
-//		while (entries.hasNext()) {
-//		    Map.Entry entry = (Map.Entry) entries.next();
-//		    //Integer key = (Integer)entry.getKey();
-//		    int value = (Integer)entry.getValue();
-//		    //System.out.println("Key = " + key + ", Value = " + value);
-//		    System.out.println("Value = " + value);
-//		    //oidxArr.push(value);
-//		}
-
-		// return selectBuyerService.selectBuyer(iidx, buyer);
-		// return selectBuyerService.selectBuyer(buyerArr);
-		// return 0;
 		return selectBuyerService.selectBuyer(oidxArr);
 	};
 
@@ -282,11 +211,11 @@ public class ItemController {
 //	};
 
 	// 나의 공구판매현황[모집완료] - QR보기
-	@GetMapping("/qr/{oidx}")
-	public String getQR(@PathVariable("oidx") int oidx) {
+	@GetMapping("/qr/{midx}/{iidx}")
+	public String getQR(@PathVariable("midx") int midx, @PathVariable("iidx") int iidx) {
 
 		System.out.println("QR보기 controller");
-		return getQRService.getQR(oidx);
+		return getQRService.getQR(midx, iidx);
 	};
 
 	// 나의 공구판매현황[판매완료] - 구매자 평점등록하기

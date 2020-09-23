@@ -151,7 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- QR보기 -->
 	<select id="getQR" resultType="String">
-		SELECT qr FROM wifi.mybuyerlist where oidx=#{oidx} 
+		SELECT qr FROM wifi.mybuyerlist where buyer=#{param1} and iidx=#{param2} 
 	</select>
 
 
