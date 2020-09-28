@@ -278,14 +278,6 @@ public class ItemController {
 	
 	
 	
-	// 나의 공구판매현황[모집완료] - QR생성
-//	@GetMapping("/qr/{iidx}/{buyer}")
-//	public String insertQR(@PathVariable("iidx") int iidx, @PathVariable("buyer") int midx) {
-//		
-//		System.out.println("QR생성 controller");
-//		return insesrtQRService.insertQR(iidx, midx); 
-//	};
-	
 	
 	
 	// 나의 공구판매현황[모집완료] - QR보기
