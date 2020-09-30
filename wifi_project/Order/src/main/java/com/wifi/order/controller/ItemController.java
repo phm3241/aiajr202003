@@ -205,41 +205,11 @@ public class ItemController {
 		//System.out.println("buyer 배열확인 buyerArr.get(oidx) : " + buyerArr.get("oidx"));
 		//System.out.println("map 배열확인 toString : " + map.toString());
 		System.out.println("oidxArr 배열확인 toString : " + oidxArr.toString());  // {oidxArr=[41, 42]}
-		//int[] buyer = (int[]) buyerArr.get("buyerArr");
-		//Object[] buyer = buyerArr.values().toArray();
-		
-		//System.out.println("oidxArr[0] : "+oidxArr[0]);
-		//System.out.println("oidxArr[1] : "+oidxArr[1]);
+
 
 		System.out.println("oidxArr.size() : "+oidxArr.size()); //1이 나온다..
 		System.out.println("oidxArr.get(0) : "+oidxArr.get(0));  //null이 나온다..
-//		System.out.println("Integer.parseInt(arr.toString() : "+Integer.parseInt(oidxArr.toString()));  //
-		
-		//hashmap 값받아오는 방법공부필요..
-		
-		
-//		int size = map.values().size();
-//		//Object arr =map.get("oidxArr");
-//		int[] oidxArr= new int[map.values().size()];
-		
-//		for(int i=0; i<size; i++) {
-//			int arr = Integer.parseInt(arr.toString());
-//		}
-//		oidxArr=map.get("oidxArr");
-		
-//		Iterator entries = map.entrySet().iterator();
-		
-//		while (entries.hasNext()) {
-//		    Map.Entry entry = (Map.Entry) entries.next();
-//		    //Integer key = (Integer)entry.getKey();
-//		    int value = (Integer)entry.getValue();
-//		    //System.out.println("Key = " + key + ", Value = " + value);
-//		    System.out.println("Value = " + value);
-//		    //oidxArr.push(value);
-//		}
 
-		//return selectBuyerService.selectBuyer(iidx, buyer); 
-		//return selectBuyerService.selectBuyer(buyerArr); 
 		return 0;
 	};
 	
