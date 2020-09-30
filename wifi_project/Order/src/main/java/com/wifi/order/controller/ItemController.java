@@ -198,12 +198,6 @@ public class ItemController {
 			
 		
 		System.out.println("참여자 구매자로 선정 controller");
-		//System.out.println("iidx 확인 :" +iidx);
-		//System.out.println("buyer 배열확인 toString : " + buyerArr.toString());
-		//System.out.println("buyer 배열확인buyerArr.get(buyerArr) : " + buyerArr.get("buyerArr"));
-		//System.out.println("buyer 배열확인 buyerArr.get(iidx) : " + buyerArr.get("iidx"));
-		//System.out.println("buyer 배열확인 buyerArr.get(oidx) : " + buyerArr.get("oidx"));
-		//System.out.println("map 배열확인 toString : " + map.toString());
 		System.out.println("oidxArr 배열확인 toString : " + oidxArr.toString());  // {oidxArr=[41, 42]}
 
 
