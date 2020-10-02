@@ -174,23 +174,6 @@ public class ItemController {
 	
 	
 //	판매현황별 기능 관련----------------------------------
-	
-	// 나의 공구판매현황[모집중] - 참여자 구매자로 선정하기
-	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
-	//public int selectBuyer(@RequestParam(value="iidx") int iidx, @RequestParam(value="buyerArr[]") List<Integer> buyer) {
-	//public int selectBuyer(@RequestParam(value="iidx") int iidx, HttpServletRequest request) {
-	//public int selectBuyer(@RequestBody ArrayList<Integer> buyerArr, @PathVariable("iidx") int iidx ) {
-	//public int selectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value = "buyerArr[]") List<String> buyerArr) {
-	//public int selectBuyer(@RequestParam(value="iidx") int iidx, 
-	//					@RequestParam(value="buyerArr[]") List<Integer> buyer, @RequestParam(value="rejectArr[]", required =false, defaultValue="false") List<Integer> reject) {
-	//public int selectBuyer(@RequestParam(value="iidx") String iidx, 
-	//			@RequestParam(value="buyerArr[]") List<Integer> buyerArr, @RequestParam(value="rejectArr[]", required =false) List<Integer> rejectArr) {
-	//public int selectBuyer(@RequestBody JsonObject buyerArr) {
-	
-	//@PostMapping("/mybuyer")  // HttpServletRequest으로 받으면 controller 실행은 되는데, 배열이 null...
-	//public int selectBuyer(HttpServletRequest request) {
-	//public int selectBuyer(@RequestBody List<Integer> buyerArr) {
-	//public int selectBuyer(@RequestBody HashMap<String, Object> map) {
 
 	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
 	//public int selectBuyer(@RequestParam(value="oidxArr[]") String[] oidxArr) {
