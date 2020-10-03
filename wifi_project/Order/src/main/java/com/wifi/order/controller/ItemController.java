@@ -176,7 +176,6 @@ public class ItemController {
 //	판매현황별 기능 관련----------------------------------
 
 	@PostMapping("/mybuyer")  // @RequestParam으로 받으면 controller 실행도 안된다..
-	//public int selectBuyer(@RequestParam(value="oidxArr[]") String[] oidxArr) {
 	public int selectBuyer(@RequestBody HashMap<String, Object> oidxArr) {  
 			
 		
@@ -205,8 +204,6 @@ public class ItemController {
 	// 나의 공구판매현황[모집중. 판매실패] - 참여자 자동거절처리  
 	// 구매자 선정하면 나머지 선택하지 않은 참여자, 판매실패하면 참여자 자동 거절처리
 	@PutMapping("/rejectBuyer")
-//	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestParam(value="buyer[]") String[] buyer) {
-//	public int rejectBuyer(@PathVariable("iidx") int iidx, @RequestBody List<Integer> buyer) {
 	public int rejectBuyer(@RequestBody HashMap<String, Object> oidxArr) {
 		
 		System.out.println("참여자 자동거절 controller");
