@@ -144,13 +144,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-	<!-- 나의 공구판매현황[모집완료] : QR코드 발급하기 ◆ order + purchase join 해서 나의 공구판매현황[판매완료] 
-		: QR코드 사용처리하기 <update id=""> update wifi.purchase set state=1 where iidx=#{param1} 
-		and midx=#{param2} </update> 나의 공구판매현황[판매완료] : 구매자 평점 등록하기 <insert id="" 
-		parameterType="com.wifi.order.model.Item_rvb"> insert into wifi.item_rvb 
-		(score_b, midx, iidx) values (#{score_b}, #{midx}, #{iidx}) </insert> 나의 
-		공구판매현황[판매실패] : 글삭제하기 <delete id="delItem"> delete from wifi.item where iidx=#{iidx} 
-		</delete> -->
 
 
 </mapper>
