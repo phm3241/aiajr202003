@@ -17,9 +17,10 @@ public class Solution {
 		int num = 0;
 
 		// 만약에 pm이면, 12 더하기
-		if(p.substring(0, 0)=="P") {
+		if (p.substring(0, 0) == "P") {
 			num = 120000;
-		};
+		}
+		;
 
 		// 특수문자 제거 후, 숫자로 변경하기
 		pp = Integer.parseInt(p.replace(":", "").substring(3));
@@ -27,16 +28,21 @@ public class Solution {
 
 		// 숫자에 더한 후, 문자열로 변경하기
 		String time = Integer.toString(pp + num + n);
-        System.out.println(time);
-		//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        //Date nowDate = new Date();
-		//Date date = sdf.parse(time);
-        //answer = sdf.parse(time);
-        
-        answer = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("HH:mm:ss")).toString();
+		System.out.println(time);
 
-		
-		//answer = sdf.format(date);
+		StringBuffer b = new StringBuffer(time);
+        b.insert(2, ':');
+        b.insert(4, ':');
+
+		// SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		// Date nowDate = new Date();
+		// Date date = sdf.parse(time);
+		// answer = sdf.parse(time);
+
+		// answer = LocalDateTime.parse(time,
+		// DateTimeFormatter.ofPattern("HH:mm:ss")).toString();
+
+		// answer = sdf.format(date);
 
 		return answer;
 	};
